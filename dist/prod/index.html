@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML+RDFa 1.1//EN">
+<!--[if IEMobile 7]><html class="iem7 no-js" lang="en" dir="ltr"><![endif]-->
+<!--[if lt IE 7]><html class="lt-ie9 lt-ie8 lt-ie7 no-js" lang="en" dir="ltr"><![endif]-->
+<!--[if (IE 7)&(!IEMobile)]><html class="lt-ie9 lt-ie8 no-js" lang="en" dir="ltr"><![endif]-->
+<!--[if IE 8]><html class="lt-ie9 no-js" lang="en" dir="ltr"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)]><!--><html class="js not-oldie" lang="en" dir="ltr" version="HTML+RDFa 1.1"><!--<![endif]-->
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta charset="utf-8" />
+  <meta http-equiv="ImageToolbar" content="false" />
+  <meta http-equiv="cleartype" content="on" />
+  <meta name="HandheldFriendly" content="true" />
+  <link rel="shortcut icon" href="https://www.epa.gov/sites/all/themes/epa/favicon.ico" type="image/vnd.microsoft.icon" />
+  <meta name="MobileOptimized" content="width" />
+  <meta name="viewport" content="width=device-width" />
+  <!--googleon: all-->
+  <meta name="DC.description" content="" />
+  <meta name="DC.title" content="" />
+  <!--googleoff: snippet-->
+  <meta name="keywords" content="" />
+  <link rel="canonical" href="" />
+  <link rel="shortlink" href="" />
+  <meta name="DC.language" content="en" />
+  <meta name="DC.Subject.epachannel" content="" />
+  <meta name="DC.type" content="" />
+  <meta name="DC.Subject.epaopt" content="" />
+  <meta name="DC.date.created" content="" />
+  <meta name="DC.date.modified" content="" />
+  <meta name="DC.date.reviewed" content="" />
+  <meta name="DC.creator" content="" />
+	<title>Power Profiler | US EPA</title>
+  <!--googleoff: all-->
+<!-- <link type="text/css" rel="stylesheet" href="css/style.css" media="all" /> -->
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src="//www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);})(window,document,"script","dataLayer","GTM-L8ZB");</script>
+  <!-- End Google Tag Manager -->
+	<script src="https://www.epa.gov/sites/all/libraries/js/d3.v3.min.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/base.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/design.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/drop-down-menu.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/drupal.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/flexslider.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/layout.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/mobile-menu.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.epa.gov/sites/all/themes/epa/css/typography.min.css">
+</head>
+<body class="html">
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-L8ZB" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<header class="masthead clearfix" role="banner">
+		<img alt="" class="site-logo" src="https://www.epa.gov/sites/all/themes/epa/logo.png">
+		<div class="site-name-and-slogan">
+			<h1 class="site-name"><a href="/" rel="home" title="Go to the home page"><span>US EPA</span></a></h1>
+			<div class="site-slogan">
+				United States Environmental Protection Agency
+			</div>
+		</div>
+		<div class="region-header">
+			<div class="block-epa-core-gsa-epa-search" id="block-epa-core-gsa-epa-search">
+				<form action="https://search.epa.gov/epasearch/epasearch" class="epa-search" method="get">
+					<label class="element-hidden" for="search-box">Search</label>
+          <input autocomplete="off" class="form-text ui-autocomplete-input" id="search-box" name="querytext" placeholder="Search EPA.gov" value="">
+          <span aria-live="polite" class="ui-helper-hidden-accessible" role="status"></span>
+          <button class="epa-search-button" id="search-button" title="Search" type="submit">Search</button>
+          <input name="areaname" type="hidden" value="">
+          <input name="areacontacts" type="hidden" value="">
+          <input name="areasearchurl" type="hidden" value="">
+          <input name="typeofsearch" type="hidden" value="epa">
+          <input name="result_template" type="hidden" value="2col.ftl">
+				</form>
+			</div>
+		</div>
+	</header>
+	<nav class="nav main-nav clearfix" role="navigation">
+		<div class="nav__inner">
+			<h2 class="element-invisible">Main menu</h2>
+			<ul class="menu" role="menu">
+				<li class="expanded active-trail menu-item" role="presentation">
+					<a class="active-trail menu-link" href="/environmental-topics" role="menuitem" title="View links to the most popular pages for each of EPA?s top environmental topics.">Environmental Topics</a></li>
+				<li class="menu-item" role="presentation">
+					<a class="menu-link" href="/laws-regulations" role="menuitem" title="View links to regulatory information by topic and sector, and to top pages about environmental laws, regulations, policies, compliance, and enforcement.">Laws &amp; Regulations</a></li>
+				<li class="expanded menu-item" role="presentation">
+					<a class="menu-link" href="/aboutepa" role="menuitem" title="Learn more about our mission, organization, and locations.">About EPA</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="mobile-nav" id="mobile-nav">
+		<div class="mobile-bar clearfix">
+			<label class="menu-button" for="mobile-nav-toggle">Menu</label>
+		</div><input checked id="mobile-nav-toggle" type="checkbox">
+		<div class="mobile-links element-hidden" id="mobile-links" style="height:2404px;">
+			<ul class="mobile-menu">
+				<li class="expanded menu-item"><a class="menu-link" href="https://www.epa.gov/environmental-topics" tabindex="-1" title="View links to the most popular pages for each of EPA?s top environmental topics.">Environmental Topics</a></li>
+				<li class="menu-item"><a class="menu-link" href="https://www.epa.gov/laws-regulations" tabindex="-1" title="View links to regulatory information by topic and sector, and to top pages about environmental laws, regulations, policies, compliance, and enforcement.">Laws &amp; Regulations</a></li>
+				<li class="expanded menu-item"><a class="menu-link" href="https://www.epa.gov/aboutepa" tabindex="-1" title="Learn more about our mission, organization, and locations.">About EPA</a></li>
+			</ul>
+		</div>
+	</div>
+	<section class="main-content clearfix" style="max-width: 100%" id="main-content" lang="en" role="main" tabindex="-1">
+		<div class="region-preface clearfix">
+			<div class="block-views-revision-hublinks-block" id="block-views-revision-hublinks-block">
+				<div class="view view-revision-hublinks view-id-revision_hublinks">
+					<span class="related-info"><strong>Related Topics:</strong></span>
+					<ul class="menu pipeline">
+						<li class="menu-item"><a href="/environmental-topics">Environmental Topics</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="block block-pane block-pane-epa-web-area-connect" id="block-pane-epa-web-area-connect">
+				<ul class="menu utility-menu">
+					<li class="menu-item"><a class="menu-link" href="{CONTACT URL}">Contact Us</a></li>
+				</ul>
+			</div>
+		</div>
+    <div class="main-column clearfix">
+      <!--googleon:all-->
+      <h1  class="page-title">Power Profiler</h1>
+      <div class="panel-pane pane-node-content">
+        <div class="pane-content">
+          <div class="node node-page clearfix view-mode-full">
+						<div id="app"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+	</section>
+	<footer class="main-footer clearfix" role="contentinfo">
+		<div class="main-footer__inner">
+			<div class="region-footer">
+				<div class="block-pane-epa-global-footer" id="block-pane-epa-global-footer">
+					<div class="row cols-3">
+						<div class="col size-1of3">
+							<div class="col__title">
+								Discover.
+							</div>
+							<ul class="menu">
+								<li><a href="https://www.epa.gov/accessibility">Accessibility</a></li>
+								<li><a href="https://www.epa.gov/aboutepa/administrator-gina-mccarthy">EPA Administrator</a></li>
+								<li><a href="https://www.epa.gov/planandbudget">Budget &amp; Performance</a></li>
+								<li><a href="https://www.epa.gov/contracts">Contracting</a></li>
+								<li><a href="https://www.epa.gov/home/grants-and-other-funding-opportunities">Grants</a></li>
+								<li><a href="https://19january2017snapshot.epa.gov">January 19, 2017 Web Snapshot</a></li>
+								<li><a href="https://www.epa.gov/ocr/whistleblower-protections-epa-and-how-they-relate-non-disclosure-agreements-signed-epa-employees">No FEAR Act Data</a></li>
+								<li><a href="https://www.epa.gov/privacy">Privacy</a></li>
+							</ul>
+						</div>
+						<div class="col size-1of3">
+							<div class="col__title">
+								Connect.
+							</div>
+							<ul class="menu">
+								<li><a href="https://www.data.gov/">Data.gov</a></li>
+								<li><a href="https://www.epa.gov/office-inspector-general/about-epas-office-inspector-general">Inspector General</a></li>
+								<li><a href="https://www.epa.gov/careers">Jobs</a></li>
+								<li><a href="https://www.epa.gov/newsroom">Newsroom</a></li>
+								<li><a href="https://www.epa.gov/open">Open Government</a></li>
+								<li><a href="https://www.regulations.gov/">Regulations.gov</a></li>
+								<li><a href="https://www.epa.gov/newsroom/email-subscriptions">Subscribe</a></li>
+								<li><a href="https://www.usa.gov/">USA.gov</a></li>
+								<li><a href="https://www.whitehouse.gov/">White House</a></li>
+							</ul>
+						</div>
+						<div class="col size-1of3">
+							<div class="col__title">
+								Ask.
+							</div>
+							<ul class="menu">
+								<li><a href="https://www.epa.gov/home/forms/contact-us">Contact Us</a></li>
+								<li><a href="https://www.epa.gov/home/epa-hotlines">Hotlines</a></li>
+								<li><a href="https://www.epa.gov/foia">FOIA Requests</a></li>
+								<li><a href="https://www.epa.gov/home/frequent-questions-specific-epa-programstopics">Frequent Questions</a></li>
+							</ul>
+							<div class="col__title">
+								Follow.
+							</div>
+							<ul class="social-menu">
+								<li><a class="menu-link social-facebook" href="https://www.facebook.com/EPA">Facebook</a></li>
+								<li><a class="menu-link social-twitter" href="https://twitter.com/epa">Twitter</a></li>
+								<li><a class="menu-link social-youtube" href="https://www.youtube.com/user/USEPAgov">YouTube</a></li>
+								<li><a class="menu-link social-flickr" href="https://www.flickr.com/photos/usepagov">Flickr</a></li>
+								<li><a class="menu-link social-instagram" href="https://www.instagram.com/epagov">Instagram</a></li>
+							</ul>
+							<p class="last-updated">Last updated on {Month day, YYYY}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<style>
+	.masthead {
+		padding-bottom: 1em;
+    	padding-top: 1.4em;
+    	position: relative;
+	}
+	</style>
+  	<script src="https://www.epa.gov/sites/all/modules/contrib/jquery_update/replace/jquery/1.7/jquery.min.js?v=1.7.2"></script>
+	<script src="https://www.epa.gov/sites/all/modules/custom/epa_core/js/alert.js"></script>
+<script type="text/javascript" src="bundle.js"></script></body>
+</html>
