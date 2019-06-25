@@ -23,17 +23,22 @@ function addTooltip(className){
         },
         mousemove : function(e){
           // Check if element is a national bar (on the righthand side of the page)
-          if(e.srcElement.parentElement.parentElement.className.baseVal == "nationalBar" || e.srcElement.classList[0] == "nationalBar"){
-            var mousex = e.pageX - $(".tooltip").width() - 20; // Get X coordinates
-            var mousey = e.pageY - 170; // Get Y coordinates
-            $('.tooltip')
-            .css({ top: mousey, left: mousex });
+          if(e.srcElement.parentElement){
+            if(e.srcElement.parentElement.parentElement.className.baseVal == "nationalBar" || e.srcElement.classList[0] == "nationalBar"){
+              positionTooltip(e, - $(".tooltip").width() - 20, 170);
+            } else {
+              positionTooltip(e, 20, 170);
+            }
           } else {
-            var mousex = e.pageX + 20; // Get X coordinates
-            var mousey = e.pageY - 170; // Get Y coordinates
-            $('.tooltip')
-            .css({ top: mousey, left: mousex });
+            positionTooltip(e, 20, 170);
           }
         }
     });
+}
+
+function positionTooltip(e, x, y){
+  var mousex = e.pageX + x; // Get X coordinates
+  var mousey = e.pageY - y; // Get Y coordinates
+  $('.tooltip')
+  .css({ top: mousey, left: mousex });
 }
