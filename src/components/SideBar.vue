@@ -42,6 +42,12 @@
           >Sign up for the mailing list</a>
         </p>
         <p>
+          <a href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
+             target="_blank"
+             aria-label="Opens new window"
+          >Información relacionada en español</a>
+        </p>
+        <p>
           <a
             href="https://epa.gov/energy/power-profiler-methodology"
             target="_blank"
