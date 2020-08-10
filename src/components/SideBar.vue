@@ -20,18 +20,18 @@
           </strong>
         </p>
         <p>
-          Data source: 2016 data from the <a
+          Data source: 2018 data from the <a
             href="https://epa.gov/energy/emissions-generation-resource-integrated-database-egrid"
             target="_blank"
             aria-label="Opens new window"
-          >Emissions & Generation Resource Integrated Database (eGRID)</a> released February 15, 2018 (2018 data release planned for spring 2020)
+          >Emissions & Generation Resource Integrated Database (eGRID)</a> released January 28, 2020
         </p>
         <p>
           Excel version:
           <a
-            href="https://epa.gov/sites/production/files/2018-08/power_profiler_zipcode_tool_2016_6_14_18._v8.xlsx"
+            href="https://epa.gov/sites/production/files/2020-03/power_profiler_zipcode_tool_2018_3_09_20._v9.xlsx"
             aria-label="Downloads Excel spreadsheet tool"
-          >Power Profiler Emissions Tool 2016 (XLSX)</a>
+          >Power Profiler Emissions Tool 2018 (XLSX)</a>
           <span class="fileinfo">(3.56M)</span>
         </p>
         <p>
@@ -56,7 +56,7 @@
         </p>
         <p>
           <a
-            href="https://epa.gov/sites/production/files/2018-02/egrid2016_summarytables.xlsx"
+            href="https://www.epa.gov/sites/production/files/2020-01/egrid2018_summary_tables.xlsx"
             aria-label="Downloads Excel spreadsheet summary tables"
           >eGRID Summary Tables (XLSX)</a>
           <span class="fileinfo">(1 pg, 293 K)</span>
