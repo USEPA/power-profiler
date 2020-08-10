@@ -16,10 +16,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 Most of the text content in the app can be found within the `template` sections of each Vue component. You can make changes to this text directly to the `.vue` files there. Some content is added programmatically. For example, the values that appear in the result of the emissions estimate are added in the logic of the display methods within `EmissionsCalculator.vue.`
 
-## Updating the data files
-
-Go to the `prep` folder and follow the instructions outlined in the `README.md`.
-
 ## Requirements
 
 - [Node.js and npm](https://nodejs.org/en/)
@@ -42,17 +38,6 @@ The "Page Javascript" section should look like this:
 <script>var $ = jQuery</script>
 <script>[INSERT CODE FROM BUNDLE HERE]</script>
 ```
-
-## Cloud.gov  
-You can deploy the app to Cloud.gov for testing purposes.  To do this you will need a Cloud.gov account and the [Cloud Foundry Command Line Tools](https://github.com/cloudfoundry/cli#installers-and-compressed-binaries) installed on your machine.  Use these commands to build and deploy the app to Cloud.gov.  
-  
-- From `app` directory run:  
-`npm run cloudgov`  
-  
-- Change directories to `app\dist\cloudgov` and run:  
-`cf push test-power-profile`  
-  
-*Note: you will first need to log into Cloud.gov (see `cf login`)*  
 
 ## Built With
 
