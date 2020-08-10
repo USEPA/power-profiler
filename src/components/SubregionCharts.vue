@@ -32,13 +32,13 @@
       </p>
       <div id="fuelMixContainer" class="col">
           <h3>Fuel Mix</h3>
-          <p>This chart compares fuel mix (%) of sources used to generate electricity in the selected <a href="https://epa.gov/sites/production/files/2018-12/egrid2016_subregions_2.jpg" target="_blank">eGRID subregion</a> to the national fuel mix (%).</p>
+          <p>This chart compares fuel mix (%) of sources used to generate electricity in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national fuel mix (%).</p>
           <subregionFuelMixChart></subregionFuelMixChart>
       </div>
       <div id="printMap"></div>
       <div id="emissionRateContainer" class="col">
           <h3>Emission Rates</h3>
-          <p id="emRatesDescription">This chart compares the average emission rates (lbs/MWh) in the selected <a href="https://epa.gov/sites/production/files/2018-12/egrid2016_subregions_2.jpg" target="_blank">eGRID subregion</a> to the national average emission rates (lbs/MWh) for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
+          <p id="emRatesDescription">This chart compares the average emission rates (lbs/MWh) in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national average emission rates (lbs/MWh) for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
           <subregionEmissionRateChart></subregionEmissionRateChart>
       </div>
     </div>
