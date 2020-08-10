@@ -1,10 +1,8 @@
 # Ignore node_modules folder
-app/node_modules/
+./node_modules/
 # Ignore VS Code settings
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-# Ignore the cloudgov dist files
-app/dist/cloudgov/*
