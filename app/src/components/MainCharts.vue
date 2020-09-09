@@ -2,7 +2,7 @@
     <div>
         <div id="nationalFuelMix">
             <h3>Fuel Mix</h3>
-            <p>This chart compares fuel mix (%) of sources used to generate electricity in all <a href="https://www.epa.gov/sites/production/files/2018-12/egrid2016_subregions_2.jpg" target="_blank">eGRID subregions</a>. <strong>Select a fuel type to sort subregions by fuel.</strong></p>
+            <p>This chart compares fuel mix (%) of sources used to generate electricity in all <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregions</a>. <strong>Select a fuel type to sort subregions by fuel.</strong></p>
             <div id="select-offset-1">
                 <div class="form-item form-type-radio form-item-radios row cols-3" id="fuelRadios">
                     <label for="fuelRadios" id="select-fuel-category"><strong>Select:</strong></label>
