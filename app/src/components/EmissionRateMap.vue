@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>This map provides <a href="https://www.epa.gov/sites/production/files/2018-12/egrid2016_subregions_2.jpg" target="_blank">eGRID subregion</a> average emission rates in pounds per <a @click="$parent.$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a>.</p>
+        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> average emission rates in pounds per <a @click="$parent.$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a>.</p>
         <div class="row cols-2" id="emissionRatesHeatMap"></div>
     </div>
 </template>
