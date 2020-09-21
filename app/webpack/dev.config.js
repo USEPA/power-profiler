@@ -14,7 +14,8 @@ module.exports = env => {
       rules: [
         { test: /\.js$/, use: 'babel-loader' },
         { test: /\.vue$/, use: 'vue-loader' },
-        { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
+        { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+        { resourceQuery: /blockType=i18n/, type: 'javascript/auto', loader: '@kazupon/vue-i18n-loader' }
       ]
     },
     devServer: {
@@ -29,11 +30,11 @@ module.exports = env => {
       new VueLoaderPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
-        'process.env':{
+        'process.env': {
           'NODE_ENV': JSON.stringify('development'),
           'VUE_APP_SUBREGION_JSON': JSON.stringify("./data/subregion.json"),
-          'VUE_APP_ZIP_UTILITY':JSON.stringify("./data/zip.csv"),
-          'VUE_APP_EGRID_LOGO':JSON.stringify("./assets/img/egrid-text-logo.png"),
+          'VUE_APP_ZIP_UTILITY': JSON.stringify("./data/zip.csv"),
+          'VUE_APP_EGRID_LOGO': JSON.stringify("./assets/img/egrid-text-logo.png"),
         }
       }),
     ]

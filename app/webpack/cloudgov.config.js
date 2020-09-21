@@ -18,7 +18,8 @@ module.exports = env => {
         { test: /\.vue$/, use: 'vue-loader' },
         { test: /\.css$/, use: ['vue-style-loader', 'css-loader']},
         { test: /\.csv$/, use: 'raw-loader' },
-        { test: /\.json$/, use: 'raw-loader' }
+        { test: /\.json$/, use: 'raw-loader' },
+        { resourceQuery: /blockType=i18n/, type: 'javascript/auto', loader: '@kazupon/vue-i18n-loader' }
       ]
     },
     target: "web",

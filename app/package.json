@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/preset-env": "^7.8.7",
+    "@kazupon/vue-i18n-loader": "^0.5.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
     "create-file-webpack": "^1.0.2",
@@ -31,6 +32,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "vue-i18n": "^8.21.0",
     "vue-router": "^3.1.6",
     "webpack-merge": "^4.2.2"
   },
