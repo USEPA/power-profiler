@@ -1,9 +1,25 @@
+<i18n>
+{
+  "en": {
+    "intro": "Electricity is produced by many different sources of energy, including, but not limited to, wind, solar, nuclear, and fossil fuels. The type and amount of emissions produced depend on how electricity is generated in your region. Type in your zip code (or select a region) to view your power profile.",
+    "subTitle": "How clean is the electricity you use?"
+  },
+  "es": {
+    "intro": "La electricidad es generada por diversas fuentes de energía, entre ellas, la energía eólica, la energía solar, la energía nuclear y los combustibles fósiles. El tipo y la cantidad de emisiones producidas dependerán de cómo se genere la electricidad en su región. Escriba su código postal (o seleccione una región) para ver su perfil de energía.",
+    "subTitle": "¿Qué tan limpia es la electricidad que consume?"
+  }
+}
+</i18n>
 <template>
   <div class="pane-content">
     <div>
       <p id="intro">
-        Electricity is produced by many different sources of energy, including, but not limited to, wind, solar, nuclear, and fossil fuels. The type and amount of emissions produced depend on how electricity is generated in your region. Type in your zip code (or select a region) to view your power profile.
-        <a class="more-link" href="javascript:void(0)" @click="$parent.showMoreInfo = true">More Info</a>
+        {{ $t("intro") }}
+        <a
+          class="more-link"
+          href="javascript:void(0)"
+          @click="$parent.showMoreInfo = true"
+        >More Info</a>
       </p>
     </div>
     <subregionSelection></subregionSelection>
@@ -20,7 +36,8 @@
           </strong>
         </p>
         <p>
-          Data source: 2018 data from the <a
+          Data source: 2018 data from the
+          <a
             href="https://epa.gov/energy/emissions-generation-resource-integrated-database-egrid"
             target="_blank"
             aria-label="Opens new window"
@@ -42,9 +59,10 @@
           >Sign up for the mailing list</a>
         </p>
         <p>
-          <a href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
-             target="_blank"
-             aria-label="Opens new window"
+          <a
+            href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
+            target="_blank"
+            aria-label="Opens new window"
           >Información relacionada en español</a>
         </p>
         <p>
@@ -71,7 +89,6 @@
 <script>
 import subregionSelection from "./SubregionSelection.vue";
 
-
 export default {
   components: {
     subregionSelection: subregionSelection,
@@ -82,5 +99,4 @@ export default {
 #intro {
   padding: 1.3529em 1em;
 }
-
 </style>

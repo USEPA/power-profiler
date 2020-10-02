@@ -14,8 +14,6 @@ const i18n = new VueI18n({
     es: {
     }
   }
-
-
 });
 var vm = new Vue({
   el: '#app',
@@ -46,6 +44,5 @@ if (typeof ga === "function") {
     ga("EPA.send", "pageview");
   });
 }
-
 
 
