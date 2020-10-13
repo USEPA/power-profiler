@@ -2,11 +2,47 @@
 {
   "en": {
     "intro": "Electricity is produced by many different sources of energy, including, but not limited to, wind, solar, nuclear, and fossil fuels. The type and amount of emissions produced depend on how electricity is generated in your region. Type in your zip code (or select a region) to view your power profile.",
-    "subTitle": "How clean is the electricity you use?"
+    "subTitle": "How clean is the electricity you use?",
+    "moreInfoLink": "More Information",
+    "ariaLabels": {
+      "opensNewWin": "Opens new window",
+      "downloadsTool": "Downloads Excel spreadsheet tool",
+      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+    },
+    "additionalInfo": {
+      "title": "Additional Information",
+      "feedback": "How do you like the new Power Profiler site?",
+      "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
+      "egridDataSource": "Data source: 2018 data from the {0} released January 28, 2020",
+      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2018 (XLSX)",
+      "powerProfilerExcelVersion": "Excel version: {0}",
+      "mailingList": "Sign up for the mailing list",
+      "methodology": "Power Profiler Methodology",
+      "summaryTables": "eGRID Summary Tables (XLSX)",
+      "resources": "Additional Resources"
+    }
   },
   "es": {
     "intro": "La electricidad es generada por diversas fuentes de energía, entre ellas, la energía eólica, la energía solar, la energía nuclear y los combustibles fósiles. El tipo y la cantidad de emisiones producidas dependerán de cómo se genere la electricidad en su región. Escriba su código postal (o seleccione una región) para ver su perfil de energía.",
-    "subTitle": "¿Qué tan limpia es la electricidad que consume?"
+    "subTitle": "¿Qué tan limpia es la electricidad que consume?",
+    "moreInfoLink": "Más Información",
+    "ariaLabels": {
+      "opensNewWin": "abre una nueva ventana",
+      "downloadsTool": "Downloads Excel spreadsheet tool",
+      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+    },
+    "additionalInfo": {
+      "title": "Información Adicional",
+      "feedback": "¿Qué le parece el nuevo sitio del Analizador de consumo de energía?",
+      "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
+      "egridDataSource": "Fuente de datos: Datos de 2018 del {0} actualizado el 01/28/2020",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2018 (XLSX)",
+      "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
+      "mailingList": "Suscríbase a la lista de distribución",
+      "methodology": "Metodología del Analizador de consumo de energía",
+      "summaryTables": "Tablas de resumen de eGRID (XLSX)",
+      "resources": "Recursos adicionales"
+    }
   }
 }
 </i18n>
@@ -19,68 +55,78 @@
           class="more-link"
           href="javascript:void(0)"
           @click="$parent.showMoreInfo = true"
-        >More Info</a>
+          >{{ $t("moreInfoLink") }}</a
+        >
       </p>
     </div>
     <subregionSelection></subregionSelection>
     <div class="box multi related-info" id="info">
-      <h3 class="pane-title">Additional Information</h3>
+      <h3 class="pane-title">{{ $t("additionalInfo.title") }}</h3>
       <div class="pane-content">
         <p>
           <strong>
             <a
               href="https://epa.gov/energy/forms/egrid-and-power-profiler-feedback-and-questions"
               target="_blank"
-              aria-label="Opens new window"
-            >How do you like the new Power Profiler site?</a>
+              v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+              >{{ $t("additionalInfo.feedback") }}</a
+            >
           </strong>
         </p>
-        <p>
-          Data source: 2018 data from the
+
+        <i18n
+          path="additionalInfo.egridDataSource"
+          tag="p"
+          for="additionalInfo.egridLink"
+        >
           <a
-            href="https://epa.gov/energy/emissions-generation-resource-integrated-database-egrid"
+            href="https://epa.gov/egrid"
             target="_blank"
-            aria-label="Opens new window"
-          >Emissions & Generation Resource Integrated Database (eGRID)</a> released January 28, 2020
-        </p>
-        <p>
-          Excel version:
+            v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+            >{{ $t("additionalInfo.egridLink") }}</a
+          >
+        </i18n>
+
+        <i18n
+          path="additionalInfo.powerProfilerExcelVersion"
+          tag="p"
+          for="additionalInfo.powerProfilerExcelLink"
+        >
           <a
             href="https://epa.gov/sites/production/files/2020-03/power_profiler_zipcode_tool_2018_3_09_20._v9.xlsx"
-            aria-label="Downloads Excel spreadsheet tool"
-          >Power Profiler Emissions Tool 2018 (XLSX)</a>
+            v-bind:aria-label="$t('ariaLabels.downloadsTool')"
+            >{{ $t("additionalInfo.powerProfilerExcelLink") }}</a
+          >
           <span class="fileinfo">(3.56M)</span>
-        </p>
+        </i18n>
         <p>
           <a
             href="https://epa.gov/energy/forms/egrid-and-power-profiler-notification"
             target="_blank"
-            aria-label="Opens new window"
-          >Sign up for the mailing list</a>
-        </p>
-        <p>
-          <a
-            href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
-            target="_blank"
-            aria-label="Opens new window"
-          >Información relacionada en español</a>
+            v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+            >{{ $t("additionalInfo.mailingList") }}</a
+          >
         </p>
         <p>
           <a
             href="https://epa.gov/energy/power-profiler-methodology"
             target="_blank"
-            aria-label="Opens new window"
-          >Power Profiler Methodology</a>
+            v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+            >{{ $t("additionalInfo.methodology") }}</a
+          >
         </p>
         <p>
           <a
             href="https://www.epa.gov/sites/production/files/2020-01/egrid2018_summary_tables.xlsx"
-            aria-label="Downloads Excel spreadsheet summary tables"
-          >eGRID Summary Tables (XLSX)</a>
+            v-bind:aria-label="$t('ariaLabels.downloadsSummary')"
+            >{{ $t("additionalInfo.summaryTables") }}</a
+          >
           <span class="fileinfo">(1 pg, 293 K)</span>
         </p>
         <p>
-          <a href="javascript:void(0)" @click="$parent.showResources = true">Additional Resources</a>
+          <a href="javascript:void(0)" @click="$parent.showResources = true">{{
+            $t("additionalInfo.resources")
+          }}</a>
         </p>
       </div>
     </div>
