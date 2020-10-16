@@ -25,37 +25,49 @@
 }
 </i18n>
 <template>
-    <transition name="modal">
-        <div class="modal-mask">
-        <div class="modal-wrapper">
-            <div class="modal-container">
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+            <slot name="header">
+              <h3>{{ $t("modalHeader") }}</h3>
+            </slot>
+          </div>
 
-            <div class="modal-header">
-                <slot name="header">
-                <h3>{{ $t("modalHeader") }}</h3>
-                </slot>
-            </div>
-
-            <div class="modal-body">
-                <slot name="body">
-                    <i18n path="modalBody.content" tag="p" for="modalBody.eGRIDTSDLink">
-                        <a aria-label="Opens new window" href="/energy/egrid-technical-support-document" target="_blank">
-                        {{ $t("modalBody.eGRIDTSDLink") }}</a>
-                    </i18n>
-                </slot>
-                <button id="subregions-ok" class="modal-default-button" @click="$emit('close')">
-                    {{ $t("okButton") }}
-                </button>
-            </div>
-            </div>
+          <div class="modal-body">
+            <slot name="body">
+              <i18n
+                path="modalBody.content"
+                tag="p"
+                for="modalBody.eGRIDTSDLink"
+              >
+                <a
+                  v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+                  href="/egrid/egrid-technical-support-document"
+                  target="_blank"
+                >
+                  {{ $t("modalBody.eGRIDTSDLink") }}</a
+                >
+              </i18n>
+            </slot>
+            <button
+              id="subregions-ok"
+              class="modal-default-button"
+              @click="$emit('close')"
+            >
+              {{ $t("okButton") }}
+            </button>
+          </div>
         </div>
-        </div>
-    </transition>
+      </div>
+    </div>
+  </transition>
 </template>
 <script>
 export default {
-    mounted: function(){
-        document.getElementById("subregions-ok").focus()
-    }
-}
+  mounted: function () {
+    document.getElementById("subregions-ok").focus();
+  },
+};
 </script>
