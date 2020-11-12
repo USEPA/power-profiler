@@ -1,32 +1,77 @@
+<i18n>
+{
+    "en": {
+        "fuelMixHeader": "Fuel Mix",
+        "fuelMixBody": {
+            "text": "This chart compares fuel mix (%) of sources used to generate electricity in all {eGRIDSubregions}. {selectFuel}.",
+            "eGRIDSubregions": "eGRID subregions",
+            "selectFuel": "Select a fuel type to sort subregions by fuel"
+        },
+        "fuelMixChart": {
+            "select": "Select:",
+            "allFuelsSelection": "All Fuels",
+            "renewableSelection": "Renewable/Non-renewable",
+            "hydroNuclearSelection": "Renewable/Non-renewable/Nuclear/Hydro",
+            "sortDescription": "This chart is sorted alphabetically A → Z by region.",
+            "sortLink": "A → Z Sort regions alphabetically"
+        },
+        "printReport": "Print Report"
+    },
+    "es": {
+        "fuelMixHeader": "Combinación de combustibles",
+        "fuelMixBody": {
+            "text": "Este cuadro compara la combinación de combustibles (porcentajes) de las fuentes utilizadas para generar electricidad en todas las {eGRIDSubregions}. {selectFuel}.",
+            "eGRIDSubregions": "subregiones de eGRID en los Estados Unidos",
+            "selectFuel": "Seleccione un combustible para ordenar las subregiones por combustible"
+        },
+        "fuelMixChart": {
+            "select": "Seleccione:",
+            "allFuelsSelection": "All Fuels",
+            "renewableSelection": "Renewable/Non-renewable",
+            "hydroNuclearSelection": "Renewable/Non-renewable/Nuclear/Hydro",
+            "sortDescription": "This chart is sorted alphabetically A → Z by region.",
+            "sortLink": "A → Z Sort regions alphabetically"
+        },
+        "printReport": "Print Report"
+    }
+}
+</i18n>
 <template>
     <div>
         <div id="nationalFuelMix">
-            <h3>Fuel Mix</h3>
-            <p>This chart compares fuel mix (%) of sources used to generate electricity in all <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregions</a>. <strong>Select a fuel type to sort subregions by fuel.</strong></p>
+            <h3>{{ $t("fuelMixHeader") }}</h3>
+            <i18n path="fuelMixBody.text" tag="p">
+                <template #eGRIDSubregions>
+                    <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">{{ $t("fuelMixBody.eGRIDSubregions") }}</a>
+                </template>
+                <template #selectFuel>
+                    <strong>{{ $t("fuelMixBody.selectFuel") }}</strong>
+                </template>
+            </i18n>
             <div id="select-offset-1">
                 <div class="form-item form-type-radio form-item-radios row cols-3" id="fuelRadios">
-                    <label for="fuelRadios" id="select-fuel-category"><strong>Select:</strong></label>
+                    <label for="fuelRadios" id="select-fuel-category"><strong>{{ $t("fuelMixChart.select") }}</strong></label>
                     <div class="col size-1of6">
                         <input class="form-radio" type="radio" id="fuel-breakdown-1" v-model="selectedFuelCategory" value="allFuels" name="fuelRadio" checked>
-                        <label class="option" for="fuel-breakdown-1">All Fuels</label>
+                        <label class="option" for="fuel-breakdown-1">{{ $t("fuelMixChart.allFuelsSelection") }}</label>
                     </div>
                     <div class="col size-1of3">
                         <input class="form-radio" type="radio" id="fuel-breakdown-2" v-model="selectedFuelCategory" value="renewableAndNon" name="fuelRadio">
-                        <label class="option" for="fuel-breakdown-2">Renewable/Non-renewable</label>
+                        <label class="option" for="fuel-breakdown-2">{{ $t("fuelMixChart.renewableSelection") }}</label>
                     </div>
                     <div class="col size-1of2">
                         <input class="form-radio" type="radio" id="fuel-breakdown-3" v-model="selectedFuelCategory" value="renewableNonNuclearAndHydro" name="fuelRadio">
-                        <label class="option" for="fuel-breakdown-3">Renewable/Non-renewable/Nuclear/Hydro</label>
+                        <label class="option" for="fuel-breakdown-3">{{ $t("fuelMixChart.hydroNuclearSelection") }}</label>
                     </div>
                 </div>
             </div>
         </div>
         <div id="resetNationalFuelMixDiv">
-            <p id="nationalFuelMixSortingStatus"><strong>This chart is sorted alphabetically A → Z by region.</strong></p>
-            <a href="javascript:void(0)" @click="handleSortReset" id="resetNationalFuelMix">A → Z Sort regions alphabetically</a>
+            <p id="nationalFuelMixSortingStatus"><strong>{{ $t("fuelMixChart.sortDescription") }}</strong></p>
+            <a href="javascript:void(0)" @click="handleSortReset" id="resetNationalFuelMix">{{ $t("fuelMixChart.sortLink") }}</a>
         </div>
         <emissionRateChart></emissionRateChart>
-        <p><a href="javascript:window.print()">&#128438; Print Report</a></p>
+        <p><a href="javascript:window.print()">&#128438; {{ $t("printReport") }}</a></p>
     </div>
 </template>
 
@@ -83,14 +128,14 @@ export default {
             if($(window).width() < 950){
                 self.orientation = "vertical"
                 self.$children[0].orientation = "vertical"
-            } else { 
+            } else {
                 self.orientation = "horizontal"
                 self.$children[0].orientation = "horizontal"
             }
             self.reset()
         })
 
-        
+
     },
     methods: {
         initialize: function(width, height, domElement){
@@ -107,8 +152,8 @@ export default {
             var sortedNational = false;
 
             if(this.sortState == "alphabetically") {
-                this.subregionData.sort(function(x,y){ 
-                    return d3.ascending(x.properties.name, y.properties.name); 
+                this.subregionData.sort(function(x,y){
+                    return d3.ascending(x.properties.name, y.properties.name);
                 });
             } else if (this.sortState == "ascending") {
                 this.subregionData.sort(function(x,y){
@@ -152,33 +197,33 @@ export default {
             var margin = {top: 30, right: 60, bottom: 140, left: 70},
                 width = (this.w) - margin.left - margin.right,
                 height = (this.h) - margin.top - margin.bottom;
-        
+
             var x = d3.scale.ordinal()
                 .rangeRoundBands([0, width], 0.2);
-        
+
             var y = d3.scale.linear()
                 .range([height, 0]);
 
             var color = d3.scale.ordinal()
                 .range(colors)
                 .domain(fuelBreakdown);
-        
+
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .outerTickSize(0)
                 .orient("bottom");
-        
+
             var yAxis = d3.svg.axis()
                 .scale(y)
                 .orient("left")
                 .tickFormat(function(d) { return d + "%"; });
-        
+
             var svg = d3.select(self.domElement).append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                
+
             for(var i = 0; i < self.subregionData.length; i += 1) {
                 self.subregions[self.subregionData[i].properties.name] = self.subregionData[i].properties.fullName;
                 if(self.subregionData[i].properties.name){
@@ -187,8 +232,8 @@ export default {
                         var obj = {
                             subregion: self.subregionData[i].properties.name,
                             val: self.subregionData[i].properties[fuelKey][name],
-                            name: name, 
-                            y0: y0, 
+                            name: name,
+                            y0: y0,
                             y1: +self.subregionData[i].properties[fuelKey][name],
                             chart: self.selectedFuelCategory
                         };
@@ -199,15 +244,15 @@ export default {
                     self.subregionData[i].fuelTotal = d3.sum(d3.values(self.subregionData[i].properties[fuelKey]));
                 }
             }
-    
+
             self.subregions[self.nationalFeature[0].properties.name] = self.nationalFeature[0].properties.fullName;
             var yNat0 = 0;
-            self.nationalFeature[0].properties.fuels = color.domain().map(function(name){ 
+            self.nationalFeature[0].properties.fuels = color.domain().map(function(name){
                 var obj = {
                     subregion: self.nationalFeature[0].properties.name,
                     val: self.nationalFeature[0].properties[fuelKey][name],
-                    name: name, 
-                    y0: yNat0, 
+                    name: name,
+                    y0: yNat0,
                     y1: +self.nationalFeature[0].properties[fuelKey][name],
                     chart: self.selectedFuelCategory
                 };
@@ -216,10 +261,10 @@ export default {
                 return obj;
             });
             self.nationalFeature[0].fuelTotal = d3.sum(d3.values(self.nationalFeature[0].properties[fuelKey]));
-            
+
             x.domain(self.subregionData.map(function(d){ return d.properties.name; }));
             y.domain([0,100]);
-        
+
             svg.append("g")
                 .attr("class", "x axis")
                 .attr("transform", "translate(0," + height + ")")
@@ -236,18 +281,18 @@ export default {
             svg.append("text")
                 .attr("transform", "translate(" + (width/2 - 50) + "," + (height + 50) + ")")
                 .text("eGRID Subregions");
-        
+
             svg.append("g")
                 .attr("class", "y axis")
                 .call(yAxis);
-    
+
             svg.append("text")
                 .attr("y", -20)
                 .attr("x",15)
                 .attr("dy", "0.71em")
                 .attr("text-anchor", "end")
                 .text("Generation");
-    
+
             var subregion = svg.selectAll(".subregion")
                 .data(self.subregionData)
                 .enter().append("g")
@@ -272,25 +317,25 @@ export default {
                 })
                 .attr("width", x.rangeBand())
                 .attr("y", function(d) {
-                    return y(d.y1); 
+                    return y(d.y1);
                 })
                 .attr("height", function(d) { return y(d.y0) - y(d.y1); })
                 .style("fill", function(d) { return color(d.name); });
 
-            
-            
+
+
             subregion.selectAll(".nationalFuelMixRect")
                 .on("click", function(fuel, i){
                     self.selectedFuel = fuel.name;
                     self.handleFuelClick(fuel, fuelKey, x, y, subregion, xAxis, yAxis, self.orientation)
                 })
 
-            fuels.append("desc").text(function(fuel){                    
+            fuels.append("desc").text(function(fuel){
                 var fuelName = fuel.name;
                 var f = d3.format(".1f");
                 return self.addHovertext(fuel, fuelName, f)
             })
-            
+
             var nationalBar = svg.selectAll(".nationalBar")
                 .data(self.nationalFeature)
                 .enter().append("g")
@@ -306,7 +351,7 @@ export default {
                     return self.addHovertext(fuel, fuelName, f)
                 });
 
-                        
+
             nationalFuels.append("rect")
                 .attr("class", function(d){
                     return "nationalFuelMixRect " + d.chart
@@ -316,7 +361,7 @@ export default {
                 })
                 .attr("width", x.rangeBand())
                 .attr("y", function(d) {
-                    return y(d.y1); 
+                    return y(d.y1);
                 })
                 .on("click", function(fuel,i){
                     self.selectedFuel = fuel.name;
@@ -325,15 +370,15 @@ export default {
                 .attr("height", function(d) { return y(d.y0) - y(d.y1); })
                 .style("fill", function(d) { return color(d.name); });
 
-            nationalFuels.append("desc").text(function(fuel){                    
+            nationalFuels.append("desc").text(function(fuel){
                 var fuelName = fuel.name;
                 var f = d3.format(".1f");
                 return self.addHovertext(fuel, fuelName, f)
             })
-            
+
             var nationalX = d3.scale.ordinal()
                 .rangeRoundBands([width, width + 20], 0.2);
-    
+
             var nationalBarXAxis = d3.svg.axis()
             .scale(nationalX)
             .outerTickSize(0)
@@ -347,7 +392,7 @@ export default {
                 .text("National")
                 .attr("x", width - 15)
                 .attr("y",  30);
-    
+
             var offset1 = 250,
                 offset2 = 150;
 
@@ -395,7 +440,7 @@ export default {
                             return "translate(" + (width / 2 + offset2) + "," + (height + 60) + ")";
                         } else if (i === 10) {
                             return "translate(" + (width / 2 + offset2) + "," + (height + 80) + ")";
-                        } 
+                        }
                     }
                 })
                 .on("click",function(d){
@@ -410,14 +455,14 @@ export default {
                     self.selectedFuel = fuel.name;
                     self.handleFuelClick(fuel, fuelKey, x, y, subregion, xAxis, yAxis, self.orientation)
                 });
-            
+
             legendBottom.append("rect")
                 .attr("x", 0)
                 .attr("y", 0)
                 .attr("width", 10)
                 .attr("height", 10)
                 .style("fill", color);
-        
+
             legendBottom.append('text')
                 .attr("x", 20)
                 .attr("y", 10)
@@ -477,33 +522,33 @@ export default {
             //Iterate through each fuels array
             var svg = d3.select(self.domElement)
             svg.selectAll("fuelContainer").sort(function(a, b) { return x0(a.subregion) - x0(b.subregion); });
-            
+
             var transition = subregion.transition().duration(duration.sub),
                 delay = function(d, i) { return i * 50; };
-                
+
             if(duration.sub != 0){
                 transition.selectAll("rect")
                 .delay(delay)
-                .attr("x", function(d) { 
+                .attr("x", function(d) {
                     if(d.subregion != "National"){
-                        return x0(d.subregion); 
+                        return x0(d.subregion);
                     }
                 });
 
                 var transitionX = svg.transition().duration(duration.x);
-    
+
                 transitionX.select(".x.axis")
                     .call(xAxis)
                     .selectAll("g")
                         .delay(delay);
             } else {
                 transition.selectAll("rect")
-                .attr("x", function(d) { 
+                .attr("x", function(d) {
                     if(d.subregion != "National"){
-                        return x0(d.subregion); 
+                        return x0(d.subregion);
                     }
                 });
-    
+
                 svg.select(".x.axis")
                     .call(xAxis);
 
@@ -514,50 +559,50 @@ export default {
                 .append("title")
                 .text(function(d){
                     return d + " (" + self.subregions[d] + ")";
-                });        
+                });
         },
         displayVertical: function(colors, fuelBreakdown, fuelKey){
             var self = this
             var margin = {top: 120, right: 20, bottom: 80, left: 65},
                 width = (500) - margin.left - margin.right,
                 height = (800) - margin.top - margin.bottom;
-        
+
             var x = d3.scale.linear()
                 .range([0, width]);
-    
+
             var y = d3.scale.ordinal()
                 .rangeRoundBands([0, height], 0.2);
-        
+
             var color = d3.scale.ordinal()
                 .range(colors)
                 .domain(fuelBreakdown);
-        
+
             var yAxis = d3.svg.axis()
                 .scale(y)
                 .outerTickSize(0)
                 .orient("left");
-        
+
             var xAxis = d3.svg.axis()
                 .scale(x)
                 .orient("top")
                 .tickFormat(function(d) { return d + "%"; });
-        
+
             var svg = d3.select(self.domElement).append("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.bottom + margin.top)
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-                    
+
             for(var i = 0; i < self.subregionData.length; i += 1) {
                 self.subregions[self.subregionData[i].properties.name] = self.subregionData[i].properties.fullName;
                 if(self.subregionData[i].properties.name){
                     var x0 = 0;
-                    self.subregionData[i].properties.fuels = color.domain().map(function(name){ 
+                    self.subregionData[i].properties.fuels = color.domain().map(function(name){
                         var obj = {
                             subregion: self.subregionData[i].properties.name,
                             val: self.subregionData[i].properties[fuelKey][name],
-                            name: name, 
-                            x0: x0, 
+                            name: name,
+                            x0: x0,
                             x1: +self.subregionData[i].properties[fuelKey][name],
                             chart: self.selectedFuelCategory
                         };
@@ -568,15 +613,15 @@ export default {
                     self.subregionData[i].fuelTotal = d3.sum(d3.values(self.subregionData[i].properties[fuelKey]));
                 }
             }
-    
+
             self.subregions[self.nationalFeature[0].properties.name] = self.nationalFeature[0].properties.fullName;
             var xn0 = 0;
-            self.nationalFeature[0].properties.fuels = color.domain().map(function(name){ 
+            self.nationalFeature[0].properties.fuels = color.domain().map(function(name){
                 var obj = {
                     subregion: self.nationalFeature[0].properties.name,
                     val: self.nationalFeature[0].properties[fuelKey][name],
-                    name: name, 
-                    x0: xn0, 
+                    name: name,
+                    x0: xn0,
                     x1: +self.nationalFeature[0].properties[fuelKey][name],
                     chart: self.selectedFuelCategory
                 };
@@ -585,34 +630,34 @@ export default {
                 return obj;
             });
             self.nationalFeature[0].fuelTotal = d3.sum(d3.values(self.nationalFeature[0].properties[fuelKey]));
-            
-        
+
+
             y.domain(self.subregionData.map(function(d){ return d.properties.name; }));
             x.domain([0,100]);
-    
+
             svg.append("g")
                 .attr("class", "y axis")
                 .attr("transform", "translate(0,0)")
                 .call(yAxis);
-    
+
             svg.append("text")
                 .attr("y", -40)
                 .attr("x",50)
                 .attr("dy", "0.71em")
                 .attr("text-anchor", "middle")
                 .text("Generation");
-    
+
             svg.selectAll("text")
                 .style("text-anchor", "end")
                 .append("title")
                 .text(function(d){
                     return d + " (" + self.subregions[d] + ")";
                 });
-        
+
             svg.append("g")
                 .attr("class", "x axis")
                 .call(xAxis);
-    
+
             var subregion = svg.selectAll(".subregion")
                 .data(self.subregionData)
                 .enter().append("g")
@@ -627,7 +672,7 @@ export default {
                     var f = d3.format(".1f");
                     return self.addHovertext(fuel, fuelName, f)
                 })
-        
+
             fuels.append("rect")
                 .attr("class", function(d){
                     return "nationalFuelMixRect " + d.chart
@@ -637,7 +682,7 @@ export default {
                 })
                 .attr("height", y.rangeBand())
                 .attr("x", function(d) {
-                    return x(d.x0); 
+                    return x(d.x0);
                 })
                 .on("click", function(fuel,i){
                     self.selectedFuel = fuel.name;
@@ -646,18 +691,18 @@ export default {
                 .attr("width", function(d) { return x(d.x1) - x(d.x0); })
                 .style("fill", function(d) { return color(d.name); });
 
-            
-            fuels.append("desc").text(function(fuel){                    
+
+            fuels.append("desc").text(function(fuel){
                 var fuelName = fuel.name;
                 var f = d3.format(".1f");
                 return self.addHovertext(fuel, fuelName, f)
             })
-    
+
             var nationalBar = svg.selectAll(".nationalBar")
                 .data(self.nationalFeature)
                 .enter().append("g")
                 .attr("class", "nationalBar");
-            
+
             var nationalFuels = nationalBar.selectAll("g")
                 .data(function(d){ return d.properties.fuels })
                 .enter().append("g")
@@ -667,7 +712,7 @@ export default {
                     var f = d3.format(".1f");
                     return self.addHovertext(fuel, fuelName, f)
                 });
-            
+
             nationalFuels.append("rect")
                 .attr("class", function(d){
                     return "nationalFuelMixRect " + d.chart
@@ -677,7 +722,7 @@ export default {
                 })
                 .attr("height", y.rangeBand())
                 .attr("x", function(d) {
-                    return x(d.x0); 
+                    return x(d.x0);
                 })
                 .on("click", function(fuel,i){
                     self.selectedFuel = fuel.name;
@@ -686,17 +731,17 @@ export default {
                 .attr("width", function(d) { return x(d.x1) - x(d.x0); })
                 .style("fill", function(d) { return color(d.name); });
 
-            nationalFuels.append("desc").text(function(fuel){                    
+            nationalFuels.append("desc").text(function(fuel){
                 var fuelName = fuel.name;
                 var f = d3.format(".1f");
                 return self.addHovertext(fuel, fuelName, f)
             })
-            
+
             var nationalY = d3.scale.ordinal()
                 .rangeRoundBands([height, height + 20], 0.2);
-    
+
             var nationalBarYAxis = d3.svg.axis().scale(nationalY).orient("left");
-                
+
             nationalBar.append("g")
                 .attr("class", "nationalY")
                 .call(nationalBarYAxis)
@@ -704,9 +749,9 @@ export default {
                 .text("National")
                 .attr("x", -65)
                 .attr("y",  height + 15);
-    
+
             var offsetL = 80;
-    
+
             var legendTop = svg.selectAll(".legendTop")
                 .data(color.domain())
                 .enter().append("g")
@@ -763,7 +808,7 @@ export default {
                             return "translate(" + (midLen + offsetL * 2 + 140) + "," + (-100) + ")";
                         } else if (i === 10) {
                             return "translate(" + (midLen + offsetL * 2 + 140) + "," + (-70) + ")";
-                        } 
+                        }
                     }
                 })
                 .on("click",function(d){
@@ -778,14 +823,14 @@ export default {
                     self.selectedFuel = fuel.name;
                     self.handleFuelClick(fuel, fuelKey, x, y, subregion, xAxis, yAxis, self.orientation)
                 });
-            
+
             legendTop.append("rect")
                 .attr("x", 0)
                 .attr("y", 0)
                 .attr("width", 10)
                 .attr("height", 10)
                 .style("fill", color);
-        
+
             legendTop.append('text')
                 .attr("x", 20)
                 .attr("y", 10)
@@ -805,9 +850,9 @@ export default {
                 .style("font-size", 15);
 
                 var lgLabels = d3.selectAll(".lgLabel");
-        
+
                 var sarr;
-        
+
                 lgLabels.append("tspan")
                     .text(function(d){
                         sarr = d.match(/[A-Z]*[^A-Z]+/g);
@@ -817,7 +862,7 @@ export default {
                             return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
                         }
                     });
-                
+
                 lgLabels.append("tspan")
                     .attr("x", 20)
                     .attr("y", 25)
@@ -833,7 +878,7 @@ export default {
                             return sarr[1];
                         }
                     });
-        
+
                     d3.selectAll(".unknown")
                         .append("tspan")
                         .attr("x",20)
@@ -855,7 +900,7 @@ export default {
             var y0 = y.domain(self.subregionData.sort(
                 function(a, b) { return b.properties[fuelKey][fuel.name] - a.properties[fuelKey][fuel.name]; }
                 ).map(function(d) { return d.properties.name; })).copy();
-            
+
             d3.selectAll("." + fuel.chart)
                 .style("opacity", function(d){
                     if(d.name == fuel.name){
@@ -893,28 +938,28 @@ export default {
 
             var transition = subregion.transition().duration(duration.sub),
                 delay = function(d, i) { return i * 50; };
-                
+
             if(duration.sub != 0) {
                 transition.selectAll("rect")
                 .delay(delay)
-                .attr("y", function(d) { 
+                .attr("y", function(d) {
                     if(d.subregion != "National"){
-                        return y0(d.subregion); 
+                        return y0(d.subregion);
                     }
                 });
-            
+
                 var transitionY = svg.transition().duration(200);
                 var yDelay = function(d, i) { return i * 20; };
-        
+
                 transitionY.select(".y.axis")
                     .call(yAxis)
                     .selectAll("g")
                         .delay(yDelay);
             } else {
                 transition.selectAll("rect")
-                .attr("y", function(d) { 
+                .attr("y", function(d) {
                     if(d.subregion != "National"){
-                        return y0(d.subregion); 
+                        return y0(d.subregion);
                     }
                 });
 
@@ -922,14 +967,14 @@ export default {
                     .call(yAxis);
             }
 
-    
+
             d3.selectAll(self.domElement + " .y.axis text")
                 .style("text-anchor","end")
                 .append("title")
                 .text(function(d){
                     return d + " (" + self.subregions[d] + ")";
                 });
-    
+
         },
         reset: function(){
             d3.selectAll("#nationalFuelMix svg").remove();
@@ -975,8 +1020,8 @@ export default {
             self.updateChild("subregionFuels", fuel)
         },
         handleSortReset: function(){
-            this.subregionData.sort(function(x,y){ 
-                return d3.ascending(x.properties.name, y.properties.name); 
+            this.subregionData.sort(function(x,y){
+                return d3.ascending(x.properties.name, y.properties.name);
             });
             this.sortState = "alphabetically";
             userSelection.sortedFuel = ""

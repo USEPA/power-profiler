@@ -6,7 +6,8 @@
   },
   "es": {
     "title": "Analizador de consumo de energía",
-    "subTitle": "¿Qué tan limpia es la electricidad que consume?"
+    "subTitle": "¿Qué tan limpia es la electricidad que consume?",
+    "linkLangNote": "Nota: La mayoría de los enlaces en estas páginas le llevarán a páginas web en inglés"
   }
 }
 </i18n>
@@ -19,6 +20,7 @@
       </select>
     </div>
     <h1 class="page-title">{{ $t("title") }}</h1>
+    <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
     <div id="app" class="row cols-2">
       <sideBar id="sidebar" class="col size-1of3 box simple"></sideBar>
