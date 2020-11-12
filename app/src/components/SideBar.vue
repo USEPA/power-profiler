@@ -46,7 +46,7 @@
             aria-label="Downloads Excel spreadsheet tool"
             >Power Profiler ZIP Code Tool</a
           >
-          <span class="fileinfo">(3.56M)</span>
+          <span class="fileinfo">(4 MB, 11/12/2020)</span>
         </p>
         <p>
           <a
