@@ -1,10 +1,39 @@
 <i18n>
 {
     "en": {
-        "generation": "Generation"
+      "generation": "Generation",
+      "fuelTooltip": "{name} accounts for {val} % of the fuel mix {subregion}",
+      "fuels": {
+        "gas": "Gas",
+        "coal": "Coal",
+        "nuclear": "Nuclear",
+        "hydro": "Hydro",
+        "wind": "Wind",
+        "biomass": "Biomass",
+        "solar": "Solar",
+        "oil": "Oil",
+        "geothermal": "Geothermal",
+        "otherFossilFuel": "Other Fossil Fuel",
+        "otherUnknownFuel": "Other Uknown Fuel"
+      }
+
     },
     "es": {
-        "generation": "Generacion"
+      "generation": "Generacion",
+      "fuelTooltip": "{name} representa el {val} % la combinación de combustibles del {subregion}",
+      "fuels": {
+        "gas": "Gas",
+        "coal": "Carbón",
+        "nuclear": "Energía Nuclear",
+        "hydro": "Energía Hidroeléctrica",
+        "wind": "Energía Eólica",
+        "biomass": "Biomasa",
+        "solar": "Energía Solar",
+        "oil": "Petróleo",
+        "geothermal": "Energía Geotérmica",
+        "otherFossilFuel": "Otros Combustibles Fósiles",
+        "otherUnknownFuel": "Otros Combustibles Desconocidos"
+      }
     }
 }
 </i18n>
@@ -149,7 +178,13 @@ export default {
         .attr("class", "legendTitle")
         .attr("dy", "0.71em")
         .attr("text-anchor", "beginning")
-        .text("Fuel (" + data[1].properties.name + " Generation %)");
+        .text(
+          "Fuel (" +
+            data[1].properties.name +
+            " " +
+            this.$t("generation") +
+            " %)"
+        );
 
       var subregion = svg
         .selectAll(".subregion")
@@ -176,13 +211,11 @@ export default {
           return y(d.y1);
         })
         .attr("title", function (fuel) {
-          return (
-            formatFuelLabel(fuel.name) +
-            " accounts for " +
-            f(fuel.val) +
-            "% of the fuel mix " +
-            checkNational(fuel.subregion)
-          );
+          return _this.$t("fuelTooltip", {
+            name: _this.$t("fuels." + fuel.name),
+            val: f(fuel.val),
+            subregion: checkNational(fuel.subregion),
+          });
         })
         .attr("height", function (d) {
           return y(d.y0) - y(d.y1);
@@ -248,7 +281,10 @@ export default {
             d != "geothermal"
           ) {
             return (
-              formatFuelLabel(d) + " (" + data[1].properties.fuelMix[d] + "%)"
+              _this.$t("fuels." + d) +
+              " (" +
+              data[1].properties.fuelMix[d] +
+              "%)"
             );
           }
         })
@@ -270,7 +306,10 @@ export default {
       var sarr;
 
       lgLabels.append("tspan").text(function (d) {
+        console.log(d);
         sarr = d.match(/[A-Z]*[^A-Z]+/g);
+        return _this.$t("fuels." + d);
+
         if (d == "geothermal") {
           return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
         } else if (d == "otherFossilFuel") {
