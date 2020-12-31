@@ -16,6 +16,7 @@
             "nox": "nitrogen oxide",
             "select": "Select:"
         },
+        "backToAllSubregions": "Back to all subregions",
         "printReport": "Print Report"
     },
     "es": {
@@ -34,6 +35,7 @@
             "nox": "óxido de nitrógeno",
             "select": "Seleccione:"
         },
+        "backToAllSubregions": "Volver a todas las subregiones",
         "printReport": "Print Report"
     }
 }
@@ -75,7 +77,7 @@
     </div>
     <div class="col row cols-2" id="selectedSubregion">
       <p id="subregionButtons">
-        <router-link :to="'/'">« Back to All Subregions</router-link>
+        <router-link :to="'/'">« {{ $t("backToAllSubregions") }}</router-link>
       </p>
       <div id="fuelMixContainer" class="col">
         <h3>{{ $t("fuelMixHeader") }}</h3>

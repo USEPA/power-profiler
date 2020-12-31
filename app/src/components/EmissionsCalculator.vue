@@ -26,9 +26,18 @@
           "goButton": "Go"
         },
         "results": {
-          "natAnnGuage":"",
-          "youAnnGuage":"",
-          "compareAnnGuage":""
+          "natAnnGauge":"National Annual Electricity Use",
+          "youAnnGauge":"Your Annual Electricity Use",
+          "compareAnnGauge":"Your Electricity Use Compared to the National Average",
+          "charts" : {
+            "co2Title": "Carbon Dioxide",
+            "so2Title": "Sulfur Dioxide",
+            "noxTitle": "Nitrogen Oxides",
+            "nat": "National Average",
+            "reg": " Average",
+            "you": "Your Emissions"
+          }
+
 
         }
     },
@@ -58,10 +67,17 @@
           "goButton": "Ir"
         },
         "results": {
-          "natAnnGuage":"",
-          "youAnnGuage":"",
-          "compareAnnGuage":""
-
+          "natAnnGauge":"Consumo nacional eléctrico anual",
+          "youAnnGauge":"Su consumo eléctrico anual",
+          "compareAnnGauge":"Su consumo eléctrico comparado con el promedio nacional",
+          "charts" : {
+            "co2Title": "dióxido de carbono",
+            "so2Title": "dióxido de azufre",
+            "noxTitle": "óxido de nitrógeno",
+            "nat": "Promedio nacional",
+            "reg": " promedio",
+            "you": "Sus emisiones"
+          }
         }
     }
 }
@@ -301,7 +317,7 @@ export default {
       emissionsResultsHeight: 0,
       residentialMode: true,
       commercialCustomerForm: false,
-      squareFootage: 0,
+      sqrFootage: 0,
     };
   },
   mounted: function () {
@@ -416,7 +432,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         this.nationalAverage * 12,
-        "National Annual Electricity Use",
+        this.$t("results.natAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -424,7 +440,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         userMonthlyAverage * 12,
-        "Your Annual Electricity Use",
+        this.$t("results.youAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -432,7 +448,7 @@ export default {
         this.emissionsResultsHeight / 2,
         percentMax,
         userPercent,
-        "Your Electricity Use Compared to the National Average",
+        this.$t("results.compareAnnGauge"),
         true
       );
       d3.selectAll("#resultGraphs svg").remove();
@@ -562,7 +578,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         this.nationalAverage * 12,
-        "National Annual Electricity Use",
+        this.$t("results.natAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -570,7 +586,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         total,
-        "Your Annual Electricity Use",
+        this.$t("results.youAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -578,7 +594,7 @@ export default {
         this.emissionsResultsHeight / 2,
         percentMax,
         userPercent,
-        "Your Electricity Use Compared to the National Average",
+        this.$t("results.compareAnnGauge"),
         true
       );
       d3.selectAll("#resultGraphs svg").remove();
@@ -654,10 +670,9 @@ export default {
       if ($("#chart-gauge").children.length > 3) {
         d3.selectAll("#chart-gauge svg").remove();
       }
-
       if (this.residentialMode == false) {
         var gaugeMax = 24000;
-        this.nationalAverage = this.squareFootage * 1.22;
+        this.nationalAverage = this.sqrFootage * 1.22;
         $("#resultGraphs").hide();
         $("#result-subheader").html(
           "National Average Electricity Use for Commercial Customers"
@@ -672,7 +687,7 @@ export default {
           this.emissionsResultsHeight / 2,
           gaugeMax,
           this.nationalAverage * 12,
-          "Your Annual Electricity Use",
+          this.$t("results.youAnnGauge"),
           false
         );
         this.displayUserAndNationalEmissions(
@@ -704,7 +719,7 @@ export default {
           this.emissionsResultsHeight / 2,
           24000,
           this.nationalAverage * 12,
-          "Your Annual Electricity Use",
+          this.$t("results.youAnnGauge"),
           false
         );
         this.displayUserAndNationalEmissions(
@@ -751,7 +766,7 @@ export default {
       );
 
       $("#commercialCustomersLink").click(function () {
-        this.commercialCustomerForm = true;
+        self.commercialCustomerForm = true;
         $("#residentialCustomersButton").show();
         $("#customerText").hide();
         $("#commercialCustomersForm").show();
@@ -759,18 +774,20 @@ export default {
 
       $("#commercialCustomersForm").on("submit", function (e) {
         e.preventDefault();
-        this.squareFootage = $("#squareFootage").val();
-        this.residentialMode = false;
-        $("#nationalAverageLink").trigger("click");
+        const input = $("#squareFootage").val();
+        self.sqrFootage = input;
+        self.residentialMode = false;
+        self.displayNationalAverage();
         $("#nat-em-rpt-intro-2").html(
           "estimated from the national average electricity consumption of 1.22 kWh/sq. ft./month for commercial customers and"
         );
       });
 
       $("#residentialCustomersButton").click(function () {
-        this.commercialCustomerForm = false;
-        this.residentialMode = true;
-        $("#nationalAverageLink").trigger("click");
+        self.commercialCustomerForm = false;
+        self.residentialMode = true;
+        self.displayNationalAverage();
+        $("#customerText").show();
         $("#nat-em-rpt-intro-2").html(
           "estimated from the average home consumption of 1,011 kWh/month and"
         );
@@ -980,6 +997,7 @@ export default {
       w,
       h
     ) {
+      let self = this;
       var pollutants = ["co2", "so2", "nox"];
 
       for (var i = 0; i < pollutants.length; i += 1) {
@@ -995,21 +1013,23 @@ export default {
             display: Number(
               parseFloat(national[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: "National Average",
+            name: self.$t("results.charts.nat"),
           },
           {
             value: parseFloat(subregion[pollutants[i]]),
             display: Number(
               parseFloat(subregion[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: this.selectedSubregion.properties.name + " Average",
+            name:
+              this.selectedSubregion.properties.name +
+              self.$t("results.charts.reg"),
           },
           {
             value: parseFloat(user[pollutants[i]]),
             display: Number(
               parseFloat(user[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: "Your Emissions",
+            name: self.$t("results.charts.you"),
           },
         ];
 
@@ -1082,11 +1102,11 @@ export default {
           .attr("font-weight", "bold")
           .text(function () {
             if (pollutants[i] == "co2") {
-              return "Carbon Dioxide";
+              return self.$t("results.charts.co2Title");
             } else if (pollutants[i] == "so2") {
-              return "Sulfur Dioxide";
+              return self.$t("results.charts.so2Title");
             } else if (pollutants[i] == "nox") {
-              return "Nitrogen Oxides";
+              return self.$t("results.charts.noxTitle");
             }
           });
 
