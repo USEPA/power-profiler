@@ -13,7 +13,7 @@
         <p>
           <strong>
             <a
-              href="https://epa.gov/energy/forms/egrid-and-power-profiler-feedback-and-questions"
+              href="https://www.epa.gov/egrid/forms/feedback"
               target="_blank"
               aria-label="Opens new window"
             >How do you like the new Power Profiler site?</a>
@@ -21,7 +21,7 @@
         </p>
         <p>
           Data source: 2018 data from the <a
-            href="https://epa.gov/energy/emissions-generation-resource-integrated-database-egrid"
+            href="https://www.epa.gov/egrid"
             target="_blank"
             aria-label="Opens new window"
           >Emissions & Generation Resource Integrated Database (eGRID)</a> released January 28, 2020
@@ -36,7 +36,7 @@
         </p>
         <p>
           <a
-            href="https://epa.gov/energy/forms/egrid-and-power-profiler-notification"
+            href="https://www.epa.gov/egrid/forms/egrid-and-power-profiler-notification"
             target="_blank"
             aria-label="Opens new window"
           >Sign up for the mailing list</a>
@@ -49,7 +49,7 @@
         </p>
         <p>
           <a
-            href="https://epa.gov/energy/power-profiler-methodology"
+            href="https://www.epa.gov/egrid/power-profiler-methodology"
             target="_blank"
             aria-label="Opens new window"
           >Power Profiler Methodology</a>
