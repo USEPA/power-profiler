@@ -22,7 +22,7 @@ Most of the text content in the app can be found within the `template` sections 
 
 ## Deployment
 
-To deploy the the app onto either the [production EPA Drupal site](https://wcms.epa.gov) or the [staging app dev server](https://webcms.appdev.epa.gov), verify that the correct paths to the `subregion.json` and `zip.csv` files are both correct in the webpack config file (`prod.config.js` or `stag.config.js`), located in the `webpack` folder.
+To deploy the the app onto either the [production EPA Drupal site](https://beta.epa.gov) or the [staging app dev server](https://webcms.appdev.epa.gov), verify that the correct paths to the `subregion.json` and `zip.csv` files are both correct in the webpack config file (`prod.config.js` or `stag.config.js`), located in the `webpack` folder.
 
 Then, use one the following commands to deploy:
 - Staging: `npm run stage`
@@ -53,7 +53,7 @@ The "Page Javascript" section should look like this:
 - Version 1.1 was released on June 20, 2019
 
 ## Helpful Links
-- [Staging site for app](https://beta.epa.gov/node/73153/revisions/1079627/view#/)
+- [Staging site for app](https://webcms.appdev.epa.gov)
 - [Production site](https://www.epa.gov/egrid/power-profiler#/)
 - [eGRID Home page](https://www.epa.gov/egrid)
 
