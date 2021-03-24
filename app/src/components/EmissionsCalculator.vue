@@ -3,7 +3,7 @@
         <h3>Estimate Your Emissions</h3>
         <div>
             <div>
-                <p><label id="userMonthlyAverageLabel" for="userMonthlyAverageInput">Enter your <a href="javascript:void(0)" id="monthlyAverageLink" @click="showAverageInput = true">average monthly electricity use</a>.</label></p>            
+                <p><label id="userMonthlyAverageLabel" for="userMonthlyAverageInput">Enter your <a href="javascript:void(0)" id="monthlyAverageLink" @click="showAverageInput = true">average monthly electricity use</a>.</label></p>
                 <form v-on:submit.prevent="displayMonthlyAverage" v-show="showAverageInput" id="userMonthlyAverage" method="POST">
                 <input id="userMonthlyAverageInput" required="" type="number" style="height: 36px;">&nbsp;kWh&nbsp;<button id="calculateMonthlyAverageButton" type="submit">Go</button></form>
             </div>
@@ -28,7 +28,7 @@
                     <div class="row cols-3">
                         <div class="col"><label for="userMonthlyActualInput10"><strong>October</strong></label> <input id="userMonthlyActualInput10" required="" type="number">&nbsp;kWh</div>
                         <div class="col"><label for="userMonthlyActualInput11"><strong>November</strong></label> <input id="userMonthlyActualInput11" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh 
+                        <div class="col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh
                         <br><button id="calculateMonthlyActualButton" type="submit">Go</button></div>
                     </div>
                 </form>
@@ -57,7 +57,7 @@ export default {
             gridLoss: {},
             subregionEmissions: {},
             nationalEmissions: {},
-            nationalAverage: 1011,
+            nationalAverage: 877,
             emRatesColors: { "national":"#2b83ba","subregion":"#e66101","co2EmissionRate":"#d7191c","so2EmissionRate":"#008837","noxEmissionRate":"#7b3294"},
             resultsFunction: "",
             emissionsResultsWidth: 0,
@@ -119,7 +119,7 @@ export default {
             $("#pounds-of-nox").html(userNitrogen);
             $("#no-of-tree-seedlings").html(self.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).trees);
             $("#acres-of-forests").html(self.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).acres);
-            
+
             var gaugeMax = 24000;
             if(userMonthlyAverage * 12 > gaugeMax){
                 gaugeMax = userMonthlyAverage * 12;
@@ -261,7 +261,7 @@ export default {
                 this.displayUserAndNationalEmissions(this.userEmissions, this.subregionEmissions, this.nationalEmissions, "#resultGraphs-rpt", 247, 340);
 
             } else {
-                this.nationalAverage = 1011;
+                this.nationalAverage = 877;
                 $("#resultGraphs").hide();
                 $("#result-subheader").html("National Average Electricity Use");
                 $("#commercialCustomersForm").hide();
@@ -273,7 +273,7 @@ export default {
                 this.displayUserAndNationalEmissions(this.userEmissions, this.subregionEmissions, this.nationalEmissions, "#resultGraphs-rpt", 247, 340);
 
             }
-            
+
             var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
             var userNitrogen = Math.round(this.userEmissions.nox).toLocaleString();
             var userSulfur = Math.round(this.userEmissions.so2).toLocaleString();
@@ -431,12 +431,12 @@ export default {
             }
         },
         calculateNationalEmissions: function(emissionFactorValue) {
-            var nationalTotal = 1011 * 12;
+            var nationalTotal = this.nationalAverage * 12;
             var res = ((nationalTotal  * emissionFactorValue) / 1000) * (1 + 0.0448);
             return res;
         },
         calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
-            var nationalTotal = 1011 * 12;
+            var nationalTotal = this.nationalAverage * 12;
             var res = ((nationalTotal  * emissionFactorValue) / 1000) * (1 + gridLoss);
             return res;
         },
@@ -454,11 +454,11 @@ export default {
             var pollutants = ["co2","so2","nox"];
 
             for (var i = 0; i < pollutants.length; i += 1) {
-                
+
                 var margin = {top: 75, right: 35, bottom: 80, left: 55},
                         width = (w) - margin.left - margin.right,
                         height = (h) - margin.top - margin.bottom;
-                    
+
                 var x = d3.scale.ordinal()
                     .rangeRoundBands([0, width], 0.3);
 
@@ -556,7 +556,7 @@ export default {
                                 .text(s[1]);
                         });
                     });
-                
+
                 svg.append("g")
                     .attr("class", "y axis")
                     .call(yAxis);
@@ -587,7 +587,7 @@ export default {
                                 return "X";
                             }
                         });
-                
+
                 svg.append("text")
                     .attr("y", -45)
                     .attr("x", - (height / 2))
@@ -620,11 +620,11 @@ export default {
                         .attr("x", function(d) { return x(d.name) + x.rangeBand()/2;})
                         .attr("y", function(d) { return y(d.value) + -5;})
                         .text("lbs");
-                
+
                 if (i == 2) {
                     addLogoBottom(svg, width - 90, height + 75);
                 }
-                
+
             }
             d3.selectAll(domElement + " svg text")
             .style("font-family","'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', 'Arial', sans-serif");
