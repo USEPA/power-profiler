@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> average emission rates in pounds per <a @click="$parent.$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a>.</p>
-        <div class="row cols-2" id="emissionRatesHeatMap"></div>
+        <div class="grid-row" id="emissionRatesHeatMap"></div>
     </div>
 </template>
 <script>
@@ -61,7 +61,7 @@ export default {
 
         var svg = d3.select(_this.domElement)
             .append("svg")
-            .attr("class","col size-4of5")
+            .attr("class","grid-col")
             .attr("width", _this.width)
             .attr("height", _this.height)
             .attr("viewBox", "0 0 " + _this.width + " " + _this.height)
@@ -77,7 +77,7 @@ export default {
         }).trigger("resize")
 
         var max = d3.max( this.subregionData, function(d) { return d.properties.emissionFactor[emissionRate].value; });
-        
+
         var color = d3.scale.linear()
             .domain([0,max])
             .range(["#eeeeee",_this.$parent.emRatesColors[emissionRate]]);
@@ -86,7 +86,7 @@ export default {
             this.containerHeight = 400;
             this.svgGradient = d3.select(this.domElement)
                 .append("svg")
-                .attr("class","col size-1of5")
+                .attr("class","grid-col")
                 .attr("width", 100)
                 .attr("height",this.containerHeight);
         } else if (this.orientation == "vertical"){
@@ -125,7 +125,7 @@ export default {
                         return "x";
                     }
                 });
-            
+
         var defs = this.svgGradient.append("defs");
 
         var linearGradient = defs.append("linearGradient")
@@ -295,7 +295,7 @@ export default {
             });
             var labels = svg.append("g")
             addSubregionLabels(labels, this.path, this.subregionData)
-            
+
             if(orientation == "horizontal"){
                 addLogoBottom(this.svgGradient, 30, _this.containerHeight - 30);
             } else if (orientation == "vertical") {

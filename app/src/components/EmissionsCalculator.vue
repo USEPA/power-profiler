@@ -10,25 +10,25 @@
             <div>
                 <p>Or enter your <a href="javascript:void(0)" id="monthlyActualLink" class="emissionsLink" @click="showAverageInput = false">actual electricity use for each month</a>.</p>
                 <form v-on:submit.prevent="displayMonthlyActual" v-show="!showAverageInput" id="calculateMonthlyActualForm" method="POST">
-                    <div class="row cols-3">
-                        <div class="col"><label for="userMonthlyActualInput1"><strong>January</strong></label> <input id="userMonthlyActualInput1" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput2"><strong>February</strong></label> <input id="userMonthlyActualInput2" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput3"><strong>March</strong></label> <input id="userMonthlyActualInput3" required="" type="number">&nbsp;kWh</div>
+                    <div class="grid-row grid-gap">
+                        <div class="grid-col"><label for="userMonthlyActualInput1"><strong>January</strong></label> <input id="userMonthlyActualInput1" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput2"><strong>February</strong></label> <input id="userMonthlyActualInput2" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput3"><strong>March</strong></label> <input id="userMonthlyActualInput3" required="" type="number">&nbsp;kWh</div>
                     </div>
-                    <div class="row cols-3">
-                        <div class="col"><label for="userMonthlyActualInput4"><strong>April</strong></label> <input id="userMonthlyActualInput4" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput5"><strong>May</strong></label> <input id="userMonthlyActualInput5" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput6"><strong>June</strong></label> <input id="userMonthlyActualInput6" required="" type="number">&nbsp;kWh</div>
+                    <div class="grid-row grid-gap">
+                        <div class="grid-col"><label for="userMonthlyActualInput4"><strong>April</strong></label> <input id="userMonthlyActualInput4" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput5"><strong>May</strong></label> <input id="userMonthlyActualInput5" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput6"><strong>June</strong></label> <input id="userMonthlyActualInput6" required="" type="number">&nbsp;kWh</div>
                     </div>
-                    <div class="row cols-3">
-                        <div class="col"><label for="userMonthlyActualInput7"><strong>July</strong></label> <input id="userMonthlyActualInput7" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput8"><strong>August</strong></label> <input id="userMonthlyActualInput8" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput9"><strong>September</strong></label> <input id="userMonthlyActualInput9" required="" type="number">&nbsp;kWh</div>
+                    <div class="grid-row grid-gap">
+                        <div class="grid-col"><label for="userMonthlyActualInput7"><strong>July</strong></label> <input id="userMonthlyActualInput7" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput8"><strong>August</strong></label> <input id="userMonthlyActualInput8" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput9"><strong>September</strong></label> <input id="userMonthlyActualInput9" required="" type="number">&nbsp;kWh</div>
                     </div>
-                    <div class="row cols-3">
-                        <div class="col"><label for="userMonthlyActualInput10"><strong>October</strong></label> <input id="userMonthlyActualInput10" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput11"><strong>November</strong></label> <input id="userMonthlyActualInput11" required="" type="number">&nbsp;kWh</div>
-                        <div class="col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh
+                    <div class="grid-row grid-gap">
+                        <div class="grid-col"><label for="userMonthlyActualInput10"><strong>October</strong></label> <input id="userMonthlyActualInput10" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput11"><strong>November</strong></label> <input id="userMonthlyActualInput11" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh
                         <br><button id="calculateMonthlyActualButton" type="submit">Go</button></div>
                     </div>
                 </form>
@@ -204,7 +204,7 @@ export default {
             }
 
             d3.selectAll("#chart-gauge svg").remove();
-            $("#chart-gauge").attr("class","pane-content row cols-3");
+            $("#chart-gauge").attr("class","pane-content grid-row grid-gap");
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, gaugeMax, this.nationalAverage * 12, "National Annual", "Electricity Use",false);
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, gaugeMax, total, "Your Annual", "Electricity Use",false);
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, percentMax, userPercent, "Your Annual Electricity Use", "Compared to the National Average",true);
@@ -251,7 +251,7 @@ export default {
                 $("#resultGraphs").hide();
                 $("#result-subheader").html("National Average Electricity Use for Commercial Customers");
                 d3.selectAll("#chart-gauge svg").remove();
-                $("#chart-gauge").attr("class","pane-content row cols-4");
+                $("#chart-gauge").attr("class","grid-row grid-gap");
                 if(this.nationalAverage * 12 > 24000) {
                     gaugeMax = this.nationalAverage * 12;
                 }
@@ -266,7 +266,7 @@ export default {
                 $("#result-subheader").html("National Average Electricity Use");
                 $("#commercialCustomersForm").hide();
                 d3.selectAll("#chart-gauge svg").remove();
-                $("#chart-gauge").attr("class","pane-content row cols-4");
+                $("#chart-gauge").attr("class","grid-row grid-gap");
                 this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, 24000, this.nationalAverage * 12, "Your Annual", "Electricity Use",false);
                 this.displayUserAndNationalEmissions(this.userEmissions, this.subregionEmissions, this.nationalEmissions, "#chart-gauge", this.emissionsResultsWidth, this.emissionsResultsHeight);
                 d3.selectAll("#resultGraphs-rpt svg").remove();
@@ -334,7 +334,7 @@ export default {
             var svg = d3.select("#chart-gauge").append("svg")
             .attr("width", width)
             .attr("height", height)
-            .attr("class","col")
+            .attr("class","grid-col")
             .append("g")
             .attr("transform", "translate(" + ((width / 2) - 20) + "," + (height / 2 + 50) + ")");
 
@@ -514,7 +514,7 @@ export default {
                 var svg = d3.select(domElement).append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
-                    .attr("class","col")
+                    .attr("class","grid-col")
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

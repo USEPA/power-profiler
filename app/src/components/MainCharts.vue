@@ -11,15 +11,16 @@
           >eGRID subregions</a
         >. <strong>Select a fuel type to sort subregions by fuel.</strong>
       </p>
-      <div id="select-offset-1">
-        <div
-          class="form-item form-type-radio form-item-radios row cols-3"
-          id="fuelRadios"
-        >
-          <label for="fuelRadios" id="select-fuel-category"
+      <label for="fuelRadios" id="select-fuel-category"
             ><strong>Select:</strong></label
           >
-          <div class="col size-1of6">
+      <div id="select-offset-1">
+        <div
+          class="form-item form-type-radio form-item-radios grid-container"
+          id="fuelRadios"
+        >
+        <div class="grid-row grid-gap">
+          <div class="grid-col-2">
             <input
               class="form-radio"
               type="radio"
@@ -31,7 +32,7 @@
             />
             <label class="option" for="fuel-breakdown-1">All Fuels</label>
           </div>
-          <div class="col size-1of3">
+          <div class="grid-col-4">
             <input
               class="form-radio"
               type="radio"
@@ -44,7 +45,7 @@
               >Renewable/Non-renewable</label
             >
           </div>
-          <div class="col size-1of2">
+          <div class="grid-col-6">
             <input
               class="form-radio"
               type="radio"
@@ -60,6 +61,7 @@
         </div>
       </div>
     </div>
+   </div>
     <div id="resetNationalFuelMixDiv">
       <p id="nationalFuelMixSortingStatus">
         <strong>This chart is sorted alphabetically A → Z by region.</strong>

@@ -19,11 +19,13 @@
             <p>To find out more about what a reduction in your electricity use means in everyday terms, like miles driven, visit <a href="/energy/greenhouse-gas-equivalencies-calculator" target="_blank">EPA's Greenhouse Gas Equivalencies Calculator</a>. For basic information about GHG emissions, visit <a href="/ghgemissions" target="_blank">EPA's Greenhouse Gas Emissions site</a>.</p>
         </div>
     </div>
-    <div class="box special">
-        <div id="chart-gauge" class="pane-content row cols-3"></div>
-    </div>
-    <div class="box special">
-        <div id="resultGraphs" class="row cols-3 pane-content"></div>
+    <div class="box special grid-container">
+        <div class="grid-row grid-gap">
+            <div id="chart-gauge" class="pane-content"></div>
+        </div>
+        <div class="grid-row grid-gap">
+            <div id="resultGraphs" class="pane-content"></div>
+        </div>
     </div>
     <div>
         <p><a href="javascript:window.print()">&#128438; Print Report</a></p>
