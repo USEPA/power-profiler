@@ -19,11 +19,9 @@
             </div>
         </div>
         <h3>Maps</h3>
+        <label class="grid-col"><strong>Select:</strong></label>
         <div>
             <div id="mapSelect" class="form-item form-type-radio form-item-radios grid-container">
-              <div class="grid-row grid-gap">
-                <label class="grid-col"><strong>Select:</strong></label>
-              </div>
               <div class="grid-row grid-gap">
                 <div class="grid-col-6">
                     <input id="emissionRateMapChoice" name="mapChoice" class="form-radio" type="radio" value="1" v-model="currentMap">

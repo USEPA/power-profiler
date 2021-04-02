@@ -204,7 +204,7 @@ export default {
             }
 
             d3.selectAll("#chart-gauge svg").remove();
-            $("#chart-gauge").attr("class","pane-content row cols-3");
+            $("#chart-gauge").attr("class","pane-content grid-row grid-gap");
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, gaugeMax, this.nationalAverage * 12, "National Annual", "Electricity Use",false);
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, gaugeMax, total, "Your Annual", "Electricity Use",false);
             this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, percentMax, userPercent, "Your Annual Electricity Use", "Compared to the National Average",true);
@@ -251,7 +251,7 @@ export default {
                 $("#resultGraphs").hide();
                 $("#result-subheader").html("National Average Electricity Use for Commercial Customers");
                 d3.selectAll("#chart-gauge svg").remove();
-                $("#chart-gauge").attr("class","pane-content row cols-4");
+                $("#chart-gauge").attr("class","grid-row grid-gap");
                 if(this.nationalAverage * 12 > 24000) {
                     gaugeMax = this.nationalAverage * 12;
                 }
@@ -266,7 +266,7 @@ export default {
                 $("#result-subheader").html("National Average Electricity Use");
                 $("#commercialCustomersForm").hide();
                 d3.selectAll("#chart-gauge svg").remove();
-                $("#chart-gauge").attr("class","pane-content row cols-4");
+                $("#chart-gauge").attr("class","grid-row grid-gap");
                 this.gaugeChart(this.emissionsResultsWidth,this.emissionsResultsHeight / 2, 24000, this.nationalAverage * 12, "Your Annual", "Electricity Use",false);
                 this.displayUserAndNationalEmissions(this.userEmissions, this.subregionEmissions, this.nationalEmissions, "#chart-gauge", this.emissionsResultsWidth, this.emissionsResultsHeight);
                 d3.selectAll("#resultGraphs-rpt svg").remove();
@@ -334,7 +334,7 @@ export default {
             var svg = d3.select("#chart-gauge").append("svg")
             .attr("width", width)
             .attr("height", height)
-            .attr("class","col")
+            .attr("class","grid-col")
             .append("g")
             .attr("transform", "translate(" + ((width / 2) - 20) + "," + (height / 2 + 50) + ")");
 
@@ -514,7 +514,7 @@ export default {
                 var svg = d3.select(domElement).append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
-                    .attr("class","col")
+                    .attr("class","grid-col")
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 

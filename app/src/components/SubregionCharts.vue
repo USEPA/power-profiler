@@ -1,45 +1,53 @@
 <template>
   <div v-if="dataLoaded">
-    <div class="grid-col grid-row grid-gap" id="kpis">
-      <h3 id="kpis-section-title">
-        <span>{{ subregion.properties.name }}</span> Emission Rates
-      </h3>
-      <div class="grid-col box special" value="co2EmissionRate">
-        <h3 class="pane-title">CO<sub>2</sub></h3>
-        <div class="pane-content">
-          <h2 id="co2-pane-content">{{ subregion.properties.emissionFactor.co2EmissionRate.display }}</h2>
-          <p>(lbs/MWh)</p>
-        </div>
+    <div class="grid-col grid-container" id="kpis">
+      <div class="grid-row grid-gap">
+        <h3 id="kpis-section-title">
+          <span>{{ subregion.properties.name }}</span> Emission Rates
+        </h3>
       </div>
-      <div class="grid-col box special" value="so2EmissionRate">
-        <h3 class="pane-title">SO<sub>2</sub></h3>
-        <div class="pane-content">
-          <h2 id="so2-pane-content">{{ subregion.properties.emissionFactor.so2EmissionRate.display }}</h2>
-          <p>(lbs/MWh)</p>
+      <div class="grid-row grid-gap">
+        <div class="grid-col box special" value="co2EmissionRate">
+          <h3 class="pane-title">CO<sub>2</sub></h3>
+          <div class="pane-content">
+            <h2 id="co2-pane-content">{{ subregion.properties.emissionFactor.co2EmissionRate.display }}</h2>
+            <p>(lbs/MWh)</p>
+          </div>
         </div>
-      </div>
-      <div class="grid-col box special" value="noxEmissionRate">
-        <h3 class="pane-title">NO<sub>X</sub></h3>
-        <div class="pane-content">
-          <h2 id="nox-pane-content">{{ subregion.properties.emissionFactor.noxEmissionRate.display }}</h2>
-          <p>(lbs/MWh)</p>
+        <div class="grid-col box special" value="so2EmissionRate">
+          <h3 class="pane-title">SO<sub>2</sub></h3>
+          <div class="pane-content">
+            <h2 id="so2-pane-content">{{ subregion.properties.emissionFactor.so2EmissionRate.display }}</h2>
+            <p>(lbs/MWh)</p>
+          </div>
+        </div>
+        <div class="grid-col box special" value="noxEmissionRate">
+          <h3 class="pane-title">NO<sub>X</sub></h3>
+          <div class="pane-content">
+            <h2 id="nox-pane-content">{{ subregion.properties.emissionFactor.noxEmissionRate.display }}</h2>
+            <p>(lbs/MWh)</p>
+          </div>
         </div>
       </div>
     </div>
-    <div class="grid-col grid-row grid-gap" id="selectedSubregion">
-      <p id="subregionButtons">
-        <router-link :to="'/'">« Back to All Subregions</router-link>
-      </p>
-      <div id="fuelMixContainer" class="grid-col">
-          <h3>Fuel Mix</h3>
-          <p>This chart compares fuel mix (%) of sources used to generate electricity in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national fuel mix (%).</p>
-          <subregionFuelMixChart></subregionFuelMixChart>
+    <div class="grid-col grid-container" id="selectedSubregion">
+      <div class="grid-row grid-gap">
+        <p id="subregionButtons">
+          <router-link :to="'/'">« Back to All Subregions</router-link>
+        </p>
       </div>
-      <div id="printMap"></div>
-      <div id="emissionRateContainer" class="grid-col">
-          <h3>Emission Rates</h3>
-          <p id="emRatesDescription">This chart compares the average emission rates (lbs/MWh) in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national average emission rates (lbs/MWh) for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
-          <subregionEmissionRateChart></subregionEmissionRateChart>
+      <div class="grid-row">
+        <div id="fuelMixContainer" class="grid-col">
+            <h3>Fuel Mix</h3>
+            <p>This chart compares fuel mix (%) of sources used to generate electricity in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national fuel mix (%).</p>
+            <subregionFuelMixChart></subregionFuelMixChart>
+        </div>
+        <div id="printMap"></div>
+        <div id="emissionRateContainer" class="grid-col">
+            <h3>Emission Rates</h3>
+            <p id="emRatesDescription">This chart compares the average emission rates (lbs/MWh) in the selected <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> to the national average emission rates (lbs/MWh) for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
+            <subregionEmissionRateChart></subregionEmissionRateChart>
+        </div>
       </div>
     </div>
     <p><a href="javascript:window.print()">&#128438; Print Report</a></p>
