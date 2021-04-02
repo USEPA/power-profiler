@@ -17,7 +17,15 @@
             "sortedByDescLabel": "",
             "sortAlphaLink": "A → Z Sort regions alphabetically",
             "sortAscLink": "↑ Sort values ascending",
-            "sortDescLink": "↓ Sort values descending"
+            "sortDescLink": "↓ Sort values descending",
+            "regionTooltip": "Average {pollutant} rate: {rate} lbs/MWh",
+            "nationalTooltip": "Average emission rate: {rate} lbs/MWh"
+        },
+        "maps": {
+            "header": "Maps",
+            "mapSelect": "Select",
+            "emissionRateMapChoice": "Emission Rate Map",
+            "renewableMapChoice": "Renewable/Non-renewable Map"
         }
     },
     "es": {
@@ -32,14 +40,22 @@
         },
         "emissionRateChart": {
             "selection": "Seleccione:",
-            "sortedByAlphaLabel": "NEED TRANSLATION",
-            "sortedByAscLabel": "",
-            "sortedByDescLabel": "",
+            "sortedByAlphaLabel": "Ordenar las regiones en forma alfabética (A → Z)",
+            "sortedByAscLabel": "↑ Clasificar los valores en orden ascendente",
+            "sortedByDescLabel": "NEED TRANSLATION",
             "sortAlphaLink": "Ordenar las regiones en forma alfabética (A → Z)",
             "sortAscLink": "↑ Clasificar los valores en orden ascendente",
-            "sortDescLink": "↓ Clasificar los valores en orden descendente"
-        }
+            "sortDescLink": "↓ Clasificar los valores en orden descendente",
+            "regionTooltip": "Tasa de emisión promedio de {pollutant}: {rate} lbs/MWh",
+            "nationalTooltip": "Tasa de emisión promedio: {rate} lbs/MWh"
 
+        },
+        "maps": {
+            "header": "Mapas",
+            "mapSelect": "Seleccione",
+            "emissionRateMapChoice": "NEED TRANSLATION",
+            "renewableMapChoice": "NEED TRANSLATION"
+        }
     }
 }
 </i18n>
@@ -124,13 +140,15 @@
         >
       </div>
     </div>
-    <h3>Maps</h3>
+    <h3>{{ $t("maps.header") }}</h3>
     <div>
       <div
         id="mapSelect"
         class="form-item form-type-radio form-item-radios row cols-2"
       >
-        <label><strong>Select:</strong></label>
+        <label
+          ><strong>{{ $t("maps.mapSelect") }}:</strong></label
+        >
         <div class="col size-1of2">
           <input
             id="emissionRateMapChoice"
@@ -140,9 +158,9 @@
             value="1"
             v-model="currentMap"
           />
-          <label for="emissionRateMapChoice" class="option"
-            >Emission Rate Map</label
-          >
+          <label for="emissionRateMapChoice" class="option">{{
+            $t("maps.emissionRateMapChoice")
+          }}</label>
         </div>
         <div class="col size-1of2">
           <input
@@ -153,9 +171,9 @@
             value="2"
             v-model="currentMap"
           />
-          <label for="renewablesMapChoice" class="option"
-            >Renewable/Non-renewable Map</label
-          >
+          <label for="renewablesMapChoice" class="option">{{
+            $t("maps.renewableMapChoice")
+          }}</label>
         </div>
       </div>
     </div>
@@ -379,13 +397,11 @@ export default {
           .append("g")
           .attr("class", "emissionRateTooltip")
           .attr("title", function (d) {
-            return (
-              "Average " +
-              pollutantLabelTooltip +
-              " rate: " +
-              d.properties.emissionFactor[self.selectedPollutantAll].display +
-              " lbs/MWh"
-            );
+            return self.$t("emissionRateChart.regionTooltip", {
+              pollutant: pollutantLabelTooltip,
+              rate:
+                d.properties.emissionFactor[self.selectedPollutantAll].display,
+            });
           });
 
         container
@@ -441,11 +457,10 @@ export default {
           .append("g")
           .attr("class", "emissionRateTooltip")
           .attr("title", function (d) {
-            return (
-              "Average emission rate: " +
-              d.properties.emissionFactor[self.selectedPollutantAll].display +
-              " lbs/MWh"
-            );
+            return self.$t("emissionRateChart.nationalTooltip", {
+              rate:
+                d.properties.emissionFactor[self.selectedPollutantAll].display,
+            });
           });
 
         nationalContainer
