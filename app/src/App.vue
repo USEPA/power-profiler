@@ -1,9 +1,9 @@
 <template>
   <div>
   <h3>How clean is the electricity you use?</h3>
-  <div id="app" class="row cols-2">
-    <sideBar id="sidebar" class="col size-1of3 box simple"></sideBar>
-    <div v-if="subregionJSONLoaded" id="main-charts" class="col size-2of3">
+  <div id="app" class="grid-row grid-gap">
+    <sideBar id="sidebar" class="grid-col-4 box simple"></sideBar>
+    <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
       <mainCharts v-show="showMain"></mainCharts>
       <router-view v-show="!showMain"></router-view>
     </div>
@@ -121,10 +121,10 @@ export default {
 };
 </script>
 <style>
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-  -webkit-appearance: none; 
-  margin: 0; 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .subregionLabels, .selectedRegionValue, .nationalX text, .nationalBar text, .y.axis text, .ui-tooltip {
   font-size: 15px;

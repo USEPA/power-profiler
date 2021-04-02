@@ -5,8 +5,8 @@
             <p>This chart compares the average emission rates in pounds per <a @click="$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a> in all <a href="https://epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregions</a> to the national average emission rates for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
             <p class="select-pollutant-label"><strong>Select: </strong></p>
             <div id="pollutantSelectAll">
-                <button @click="handlePollutantButton" id="defaultPollutantAll" value="co2EmissionRate">CO<sub>2</sub></button> 
-                <button @click="handlePollutantButton" value="so2EmissionRate">SO<sub>2</sub></button> 
+                <button @click="handlePollutantButton" id="defaultPollutantAll" value="co2EmissionRate">CO<sub>2</sub></button>
+                <button @click="handlePollutantButton" value="so2EmissionRate">SO<sub>2</sub></button>
                 <button @click="handlePollutantButton" value="noxEmissionRate">NO<sub>X</sub></button>
             </div>
             <div id="nationalEmissionRateGraph">
@@ -20,18 +20,22 @@
         </div>
         <h3>Maps</h3>
         <div>
-            <div id="mapSelect" class="form-item form-type-radio form-item-radios row cols-2">
-                <label><strong>Select:</strong></label>
-                <div class="col size-1of2">
+            <div id="mapSelect" class="form-item form-type-radio form-item-radios grid-container">
+              <div class="grid-row grid-gap">
+                <label class="grid-col"><strong>Select:</strong></label>
+              </div>
+              <div class="grid-row grid-gap">
+                <div class="grid-col-6">
                     <input id="emissionRateMapChoice" name="mapChoice" class="form-radio" type="radio" value="1" v-model="currentMap">
                     <label for="emissionRateMapChoice" class="option">Emission Rate Map</label>
                 </div>
-                <div class="col size-1of2">
+                <div class="grid-col-6">
                     <input id="renewablesMapChoice" name="mapChoice" class="form-radio" type="radio" value="2" v-model="currentMap">
                     <label for="renewablesMapChoice" class="option">Renewable/Non-renewable Map</label>
                 </div>
+              </div>
             </div>
-        </div>
+      </div>
         <emissionRateMap v-if="currentMap == 1"></emissionRateMap>
         <renewablesMap v-if="currentMap == 2"></renewablesMap>
     </div>
@@ -96,7 +100,7 @@ export default {
                 $("#sortAlphabeticallyEmissionRate").trigger("click")
             }
         }
-        
+
     },
     methods: {
         initialize: function(width, height, domElement){
@@ -128,30 +132,30 @@ export default {
             var margin = {top: 30, right: 60, bottom: 70, left: 70},
                 width = (self.w) - margin.left - margin.right,
                 height = (self.h) - margin.top - margin.bottom;
-        
-                
+
+
             for (var i = 0; i < self.parameters.length; i += 1) {
 
                 var x = d3.scale.ordinal()
                     .rangeRoundBands([0, width], 0.4);
-        
+
                 var y = d3.scale.linear()
                     .rangeRound([height, 1]);
-        
+
                 var color = d3.scale.ordinal()
                     .range([self.emRatesColors[self.parameters[i]]])
                     .domain(self.subregionData);
-        
+
                 var xAxis = d3.svg.axis()
                     .scale(x)
                     .outerTickSize(0)
                     .orient("bottom");
-        
+
                 var yAxis = d3.svg.axis()
                     .scale(y)
                     .outerTickSize(0)
                     .orient("left");
-        
+
                 var svg = d3.select(self.domElement).append("svg")
                     .attr("id", "all" + self.parameters[i])
                     .attr("width", width + margin.left + margin.right)
@@ -161,7 +165,7 @@ export default {
 
                 x.domain(self.subregionData.map(function(d){ return d.properties.name; }));
                 y.domain([0,d3.max(self.subregionData, function(d){ return d.properties.emissionFactor[self.parameters[i]].value; })]);
-        
+
                 svg.append("g")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0," + height + ")")
@@ -176,11 +180,11 @@ export default {
                     .text(function(d){
                         return d + " (" + self.subregions[d] + ")";
                     });
-                
+
                 svg.append("text")
                     .attr("transform", "translate(" + (width/2 - 50) + "," + (height + 50) + ")")
                     .text("eGRID Subregions");
-        
+
                 svg.append("g")
                     .attr("class", "y axis")
                     .call(yAxis);
@@ -215,7 +219,7 @@ export default {
                                 return "X";
                             }
                         });
-                
+
                 svg.append("text")
                     .attr("y", -50)
                     .attr("x", - (height / 2))
@@ -251,12 +255,12 @@ export default {
 
                 var nationalX = d3.scale.ordinal()
                     .rangeRoundBands([width, width + 20], 0.2);
-        
+
                 var nationalBarXAxis = d3.svg.axis()
                     .scale(nationalX)
                     .outerTickSize(0)
                     .orient("bottom");
-        
+
                 var nationalBar = svg.selectAll(".nationalBar")
                     .append("g")
                     .data(self.nationalFeature)
@@ -269,7 +273,7 @@ export default {
                     .attr("title",function(d){
                         return "Average emission rate: " + d.properties.emissionFactor[self.selectedPollutantAll].display + " lbs/MWh"
                     })
-        
+
                 nationalContainer.append("rect")
                     .attr("class", "nationalBar allEmissionRate " + self.parameters[i])
                     .attr("fill", function(d) { return color(d.properties.name );})
@@ -288,7 +292,7 @@ export default {
                             $("#sortDescendingEmissionRate")[0].click()
                         }
                     });
-                
+
                 nationalBar.append("text")
                     .attr("text-anchor","middle")
                     .attr("class","selectedRegionValue")
@@ -297,7 +301,7 @@ export default {
                     .text(function(d){
                         return d.properties.emissionFactor[self.parameters[i]].display;
                     });
-        
+
                 nationalBar.append("g")
                     .attr("class", "nationalBar")
                     .attr("transform", "translate(" + x.rangeBand() + "," + height + ")")
@@ -306,7 +310,7 @@ export default {
                     .text("National")
                     .attr("x", width - 15)
                     .attr("y",  30);
-        
+
                 addLogoBottom(svg, width - 15, height + 65);
 
                 if(Object.keys(self.selectedRegion).length) {
@@ -320,7 +324,7 @@ export default {
                     d3.selectAll("text.allEmissionRate").remove();
 
                     svg.selectAll("text.allEmissionRate")
-                        .data(self.subregionData.filter(function(d){ 
+                        .data(self.subregionData.filter(function(d){
                             if(d.properties.name == self.selectedRegion.properties.name){
                                 return d;
                             }
@@ -350,32 +354,32 @@ export default {
 
                 var x = d3.scale.linear()
                     .rangeRound([0, width]);
-                    
+
                 var y = d3.scale.ordinal()
                     .rangeRoundBands([0, height], 0.4);
-                    
+
                 var color = d3.scale.ordinal()
                     .range([self.emRatesColors[self.parameters[i]]])
                     .domain(self.subregionData);
-        
+
                 var xAxis = d3.svg.axis()
                     .scale(x)
                     .orient("top");
-        
+
                 var yAxis = d3.svg.axis()
                     .scale(y)
                     .orient("left");
-        
+
                 var svg = d3.select(self.domElement).append("svg")
                     .attr("id", "all" + self.parameters[i])
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
                     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
+
                 x.domain([0,d3.max(self.subregionData, function(d){ return d.properties.emissionFactor[self.parameters[i]].value; })]);
                 y.domain(self.subregionData.map(function(d){ return d.properties.name; }));
-        
+
                 svg.append("g")
                     .attr("class", "x axis")
                     .attr("transform", "translate(0,0)")
@@ -388,7 +392,7 @@ export default {
                     .text(function(d){
                         return d + " (" + self.subregions[d] + ")";
                     });
-        
+
                 svg.append("g")
                     .attr("class", "y axis")
                     .call(yAxis);
@@ -431,7 +435,7 @@ export default {
                     .attr("title",function(d){
                         return "Average " + pollutantLabelTooltip + " rate: " + d.properties.emissionFactor[self.selectedPollutantAll].display + " lbs/MWh"
                     })
-        
+
                 container.append("rect")
                     .attr("class", "bar allEmissionRate " + self.parameters[i])
                     .attr("fill", function(d){ return color(d.properties.name );})
@@ -450,17 +454,17 @@ export default {
                             $("#sortDescendingEmissionRate")[0].click()
                         }
                     });
-        
+
                 var nationalY = d3.scale.ordinal()
                     .rangeRoundBands([height, height + 20], 0.2);
-        
+
                 var nationalBarYAxis = d3.svg.axis().scale(nationalY).orient("left");
-        
+
                 var nationalBar = svg.selectAll(".nationalY")
                     .append("g")
                     .data(self.nationalFeature)
                     .enter();
-        
+
                 nationalBar.append("rect")
                     .attr("class", "bar allEmissionRate " + self.parameters[i])
                     .attr("fill", function(d) { return color(d.properties.name );})
@@ -479,7 +483,7 @@ export default {
                             $("#sortDescendingEmissionRate")[0].click()
                         }
                     });
-                
+
                 nationalBar.append("text")
                     .attr("text-anchor","middle")
                     .attr("class","selectedRegionValue")
@@ -488,7 +492,7 @@ export default {
                     .text(function(d){
                         return d.properties.emissionFactor[self.parameters[i]].display;
                     });
-        
+
                 nationalBar.append("g")
                     .attr("class", "nationalBarV")
                     .attr("transform", "translate(0,0)")
@@ -497,7 +501,7 @@ export default {
                     .text("National")
                     .attr("x", -65)
                     .attr("y",  height + y.rangeBand());
-        
+
                 addLogoBottom(svg, width - 70, height + 70);
 
                 if(Object.keys(self.selectedRegion).length) {
@@ -512,7 +516,7 @@ export default {
                     d3.selectAll("text.allEmissionRate").remove();
 
                     svg.selectAll("text.allEmissionRate")
-                        .data(self.subregionData.filter(function(d){ 
+                        .data(self.subregionData.filter(function(d){
                             if(d.properties.name == self.selectedRegion.properties.name){
                                 return d;
                             }
@@ -530,7 +534,7 @@ export default {
                             return d.properties.emissionFactor[self.parameters[i]].display;
                         });
                 }
-        
+
             }
         },
         show: function() {
@@ -552,8 +556,8 @@ export default {
             var self = this;
             var data = self.subregionData
             if(sortState == "alphabetically") {
-                data.sort(function(x,y){ 
-                    return d3.ascending(x.properties.name, y.properties.name); 
+                data.sort(function(x,y){
+                    return d3.ascending(x.properties.name, y.properties.name);
                 });
             } else if (sortState == "ascending") {
                 data.sort(function(x,y){

@@ -13,13 +13,13 @@
       </p>
       <div id="select-offset-1">
         <div
-          class="form-item form-type-radio form-item-radios row cols-3"
+          class="form-item form-type-radio form-item-radios grid-row grid-gap"
           id="fuelRadios"
         >
           <label for="fuelRadios" id="select-fuel-category"
             ><strong>Select:</strong></label
           >
-          <div class="col size-1of6">
+          <div class="grid-col-2">
             <input
               class="form-radio"
               type="radio"
@@ -31,7 +31,7 @@
             />
             <label class="option" for="fuel-breakdown-1">All Fuels</label>
           </div>
-          <div class="col size-1of3">
+          <div class="grid-col-4">
             <input
               class="form-radio"
               type="radio"
@@ -44,7 +44,7 @@
               >Renewable/Non-renewable</label
             >
           </div>
-          <div class="col size-1of2">
+          <div class="grid-col-6">
             <input
               class="form-radio"
               type="radio"
