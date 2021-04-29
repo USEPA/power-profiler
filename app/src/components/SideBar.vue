@@ -29,7 +29,7 @@
         <p>
           Excel version:
           <a
-            href="https://epa.gov/sites/production/files/2020-03/power_profiler_zipcode_tool_2018_3_09_20._v9.xlsx"
+            href="https://www.epa.gov/sites/production/files/2020-11/power_profiler_zipcode_tool.xlsx"
             aria-label="Downloads Excel spreadsheet tool"
           >Power Profiler Emissions Tool 2018 (XLSX)</a>
           <span class="fileinfo">(3.56M)</span>
