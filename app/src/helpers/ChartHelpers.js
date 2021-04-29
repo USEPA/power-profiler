@@ -3,7 +3,7 @@ import { env } from "../config/env.js"
 
 function addLogoBottom(svg, width, height){
     var a = svg.append("svg:a")
-        .attr("xlink:href","https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid");
+        .attr("xlink:href","https://www.epa.gov/egrid");
         
         a.append("title").text("eGRID Home Page");
 
