@@ -21,16 +21,16 @@ renewables = {
 }
 # Round values to the tenths for emission rates. Display a comma for thousands.
 sn['SRNOXRTA'] = sn['SRNOXRTA'].round(1)
-sn['SRSO2RTA'] = sn['SRSO2RTA'].round(1)
+sn['SRSO2RTA'] = sn['SRSO2RTA'].round(2)
 sn['SRCO2RTA'] = sn['SRCO2RTA'].round(1)
 sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(1).astype('str')
-sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(1).astype('str')
+sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(2).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
 n['USNOXRTA'] = n['USNOXRTA'].round(1)
-n['USSO2RTA'] = n['USSO2RTA'].round(1)
+n['USSO2RTA'] = n['USSO2RTA'].round(2)
 n['USCO2RTA'] = n['USCO2RTA'].round(1)
 n['USNOXRTA_STR'] = n['USNOXRTA'].round(1).astype('str')
-n['USSO2RTA_STR'] = n['USSO2RTA'].round(1).astype('str')
+n['USSO2RTA_STR'] = n['USSO2RTA'].round(2).astype('str')
 n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
 # Set up lists for checking whether subregion is in one of the interconnect power grids.
 alaska = ['AKGD','AKMS']
@@ -39,7 +39,7 @@ ercot = ['ERCT']
 eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE','NYCW','NYLI','NYUP','NEWE','SPSO','SPNO','MROW']
 western = ['CAMX','NWPP','AZNM','RMPA']
 # Read in Subregions json.
-with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
+with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
     data = json.load(read_file)
     for feature in data["features"]:
         # Add eGRID data values.
@@ -98,7 +98,7 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
                         "display": gl[gl['REGION'] == 'Western']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'Western']['GGRSLOSS'].values[0]
                     }
-                elif feature["properties"]["name"] in ercot:
+                elif feature["properties"]["name"] in ercot:                 
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS'].values[0]
@@ -106,8 +106,7 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
             
             # Add other fuel mix categories
             for index, row in snfm.iterrows():
-                if "name" in feature["properties"]:
-
+                if "name" in feature["properties"]:                       
                     if feature["properties"]["name"] == row["eGRID subregion acronym"]:
                         feature["properties"]["fuelMixCategories"] = {
                             "renewable": row[renewables["pctRenewable"]],
@@ -174,5 +173,5 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
 
     data["features"].insert(52,national)
 
-with open('./result/subregion.json', 'w') as outfile:
+with open('./data/subregion.json', 'w') as outfile:
     json.dump(data, outfile)

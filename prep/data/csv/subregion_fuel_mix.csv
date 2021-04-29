@@ -1,0 +1,28 @@
+eGRID subregion acronym,eGRID subregion name,"Percent Renewable (Hydro, wind, biomass, solar, geothermal) net generation","Percent Non-renewable (coal, oil, gas, other fossil, other unknown,  and Nuclear) net generation","Percent Non-renewable Excluding Nuclear (coal, oil, gas, other fossil, other unknown) net generation","Percent Renewable Excluding Hydro (wind, biomass, solar, geothermal) net generation",Percent Nuclear net generation,Percent Hydro net generation
+AKGD,ASCC Alaska Grid,17.7,82.3,82.3,3.3,0.0,14.4
+AKMS,ASCC Miscellaneous,64.6,35.4,35.4,2.0,0.0,62.6
+AZNM,WECC Southwest,13.8,86.2,67.4,10.7,18.8,3.1
+CAMX,WECC California,45.0,55.0,47.1,28.9,7.9,16.1
+ERCT,ERCOT All,19.8,80.2,70.3,19.5,9.9,0.3
+FRCC,FRCC All,3.9,96.1,83.7,3.9,12.4,0.1
+HIMS,HICC Miscellaneous,23.4,76.6,76.6,20.0,0.0,3.4
+HIOA,HICC Oahu,10.9,89.1,89.1,10.9,0.0,0.0
+MROE,MRO East,14.2,85.8,85.8,8.1,0.0,6.1
+MROW,MRO West,33.3,66.7,55.5,26.5,11.2,6.9
+NEWE,NPCC New England,20.0,80.0,50.2,12.7,29.8,7.3
+NWPP,WECC Northwest,53.5,46.5,43.4,11.2,3.1,42.3
+NYCW,NPCC NYC/Westchester,0.9,99.1,58.9,0.9,40.2,0.0
+NYLI,NPCC Long Island,12.1,87.9,87.9,12.1,0.0,0.0
+NYUP,NPCC Upstate NY,42.2,57.8,25.6,7.3,32.2,34.9
+PRMS,Puerto Rico Miscellaneous,2.4,97.6,97.6,2.4,0.0,0.0
+RFCE,RFC East,4.7,95.3,58.4,3.2,36.9,1.6
+RFCM,RFC Michigan,7.6,92.4,75.2,7.7,17.2,0.0
+RFCW,RFC West,6.1,93.9,64.9,5.1,29.0,1.0
+RMPA,WECC Rockies,30.9,69.1,69.1,19.0,0.0,11.9
+SPNO,SPP North,31.9,68.1,54.9,31.7,13.2,0.2
+SPSO,SPP South,32.0,68.0,68.0,27.0,0.0,5.0
+SRMV,SERC Mississippi Valley,3.1,96.9,74.7,1.5,22.2,1.6
+SRMW,SERC Midwest,6.0,94.0,79.4,4.2,14.6,1.8
+SRSO,SERC South,8.1,91.9,73.6,4.9,18.3,3.1
+SRTV,SERC Tennessee Valley,10.6,89.4,59.2,1.0,30.2,9.6
+U.S.,National,17.7,82.3,62.7,10.8,19.6,6.8
