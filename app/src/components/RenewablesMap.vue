@@ -1,6 +1,32 @@
+<i18n>
+{
+    "en": {
+        "description": {
+            "text": "This map provides {eGRIDSubregion} renewable percentages.",
+            "eGRIDSubregion": "eGRID subregion"
+        },
+        "tooltip": {
+            "text": "{subregionName} {sourceType} generation: {sourcePct}%"
+        }
+    },
+    "es": {
+        "description": {
+            "text": "NEED TRANSLATION",
+            "eGRIDSubregion": "subregiones de eGRID"
+        },
+        "tooltip": {
+            "text": "NEED TRANSLATION {subregionName} {sourceType} generation: {sourcePct}%"
+        }
+    }
+}
+</i18n>
 <template>
     <div>
-        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> renewable percentages.</p>
+        <i18n path="description.text" tag="p">
+            <template #eGRIDSubregion>
+                <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">{{ $t("description.eGRIDSubregion") }}</a>
+            </template>
+        </i18n>
         <div id="renewablesMap" class="row cols-2"></div>
     </div>
 </template>
@@ -43,7 +69,7 @@ export default {
             var _this = this;
             var percentBins = [10,20,30,40,50,60,70,80,90,100];
             var redToGreen = ["#D73027","#F46D43","#FDAE61","#FEE08B","#FFFFBF","#D9EF8B","#A6D96A","#66BD63","#1A9850","#006837"];
-            
+
             var color = d3.scale.ordinal()
                 .domain(percentBins)
                 .range(redToGreen);
@@ -56,7 +82,7 @@ export default {
                 .attr("viewBox", "0 0 " + this.width + " " + this.height)
                 .attr("preserveAspectRatio","xMidYMid meet")
                 .attr("fill","gainsboro");
-            
+
             var aspect = this.width / this.height;
 
             $(window).on('resize', function(){
@@ -70,7 +96,7 @@ export default {
                 .enter().append("g")
                 .attr("class","renewablesMapTooltip")
                 .attr("title", function(d){
-                    return d.properties.fullName + " " + dataValue + " generation: " + d.properties.fuelMixCategories[dataValue] + "%"
+                    return _this.$t('tooltip.text', {subregionName: d.properties.fullName, sourceType: dataValue, sourcePct: d.properties.fuelMixCategories[dataValue]})
                 });
 
             container.append("path")
@@ -117,7 +143,7 @@ export default {
                         .data(color.domain())
                         .enter().append("g")
                         .attr("class","renewables-legend");
-                    
+
                     var sqOffset = -20;
                     legend.append("rect")
                         .attr("x", 0)
@@ -128,7 +154,7 @@ export default {
                         .attr("width", 15)
                         .attr("height", 15)
                         .style("fill", color);
-                    
+
                     var txtOffset = -5;
                     legend.append("text")
                         .attr("x",25)
@@ -154,7 +180,7 @@ export default {
                         .data(color.domain())
                         .enter().append("g")
                         .attr("class","renewables-legend");
-                    
+
                     var sqOffsetV = -40;
                     legendV.append("rect")
                         .attr("y", 0)
@@ -165,7 +191,7 @@ export default {
                         .attr("width", 15)
                         .attr("height", 15)
                         .style("fill", color);
-                    
+
                     var txtOffsetV = -50;
                     legendV.append("text")
                         .attr("y",40)
