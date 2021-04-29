@@ -7,7 +7,7 @@ function addTooltip(className){
           var title = $(this).attr('title');
 
           $(this).data('tipText', title).removeAttr('title');
-      
+
           $('<p class="tooltip"></p>')
           .text(title)
           .appendTo('#app')
@@ -23,14 +23,12 @@ function addTooltip(className){
         },
         mousemove : function(e){
           // Check if element is a national bar (on the righthand side of the page)
-          if(e.srcElement.parentElement){
-            if(e.srcElement.parentElement.parentElement.className.baseVal == "nationalBar" || e.srcElement.classList[0] == "nationalBar"){
-              positionTooltip(e, - $(".tooltip").width() - 20, 170);
-            } else {
-              positionTooltip(e, 20, 170);
-            }
+          const natBar = $(this).parents('.nationalBar');
+
+          if(natBar.length || e.target.classList.contains("nationalBar")){
+            positionTooltip(e, - $(".tooltip").width() - 100, 400);
           } else {
-            positionTooltip(e, 20, 170);
+            positionTooltip(e, 10, 400);
           }
         }
     });
