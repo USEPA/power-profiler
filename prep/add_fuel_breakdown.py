@@ -2,18 +2,18 @@ import pandas as pd
 # Load eGRID subregion data
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
 sn['SRNOXRTA'] = sn['SRNOXRTA'].round(1)
-sn['SRSO2RTA'] = sn['SRSO2RTA'].round(1)
+sn['SRSO2RTA'] = sn['SRSO2RTA'].round(2)
 sn['SRCO2RTA'] = sn['SRCO2RTA'].round(1)
 sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(1).astype('str')
-sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(1).astype('str')
+sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(2).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
 # Load eGRID national data
 n = pd.read_csv("./data/csv/national.csv", delimiter=',', thousands=',')
 n['USNOXRTA'] = n['USNOXRTA'].round(1)
-n['USSO2RTA'] = n['USSO2RTA'].round(1)
+n['USSO2RTA'] = n['USSO2RTA'].round(2)
 n['USCO2RTA'] = n['USCO2RTA'].round(1)
 n['USNOXRTA_STR'] = n['USNOXRTA'].round(1).astype('str')
-n['USSO2RTA_STR'] = n['USSO2RTA'].round(1).astype('str')
+n['USSO2RTA_STR'] = n['USSO2RTA'].round(2).astype('str')
 n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
 # Column names
 cols = [

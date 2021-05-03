@@ -1,28 +1,28 @@
 eGRID subregion acronym,eGRID subregion name,"Percent Renewable (Hydro, wind, biomass, solar, geothermal) net generation","Percent Non-renewable (coal, oil, gas, other fossil, other unknown,  and Nuclear) net generation","Percent Non-renewable Excluding Nuclear (coal, oil, gas, other fossil, other unknown) net generation","Percent Renewable Excluding Hydro (wind, biomass, solar, geothermal) net generation",Percent Nuclear net generation,Percent Hydro net generation
-AKGD,ASCC Alaska Grid,17.2,82.8,82.8,3.5,0.0,13.6
-AKMS,ASCC Miscellaneous,66.6,33.4,33.4,2.2,0.0,64.4
-AZNM,WECC Southwest,13.3,86.7,67.9,10.0,18.8,3.4
-CAMX,WECC California,40.2,59.8,50.7,29.2,9.1,11.0
-ERCT,ERCOT All,18.3,81.7,71.7,18.0,10.0,0.2
-FRCC,FRCC All,3.7,96.3,83.7,3.6,12.6,0.1
-HIMS,HICC Miscellaneous,26.9,73.1,73.1,23.4,0.0,3.5
-HIOA,HICC Oahu,10.7,89.3,89.3,10.7,0.0,0.0
-MROE,MRO East,12.7,87.3,87.3,7.4,0.0,5.3
-MROW,MRO West,29.2,70.8,60.2,23.2,10.6,6.0
-NEWE,NPCC New England,18.9,81.1,51.3,12.2,29.8,6.7
-NWPP,WECC Northwest,59.1,40.9,37.6,11.4,3.3,47.7
-NYCW,NPCC NYC/Westchester,0.9,99.1,61.5,0.9,37.6,0.0
-NYLI,NPCC Long Island,10.3,89.7,89.7,10.3,0.0,0.0
-NYUP,NPCC Upstate NY,41.4,58.6,27.3,6.8,31.3,34.6
-RFCE,RFC East,5.2,94.8,55.9,3.2,38.9,2.0
-RFCM,RFC Michigan,7.6,92.2,78.6,7.8,13.6,0.0
-RFCW,RFC West,5.2,94.8,66.5,4.4,28.3,0.9
-RMPA,WECC Rockies,29.7,70.3,70.3,17.2,0.0,12.5
-SPNO,SPP North,28.3,71.7,58.8,28.1,12.9,0.2
-SPSO,SPP South,27.1,72.9,72.9,24.2,0.0,2.8
-SRMV,SERC Mississippi Valley,3.0,97.0,76.3,1.7,20.7,1.3
-SRMW,SERC Midwest,5.3,94.7,79.9,4.3,14.8,1.0
-SRSO,SERC South,7.7,92.3,73.8,4.7,18.5,3.0
-SRTV,SERC Tennessee Valley,10.5,89.5,62.0,0.9,27.5,9.5
-SRVC,SERC Virginia/Carolina,7.7,92.3,54.5,5.4,37.8,2.3
-U.S.,National,17.0,83.0,63.6,10.1,19.4,6.9
+AKGD,ASCC Alaska Grid,17.7,82.3,82.3,3.3,0.0,14.4
+AKMS,ASCC Miscellaneous,64.6,35.4,35.4,2.0,0.0,62.6
+AZNM,WECC Southwest,13.8,86.2,67.4,10.7,18.8,3.1
+CAMX,WECC California,45.0,55.0,47.1,28.9,7.9,16.1
+ERCT,ERCOT All,19.8,80.2,70.3,19.5,9.9,0.3
+FRCC,FRCC All,3.9,96.1,83.7,3.9,12.4,0.1
+HIMS,HICC Miscellaneous,23.4,76.6,76.6,20.0,0.0,3.4
+HIOA,HICC Oahu,10.9,89.1,89.1,10.9,0.0,0.0
+MROE,MRO East,14.2,85.8,85.8,8.1,0.0,6.1
+MROW,MRO West,33.3,66.7,55.5,26.5,11.2,6.9
+NEWE,NPCC New England,20.0,80.0,50.2,12.7,29.8,7.3
+NWPP,WECC Northwest,53.5,46.5,43.4,11.2,3.1,42.3
+NYCW,NPCC NYC/Westchester,0.9,99.1,58.9,0.9,40.2,0.0
+NYLI,NPCC Long Island,12.1,87.9,87.9,12.1,0.0,0.0
+NYUP,NPCC Upstate NY,42.2,57.8,25.6,7.3,32.2,34.9
+PRMS,Puerto Rico Miscellaneous,2.4,97.6,97.6,2.4,0.0,0.0
+RFCE,RFC East,4.7,95.3,58.4,3.2,36.9,1.6
+RFCM,RFC Michigan,7.6,92.4,75.2,7.7,17.2,0.0
+RFCW,RFC West,6.1,93.9,64.9,5.1,29.0,1.0
+RMPA,WECC Rockies,30.9,69.1,69.1,19.0,0.0,11.9
+SPNO,SPP North,31.9,68.1,54.9,31.7,13.2,0.2
+SPSO,SPP South,32.0,68.0,68.0,27.0,0.0,5.0
+SRMV,SERC Mississippi Valley,3.1,96.9,74.7,1.5,22.2,1.6
+SRMW,SERC Midwest,6.0,94.0,79.4,4.2,14.6,1.8
+SRSO,SERC South,8.1,91.9,73.6,4.9,18.3,3.1
+SRTV,SERC Tennessee Valley,10.6,89.4,59.2,1.0,30.2,9.6
+U.S.,National,17.7,82.3,62.7,10.8,19.6,6.8

@@ -36,14 +36,17 @@ n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
 alaska = ['AKGD','AKMS']
 hawaii = ['HIMS','HIOA']
 ercot = ['ERCT']
-eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE','NYCW','NYLI','NYUP','NEWE','SPSO','SPNO','MROW']
+eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE','NYCW','NYLI','NYUP','NEWE','SPSO','SPNO','MROW','PRMS']
 western = ['CAMX','NWPP','AZNM','RMPA']
 # Read in Subregions json.
-with open("./data/shape/egrid_2018v2_subregions_states.json", "r") as read_file:
+print("Start reading subregions_states.json")
+with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
     data = json.load(read_file)
+    print("Before data[]")
     for feature in data["features"]:
         # Add eGRID data values.
         for index, row in sn.iterrows():
+            print("Start eGRID data values")
             if "name" in feature["properties"]:
                 if feature["properties"]["name"] == row["SUBRGN"]:
                     feature["properties"]["fullName"] = row["SRNAME"]
@@ -79,26 +82,31 @@ with open("./data/shape/egrid_2018v2_subregions_states.json", "r") as read_file:
                     }
                 # Add "gridLoss" to each feature from GGL sheet in eGRID data.
                 if feature["properties"]["name"] in alaska:
+                    print("Start gridLoss alaska")
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Alaska']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'Alaska']['GGRSLOSS'].values[0]
                     }
                 elif feature["properties"]["name"] in hawaii:
+                    print("Start gridLoss HI")
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Hawaii']['GGRSLOSS_STR'].values[0],
                         "value" : gl[gl['REGION'] == 'Hawaii']['GGRSLOSS'].values[0]
                     } 
                 elif feature["properties"]["name"] in eastern:
+                    print("Start gridLoss eastern")
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Eastern']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'Eastern']['GGRSLOSS'].values[0]
                     }
                 elif feature["properties"]["name"] in western:
+                    print("Start gridLoss western")
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Western']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'Western']['GGRSLOSS'].values[0]
                     }
                 elif feature["properties"]["name"] in ercot:
+                    print("Start gridLoss ercot")
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS'].values[0]
@@ -106,9 +114,15 @@ with open("./data/shape/egrid_2018v2_subregions_states.json", "r") as read_file:
             
             # Add other fuel mix categories
             for index, row in snfm.iterrows():
+                print("Start fuel mix categories")
+                print(feature["properties"])
                 if "name" in feature["properties"]:
+                    print("In feature[]")
 
+                    print(feature["properties"]["name"])
+                        
                     if feature["properties"]["name"] == row["eGRID subregion acronym"]:
+                        print("In 1st loop")
                         feature["properties"]["fuelMixCategories"] = {
                             "renewable": row[renewables["pctRenewable"]],
                             "non-renewable": row[renewables["pctNonRenewable"]],
@@ -118,6 +132,7 @@ with open("./data/shape/egrid_2018v2_subregions_states.json", "r") as read_file:
                             "hydro": row[renewables["pctHydro"]]
                         }
                     elif row["eGRID subregion acronym"] == "U.S.":
+                        print("In fmCategories")
                         fmCategories = {
                             "renewable": row[renewables["pctRenewable"]],
                             "non-renewable": row[renewables["pctNonRenewable"]],
