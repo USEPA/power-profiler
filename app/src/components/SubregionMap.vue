@@ -28,7 +28,6 @@ export default {
                 self.allData = json.features;
                 self.nationalFeature = json.features.slice(52,53);
                 self.subregionData = json.features.slice(53,json.features.length);
-                console.log(self.nationalFeature);
                 allSubregions.update(self.subregionData);
                 nationalFeature.update(self.nationalFeature)
                 self.$parent.$parent.$parent.subregionJSONLoaded = true
