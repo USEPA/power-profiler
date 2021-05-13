@@ -72,7 +72,7 @@
             class="form-select"
             id="regionSelectionDropdown"
           >
-            <option value="All">eGRID Subregions</option>
+            <option value="All">{{ $t('egridSubregions') }}</option>
             <option value="AKGD">AKGD (ASCC Alaska Grid)</option>
             <option value="AKMS">AKMS (ASCC Miscellaneous)</option>
             <option value="AZNM">AZNM (WECC Southwest)</option>

@@ -1,10 +1,19 @@
 <i18n>
 {
   "en": {
-    "select": "Select"
+    "select": "Select",
+    "so2EmissionRate": "sulfur dioxide",
+    "co2EmissionRate": "carbon dioxide",
+    "noxEmissionRate": "nitrogen oxides",
+    "subregionTooltip": "Average {pollutant} rate: {rate} lbs/MWh"
+
   },
   "es": {
-    "select": "Seleccione"
+    "select": "Seleccione",
+    "so2EmissionRate": "dióxido de azufre",
+    "co2EmissionRate": "dióxido de carbono",
+    "noxEmissionRate": "óxido de nitrógeno",
+    "subregionTooltip": "Tasa de emisión promedio de {pollutant}: {rate} lbs/MWh"
   }
 }
 </i18n>
@@ -67,6 +76,7 @@ export default {
   },
   methods: {
     display: function (data) {
+      let self = this;
       var domElement = "#emissionRate";
       var w = $(domElement).width();
       var h = 500 - ($("#select-offset-2").height() - 20);
@@ -144,13 +154,13 @@ export default {
           .append("tspan")
           .text(function (d) {
             if (selectedPollutantSub == "co2EmissionRate") {
-              pollutantLabelTooltip = "carbon dioxide";
+              pollutantLabelTooltip = self.$t("co2EmissionRate");
               return "CO";
             } else if (selectedPollutantSub == "so2EmissionRate") {
-              pollutantLabelTooltip = "sulfur dioxide";
+              pollutantLabelTooltip = self.$t("so2EmissionRate");
               return "SO";
             } else if (selectedPollutantSub == "noxEmissionRate") {
-              pollutantLabelTooltip = "nitrogen oxides";
+              pollutantLabelTooltip = self.$t("noxEmissionRate");
               return "NO";
             }
           })
@@ -181,13 +191,7 @@ export default {
           .append("g")
           .attr("class", "subEmissionRateTooltip")
           .attr("title", function (d) {
-            return (
-              "Average " +
-              pollutantLabelTooltip +
-              " rate: " +
-              d.properties.emissionFactor[parameters[i]].display +
-              " lbs/MWh"
-            );
+            return (self.$t('subregionTooltip', {pollutant: pollutantLabelTooltip, rate: d.properties.emissionFactor[parameters[i]].display}));
           });
 
         container
