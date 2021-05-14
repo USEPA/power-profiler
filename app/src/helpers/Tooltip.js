@@ -26,9 +26,9 @@ function addTooltip(className){
           const natBar = $(this).parents('.nationalBar');
 
           if(natBar.length || e.target.classList.contains("nationalBar")){
-            positionTooltip(e, - $(".tooltip").width() - 100, 400);
+            positionTooltip(e, - $(".tooltip").width() - 90, 350);
           } else {
-            positionTooltip(e, 10, 400);
+            positionTooltip(e, 0, 350);
           }
         }
     });
@@ -37,6 +37,7 @@ function addTooltip(className){
 function positionTooltip(e, x, y){
   var mousex = e.pageX + x; // Get X coordinates
   var mousey = e.pageY - y; // Get Y coordinates
+
   $('.tooltip')
-  .css({ top: mousey, left: mousex });
+  .css({top: mousey + 'px', left: mousex + 'px'})
 }
