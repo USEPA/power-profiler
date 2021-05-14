@@ -11,26 +11,27 @@
                 <p>Or enter your <a href="javascript:void(0)" id="monthlyActualLink" class="emissionsLink" @click="showAverageInput = false">actual electricity use for each month</a>.</p>
                 <form v-on:submit.prevent="displayMonthlyActual" v-show="!showAverageInput" id="calculateMonthlyActualForm" method="POST">
                     <div class="grid-row grid-gap">
-                        <div class="grid-col"><label for="userMonthlyActualInput1"><strong>January</strong></label> <input id="userMonthlyActualInput1" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput2"><strong>February</strong></label> <input id="userMonthlyActualInput2" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput3"><strong>March</strong></label> <input id="userMonthlyActualInput3" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput1"><strong>January</strong></label> <div><input id="userMonthlyActualInput1" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput2"><strong>February</strong></label> <div><input id="userMonthlyActualInput2" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput3"><strong>March</strong></label> <div><input id="userMonthlyActualInput3" required="" type="number">&nbsp;kWh</div></div>
                     </div>
                     <div class="grid-row grid-gap">
-                        <div class="grid-col"><label for="userMonthlyActualInput4"><strong>April</strong></label> <input id="userMonthlyActualInput4" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput5"><strong>May</strong></label> <input id="userMonthlyActualInput5" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput6"><strong>June</strong></label> <input id="userMonthlyActualInput6" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput4"><strong>April</strong></label> <div><input id="userMonthlyActualInput4" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput5"><strong>May</strong></label> <div><input id="userMonthlyActualInput5" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput6"><strong>June</strong></label> <div><input id="userMonthlyActualInput6" required="" type="number">&nbsp;kWh</div></div>
                     </div>
                     <div class="grid-row grid-gap">
-                        <div class="grid-col"><label for="userMonthlyActualInput7"><strong>July</strong></label> <input id="userMonthlyActualInput7" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput8"><strong>August</strong></label> <input id="userMonthlyActualInput8" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput9"><strong>September</strong></label> <input id="userMonthlyActualInput9" required="" type="number">&nbsp;kWh</div>
+                        <div class="grid-col"><label for="userMonthlyActualInput7"><strong>July</strong></label> <div><input id="userMonthlyActualInput7" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput8"><strong>August</strong></label> <div><input id="userMonthlyActualInput8" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput9"><strong>September</strong></label> <div><input id="userMonthlyActualInput9" required="" type="number">&nbsp;kWh</div></div>
                     </div>
                     <div class="grid-row grid-gap">
-                        <div class="grid-col"><label for="userMonthlyActualInput10"><strong>October</strong></label> <input id="userMonthlyActualInput10" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput11"><strong>November</strong></label> <input id="userMonthlyActualInput11" required="" type="number">&nbsp;kWh</div>
-                        <div class="grid-col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh
-                        <br><button id="calculateMonthlyActualButton" type="submit">Go</button></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput10"><strong>October</strong></label> <div><input id="userMonthlyActualInput10" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput11"><strong>November</strong></label> <div><input id="userMonthlyActualInput11" required="" type="number">&nbsp;kWh</div></div>
+                        <div class="grid-col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <div><input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh</div></div>
+
                     </div>
+                    <div><button id="calculateMonthlyActualButton" type="submit">Go</button></div>
                 </form>
             </div>
             <div>
