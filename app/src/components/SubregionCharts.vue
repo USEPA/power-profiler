@@ -36,7 +36,7 @@
             "select": "Seleccione:"
         },
         "backToAllSubregions": "Volver a todas las subregiones",
-        "printReport": "Print Report"
+        "printReport": "Imprima un reporte"
     }
 }
 </i18n>

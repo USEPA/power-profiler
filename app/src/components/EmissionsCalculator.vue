@@ -36,9 +36,11 @@
             "nat": "National Average",
             "reg": " Average",
             "you": "Your Emissions"
-          }
-
-
+          },
+          "avgSubheader": "Average Monthly Electricity Use",
+          "actualSubheader": "Actual Monthly Electricity Use",
+          "nationalSubheader": "National Average Electricity Use",
+          "commercialSubheader": "National Average Electricity Use for Commercial Customers"
         }
     },
     "es": {
@@ -77,7 +79,11 @@
             "nat": "Promedio nacional",
             "reg": " promedio",
             "you": "Sus emisiones"
-          }
+          },
+          "avgSubheader": "Consumo mensual promedio de electricidad",
+          "actualSubheader": "Consumo mensual de electricidad",
+          "nationalSubheader": "Consumo nacional promedio de electricidad",
+          "commercialSubheader": "Uso promedio nacional de electricidad para clientes comerciales"
         }
     }
 }
@@ -93,7 +99,10 @@
             href="javascript:void(0)"
             id="monthlyAverageLink"
             @click="showAverageInput = true"
+            v-if="showAverageInput === false"
             >{{ $t("calculatorForm.linkToAvgUse") }}</a
+          >
+          <span v-else>{{ $t("calculatorForm.linkToAvgUse") }}</span
           >.
         </label>
         <form
@@ -123,7 +132,10 @@
             id="monthlyActualLink"
             class="emissionsLink"
             @click="showAverageInput = false"
+            v-if="showAverageInput === true"
             >{{ $t("calculatorForm.monUseLink") }}</a
+          >
+          <span v-else>{{ $t("calculatorForm.monUseLink") }}</span
           >.
         </p>
         <form
@@ -286,10 +298,10 @@
 <script>
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
+import { userSelection } from "../stores/userSelection.js";
 import {
   addLogoBottom,
-  formatFuelLabel,
-  checkNational,
+  textWrap,
 } from "../helpers/ChartHelpers.js";
 
 export default {
@@ -316,6 +328,7 @@ export default {
       emissionsResultsWidth: 0,
       emissionsResultsHeight: 0,
       residentialMode: true,
+      userSelectionStore: userSelection,
       commercialCustomerForm: false,
       sqrFootage: 0,
     };
@@ -472,7 +485,7 @@ export default {
       $("#resultGraphs").show();
       $("#annual-results-text").show();
       $("#national-avg-annual-results-text").hide();
-      $("#result-subheader").html("Average Monthly Electricity Use");
+      $("#result-subheader").html(self.$t("results.avgSubheader"));
       $("#result").show();
     },
     displayMonthlyActual: function () {
@@ -618,7 +631,7 @@ export default {
       $("#resultGraphs").show();
       $("#annual-results-text").show();
       $("#national-avg-annual-results-text").hide();
-      $("#result-subheader").html("Actual Monthly Electricity Use");
+      $("#result-subheader").html(self.$t("results.actualSubheader"));
       $("#result").show();
     },
     displayNationalAverage: function (e) {
@@ -674,9 +687,7 @@ export default {
         var gaugeMax = 24000;
         this.nationalAverage = this.sqrFootage * 1.22;
         $("#resultGraphs").hide();
-        $("#result-subheader").html(
-          "National Average Electricity Use for Commercial Customers"
-        );
+        $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
         $("#chart-gauge").attr("class", "pane-content row cols-4");
         if (this.nationalAverage * 12 > 24000) {
@@ -710,7 +721,7 @@ export default {
       } else {
         this.nationalAverage = 1011;
         $("#resultGraphs").hide();
-        $("#result-subheader").html("National Average Electricity Use");
+        $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
         d3.selectAll("#chart-gauge svg").remove();
         $("#chart-gauge").attr("class", "pane-content row cols-4");
@@ -778,61 +789,21 @@ export default {
         self.sqrFootage = input;
         self.residentialMode = false;
         self.displayNationalAverage();
-        $("#nat-em-rpt-intro-2").html(
-          "estimated from the national average electricity consumption of 1.22 kWh/sq. ft./month for commercial customers and"
-        );
+        self.userSelectionStore.setResidentialMode(false);
       });
 
       $("#residentialCustomersButton").click(function () {
         self.commercialCustomerForm = false;
         self.residentialMode = true;
+        self.userSelectionStore.setResidentialMode(true);
         self.displayNationalAverage();
         $("#customerText").show();
-        $("#nat-em-rpt-intro-2").html(
-          "estimated from the average home consumption of 1,011 kWh/month and"
-        );
+        $("#residentialCustomersButton").hide();
       });
 
       $("#annual-results-text").hide();
       $("#national-avg-annual-results-text").show();
       $("#result").show();
-    },
-    wrap: function (text, width, startHeight) {
-      text.each(function () {
-        let txt = d3.select(this),
-          words = txt.text().split(/\s+/).reverse(),
-          word,
-          line = [],
-          lineNumber = 0,
-          lineHeight = 1.1, // ems
-          x = txt.attr("x"),
-          y = txt.attr("y"),
-          dy = 0, //parseFloat(text.attr("dy")),
-          tspan = txt
-            .text(null)
-            .append("tspan")
-            .attr("x", 0)
-            .attr("y", 0)
-            .attr("dy", dy + "em");
-        while ((word = words.pop())) {
-          line.push(word);
-          tspan.text(line.join(" "));
-          if (tspan.text().length > width) {
-            line.pop();
-            tspan.text(line.join(" ") + " ");
-            line = [word];
-            tspan = txt
-              .append("tspan")
-              .attr("x", 0)
-              .attr("y", 0)
-              .attr("dy", ++lineNumber * lineHeight + dy + "em")
-              .text(word);
-          }
-        }
-        let cur_y = -startHeight;
-        let new_y = cur_y - 12 * (lineNumber + 1);
-        let adjust = txt.attr("transform", "translate(0," + new_y + ")");
-      });
     },
     gaugeChart: function (width, height, maxVal, num, text, percent) {
       // Set Up
@@ -944,7 +915,7 @@ export default {
         "'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', 'Arial', sans-serif"
       );
 
-      d3.selectAll(".gauge-title").call(this.wrap, 20, oR);
+      d3.selectAll(".gauge-title").call(textWrap, 20, oR);
       //        .attr("transform", "translate(0," + -oR + ")");
 
       d3.selectAll(
@@ -1246,6 +1217,12 @@ export default {
         self.selectedSubregion = selectedSubregion.data;
         self.update();
       }
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      },
     },
   },
 };

@@ -14,13 +14,13 @@
             "hydroNuclearSelection": "Renewable/Non-renewable/Nuclear/Hydro",
             "azSortDescription": "This chart is sorted alphabetically A → Z by region.",
             "fuelSortDescription": "This chart is sorted by decreasing % of {fuel}.",
-            "sortLink": "A → Z Sort regions alphabetically",
+            "sortLink": "Sort regions alphabetically (A → Z)",
             "eGRIDSubregions": "eGRID subregions",
             "yAxis": "Generation",
             "nationalLabel": "National",
             "fuel": "Fuel",
             "fuelTooltip": "{name} accounts for {val} % of the fuel mix for {subregion}",
-            "nationally": "nationally",
+            "nationalFuelTooltip": "{name} accounts for {val} % of the fuel mix nationally",
             "fuels": {
                 "gas": "Gas",
                 "coal": "Coal",
@@ -52,17 +52,18 @@
         },
         "fuelMixChart": {
             "select": "Seleccione:",
-            "allFuelsSelection": "NEEDS TRANSLATION",
-            "renewableSelection": "NEEDS TRANSLATION",
-            "hydroNuclearSelection": "NEEDS TRANSLATION",
-            "azSortDescription": "NEEDS TRANSLATION",
-            "fuelSortDescription": "NEEDS TRANSLATION {fuel}.",
-            "sortLink": "NEEDS TRANSLATION",
+            "allFuelsSelection": "Todos los Combustibles",
+            "renewableSelection": "Renovables/No-renovables",
+            "hydroNuclearSelection": "Renovables/No-renovables/Energía Nuclear/Energía Hidroeléctrica",
+            "azSortDescription": "Esta gráfica está ordenada alfabéticamente (A → Z) por región.",
+            "fuelSortDescription": "Esta gráfica está ordenada por el porciento (%) descendente de {fuel}.",
+            "sortLink": "Ordenar las regiones alfabéticamente (A → Z)",
             "eGRIDSubregions": "Subregiones de eGRID",
             "yAxis": "Generación",
             "nationalLabel": "Nacional",
             "fuel": "Combustibles",
             "fuelTooltip": "{name} representa el {val} % la combinación de combustibles de {subregion}",
+            "nationalFuelTooltip": "{name} representa el {val} % la combinación de combustibles a nivel nacional",
             "fuels": {
                 "gas": "Gas",
                 "coal": "Carbón",
@@ -75,13 +76,13 @@
                 "geothermal": "Energía Geotérmica",
                 "otherFossilFuel": "Otros Combustibles Fósiles",
                 "otherUnknownFuel": "Otros Combustibles Desconocidos",
-                "renewable": "NEEDS TRANSLATION",
-                "non-renewable": "NEEDS TRANSLATION",
-                "renewable (excluding hydro)": "NEEDS TRANSLATION",
-                "non-renewable (excluding nuclear)": "NEEDS TRANSLATION"
+                "renewable": "Renovable",
+                "non-renewable": "No-renovable",
+                "renewable (excluding hydro)": "Renovable (excluyendo energía hidroeléctrica)",
+                "non-renewable (excluding nuclear)": "Renovable (excluyendo energía nuclear)"
             }
         },
-        "printReport": "NEEDS TRANSLATION"
+        "printReport": "Imprima un reporte"
     }
 }
 </i18n>
@@ -176,10 +177,7 @@ import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { userSelection } from "../stores/userSelection.js";
 import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational,
-  textWrap,
+  addLogoBottom
 } from "../helpers/ChartHelpers.js";
 import emissionRateChart from "./EmissionRateChart.vue";
 import { addTooltip } from "../helpers/Tooltip";
@@ -244,7 +242,7 @@ export default {
       selectedFuelCategory: "allFuels",
       orientation: "",
       selectedRegion: {},
-    }
+    };
   },
   mounted: function () {
     var self = this;
@@ -609,42 +607,42 @@ export default {
           if (self.selectedFuelCategory == "renewableNonNuclearAndHydro") {
             // First row
             if (i === 0) {
-              return (`translate(${(width / 2 - offset1)},${(height + 120)})`);
+              return `translate(${width / 2 - offset1},${height + 120})`;
             } else if (i === 1) {
-                return (`translate(${(width / 2 - offset1)},${(height + 60)})`);
+              return `translate(${width / 2 - offset1},${height + 60})`;
             } else if (i === 2) {
-                return (`translate(${(width / 2 - offset1)},${(height + 80)})`);
+              return `translate(${width / 2 - offset1},${height + 80})`;
             } else if (i === 3) {
-                return (`translate(${(width / 2 - offset1)},${(height + 100)})`);
+              return `translate(${width / 2 - offset1},${height + 100})`;
             }
           } else {
             // First row
             if (i === 0) {
-                return (`translate(${(width / 2 - offset1)},${(height + 60)})`);
+              return `translate(${width / 2 - offset1},${height + 60})`;
             } else if (i === 1) {
-                return (`translate(${(width / 2 - offset1)},${(height + 80)})`);
+              return `translate(${width / 2 - offset1},${height + 80})`;
             } else if (i === 2) {
-                return (`translate(${(width / 2 - offset1)},${(height + 100)})`);
+              return `translate(${width / 2 - offset1},${height + 100})`;
             }
             // Sec row
             else if (i === 3) {
-                return (`translate(${(width / 2 - offset2)},${(height + 60)})`);
+              return `translate(${width / 2 - offset2},${height + 60})`;
             } else if (i === 4) {
-                return (`translate(${(width / 2 - offset2)},${(height + 80)})`);
+              return `translate(${width / 2 - offset2},${height + 80})`;
             } else if (i === 5) {
-                return (`translate(${(width / 2 - offset2)},${(height + 100)})`);
+              return `translate(${width / 2 - offset2},${height + 100})`;
             }
             // Third row
             else if (i === 6) {
-                return (`translate(${(width / 2)},${(height + 60)})`);
+              return `translate(${width / 2},${height + 60})`;
             } else if (i === 7) {
-                return (`translate(${(width / 2)},${(height + 80)})`);
+              return `translate(${width / 2},${height + 80})`;
             } else if (i === 8) {
-                return (`translate(${(width / 2)},${(height + 100)})`);
+              return `translate(${width / 2},${height + 100})`;
             } else if (i === 9) {
-                return (`translate(${(width / 2 + offset2)},${(height + 60)})`);
+              return `translate(${width / 2 + offset2},${height + 60})`;
             } else if (i === 10) {
-                return (`translate(${(width / 2 + offset2)},${(height + 80)})`);
+              return `translate(${width / 2 + offset2},${height + 80})`;
             }
           }
         })
@@ -1381,11 +1379,18 @@ export default {
       );
     },
     addHovertext: function (fuel, fuelName, f) {
-      return this.$t("fuelMixChart.fuelTooltip", {
-        name: fuelName,
-        val: f(fuel.val),
-        subregion: checkNational(fuel.subregion),
-      });
+      if (fuel.subregion === "National") {
+        return this.$t("fuelMixChart.nationalFuelTooltip", {
+          name: fuelName,
+          val: f(fuel.val),
+        });
+      } else {
+        return this.$t("fuelMixChart.fuelTooltip", {
+          name: fuelName,
+          val: f(fuel.val),
+          subregion: fuel.subregion,
+        });
+      }
     },
     updateChild: function (sortState, fuel) {
       var emRateChart = this.$children[0];

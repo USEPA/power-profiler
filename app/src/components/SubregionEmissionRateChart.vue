@@ -2,6 +2,7 @@
 {
   "en": {
     "select": "Select",
+    "national": "National",
     "so2EmissionRate": "sulfur dioxide",
     "co2EmissionRate": "carbon dioxide",
     "noxEmissionRate": "nitrogen oxides",
@@ -10,6 +11,7 @@
   },
   "es": {
     "select": "Seleccione",
+    "national": "Nacional",
     "so2EmissionRate": "dióxido de azufre",
     "co2EmissionRate": "dióxido de carbono",
     "noxEmissionRate": "óxido de nitrógeno",
@@ -37,8 +39,6 @@
 <script>
 import {
   addLogoBottom,
-  formatFuelLabel,
-  checkNational,
 } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
@@ -50,6 +50,14 @@ export default {
       data: [],
       selectedPollutantSub: "co2EmissionRate",
     };
+  },
+  watch: {
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      },
+    },
   },
   mounted: function () {
     var self = this;
@@ -109,7 +117,18 @@ export default {
           .range([emRatesColors.national, emRatesColors[selectedPollutantSub]])
           .domain([data[0].properties.name, data[1].properties.name]);
 
-        var xAxis = d3.svg.axis().outerTickSize(0).scale(x).orient("bottom");
+        var xAxis = d3.svg
+          .axis()
+          .outerTickSize(0)
+          .scale(x)
+          .orient("bottom")
+          .tickFormat(function(d) {
+            if (d === "National") {
+              return self.$t("national");
+            } else {
+              return d;
+            }
+          });
 
         var yAxis = d3.svg.axis().outerTickSize(0).scale(y).orient("left");
 
@@ -191,7 +210,10 @@ export default {
           .append("g")
           .attr("class", "subEmissionRateTooltip")
           .attr("title", function (d) {
-            return (self.$t('subregionTooltip', {pollutant: pollutantLabelTooltip, rate: d.properties.emissionFactor[parameters[i]].display}));
+            return self.$t("subregionTooltip", {
+              pollutant: pollutantLabelTooltip,
+              rate: d.properties.emissionFactor[parameters[i]].display,
+            });
           });
 
         container

@@ -12,14 +12,17 @@
         },
         "emissionRateChart": {
             "selection": "Selection:",
+            "xAxis": "eGRID Subregions",
             "sortedByAlphaLabel": "This chart is sorted alphabetically A → Z by region.",
-            "sortedByAscLabel": "",
-            "sortedByDescLabel": "",
+            "sortedByLabel": "This chart is sorted by {direction} {pollutant} emission rates.",
+            "ascending": "ascending",
+            "descending": "descending",
             "sortAlphaLink": "A → Z Sort regions alphabetically",
             "sortAscLink": "↑ Sort values ascending",
             "sortDescLink": "↓ Sort values descending",
             "regionTooltip": "Average {pollutant} rate: {rate} lbs/MWh",
-            "nationalTooltip": "Average emission rate: {rate} lbs/MWh"
+            "nationalTooltip": "Average emission rate: {rate} lbs/MWh",
+            "nationalBar": "National"
         },
         "maps": {
             "header": "Maps",
@@ -40,21 +43,24 @@
         },
         "emissionRateChart": {
             "selection": "Seleccione:",
+            "xAxis": "eGRID Subregions",
             "sortedByAlphaLabel": "Ordenar las regiones en forma alfabética (A → Z)",
-            "sortedByAscLabel": "↑ Clasificar los valores en orden ascendente",
-            "sortedByDescLabel": "NEED TRANSLATION",
+            "sortedByLabel": "Esta gráfica está ordenada en tasas de emisiones {direction} de {pollutant}",
+            "asc": "ascendentes",
+            "desc": "descendentes",
             "sortAlphaLink": "Ordenar las regiones en forma alfabética (A → Z)",
             "sortAscLink": "↑ Clasificar los valores en orden ascendente",
             "sortDescLink": "↓ Clasificar los valores en orden descendente",
             "regionTooltip": "Tasa de emisión promedio de {pollutant}: {rate} lbs/MWh",
-            "nationalTooltip": "Tasa de emisión promedio: {rate} lbs/MWh"
+            "nationalTooltip": "Tasa de emisión promedio: {rate} lbs/MWh",
+            "nationalBar": "Nacional"
 
         },
         "maps": {
             "header": "Mapas",
             "mapSelect": "Seleccione",
-            "emissionRateMapChoice": "NEED TRANSLATION",
-            "renewableMapChoice": "NEED TRANSLATION"
+            "emissionRateMapChoice": "Mapa de las Tasas de Emisión",
+            "renewableMapChoice": "Mapa de Emisiones Renovables y No-Renovables"
         }
     }
 }
@@ -188,8 +194,6 @@ import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import {
   addLogoBottom,
-  formatFuelLabel,
-  checkNational,
 } from "../helpers/ChartHelpers.js";
 import emissionRateMap from "./EmissionRateMap.vue";
 import renewablesMap from "./RenewablesMap.vue";
@@ -347,7 +351,7 @@ export default {
             "transform",
             "translate(" + (width / 2 - 50) + "," + (height + 50) + ")"
           )
-          .text("eGRID Subregions");
+          .text(self.$t('emissionRateChart.xAxis'));
 
         svg.append("g").attr("class", "y axis").call(yAxis);
         var pollutantLabelTooltip = "";
@@ -515,7 +519,7 @@ export default {
           .attr("transform", "translate(" + x.rangeBand() + "," + height + ")")
           .call(nationalBarXAxis)
           .append("text")
-          .text("National")
+          .text(self.$t('emissionRateChart.nationalBar'))
           .attr("x", width - 15)
           .attr("y", 30);
 
@@ -759,7 +763,7 @@ export default {
           .attr("transform", "translate(0,0)")
           .call(nationalBarYAxis)
           .append("text")
-          .text("National")
+          .text(self.$t('emissionRateChart.nationalBar'))
           .attr("x", -65)
           .attr("y", height + y.rangeBand());
 
@@ -874,13 +878,10 @@ export default {
     },
     updateStatus: function (pollutant, state) {
       if (state == "ascending" || state == "descending") {
-        return (
-          "<strong>This chart is sorted by " +
-          state +
-          " " +
-          pollutant +
-          " emission rates.</strong>"
-        );
+        return `<strong> ${this.$t("emissionRateChart.sortedByLabel", {
+          direction: this.$t(state),
+          pollutant: pollutant,
+        })}<strong>`;
       } else if (state == "alphabetically") {
         return `<strong>${this.$t(
           "emissionRateChart.sortedByAlphaLabel"
@@ -972,6 +973,12 @@ export default {
     },
     currentMap: function (m) {
       userSelection.currentMap = m;
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      },
     },
   },
 };

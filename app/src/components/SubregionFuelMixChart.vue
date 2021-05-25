@@ -3,7 +3,9 @@
     "en": {
       "fuel": "Fuel",
       "generation": "Generation",
-      "fuelTooltip": "{name} accounts for {val} % of the fuel mix {subregion}",
+      "national": "National",
+      "fuelTooltip": "{name} accounts for {val} % of the fuel mix for {subregion}",
+      "nationalFuelTooltip": "{name} accounts for {val} % of the fuel mix nationally",
       "fuels": {
         "gas": "Gas",
         "coal": "Coal",
@@ -22,7 +24,9 @@
     "es": {
       "fuel": "Combustibles",
       "generation": "Generacion",
+      "national": "Nacional",
       "fuelTooltip": "{name} representa el {val} % la combinación de combustibles del {subregion}",
+      "nationalFuelTooltip": "{name} representa el {val} % la combinación de combustibles a nivel nacional",
       "fuels": {
         "gas": "Gas",
         "coal": "Carbón",
@@ -46,11 +50,7 @@
   </div>
 </template>
 <script>
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational,
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { addTooltip } from "../helpers/Tooltip";
@@ -122,7 +122,18 @@ export default {
 
       var color = d3.scale.ordinal().range(allFuelsColorRange).domain(fuels);
 
-      var xAxis = d3.svg.axis().scale(x).outerTickSize(0).orient("bottom");
+      var xAxis = d3.svg
+        .axis()
+        .scale(x)
+        .outerTickSize(0)
+        .orient("bottom")
+        .tickFormat(function(d) {
+          if (d === "National") {
+            return _this.$t("national");
+          } else {
+            return d;
+          }
+        });
 
       var yAxis = d3.svg
         .axis()
@@ -155,6 +166,7 @@ export default {
           return obj;
         });
       }
+
 
       x.domain(
         data.map(function (d) {
@@ -219,11 +231,18 @@ export default {
           return y(d.y1);
         })
         .attr("title", function (fuel) {
-          return _this.$t("fuelTooltip", {
-            name: _this.$t("fuels." + fuel.name),
-            val: f(fuel.val),
-            subregion: checkNational(fuel.subregion),
-          });
+          if (fuel.subregion === "National") {
+            return _this.$t("nationalFuelTooltip", {
+              name: _this.$t("fuels." + fuel.name),
+              val: f(fuel.val),
+            });
+          } else {
+            return _this.$t("fuelTooltip", {
+              name: _this.$t("fuels." + fuel.name),
+              val: f(fuel.val),
+              subregion: fuel.subregion,
+            });
+          }
         })
         .attr("height", function (d) {
           return y(d.y0) - y(d.y1);
