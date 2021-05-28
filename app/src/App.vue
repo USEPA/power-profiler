@@ -15,9 +15,9 @@
 <template>
   <div>
     <div class="locale-changer">
-      <select v-model="$root.$i18n.locale">
-        <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
-      </select>
+      <a v-on:click="toggleLang" href="javascript:void(0)"
+        >{{langLink}}</a
+      >
     </div>
     <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
@@ -28,10 +28,22 @@
         <mainCharts v-show="showMain"></mainCharts>
         <router-view v-show="!showMain"></router-view>
       </div>
-      <moreInfoModal v-if="showMoreInfo" @close="showMoreInfo = false"></moreInfoModal>
-      <resourcesModal v-if="showResources" @close="showResources = false"></resourcesModal>
-      <subregionsModal v-if="showSubregionInfo" @close="showSubregionInfo = false"></subregionsModal>
-      <megawattModal v-if="showMegaWattInfo" @close="showMegaWattInfo = false"></megawattModal>
+      <moreInfoModal
+        v-if="showMoreInfo"
+        @close="showMoreInfo = false"
+      ></moreInfoModal>
+      <resourcesModal
+        v-if="showResources"
+        @close="showResources = false"
+      ></resourcesModal>
+      <subregionsModal
+        v-if="showSubregionInfo"
+        @close="showSubregionInfo = false"
+      ></subregionsModal>
+      <megawattModal
+        v-if="showMegaWattInfo"
+        @close="showMegaWattInfo = false"
+      ></megawattModal>
     </div>
     <appDescription v-show="showReport || showMainReport"></appDescription>
     <printReport v-if="subregionSelected" v-show="showReport"></printReport>
@@ -80,8 +92,20 @@ export default {
       showResult: false,
       showMain: false,
       showMainReport: false,
-      langs: ["en", "es"],
+      langs: {
+        en: "English",
+        es: "Español"
+      },
+      langLink: "Español"
     };
+  },
+  methods: {
+    toggleLang: function() {
+      let curLang = this.$root.$i18n.locale;
+      let newLang = curLang === "en" ? "es" : "en";
+      this.langLink = this.langs[curLang];
+      this.$root.$i18n.locale = newLang;
+    }
   },
   mounted: function () {
     var self = this;
