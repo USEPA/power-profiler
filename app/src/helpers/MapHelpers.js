@@ -54,6 +54,8 @@ function addSubregionLabels(svg, path, subregionData) {
                     return path.centroid(d)[1] - 23;
                 }else if (d.properties.name == 'SRSO'){
                     return path.centroid(d)[1] - 10;
+                }else if (d.properties.name == 'PRMS'){
+                    return path.centroid(d)[1] - 33;
                 }else {
                     return path.centroid(d)[1] - 12;
                 }
@@ -114,6 +116,9 @@ function addSubregionLabels(svg, path, subregionData) {
                 }
                 else if (d.properties.name == 'SRSO'){
                     return path.centroid(d)[1] + 1;
+                }
+                else if (d.properties.name == 'PRMS'){
+                    return path.centroid(d)[1] - 15;
                 }
                 else {
                     return path.centroid(d)[1];
