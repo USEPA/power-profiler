@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { geoAlbersUsaTerritories } from "geo-albers-usa-territories";
 import { env } from "../config/env.js"
 import { allSubregions } from "../stores/allSubregions.js"
 import { nationalFeature } from "../stores/nationalFeature.js"
@@ -39,7 +40,7 @@ export default {
     methods: {
         displayMap: function(elementID, data){
             var self = this
-            var projection = d3.geo.albersUsa().translate([this.w / 2, this.h / 2]).scale([this.w + 100]);
+            var projection = geoAlbersUsaTerritories().translate([this.w / 2, this.h / 2]).scale([this.w + 100]);
             var path = d3.geo.path().projection(projection);
             var svg = d3.select(elementID)
                 .append("svg")
@@ -60,11 +61,11 @@ export default {
             }).trigger('resize')
 
             var container = svg.selectAll("g")
-                .data(data)
-                .enter().append("g")
-                .attr("class","mapTooltip")
-                .attr("title", function(d){
-                    if(d.properties.name) return d.properties.name + " (" + d.properties.fullName + ")";
+                 .data(data)
+                 .enter().append("g")
+                 .attr("class","mapTooltip")
+                    .attr("title", function(d){
+                  if(d.properties.name) return d.properties.name + " (" + d.properties.fullName + ")";
                 });
 
             container.append("path")
@@ -92,7 +93,6 @@ export default {
     fill-opacity: .7;
     fill: steelblue;
 }
-
 .map {
     fill-opacity: .5;
 }

@@ -5,6 +5,7 @@
     </div>
 </template>
 <script>
+import { geoAlbersUsaTerritories } from "geo-albers-usa-territories";
 import { addLogoBottom } from "../helpers/ChartHelpers.js"
 import { addSubregionLabels } from "../helpers/MapHelpers.js"
 import { allSubregions } from "../stores/allSubregions.js"
@@ -33,7 +34,7 @@ export default {
     },
     methods: {
         createProjection: function(){
-            this.projection = d3.geo.albersUsa()
+            this.projection = geoAlbersUsaTerritories()
                 .translate([this.width / 2, this.height / 2])
                 .scale([this.width + 100]);
             this.path = d3.geo.path()
