@@ -1,5 +1,7 @@
 import pandas as pd
 import json
+from pathlib import Path
+
 # Load in Subregion data.
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
 snfm = pd.read_csv("./data/csv/subregion_fuel_mix.csv",delimiter=',',thousands=',')
@@ -181,5 +183,6 @@ with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
 
     data["features"].insert(52,national)
 
+Path("./result").mkdir(exist_ok=True)
 with open('./result/subregion.json', 'w') as outfile:
     json.dump(data, outfile)
