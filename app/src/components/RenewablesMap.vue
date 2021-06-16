@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> renewable percentages.</p>
+        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png" target="_blank">eGRID subregion</a> renewable percentages.</p>
         <div id="renewablesMap" class="row cols-2"></div>
     </div>
 </template>

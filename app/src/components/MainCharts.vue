@@ -6,7 +6,7 @@
         This chart compares fuel mix (%) of sources used to generate electricity
         in all
         <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
           target="_blank"
           >eGRID subregions</a
         >. <strong>Select a fuel type to sort subregions by fuel.</strong>
