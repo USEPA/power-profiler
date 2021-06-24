@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> average emission rates in pounds per <a @click="$parent.$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a>.</p>
+        <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png" target="_blank">eGRID subregion</a> average emission rates in pounds per <a @click="$parent.$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a>.</p>
         <div class="row cols-2" id="emissionRatesHeatMap"></div>
     </div>
 </template>
@@ -10,6 +10,7 @@ import { addSubregionLabels } from "../helpers/MapHelpers.js"
 import { allSubregions } from "../stores/allSubregions.js"
 import { userSelection } from "../stores/userSelection.js"
 import { addTooltip } from '../helpers/Tooltip';
+import { geoAlbersUsaTerritories } from "geo-albers-usa-territories";
 
 export default {
     data() {
@@ -39,8 +40,8 @@ export default {
             this.subregionData = allSubregions.data;
         },
         createProjection: function() {
-            this.projection = d3.geo.albersUsa()
-                .translate([this.width / 2, this.height / 2])
+            this.projection = geoAlbersUsaTerritories()
+                .translate([this.width / 2, this.height /2])
                 .scale([this.width + 100]);
             // Define path generator
             this.path = d3.geo.path()
@@ -75,7 +76,7 @@ export default {
             svg.attr("width",targetWidth);
             svg.attr("height", Math.round(targetWidth / aspect));
         }).trigger("resize")
-
+        
         var max = d3.max( this.subregionData, function(d) { return d.properties.emissionFactor[emissionRate].value; });
         
         var color = d3.scale.linear()
@@ -98,6 +99,7 @@ export default {
         }
 
         var pollutantLabelTooltip = ""
+        
         var legendLabel = this.svgGradient.append("text")
             .attr("y",20)
             .attr("x",20)
@@ -131,6 +133,7 @@ export default {
         var linearGradient = defs.append("linearGradient")
                                     .attr("class","legend")
                                     .attr("id","linear-gradient");
+
 
         if(this.orientation == "horizontal") {
             linearGradient
@@ -257,6 +260,7 @@ export default {
                 .attr("y2","5");
         }
 
+
         var container = svg.selectAll("g")
             .data(_this.subregionData)
             .enter().append("g")
@@ -302,9 +306,7 @@ export default {
                 addLogoBottom(this.svgGradient, 30, _this.containerHeight);
             }
             addTooltip(".emissionRateMapTooltip")
-
         }
-
     }
 }
 </script>

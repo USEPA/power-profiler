@@ -31,6 +31,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "d3-geo": "^3.0.1",
+    "geo-albers-usa-territories": "^0.1.0",
     "vue-router": "^3.1.6",
     "webpack-merge": "^4.2.2"
   },

@@ -2,7 +2,7 @@
     <div>
         <div id="nationalEmissionRate">
             <h3>Emission Rates</h3>
-            <p>This chart compares the average emission rates in pounds per <a @click="$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a> in all <a href="https://epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregions</a> to the national average emission rates for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
+            <p>This chart compares the average emission rates in pounds per <a @click="$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a> in all <a href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png" target="_blank">eGRID subregions</a> to the national average emission rates for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
             <p class="select-pollutant-label"><strong>Select: </strong></p>
             <div id="pollutantSelectAll">
                 <button @click="handlePollutantButton" id="defaultPollutantAll" value="co2EmissionRate">CO<sub>2</sub></button> 

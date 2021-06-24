@@ -1,5 +1,7 @@
 import pandas as pd
 import json
+from pathlib import Path
+
 # Load in Subregion data.
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
 snfm = pd.read_csv("./data/csv/subregion_fuel_mix.csv",delimiter=',',thousands=',')
@@ -38,8 +40,9 @@ hawaii = ['HIMS','HIOA']
 ercot = ['ERCT']
 eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE','NYCW','NYLI','NYUP','NEWE','SPSO','SPNO','MROW']
 western = ['CAMX','NWPP','AZNM','RMPA']
+pr = ['PRMS']
 # Read in Subregions json.
-with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
+with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
     data = json.load(read_file)
     for feature in data["features"]:
         # Add eGRID data values.
@@ -102,6 +105,12 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS'].values[0]
+                    }
+                elif feature["properties"]["name"] in pr:
+                    feature["properties"]["gridLoss"] = {
+                        #Use the national values for the GGL in Puerto Rico
+                        "display": gl[gl['REGION'] == 'U.S.']['GGRSLOSS_STR'].values[0],
+                        "value": gl[gl['REGION'] == 'U.S.']['GGRSLOSS'].values[0]
                     }
 
             # Add other fuel mix categories
@@ -174,5 +183,6 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
 
     data["features"].insert(52,national)
 
+Path("./result").mkdir(exist_ok=True)
 with open('./result/subregion.json', 'w') as outfile:
     json.dump(data, outfile)

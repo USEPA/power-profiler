@@ -42,6 +42,6 @@ df["Percent Nuclear net generation"] = sn["SRNCPR"]
 df["Percent Hydro net generation"] = sn["SRHYPR"]
 # Add national data
 row = ["U.S.", "National", n["USTRPR"].values[0], n["USTNPR"].values[0], (n["USTNPR"] - n["USNCPR"]).round(3).values[0], n["USTHPR"].values[0], n["USNCPR"].values[0], n["USHYPR"].values[0]]
-df.loc[26] = row
+df.loc[len(df.index)] = row
 # Write to .csv file
 df.to_csv("./data/csv/subregion_fuel_mix.csv", index=False)
