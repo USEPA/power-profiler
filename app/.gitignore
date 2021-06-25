@@ -6,3 +6,5 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+# Ignore dist directory
+./dist/
