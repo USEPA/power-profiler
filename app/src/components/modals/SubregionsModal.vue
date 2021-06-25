@@ -66,8 +66,8 @@
 </template>
 <script>
 export default {
-  mounted: function () {
+  mounted: function() {
     document.getElementById("subregions-ok").focus();
-  },
+  }
 };
 </script>

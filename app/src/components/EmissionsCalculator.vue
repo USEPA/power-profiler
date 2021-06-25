@@ -299,10 +299,7 @@
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { userSelection } from "../stores/userSelection.js";
-import {
-  addLogoBottom,
-  textWrap,
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom, textWrap } from "../helpers/ChartHelpers.js";
 
 export default {
   data() {
@@ -322,7 +319,7 @@ export default {
         subregion: "#e66101",
         co2EmissionRate: "#d7191c",
         so2EmissionRate: "#008837",
-        noxEmissionRate: "#7b3294",
+        noxEmissionRate: "#7b3294"
       },
       resultsFunction: "",
       emissionsResultsWidth: 0,
@@ -330,10 +327,10 @@ export default {
       residentialMode: true,
       userSelectionStore: userSelection,
       commercialCustomerForm: false,
-      sqrFootage: 0,
+      sqrFootage: 0
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.selectedSubregion = selectedSubregion.data;
     this.nationalFeature = nationalFeature.data;
     this.emissionFactors = this.selectedSubregion.properties.emissionFactor;
@@ -344,7 +341,7 @@ export default {
     this.emissionsResultsHeight = 340;
   },
   methods: {
-    displayMonthlyAverage: function () {
+    displayMonthlyAverage: function() {
       var self = this;
       this.resultsFunction = "monthlyAverage";
       var userMonthlyAverage = $("#userMonthlyAverageInput").val();
@@ -372,7 +369,7 @@ export default {
         nox: calculateEmissions(
           this.emissionFactors.noxEmissionRate.value,
           userMonthlyAverage
-        ),
+        )
       };
 
       this.subregionEmissions = {
@@ -387,7 +384,7 @@ export default {
         nox: self.calculateSubregionEmissions(
           this.emissionFactors.noxEmissionRate.value,
           this.gridLoss.value
-        ),
+        )
       };
 
       this.nationalEmissions = {
@@ -402,7 +399,7 @@ export default {
         nox: self.calculateNationalEmissions(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value
-        ),
+        )
       };
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
@@ -488,16 +485,16 @@ export default {
       $("#result-subheader").html(self.$t("results.avgSubheader"));
       $("#result").show();
     },
-    displayMonthlyActual: function () {
+    displayMonthlyActual: function() {
       var self = this;
       this.resultsFunction = "monthlyActual";
       var vals = $("#calculateMonthlyActualForm input")
-        .map(function () {
+        .map(function() {
           return $(this).val();
         })
         .get();
 
-      var total = vals.reduce(function (a, b) {
+      var total = vals.reduce(function(a, b) {
         return parseFloat(a) + parseFloat(b);
       }, 0);
 
@@ -519,7 +516,7 @@ export default {
         nox: this.calculateNationalEmissions(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value
-        ),
+        )
       };
 
       this.subregionEmissions = {
@@ -534,7 +531,7 @@ export default {
         nox: this.calculateSubregionEmissions(
           this.emissionFactors.noxEmissionRate.value,
           this.gridLoss.value
-        ),
+        )
       };
 
       this.userEmissions = {
@@ -549,7 +546,7 @@ export default {
         nox: calculateEmissions(
           this.emissionFactors.noxEmissionRate.value,
           total
-        ),
+        )
       };
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
@@ -634,7 +631,7 @@ export default {
       $("#result-subheader").html(self.$t("results.actualSubheader"));
       $("#result").show();
     },
-    displayNationalAverage: function (e) {
+    displayNationalAverage: function(e) {
       var self = this;
       // Only display national graphs
       this.resultsFunction = "nationalAverage";
@@ -661,7 +658,7 @@ export default {
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value,
           this.nationalAverage
-        ),
+        )
       };
 
       this.subregionEmissions = {};
@@ -678,7 +675,7 @@ export default {
         nox: calculateEmissions(
           this.emissionFactors.noxEmissionRate.value,
           this.nationalAverage
-        ),
+        )
       };
       if ($("#chart-gauge").children.length > 3) {
         d3.selectAll("#chart-gauge svg").remove();
@@ -776,14 +773,14 @@ export default {
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).acres
       );
 
-      $("#commercialCustomersLink").click(function () {
+      $("#commercialCustomersLink").click(function() {
         self.commercialCustomerForm = true;
         $("#residentialCustomersButton").show();
         $("#customerText").hide();
         $("#commercialCustomersForm").show();
       });
 
-      $("#commercialCustomersForm").on("submit", function (e) {
+      $("#commercialCustomersForm").on("submit", function(e) {
         e.preventDefault();
         const input = $("#squareFootage").val();
         self.sqrFootage = input;
@@ -792,7 +789,7 @@ export default {
         self.userSelectionStore.setResidentialMode(false);
       });
 
-      $("#residentialCustomersButton").click(function () {
+      $("#residentialCustomersButton").click(function() {
         self.commercialCustomerForm = false;
         self.residentialMode = true;
         self.userSelectionStore.setResidentialMode(true);
@@ -805,7 +802,7 @@ export default {
       $("#national-avg-annual-results-text").show();
       $("#result").show();
     },
-    gaugeChart: function (width, height, maxVal, num, text, percent) {
+    gaugeChart: function(width, height, maxVal, num, text, percent) {
       // Set Up
       var pi = Math.PI;
       var iR = 60;
@@ -862,7 +859,7 @@ export default {
         .attr("text-anchor", "middle")
         .attr("class", "gauge-chart-label")
         .style("font-family", "Helvetica")
-        .text(function () {
+        .text(function() {
           if (percent == true) {
             return Math.round(maxVal).toLocaleString() + "%";
           } else {
@@ -891,7 +888,7 @@ export default {
       var numPi = Math.floor(num - maxVal / 2) * (pi / maxVal);
 
       // Text transition
-      current.transition().text(function () {
+      current.transition().text(function() {
         if (percent == true) {
           return Math.round(num).toLocaleString() + "%";
         } else {
@@ -902,10 +899,10 @@ export default {
       // Arc Transition
       foreground
         .transition()
-        .duration(function (d) {
+        .duration(function(d) {
           return 750;
         })
-        .styleTween("fill", function () {
+        .styleTween("fill", function() {
           return d3.interpolate(cur_color, cur_color);
         })
         .call(arcTween, numPi);
@@ -927,40 +924,40 @@ export default {
 
       // Update animation
       function arcTween(transition, newAngle) {
-        transition.attrTween("d", function (d) {
+        transition.attrTween("d", function(d) {
           var interpolate = d3.interpolate(d.endAngle, newAngle);
-          return function (t) {
+          return function(t) {
             d.endAngle = interpolate(t);
             return arc(d);
           };
         });
       }
     },
-    calculateNationalEmissions: function (emissionFactorValue) {
+    calculateNationalEmissions: function(emissionFactorValue) {
       var nationalTotal = 1011 * 12;
       var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + 0.0448);
       return res;
     },
-    calculateSubregionEmissions: function (emissionFactorValue, gridLoss) {
+    calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
       var nationalTotal = 1011 * 12;
       var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + gridLoss);
       return res;
     },
-    calculateCarbonOffset: function (carbon) {
+    calculateCarbonOffset: function(carbon) {
       // 23.2 pounds of carbon a medium growth tree, planted in an urban setting, and allowed to grow for 10 years sequesters
       // 44 units CO2
       // 12 Units C
       // 0.85 metric tons of CO2 sequestered annually by one acre of average US forest
       // 1 metric ton = 2204.6 lbs
       var trees = (carbon / (23.2 * (44 / 12))).toLocaleString(undefined, {
-        maximumFractionDigits: 0,
+        maximumFractionDigits: 0
       });
       var acres = (carbon / (0.85 * 2204.6)).toLocaleString(undefined, {
-        maximumFractionDigits: 0,
+        maximumFractionDigits: 0
       });
       return { trees: trees, acres: acres };
     },
-    displayUserAndNationalEmissions: function (
+    displayUserAndNationalEmissions: function(
       user,
       subregion,
       national,
@@ -984,7 +981,7 @@ export default {
             display: Number(
               parseFloat(national[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: self.$t("results.charts.nat"),
+            name: self.$t("results.charts.nat")
           },
           {
             value: parseFloat(subregion[pollutants[i]]),
@@ -993,15 +990,15 @@ export default {
             ).toLocaleString(),
             name:
               this.selectedSubregion.properties.name +
-              self.$t("results.charts.reg"),
+              self.$t("results.charts.reg")
           },
           {
             value: parseFloat(user[pollutants[i]]),
             display: Number(
               parseFloat(user[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: self.$t("results.charts.you"),
-          },
+            name: self.$t("results.charts.you")
+          }
         ];
 
         var y = d3.scale.linear().rangeRound([height, 1]);
@@ -1009,14 +1006,14 @@ export default {
         var cArr = [
           this.emRatesColors.national,
           this.emRatesColors.subregion,
-          this.emRatesColors[pollutants[i] + "EmissionRate"],
+          this.emRatesColors[pollutants[i] + "EmissionRate"]
         ];
 
         if (this.resultsFunction == "nationalAverage") {
           arr.splice(1, 1);
           cArr = [
             this.emRatesColors.national,
-            this.emRatesColors[pollutants[i] + "EmissionRate"],
+            this.emRatesColors[pollutants[i] + "EmissionRate"]
           ];
         }
 
@@ -1024,18 +1021,22 @@ export default {
           .ordinal()
           .range(cArr)
           .domain(
-            arr.map(function (d) {
+            arr.map(function(d) {
               return d.name;
             })
           );
 
-        var xAxis = d3.svg.axis().scale(x).outerTickSize(0).orient("bottom");
+        var xAxis = d3.svg
+          .axis()
+          .scale(x)
+          .outerTickSize(0)
+          .orient("bottom");
 
         var yAxis = d3.svg
           .axis()
           .scale(y)
           .outerTickSize(0)
-          .tickFormat(function (d) {
+          .tickFormat(function(d) {
             var prefix = d3.formatPrefix(d);
             return prefix.scale(d) + prefix.symbol;
           })
@@ -1054,15 +1055,15 @@ export default {
           );
 
         x.domain(
-          arr.map(function (d) {
+          arr.map(function(d) {
             return d.name;
           })
         );
         y.domain([
           0,
-          d3.max(arr, function (d) {
+          d3.max(arr, function(d) {
             return d.value;
-          }),
+          })
         ]);
 
         svg
@@ -1071,7 +1072,7 @@ export default {
           .attr("y", 0 - margin.top / 2)
           .attr("text-anchor", "middle")
           .attr("font-weight", "bold")
-          .text(function () {
+          .text(function() {
             if (pollutants[i] == "co2") {
               return self.$t("results.charts.co2Title");
             } else if (pollutants[i] == "so2") {
@@ -1087,18 +1088,28 @@ export default {
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis)
           .selectAll(".x .tick text")
-          .call(function (t) {
-            t.each(function (d) {
+          .call(function(t) {
+            t.each(function(d) {
               var self = d3.select(this);
               self.style("font-size", "0.8em");
               var s = self.text().split(" ");
               self.text("");
-              self.append("tspan").attr("x", 0).text(s[0]);
-              self.append("tspan").attr("x", 0).attr("y", 35).text(s[1]);
+              self
+                .append("tspan")
+                .attr("x", 0)
+                .text(s[0]);
+              self
+                .append("tspan")
+                .attr("x", 0)
+                .attr("y", 35)
+                .text(s[1]);
             });
           });
 
-        svg.append("g").attr("class", "y axis").call(yAxis);
+        svg
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
 
         svg
           .append("text")
@@ -1106,7 +1117,7 @@ export default {
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .append("tspan")
-          .text(function (d) {
+          .text(function(d) {
             if (pollutants[i] == "co2") {
               return "CO";
             } else if (pollutants[i] == "so2") {
@@ -1118,7 +1129,7 @@ export default {
           .append("tspan")
           .attr("baseline-shift", "-.25em")
           .attr("font-size", "76.4706%")
-          .text(function (d) {
+          .text(function(d) {
             if (pollutants[i] == "co2") {
               return "2";
             } else if (pollutants[i] == "so2") {
@@ -1141,41 +1152,45 @@ export default {
           .enter()
           .append("rect")
           .attr("class", "bar comparisonGraph" + pollutants[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.name);
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.name);
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.value);
           })
           .attr("width", x.rangeBand())
-          .attr("height", function (d) {
+          .attr("height", function(d) {
             return height - y(d.value);
           });
 
-        var labels = svg.selectAll("text.bar").data(arr).enter().append("text");
+        var labels = svg
+          .selectAll("text.bar")
+          .data(arr)
+          .enter()
+          .append("text");
 
         labels
           .attr("text-anchor", "middle")
           .append("tspan")
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.name) + x.rangeBand() / 2;
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.value) + -20;
           })
-          .text(function (d) {
+          .text(function(d) {
             return d.display;
           });
 
         labels
           .append("tspan")
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.name) + x.rangeBand() / 2;
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.value) + -5;
           })
           .text("lbs");
@@ -1208,10 +1223,10 @@ export default {
       } else if (this.resultsFunction == "nationalAverage") {
         this.displayNationalAverage();
       }
-    },
+    }
   },
   watch: {
-    $route: function (to, from) {
+    $route: function(to, from) {
       var self = this;
       if (to !== from) {
         self.selectedSubregion = selectedSubregion.data;
@@ -1222,9 +1237,8 @@ export default {
       deep: true,
       handler() {
         this.update();
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
-

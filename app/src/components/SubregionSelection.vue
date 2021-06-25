@@ -72,7 +72,7 @@
             class="form-select"
             id="regionSelectionDropdown"
           >
-            <option value="All">{{ $t('egridSubregions') }}</option>
+            <option value="All">{{ $t("egridSubregions") }}</option>
             <option value="AKGD">AKGD (ASCC Alaska Grid)</option>
             <option value="AKMS">AKMS (ASCC Miscellaneous)</option>
             <option value="AZNM">AZNM (WECC Southwest)</option>
@@ -114,17 +114,17 @@ import { allSubregions } from "../stores/allSubregions.js";
 
 export default {
   components: {
-    subregionMap: subregionMap,
+    subregionMap: subregionMap
   },
   data() {
     return {
       userZip: "",
       selectedSubregion: {},
-      utilArr: [],
+      utilArr: []
     };
   },
   methods: {
-    processZipForm: function (e) {
+    processZipForm: function(e) {
       e.preventDefault();
       $("#errorMessage").hide();
       $("#utilitySelectDiv").hide();
@@ -133,14 +133,14 @@ export default {
       if (this.userZip) {
         d3.csv(
           env.ZIP_UTILITY,
-          function (d) {
+          function(d) {
             if (self.userZip == d.zip) {
               return d;
             }
           },
-          function (data) {
+          function(data) {
             if (data.length == 1) {
-              var subregion = allSubregions.data.filter(function (d) {
+              var subregion = allSubregions.data.filter(function(d) {
                 return d.properties.name == data[0].SUBRGN;
               });
               $("#utilitySelect").hide();
@@ -153,7 +153,7 @@ export default {
               self.utilArr = [];
               var subArr = [];
               var utilitySelectHTML = [
-                "<option disabled selected value>Select your utility</option>",
+                "<option disabled selected value>Select your utility</option>"
               ];
               for (var i = 0; i < data.length; i += 1) {
                 self.utilArr.push(data[i]);
@@ -169,9 +169,7 @@ export default {
                 $("#utilitySelect").attr("required", true);
                 $("#utilitySelectDiv").show();
               } else {
-                var subregionSelection = allSubregions.data.filter(function (
-                  d
-                ) {
+                var subregionSelection = allSubregions.data.filter(function(d) {
                   for (var i = 0; i < subArr.length; i += 1) {
                     if (subArr[i] == d.properties.name) {
                       return d;
@@ -191,28 +189,28 @@ export default {
         $("#errorMessage").html("<p>Please enter a valid zip code.</p>");
       }
     },
-    handleSelectChange: function (e) {
+    handleSelectChange: function(e) {
       $("#userLocation").val("");
       $("#utilitySelectDiv").hide();
       var subAcronym = e.target.options[e.target.options.selectedIndex].value;
       this.selectedSubregion = allSubregions.data.filter(
-        (d) => d.properties.name == subAcronym
+        d => d.properties.name == subAcronym
       )[0];
       this.$root.$emit("subregionSelected", this.selectedSubregion);
-    },
+    }
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     const zipForm = document.getElementById("zipForm");
     zipForm.addEventListener("submit", this.processZipForm);
-    $("#utilitySelect").on("change", function (e) {
+    $("#utilitySelect").on("change", function(e) {
       var index = $("#utilitySelect").val();
-      var subregion = allSubregions.data.filter(function (d) {
+      var subregion = allSubregions.data.filter(function(d) {
         return d.properties.name == self.utilArr[index].SUBRGN;
       });
       self.$root.$emit("subregionSelected", subregion[0]);
     });
-  },
+  }
 };
 </script>
 <style>

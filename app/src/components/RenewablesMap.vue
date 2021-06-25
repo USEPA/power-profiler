@@ -52,24 +52,24 @@ export default {
       path: {},
       containerHeight: 0,
       subregionData: [],
-      selectedRenewable: "renewable",
+      selectedRenewable: "renewable"
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.orientation = userSelection.data.emissionRatesOrientation;
     this.subregionData = allSubregions.data;
     this.createProjection();
     this.display(this.selectedRenewable, this.$parent.orientation);
   },
   methods: {
-    createProjection: function () {
+    createProjection: function() {
       this.projection = d3.geo
         .albersUsa()
         .translate([this.width / 2, this.height / 2])
         .scale([this.width + 100]);
       this.path = d3.geo.path().projection(this.projection);
     },
-    display: function (dataValue, orientation) {
+    display: function(dataValue, orientation) {
       var _this = this;
       var percentBins = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
       var redToGreen = [
@@ -82,10 +82,13 @@ export default {
         "#A6D96A",
         "#66BD63",
         "#1A9850",
-        "#006837",
+        "#006837"
       ];
 
-      var color = d3.scale.ordinal().domain(percentBins).range(redToGreen);
+      var color = d3.scale
+        .ordinal()
+        .domain(percentBins)
+        .range(redToGreen);
 
       var svg = d3
         .select(this.domElement)
@@ -100,7 +103,7 @@ export default {
       var aspect = this.width / this.height;
 
       $(window)
-        .on("resize", function () {
+        .on("resize", function() {
           var targetWidth = $("#main-charts").width();
           svg.attr("width", targetWidth);
           svg.attr("height", Math.round(targetWidth / aspect));
@@ -113,17 +116,17 @@ export default {
         .enter()
         .append("g")
         .attr("class", "renewablesMapTooltip")
-        .attr("title", function (d) {
+        .attr("title", function(d) {
           return _this.$t("tooltip.text", {
             subregionName: d.properties.fullName,
             sourceType: dataValue,
-            sourcePct: d.properties.fuelMixCategories[dataValue],
+            sourcePct: d.properties.fuelMixCategories[dataValue]
           });
         });
 
       container
         .append("path")
-        .attr("class", function (d) {
+        .attr("class", function(d) {
           if (d.properties.hasOwnProperty("STATE")) {
             return "state";
           } else {
@@ -131,7 +134,7 @@ export default {
           }
         })
         .attr("d", _this.path)
-        .style("stroke", function (d) {
+        .style("stroke", function(d) {
           if (d.properties.hasOwnProperty("STATE")) {
             return "#a9a9a9";
           } else {
@@ -139,7 +142,7 @@ export default {
           }
         })
         .style("stroke-width", "1")
-        .style("fill", function (d) {
+        .style("fill", function(d) {
           // Get data value
           var value = d.properties.fuelMixCategories[dataValue];
           if (value) {
@@ -174,7 +177,7 @@ export default {
         legend
           .append("rect")
           .attr("x", 0)
-          .attr("y", function (d, i) {
+          .attr("y", function(d, i) {
             sqOffset += 25;
             return i + sqOffset;
           })
@@ -186,12 +189,12 @@ export default {
         legend
           .append("text")
           .attr("x", 25)
-          .attr("y", function (d, i) {
+          .attr("y", function(d, i) {
             txtOffset += 25;
             return i + txtOffset;
           })
           .style("fill", "black")
-          .text(function (d, i) {
+          .text(function(d, i) {
             return color.domain()[i] - 10 + "-" + color.domain()[i] + "%";
           });
 
@@ -216,7 +219,7 @@ export default {
         legendV
           .append("rect")
           .attr("y", 0)
-          .attr("x", function (d, i) {
+          .attr("x", function(d, i) {
             sqOffsetV += 50;
             return i + sqOffsetV;
           })
@@ -228,20 +231,19 @@ export default {
         legendV
           .append("text")
           .attr("y", 40)
-          .attr("x", function (d, i) {
+          .attr("x", function(d, i) {
             txtOffsetV += 50;
             return i + txtOffsetV;
           })
           .style("fill", "black")
-          .text(function (d, i) {
+          .text(function(d, i) {
             return color.domain()[i] - 10 + "-" + color.domain()[i] + "%";
           });
 
         addSubregionLabels(labels, this.path, this.subregionData);
         addLogoBottom(svgLegendV, 30, this.height);
       }
-    },
-  },
+    }
+  }
 };
 </script>
-

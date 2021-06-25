@@ -37,9 +37,7 @@
   </div>
 </template>
 <script>
-import {
-  addLogoBottom,
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { addTooltip } from "../helpers/Tooltip";
@@ -48,7 +46,7 @@ export default {
   data() {
     return {
       data: [],
-      selectedPollutantSub: "co2EmissionRate",
+      selectedPollutantSub: "co2EmissionRate"
     };
   },
   watch: {
@@ -56,22 +54,24 @@ export default {
       deep: true,
       handler() {
         this.update();
-      },
-    },
+      }
+    }
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     this.data = [nationalFeature.data[0], selectedSubregion.data];
     this.display(this.data);
 
-    $(window).on("resize", function () {
+    $(window).on("resize", function() {
       d3.selectAll("#emissionRate svg").remove();
       self.update();
     });
 
-    $("#pollutantSelectSub button").on("click", function (e) {
+    $("#pollutantSelectSub button").on("click", function(e) {
       $(this).css({ "background-color": "#2B7D3B" });
-      $(this).siblings().css({ "background-color": "#0071bc" });
+      $(this)
+        .siblings()
+        .css({ "background-color": "#0071bc" });
       self.selectedPollutantSub = $(this).val();
 
       $("#sub" + self.selectedPollutantSub).show();
@@ -83,7 +83,7 @@ export default {
     $("#defaultPollutantSub").trigger("click");
   },
   methods: {
-    display: function (data) {
+    display: function(data) {
       let self = this;
       var domElement = "#emissionRate";
       var w = $(domElement).width();
@@ -91,14 +91,14 @@ export default {
       var parameters = [
         "so2EmissionRate",
         "co2EmissionRate",
-        "noxEmissionRate",
+        "noxEmissionRate"
       ];
       var emRatesColors = {
         national: "#2b83ba",
         subregion: "#e66101",
         co2EmissionRate: "#d7191c",
         so2EmissionRate: "#008837",
-        noxEmissionRate: "#7b3294",
+        noxEmissionRate: "#7b3294"
       };
 
       for (var i = 0; i < parameters.length; i += 1) {
@@ -130,7 +130,11 @@ export default {
             }
           });
 
-        var yAxis = d3.svg.axis().outerTickSize(0).scale(y).orient("left");
+        var yAxis = d3.svg
+          .axis()
+          .outerTickSize(0)
+          .scale(y)
+          .orient("left");
 
         var svg = d3
           .select(domElement)
@@ -145,15 +149,15 @@ export default {
           );
 
         x.domain(
-          data.map(function (d) {
+          data.map(function(d) {
             return d.properties.name;
           })
         );
         y.domain([
           0,
-          d3.max(data, function (d) {
+          d3.max(data, function(d) {
             return d.properties.emissionFactor[selectedPollutantSub].value;
-          }),
+          })
         ]);
 
         svg
@@ -162,7 +166,10 @@ export default {
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis);
 
-        svg.append("g").attr("class", "y axis").call(yAxis);
+        svg
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
 
         var pollutantLabelTooltip = "";
         svg
@@ -171,7 +178,7 @@ export default {
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .append("tspan")
-          .text(function (d) {
+          .text(function(d) {
             if (selectedPollutantSub == "co2EmissionRate") {
               pollutantLabelTooltip = self.$t("co2EmissionRate");
               return "CO";
@@ -186,7 +193,7 @@ export default {
           .append("tspan")
           .attr("baseline-shift", "-.25em")
           .attr("font-size", "76.4706%")
-          .text(function (d) {
+          .text(function(d) {
             if (selectedPollutantSub == "co2EmissionRate") {
               return "2";
             } else if (selectedPollutantSub == "so2EmissionRate") {
@@ -209,27 +216,27 @@ export default {
           .enter()
           .append("g")
           .attr("class", "subEmissionRateTooltip")
-          .attr("title", function (d) {
+          .attr("title", function(d) {
             return self.$t("subregionTooltip", {
               pollutant: pollutantLabelTooltip,
-              rate: d.properties.emissionFactor[parameters[i]].display,
+              rate: d.properties.emissionFactor[parameters[i]].display
             });
           });
 
         container
           .append("rect")
           .attr("class", "bar subregionEmissionRate " + parameters[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.properties.name);
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.properties.name);
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.properties.emissionFactor[selectedPollutantSub].value);
           })
           .attr("width", x.rangeBand())
-          .attr("height", function (d) {
+          .attr("height", function(d) {
             return (
               height -
               y(d.properties.emissionFactor[selectedPollutantSub].value)
@@ -242,15 +249,15 @@ export default {
           .enter()
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.properties.name) + x.rangeBand() / 2;
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return (
               y(d.properties.emissionFactor[selectedPollutantSub].value) + -10
             );
           })
-          .text(function (d) {
+          .text(function(d) {
             return d.properties.emissionFactor[selectedPollutantSub].display;
           });
 
@@ -259,17 +266,16 @@ export default {
       }
       addTooltip(".subEmissionRateTooltip");
     },
-    update: function () {
+    update: function() {
       var self = this;
       this.data = [nationalFeature.data[0], selectedSubregion.data];
       d3.selectAll("#emissionRate svg").remove();
       this.display(this.data);
-      $("#pollutantSelectSub button").each(function () {
+      $("#pollutantSelectSub button").each(function() {
         if ($(this)[0].value == self.selectedPollutantSub)
           $(this).trigger("click");
       });
-    },
-  },
+    }
+  }
 };
 </script>
-

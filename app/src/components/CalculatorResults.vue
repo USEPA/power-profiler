@@ -169,9 +169,9 @@ import { userSelection } from "../stores/userSelection.js";
 export default {
   data() {
     return {
-      userSelectionStore: userSelection,
+      userSelectionStore: userSelection
     };
-  },
+  }
 };
 </script>
 <style>

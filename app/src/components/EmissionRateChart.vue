@@ -192,9 +192,7 @@
 import { allSubregions } from "../stores/allSubregions.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
-import {
-  addLogoBottom,
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import emissionRateMap from "./EmissionRateMap.vue";
 import renewablesMap from "./RenewablesMap.vue";
 import { userSelection } from "../stores/userSelection.js";
@@ -203,7 +201,7 @@ import { addTooltip } from "../helpers/Tooltip";
 export default {
   components: {
     emissionRateMap: emissionRateMap,
-    renewablesMap: renewablesMap,
+    renewablesMap: renewablesMap
   },
   data() {
     return {
@@ -220,17 +218,17 @@ export default {
         subregion: "#e66101",
         co2EmissionRate: "#d7191c",
         so2EmissionRate: "#008837",
-        noxEmissionRate: "#7b3294",
+        noxEmissionRate: "#7b3294"
       },
       selectedRegion: {},
       selectedPollutantAll: "co2EmissionRate",
       pollutantText: "CO<sub>2</sub>",
       sortState: "alphabetically",
       selectedFuel: "",
-      currentMap: 1,
+      currentMap: 1
     };
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     this.orientation = userSelection.data.emissionRatesOrientation;
     this.initialize(
@@ -245,7 +243,7 @@ export default {
     $("#defaultPollutantAll").css({ "background-color": "#2B7D3B" });
     $("#sortAlphabeticallyEmissionRate").hide();
 
-    $(window).on("resize", function () {
+    $(window).on("resize", function() {
       if (self.$route.name == "home") self.update();
     });
 
@@ -261,14 +259,14 @@ export default {
     }
   },
   methods: {
-    initialize: function (width, height, domElement) {
+    initialize: function(width, height, domElement) {
       this.w = width;
       this.h = height;
       this.domElement = domElement;
       this.subregionData = allSubregions.data;
       this.nationalFeature = nationalFeature.data;
     },
-    display: function (orientation) {
+    display: function(orientation) {
       var self = this;
       $(this.domElement).show();
 
@@ -285,7 +283,7 @@ export default {
       this.showSelection();
       addTooltip(".emissionRateTooltip");
     },
-    displayHorizontal: function () {
+    displayHorizontal: function() {
       var self = this;
       var margin = { top: 30, right: 60, bottom: 70, left: 70 },
         width = self.w - margin.left - margin.right,
@@ -301,9 +299,17 @@ export default {
           .range([self.emRatesColors[self.parameters[i]]])
           .domain(self.subregionData);
 
-        var xAxis = d3.svg.axis().scale(x).outerTickSize(0).orient("bottom");
+        var xAxis = d3.svg
+          .axis()
+          .scale(x)
+          .outerTickSize(0)
+          .orient("bottom");
 
-        var yAxis = d3.svg.axis().scale(y).outerTickSize(0).orient("left");
+        var yAxis = d3.svg
+          .axis()
+          .scale(y)
+          .outerTickSize(0)
+          .orient("left");
 
         var svg = d3
           .select(self.domElement)
@@ -318,15 +324,15 @@ export default {
           );
 
         x.domain(
-          self.subregionData.map(function (d) {
+          self.subregionData.map(function(d) {
             return d.properties.name;
           })
         );
         y.domain([
           0,
-          d3.max(self.subregionData, function (d) {
+          d3.max(self.subregionData, function(d) {
             return d.properties.emissionFactor[self.parameters[i]].value;
-          }),
+          })
         ]);
 
         svg
@@ -341,7 +347,7 @@ export default {
           .attr("transform", "rotate(-30)")
           .attr("text-anchor", "end")
           .append("title")
-          .text(function (d) {
+          .text(function(d) {
             return d + " (" + self.subregions[d] + ")";
           });
 
@@ -351,9 +357,12 @@ export default {
             "transform",
             "translate(" + (width / 2 - 50) + "," + (height + 50) + ")"
           )
-          .text(self.$t('emissionRateChart.xAxis'));
+          .text(self.$t("emissionRateChart.xAxis"));
 
-        svg.append("g").attr("class", "y axis").call(yAxis);
+        svg
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
         var pollutantLabelTooltip = "";
         svg
           .append("text")
@@ -362,7 +371,7 @@ export default {
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .append("tspan")
-          .text(function (d) {
+          .text(function(d) {
             if (self.parameters[i] == "co2EmissionRate") {
               pollutantLabelTooltip = self.$t("emissionRateBody.co2");
               return "CO";
@@ -377,7 +386,7 @@ export default {
           .append("tspan")
           .attr("baseline-shift", "-.25em")
           .attr("font-size", "76.4706%")
-          .text(function (d) {
+          .text(function(d) {
             if (self.parameters[i] == "co2EmissionRate") {
               return "2";
             } else if (self.parameters[i] == "so2EmissionRate") {
@@ -400,33 +409,33 @@ export default {
           .enter()
           .append("g")
           .attr("class", "emissionRateTooltip")
-          .attr("title", function (d) {
+          .attr("title", function(d) {
             return self.$t("emissionRateChart.regionTooltip", {
               pollutant: pollutantLabelTooltip,
               rate:
-                d.properties.emissionFactor[self.selectedPollutantAll].display,
+                d.properties.emissionFactor[self.selectedPollutantAll].display
             });
           });
 
         container
           .append("rect")
           .attr("class", "bar allEmissionRate " + self.parameters[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.properties.name);
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(d.properties.name);
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.properties.emissionFactor[self.parameters[i]].value);
           })
           .attr("width", x.rangeBand())
-          .attr("height", function (d) {
+          .attr("height", function(d) {
             return (
               height - y(d.properties.emissionFactor[self.parameters[i]].value)
             );
           })
-          .on("click", function (d) {
+          .on("click", function(d) {
             if (self.sortState == "ascending") {
               $("#sortDescendingEmissionRate")[0].click();
             } else if (self.sortState == "descending") {
@@ -460,32 +469,32 @@ export default {
           .enter()
           .append("g")
           .attr("class", "emissionRateTooltip")
-          .attr("title", function (d) {
+          .attr("title", function(d) {
             return self.$t("emissionRateChart.nationalTooltip", {
               rate:
-                d.properties.emissionFactor[self.selectedPollutantAll].display,
+                d.properties.emissionFactor[self.selectedPollutantAll].display
             });
           });
 
         nationalContainer
           .append("rect")
           .attr("class", "nationalBar allEmissionRate " + self.parameters[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.properties.name);
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return width + x.rangeBand();
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.properties.emissionFactor[self.parameters[i]].value);
           })
           .attr("width", x.rangeBand())
-          .attr("height", function (d) {
+          .attr("height", function(d) {
             return (
               height - y(d.properties.emissionFactor[self.parameters[i]].value)
             );
           })
-          .on("click", function (d) {
+          .on("click", function(d) {
             if (self.sortState == "ascending") {
               $("#sortDescendingEmissionRate")[0].click();
             } else if (self.sortState == "descending") {
@@ -501,15 +510,15 @@ export default {
           .append("text")
           .attr("text-anchor", "middle")
           .attr("class", "selectedRegionValue")
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return width + x.rangeBand() + x.rangeBand() / 2;
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return (
               y(d.properties.emissionFactor[self.parameters[i]].value) + -10
             );
           })
-          .text(function (d) {
+          .text(function(d) {
             return d.properties.emissionFactor[self.parameters[i]].display;
           });
 
@@ -519,7 +528,7 @@ export default {
           .attr("transform", "translate(" + x.rangeBand() + "," + height + ")")
           .call(nationalBarXAxis)
           .append("text")
-          .text(self.$t('emissionRateChart.nationalBar'))
+          .text(self.$t("emissionRateChart.nationalBar"))
           .attr("x", width - 15)
           .attr("y", 30);
 
@@ -528,7 +537,7 @@ export default {
         if (Object.keys(self.selectedRegion).length) {
           d3.selectAll(self.domElement + " .tick text").attr(
             "font-weight",
-            function (d) {
+            function(d) {
               if (d == self.selectedRegion.properties.name) {
                 return "bold";
               }
@@ -540,7 +549,7 @@ export default {
           svg
             .selectAll("text.allEmissionRate")
             .data(
-              self.subregionData.filter(function (d) {
+              self.subregionData.filter(function(d) {
                 if (d.properties.name == self.selectedRegion.properties.name) {
                   return d;
                 }
@@ -550,21 +559,21 @@ export default {
             .append("text")
             .attr("class", "selectedRegionValue")
             .attr("text-anchor", "middle")
-            .attr("x", function (d) {
+            .attr("x", function(d) {
               return x(d.properties.name) + x.rangeBand() / 2;
             })
-            .attr("y", function (d) {
+            .attr("y", function(d) {
               return (
                 y(d.properties.emissionFactor[self.parameters[i]].value) - 10
               );
             })
-            .text(function (d) {
+            .text(function(d) {
               return d.properties.emissionFactor[self.parameters[i]].display;
             });
         }
       }
     },
-    displayVertical: function () {
+    displayVertical: function() {
       var self = this;
       for (var i = 0; i < self.parameters.length; i += 1) {
         var margin = { top: 60, right: 70, bottom: 70, left: 100 },
@@ -580,9 +589,15 @@ export default {
           .range([self.emRatesColors[self.parameters[i]]])
           .domain(self.subregionData);
 
-        var xAxis = d3.svg.axis().scale(x).orient("top");
+        var xAxis = d3.svg
+          .axis()
+          .scale(x)
+          .orient("top");
 
-        var yAxis = d3.svg.axis().scale(y).orient("left");
+        var yAxis = d3.svg
+          .axis()
+          .scale(y)
+          .orient("left");
 
         var svg = d3
           .select(self.domElement)
@@ -598,12 +613,12 @@ export default {
 
         x.domain([
           0,
-          d3.max(self.subregionData, function (d) {
+          d3.max(self.subregionData, function(d) {
             return d.properties.emissionFactor[self.parameters[i]].value;
-          }),
+          })
         ]);
         y.domain(
-          self.subregionData.map(function (d) {
+          self.subregionData.map(function(d) {
             return d.properties.name;
           })
         );
@@ -618,11 +633,14 @@ export default {
           .attr("y", "-10")
           .attr("text-anchor", "end")
           .append("title")
-          .text(function (d) {
+          .text(function(d) {
             return d + " (" + self.subregions[d] + ")";
           });
 
-        svg.append("g").attr("class", "y axis").call(yAxis);
+        svg
+          .append("g")
+          .attr("class", "y axis")
+          .call(yAxis);
         var pollutantLabelTooltip = "";
         svg
           .append("text")
@@ -631,7 +649,7 @@ export default {
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .append("tspan")
-          .text(function (d) {
+          .text(function(d) {
             if (self.parameters[i] == "co2EmissionRate") {
               pollutantLabelTooltip = "carbon dioxide";
               return "CO";
@@ -645,7 +663,7 @@ export default {
           })
           .append("tspan")
           .attr("baseline-shift", "sub")
-          .text(function (d) {
+          .text(function(d) {
             if (self.parameters[i] == "co2EmissionRate") {
               return "2";
             } else if (self.parameters[i] == "so2EmissionRate") {
@@ -663,7 +681,7 @@ export default {
           .enter()
           .append("g")
           .attr("class", "emissionRateTooltip")
-          .attr("title", function (d) {
+          .attr("title", function(d) {
             return (
               "Average " +
               pollutantLabelTooltip +
@@ -676,20 +694,20 @@ export default {
         container
           .append("rect")
           .attr("class", "bar allEmissionRate " + self.parameters[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.properties.name);
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return y(d.properties.name);
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(0);
           })
           .attr("height", y.rangeBand())
-          .attr("width", function (d) {
+          .attr("width", function(d) {
             return x(d.properties.emissionFactor[self.parameters[i]].value);
           })
-          .on("click", function (d) {
+          .on("click", function(d) {
             if (self.sortState == "ascending") {
               $("#sortDescendingEmissionRate")[0].click();
             } else if (self.sortState == "descending") {
@@ -705,7 +723,10 @@ export default {
           .ordinal()
           .rangeRoundBands([height, height + 20], 0.2);
 
-        var nationalBarYAxis = d3.svg.axis().scale(nationalY).orient("left");
+        var nationalBarYAxis = d3.svg
+          .axis()
+          .scale(nationalY)
+          .orient("left");
 
         var nationalBar = svg
           .selectAll(".nationalY")
@@ -716,20 +737,20 @@ export default {
         nationalBar
           .append("rect")
           .attr("class", "bar allEmissionRate " + self.parameters[i])
-          .attr("fill", function (d) {
+          .attr("fill", function(d) {
             return color(d.properties.name);
           })
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return height;
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return x(0);
           })
           .attr("height", y.rangeBand())
-          .attr("width", function (d) {
+          .attr("width", function(d) {
             return x(d.properties.emissionFactor[self.parameters[i]].value);
           })
-          .on("click", function (d) {
+          .on("click", function(d) {
             if (self.sortState == "ascending") {
               $("#sortDescendingEmissionRate")[0].click();
             } else if (self.sortState == "descending") {
@@ -745,15 +766,15 @@ export default {
           .append("text")
           .attr("text-anchor", "middle")
           .attr("class", "selectedRegionValue")
-          .attr("y", function (d) {
+          .attr("y", function(d) {
             return height + y.rangeBand() - 3;
           })
-          .attr("x", function (d) {
+          .attr("x", function(d) {
             return (
               x(d.properties.emissionFactor[self.parameters[i]].value) + 20
             );
           })
-          .text(function (d) {
+          .text(function(d) {
             return d.properties.emissionFactor[self.parameters[i]].display;
           });
 
@@ -763,7 +784,7 @@ export default {
           .attr("transform", "translate(0,0)")
           .call(nationalBarYAxis)
           .append("text")
-          .text(self.$t('emissionRateChart.nationalBar'))
+          .text(self.$t("emissionRateChart.nationalBar"))
           .attr("x", -65)
           .attr("y", height + y.rangeBand());
 
@@ -772,7 +793,7 @@ export default {
         if (Object.keys(self.selectedRegion).length) {
           d3.selectAll(self.domElement + " .tick text").attr(
             "font-weight",
-            function (d) {
+            function(d) {
               if (d == self.selectedRegion.properties.name) {
                 return "bold";
               }
@@ -784,7 +805,7 @@ export default {
           svg
             .selectAll("text.allEmissionRate")
             .data(
-              self.subregionData.filter(function (d) {
+              self.subregionData.filter(function(d) {
                 if (d.properties.name == self.selectedRegion.properties.name) {
                   return d;
                 }
@@ -794,60 +815,64 @@ export default {
             .append("text")
             .attr("class", "selectedRegionValue")
             .attr("text-anchor", "middle")
-            .attr("y", function (d) {
+            .attr("y", function(d) {
               return y(d.properties.name) + y.rangeBand() / 2 + 5;
             })
-            .attr("x", function (d) {
+            .attr("x", function(d) {
               return (
                 x(d.properties.emissionFactor[self.parameters[i]].value) + 25
               );
             })
-            .text(function (d) {
+            .text(function(d) {
               return d.properties.emissionFactor[self.parameters[i]].display;
             });
         }
       }
     },
-    show: function () {
-      $(this.domElement).parent("div").show();
+    show: function() {
+      $(this.domElement)
+        .parent("div")
+        .show();
       $(this.domElement).show();
     },
-    showSelection: function () {
+    showSelection: function() {
       $("#all" + this.selectedPollutantAll).show();
       $("#all" + this.selectedPollutantAll)
         .siblings("svg")
         .hide();
     },
-    hide: function () {
-      $(this.domElement).parent("div").hide();
+    hide: function() {
+      $(this.domElement)
+        .parent("div")
+        .hide();
       $(this.domElement).hide();
     },
-    clear: function () {
+    clear: function() {
       d3.selectAll(this.domElement + " svg").remove();
     },
-    sort: function (sortState, selectedPollutantAll) {
+    sort: function(sortState, selectedPollutantAll) {
       var self = this;
       var data = self.subregionData;
       if (sortState == "alphabetically") {
-        data.sort(function (x, y) {
+        data.sort(function(x, y) {
           return d3.ascending(x.properties.name, y.properties.name);
         });
       } else if (sortState == "ascending") {
-        data.sort(function (x, y) {
+        data.sort(function(x, y) {
           return d3.ascending(
             x.properties.emissionFactor[selectedPollutantAll].value,
             y.properties.emissionFactor[selectedPollutantAll].value
           );
         });
       } else if (sortState == "descending") {
-        data.sort(function (x, y) {
+        data.sort(function(x, y) {
           return d3.descending(
             x.properties.emissionFactor[selectedPollutantAll].value,
             y.properties.emissionFactor[selectedPollutantAll].value
           );
         });
       } else if (sortState == "subregionFuels") {
-        data.sort(function (x, y) {
+        data.sort(function(x, y) {
           return d3.descending(
             x.properties.fuelMix[self.selectedFuel],
             y.properties.fuelMix[self.selectedFuel]
@@ -855,7 +880,7 @@ export default {
         });
       }
     },
-    update: function () {
+    update: function() {
       this.clear();
       this.initialize(
         $("#main-charts").width(),
@@ -868,19 +893,19 @@ export default {
       this.show(this.subregionData);
       this.showSelection(this.selectedPollutantAll);
     },
-    setPollutantText: function () {
+    setPollutantText: function() {
       var self = this;
-      $("#pollutantSelectAll button").each(function () {
+      $("#pollutantSelectAll button").each(function() {
         if ($(this).attr("value") == self.selectedPollutantAll) {
           self.pollutantText = $(this).html();
         }
       });
     },
-    updateStatus: function (pollutant, state) {
+    updateStatus: function(pollutant, state) {
       if (state == "ascending" || state == "descending") {
         return `<strong> ${this.$t("emissionRateChart.sortedByLabel", {
           direction: this.$t(state),
-          pollutant: pollutant,
+          pollutant: pollutant
         })}<strong>`;
       } else if (state == "alphabetically") {
         return `<strong>${this.$t(
@@ -888,13 +913,15 @@ export default {
         )}</strong>`;
       }
     },
-    handlePollutantButton: function (e) {
+    handlePollutantButton: function(e) {
       var self = this;
       var el = e.target;
       if (el.tagName !== "BUTTON") el = el.parentNode;
 
       $(el).css({ "background-color": "#2B7D3B" });
-      $(el).siblings().css({ "background-color": "#0071bc" });
+      $(el)
+        .siblings()
+        .css({ "background-color": "#0071bc" });
       self.selectedPollutantAll = $(el).val();
       userSelection.selectedPollutantAll = $(el).val();
       self.update();
@@ -907,7 +934,7 @@ export default {
       $("#nationalEmissionRateSortingStatus").html(status);
       $("#nationalFuelMixSortingStatus").html(status);
     },
-    handleSortLink: function (e) {
+    handleSortLink: function(e) {
       var self = this;
       var el = e.srcElement;
       var sortVal = el.id;
@@ -920,7 +947,9 @@ export default {
           userSelection.sortState
         );
         $(el).hide();
-        $(el).siblings().show();
+        $(el)
+          .siblings()
+          .show();
         $("#nationalEmissionRateSortingStatus").html(status);
         $("#nationalFuelMixSortingStatus").html(status);
         $("#resetNationalFuelMix").css("visibility", "hidden");
@@ -931,7 +960,9 @@ export default {
           userSelection.sortState
         );
         $(el).hide();
-        $(el).siblings().show();
+        $(el)
+          .siblings()
+          .show();
         $("#nationalEmissionRateSortingStatus").html(status);
         $("#nationalFuelMixSortingStatus").html(status);
         $("#resetNationalFuelMix").css("visibility", "visible");
@@ -942,7 +973,9 @@ export default {
           userSelection.sortState
         );
         $(el).hide();
-        $(el).siblings().show();
+        $(el)
+          .siblings()
+          .show();
         $("#nationalEmissionRateSortingStatus").html(status);
         $("#nationalFuelMixSortingStatus").html(status);
         $("#resetNationalFuelMix").css("visibility", "visible");
@@ -951,17 +984,17 @@ export default {
       userSelection.sortedFuel = "";
       self.$parent.reset();
       self.$parent.show(self.$parent.selectedRegion);
-    },
+    }
   },
   watch: {
-    selectedRegion: function () {
+    selectedRegion: function() {
       this.clear();
       this.sort(this.sortState, this.selectedPollutantAll);
       this.display(this.orientation);
       this.show(this.subregionData);
       this.showSelection(this.selectedPollutantAll);
     },
-    orientation: function (o) {
+    orientation: function(o) {
       userSelection.data.emissionRatesOrientation = o;
       this.clear();
       this.initialize(
@@ -971,15 +1004,15 @@ export default {
       );
       this.display(this.orientation);
     },
-    currentMap: function (m) {
+    currentMap: function(m) {
       userSelection.currentMap = m;
     },
     "$root.$i18n.locale": {
       deep: true,
       handler() {
         this.update();
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>

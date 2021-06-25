@@ -61,10 +61,10 @@ export default {
       projection: {},
       path: {},
       containerHeight: 0,
-      subregionData: [],
+      subregionData: []
     };
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     this.orientation = userSelection.data.emissionRatesOrientation;
     this.initialize(600, 300, "#emissionRatesHeatMap");
@@ -72,13 +72,13 @@ export default {
     this.display(this.$parent.selectedPollutantAll, this.orientation);
   },
   methods: {
-    initialize: function (width, height, domElement) {
+    initialize: function(width, height, domElement) {
       this.width = width;
       this.height = height;
       this.domElement = domElement;
       this.subregionData = allSubregions.data;
     },
-    createProjection: function () {
+    createProjection: function() {
       this.projection = d3.geo
         .albersUsa()
         .translate([this.width / 2, this.height / 2])
@@ -86,17 +86,21 @@ export default {
       // Define path generator
       this.path = d3.geo.path().projection(this.projection);
     },
-    clear: function () {
+    clear: function() {
       d3.selectAll("#emissionRatesHeatMap svg").remove();
     },
-    hide: function () {
-      $(this.domElement).parent().hide();
+    hide: function() {
+      $(this.domElement)
+        .parent()
+        .hide();
     },
-    show: function () {
-      $(this.domElement).parent().show();
+    show: function() {
+      $(this.domElement)
+        .parent()
+        .show();
       $(window).trigger("resize");
     },
-    display: function (emissionRate, orientation) {
+    display: function(emissionRate, orientation) {
       var _this = this;
 
       var svg = d3
@@ -112,14 +116,14 @@ export default {
       var aspect = _this.width / _this.height;
 
       $(window)
-        .on("resize", function () {
+        .on("resize", function() {
           var targetWidth = $("#main-charts").width();
           svg.attr("width", targetWidth);
           svg.attr("height", Math.round(targetWidth / aspect));
         })
         .trigger("resize");
 
-      var max = d3.max(this.subregionData, function (d) {
+      var max = d3.max(this.subregionData, function(d) {
         return d.properties.emissionFactor[emissionRate].value;
       });
 
@@ -151,7 +155,7 @@ export default {
         .attr("y", 20)
         .attr("x", 20)
         .append("tspan")
-        .text(function () {
+        .text(function() {
           if (emissionRate == "co2EmissionRate") {
             pollutantLabelTooltip = "carbon dioxide";
             return "CO";
@@ -165,7 +169,7 @@ export default {
         })
         .append("tspan")
         .attr("baseline-shift", "sub")
-        .text(function () {
+        .text(function() {
           if (emissionRate == "co2EmissionRate") {
             return "2";
           } else if (emissionRate == "so2EmissionRate") {
@@ -225,7 +229,7 @@ export default {
           .axis()
           .scale(xLeg)
           .orient("right")
-          .tickFormat(function (d) {
+          .tickFormat(function(d) {
             if (emissionRate !== "co2EmissionRate") {
               return d3.format(".2n")(d);
             } else {
@@ -283,13 +287,16 @@ export default {
           .text("(lbs/MWh)");
 
         // Create tick marks
-        var xLeg = d3.scale.linear().domain(color.domain()).range([0, 370]);
+        var xLeg = d3.scale
+          .linear()
+          .domain(color.domain())
+          .range([0, 370]);
 
         var axisLeg = d3.svg
           .axis()
           .scale(xLeg)
           .orient("bottom")
-          .tickFormat(function (d) {
+          .tickFormat(function(d) {
             if (emissionRate !== "co2EmissionRate") {
               return d3.format(".2n")(d);
             } else {
@@ -322,17 +329,17 @@ export default {
         .enter()
         .append("g")
         .attr("class", "emissionRateMapTooltip")
-        .attr("title", function (d) {
+        .attr("title", function(d) {
           return _this.$t("tooltip.text", {
             subregionName: d.properties.fullName,
             pollutant: pollutantLabelTooltip,
-            rate: d.properties.emissionFactor[emissionRate].display,
+            rate: d.properties.emissionFactor[emissionRate].display
           });
         });
 
       container
         .append("path")
-        .attr("class", function (d) {
+        .attr("class", function(d) {
           if (d.properties.hasOwnProperty("STATE")) {
             return "state";
           } else {
@@ -340,7 +347,7 @@ export default {
           }
         })
         .attr("d", _this.path)
-        .style("stroke", function (d) {
+        .style("stroke", function(d) {
           if (d.properties.hasOwnProperty("STATE")) {
             return "#a9a9a9";
           } else {
@@ -348,7 +355,7 @@ export default {
           }
         })
         .style("stroke-width", "1")
-        .style("fill", function (d) {
+        .style("fill", function(d) {
           // Get data value
           var value = d.properties.emissionFactor[emissionRate].value;
           if (value) {
@@ -368,7 +375,7 @@ export default {
         addLogoBottom(this.svgGradient, 30, _this.containerHeight);
       }
       addTooltip(".emissionRateMapTooltip");
-    },
+    }
   },
   watch: {
     "$root.$i18n.locale": {
@@ -378,9 +385,8 @@ export default {
         this.initialize(600, 300, "#emissionRatesHeatMap");
         this.createProjection();
         this.display(this.$parent.selectedPollutantAll, this.orientation);
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
-

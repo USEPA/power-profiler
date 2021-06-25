@@ -43,11 +43,11 @@ import AppDescription from "../AppDescription.vue";
 
 export default {
   components: {
-    appDescription: AppDescription,
+    appDescription: AppDescription
   },
-  mounted: function () {
+  mounted: function() {
     document.getElementById("more-info-ok").focus();
     $("#appDescription").show();
-  },
+  }
 };
 </script>

@@ -137,8 +137,8 @@ import subregionSelection from "./SubregionSelection.vue";
 
 export default {
   components: {
-    subregionSelection: subregionSelection,
-  },
+    subregionSelection: subregionSelection
+  }
 };
 </script>
 <style>

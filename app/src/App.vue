@@ -15,9 +15,7 @@
 <template>
   <div>
     <div class="locale-changer">
-      <a v-on:click="toggleLang" href="javascript:void(0)"
-        >{{langLink}}</a
-      >
+      <a v-on:click="toggleLang" href="javascript:void(0)">{{ langLink }}</a>
     </div>
     <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
@@ -78,7 +76,7 @@ export default {
     calculatorResults: calculatorResults,
     appDescription: AppDescription,
     printReport: printReport,
-    mainPrintReport: mainPrintReport,
+    mainPrintReport: mainPrintReport
   },
   data() {
     return {
@@ -107,11 +105,11 @@ export default {
       this.$root.$i18n.locale = newLang;
     }
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     var emissionRatePollutantId;
 
-    window.addEventListener("beforeprint", function (event) {
+    window.addEventListener("beforeprint", function(event) {
       if (self.$route.name == "subregion") {
         $("#print-map").html("");
         $("#print-fuel-mix").html("");
@@ -124,7 +122,7 @@ export default {
         $("#print-fuel-mix svg").css({
           marginTop: "0",
           height: "480px",
-          width: "347px",
+          width: "347px"
         });
         $("#print-emission-rates").append("<h3>Emission Rates</h3>");
         $("#print-emission-rates").append($("#emRatesDescription").clone());
@@ -169,13 +167,13 @@ export default {
           $("#nationalEmissionRateGraph").clone()
         );
         $("#print-main-emission-rates > #nationalEmissionRateGraph > svg").css({
-          display: "inline-block",
+          display: "inline-block"
         });
         $("#printReport").hide();
         self.showMainReport = true;
       }
     });
-    window.addEventListener("afterprint", function (event) {
+    window.addEventListener("afterprint", function(event) {
       self.showReport = false;
       self.showMainReport = false;
     });
@@ -191,11 +189,11 @@ export default {
     if (this.$route.name == "home") this.showMain = true;
   },
   watch: {
-    $route: function (to, from) {
+    $route: function(to, from) {
       if (to.name == "home") this.showMain = true;
       $("#result").hide();
-    },
-  },
+    }
+  }
 };
 </script>
 <style>

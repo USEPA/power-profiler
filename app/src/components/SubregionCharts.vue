@@ -150,34 +150,34 @@ export default {
   components: {
     subregionFuelMixChart: subregionFuelMixChart,
     subregionEmissionRateChart: subregionEmissionRateChart,
-    emissionsCalculator: emissionsCalculator,
+    emissionsCalculator: emissionsCalculator
   },
   data() {
     return {
       subregion: {},
-      dataLoaded: false,
+      dataLoaded: false
     };
   },
-  mounted: function () {
+  mounted: function() {
     this.subregion = selectedSubregion.data;
     this.dataLoaded = true;
     this.$root.$children[0].subregionSelected = true;
     this.$root.$children[0].showMain = false;
   },
   watch: {
-    $route: function (to, from) {
+    $route: function(to, from) {
       var self = this;
       if (to !== from) {
         this.subregion = selectedSubregion.data;
         this.$children[1].update();
         this.$children[2].update();
       }
-    },
+    }
   },
-  beforeCreate: function () {
+  beforeCreate: function() {
     var self = this;
     var subName = this.$router.history.current.params.subregion;
-    var subregion = allSubregions.data.filter(function (d) {
+    var subregion = allSubregions.data.filter(function(d) {
       return d.properties.name == subName;
     });
     if (subregion.length > 0) {
@@ -189,6 +189,6 @@ export default {
       this.dataLoaded = false;
       self.$router.push("/");
     }
-  },
+  }
 };
 </script>

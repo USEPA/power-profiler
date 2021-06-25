@@ -1,6 +1,6 @@
 export const nationalFeature = {
-    data: {},
-    update(newObject) {
-      this.data = newObject;
-    },
-  };
+  data: {},
+  update(newObject) {
+    this.data = newObject;
+  }
+};

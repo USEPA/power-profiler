@@ -42,8 +42,8 @@
 </template>
 <script>
 export default {
-  mounted: function () {
+  mounted: function() {
     document.getElementById("megawatt-ok").focus();
-  },
+  }
 };
 </script>

@@ -131,8 +131,8 @@
 </template>
 <script>
 export default {
-  mounted: function () {
+  mounted: function() {
     document.getElementById("resources-ok").focus();
-  },
+  }
 };
 </script>
