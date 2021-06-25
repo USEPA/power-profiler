@@ -1,7 +1,7 @@
 export const userSelection = {
-    data: {
-        fuelMixOrientation: "",
-        emissionRatesOrientation: "",
-        sortState: ""
-    }
-  };
+  data: {
+    fuelMixOrientation: "",
+    emissionRatesOrientation: "",
+    sortState: ""
+  }
+};

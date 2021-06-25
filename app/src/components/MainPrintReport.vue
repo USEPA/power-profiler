@@ -1,12 +1,11 @@
 <template>
   <div id="printReportMain">
     <div>
-      <div id="print-main-map">
-      </div>
+      <div id="print-main-map"></div>
       <div class="page-break" id="print-main-fuel-mix"></div>
       <div class="page-break" id="print-main-emission-rates"></div>
     </div>
-  </div>  
+  </div>
 </template>
 <style>
 #printReportMain {
@@ -17,5 +16,3 @@
   page-break-after: always;
 }
 </style>
-
-

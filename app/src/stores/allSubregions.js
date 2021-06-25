@@ -1,6 +1,6 @@
 export const allSubregions = {
-    data: [],
-    update(newList) {
-      this.data = newList;
-    },
-  };
+  data: [],
+  update(newList) {
+    this.data = newList;
+  }
+};

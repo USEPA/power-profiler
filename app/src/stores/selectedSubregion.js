@@ -1,6 +1,6 @@
 export const selectedSubregion = {
-    data: {},
-    update(newObject) {
-      this.data = newObject;
-    },
-  };
+  data: {},
+  update(newObject) {
+    this.data = newObject;
+  }
+};
