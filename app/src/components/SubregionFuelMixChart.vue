@@ -7,7 +7,7 @@
 import {
   addLogoBottom,
   formatFuelLabel,
-  checkNational,
+  checkNational
 } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
@@ -16,21 +16,21 @@ import { addTooltip } from "../helpers/Tooltip";
 export default {
   data() {
     return {
-      graphData: [],
+      graphData: []
     };
   },
-  mounted: function () {
+  mounted: function() {
     var self = this;
     this.graphData.push(nationalFeature.data[0]);
     this.graphData.push(selectedSubregion.data);
     this.display(this.graphData);
 
-    $(window).on("resize", function () {
+    $(window).on("resize", function() {
       self.update();
     });
   },
   methods: {
-    display: function (data) {
+    display: function(data) {
       var _this = this;
       var domElement = "#fuelMix";
       var w = $(domElement).width();
@@ -46,7 +46,7 @@ export default {
         "#fdbf6f",
         "#fb9a99",
         "#cab2d6",
-        "#8c510a",
+        "#8c510a"
       ];
       var fuels = [
         "gas",
@@ -59,7 +59,7 @@ export default {
         "oil",
         "geothermal",
         "otherFossilFuel",
-        "otherUnknownFuel",
+        "otherUnknownFuel"
       ];
 
       var margin = { top: 40, right: 30, bottom: 180, left: 50 },
@@ -70,15 +70,22 @@ export default {
 
       var y = d3.scale.linear().rangeRound([height, 0]);
 
-      var color = d3.scale.ordinal().range(allFuelsColorRange).domain(fuels);
+      var color = d3.scale
+        .ordinal()
+        .range(allFuelsColorRange)
+        .domain(fuels);
 
-      var xAxis = d3.svg.axis().scale(x).outerTickSize(0).orient("bottom");
+      var xAxis = d3.svg
+        .axis()
+        .scale(x)
+        .outerTickSize(0)
+        .orient("bottom");
 
       var yAxis = d3.svg
         .axis()
         .scale(y)
         .orient("left")
-        .tickFormat(function (d) {
+        .tickFormat(function(d) {
           return d + "%";
         });
 
@@ -92,13 +99,13 @@ export default {
 
       for (var i = 0; i < data.length; i += 1) {
         var y0 = 0;
-        data[i].properties.fuels = color.domain().map(function (name) {
+        data[i].properties.fuels = color.domain().map(function(name) {
           var obj = {
             subregion: data[i].properties.name,
             name: name,
             val: data[i].properties.fuelMix[name],
             y0: y0,
-            y1: +data[i].properties.fuelMix[name],
+            y1: +data[i].properties.fuelMix[name]
           };
           y0 += +data[i].properties.fuelMix[name];
           obj.y1 = y0;
@@ -107,7 +114,7 @@ export default {
       }
 
       x.domain(
-        data.map(function (d) {
+        data.map(function(d) {
           return d.properties.name;
         })
       );
@@ -121,7 +128,10 @@ export default {
         .selectAll("text")
         .style("text-anchor", "middle");
 
-      svg.append("g").attr("class", "y axis").call(yAxis);
+      svg
+        .append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
 
       svg
         .append("text")
@@ -151,20 +161,20 @@ export default {
 
       subregion
         .selectAll("rect")
-        .data(function (d) {
+        .data(function(d) {
           return d.properties.fuels;
         })
         .enter()
         .append("rect")
-        .attr("x", function (d) {
+        .attr("x", function(d) {
           return x(d.subregion);
         })
         .attr("class", "subFuelMixTooltip")
         .attr("width", x.rangeBand())
-        .attr("y", function (d) {
+        .attr("y", function(d) {
           return y(d.y1);
         })
-        .attr("title", function (fuel) {
+        .attr("title", function(fuel) {
           return (
             formatFuelLabel(fuel.name) +
             " accounts for " +
@@ -173,10 +183,10 @@ export default {
             checkNational(fuel.subregion)
           );
         })
-        .attr("height", function (d) {
+        .attr("height", function(d) {
           return y(d.y0) - y(d.y1);
         })
-        .style("fill", function (d) {
+        .style("fill", function(d) {
           return color(d.name);
         });
 
@@ -186,7 +196,7 @@ export default {
         .enter()
         .append("g")
         .attr("class", "legendBottomSub")
-        .attr("transform", function (d, i) {
+        .attr("transform", function(d, i) {
           var x = -45;
           // First col
           if (i === 0) {
@@ -230,7 +240,7 @@ export default {
         .append("text")
         .attr("x", 20)
         .attr("y", 10)
-        .text(function (d, i) {
+        .text(function(d, i) {
           if (
             d != "otherFossilFuel" &&
             d != "otherUnknownFuel" &&
@@ -241,7 +251,7 @@ export default {
             );
           }
         })
-        .attr("class", function (d) {
+        .attr("class", function(d) {
           if (
             d == "otherFossilFuel" ||
             d == "otherUnknownFuel" ||
@@ -258,7 +268,7 @@ export default {
 
       var sarr;
 
-      lgLabels.append("tspan").text(function (d) {
+      lgLabels.append("tspan").text(function(d) {
         sarr = d.match(/[A-Z]*[^A-Z]+/g);
         if (d == "geothermal") {
           return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
@@ -275,12 +285,12 @@ export default {
         .append("tspan")
         .attr("x", 20)
         .attr("y", 25)
-        .attr("class", function (d) {
+        .attr("class", function(d) {
           if (d == "otherUnknownFuel") {
             return "unknown";
           }
         })
-        .text(function (d) {
+        .text(function(d) {
           if (d == "geothermal") {
             return "(" + data[1].properties.fuelMix[d] + "%)";
           } else if (d == "otherFossilFuel") {
@@ -295,7 +305,7 @@ export default {
         .append("tspan")
         .attr("x", 20)
         .attr("y", 40)
-        .text(function (d) {
+        .text(function(d) {
           return "Fuel (" + data[1].properties.fuelMix[d] + "%)";
         });
 
@@ -326,8 +336,8 @@ export default {
       this.graphData.push(selectedSubregion.data);
       d3.selectAll("#fuelMix svg").remove();
       this.display(this.graphData);
-    },
-  },
+    }
+  }
 };
 </script>
 

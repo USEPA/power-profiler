@@ -5,7 +5,9 @@
         <strong>Select:</strong>
       </p>
       <div id="pollutantSelectSub">
-        <button id="defaultPollutantSub" value="co2EmissionRate">CO<sub>2</sub></button>
+        <button id="defaultPollutantSub" value="co2EmissionRate">
+          CO<sub>2</sub>
+        </button>
         <button value="so2EmissionRate">SO<sub>2</sub></button>
         <button value="noxEmissionRate">NO<sub>X</sub></button>
       </div>
@@ -20,7 +22,7 @@ import {
 } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
-import { addTooltip } from '../helpers/Tooltip';
+import { addTooltip } from "../helpers/Tooltip";
 
 export default {
   data() {
@@ -30,26 +32,29 @@ export default {
     };
   },
   mounted: function() {
-    var self = this
+    var self = this;
     this.data = [nationalFeature.data[0], selectedSubregion.data];
     this.display(this.data);
 
-    $(window).on('resize', function(){
+    $(window).on("resize", function() {
       d3.selectAll("#emissionRate svg").remove();
-      self.update()
-    })
-
-    $("#pollutantSelectSub button").on("click", function(e){
-        $(this).css({"background-color": "#2B7D3B"});
-        $(this).siblings().css({"background-color":"#0071bc"});
-        self.selectedPollutantSub = $(this).val();
-
-        $("#sub" + self.selectedPollutantSub).show();
-        $("#sub" + self.selectedPollutantSub).siblings("svg").hide();
+      self.update();
     });
 
-    $("#defaultPollutantSub").trigger("click")
+    $("#pollutantSelectSub button").on("click", function(e) {
+      $(this).css({ "background-color": "#2B7D3B" });
+      $(this)
+        .siblings()
+        .css({ "background-color": "#0071bc" });
+      self.selectedPollutantSub = $(this).val();
 
+      $("#sub" + self.selectedPollutantSub).show();
+      $("#sub" + self.selectedPollutantSub)
+        .siblings("svg")
+        .hide();
+    });
+
+    $("#defaultPollutantSub").trigger("click");
   },
   methods: {
     display: function(data) {
@@ -121,36 +126,39 @@ export default {
           })
         ]);
 
-        svg.append("g")
+        svg
+          .append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + height + ")")
           .call(xAxis);
 
-        svg.append("g")
+        svg
+          .append("g")
           .attr("class", "y axis")
           .call(yAxis);
 
-        var pollutantLabelTooltip = ""
-        svg.append("text")
+        var pollutantLabelTooltip = "";
+        svg
+          .append("text")
           .attr("y", -30)
           .attr("dy", "0.71em")
           .attr("text-anchor", "end")
           .append("tspan")
           .text(function(d) {
             if (selectedPollutantSub == "co2EmissionRate") {
-              pollutantLabelTooltip = "carbon dioxide"
+              pollutantLabelTooltip = "carbon dioxide";
               return "CO";
             } else if (selectedPollutantSub == "so2EmissionRate") {
-              pollutantLabelTooltip = "sulfur dioxide"
+              pollutantLabelTooltip = "sulfur dioxide";
               return "SO";
             } else if (selectedPollutantSub == "noxEmissionRate") {
-              pollutantLabelTooltip = "nitrogen oxides"
+              pollutantLabelTooltip = "nitrogen oxides";
               return "NO";
             }
           })
           .append("tspan")
-          .attr("baseline-shift","-.25em")
-          .attr("font-size","76.4706%")
+          .attr("baseline-shift", "-.25em")
+          .attr("font-size", "76.4706%")
           .text(function(d) {
             if (selectedPollutantSub == "co2EmissionRate") {
               return "2";
@@ -161,21 +169,31 @@ export default {
             }
           });
 
-        svg.append("text")
+        svg
+          .append("text")
           .attr("y", -50)
           .attr("x", -(height / 2))
           .attr("transform", "rotate(-90)")
           .text("(lbs/MWh)");
 
-        var container = svg.selectAll(".container")
+        var container = svg
+          .selectAll(".container")
           .data(data)
-          .enter().append("g")
-          .attr("class","subEmissionRateTooltip")
-          .attr("title", function(d){
-            return "Average " + pollutantLabelTooltip + " rate: " + d.properties.emissionFactor[parameters[i]].display + " lbs/MWh"
-          })
+          .enter()
+          .append("g")
+          .attr("class", "subEmissionRateTooltip")
+          .attr("title", function(d) {
+            return (
+              "Average " +
+              pollutantLabelTooltip +
+              " rate: " +
+              d.properties.emissionFactor[parameters[i]].display +
+              " lbs/MWh"
+            );
+          });
 
-        container.append("rect")
+        container
+          .append("rect")
           .attr("class", "bar subregionEmissionRate " + parameters[i])
           .attr("fill", function(d) {
             return color(d.properties.name);
@@ -194,7 +212,8 @@ export default {
             );
           });
 
-        svg.selectAll("text.bar")
+        svg
+          .selectAll("text.bar")
           .data(data)
           .enter()
           .append("text")
@@ -214,19 +233,18 @@ export default {
         var baseline = (height + margin.top + margin.bottom) * 0.17;
         addLogoBottom(svg, width - 100, height + baseline);
       }
-      addTooltip(".subEmissionRateTooltip")
-
+      addTooltip(".subEmissionRateTooltip");
     },
     update: function() {
-      var self = this
+      var self = this;
       this.data = [nationalFeature.data[0], selectedSubregion.data];
       d3.selectAll("#emissionRate svg").remove();
       this.display(this.data);
-      $("#pollutantSelectSub button").each(function(){
-        if($(this)[0].value == self.selectedPollutantSub) $(this).trigger("click")
-      })
+      $("#pollutantSelectSub button").each(function() {
+        if ($(this)[0].value == self.selectedPollutantSub)
+          $(this).trigger("click");
+      });
     }
   }
 };
 </script>
-

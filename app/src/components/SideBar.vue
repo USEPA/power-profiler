@@ -2,8 +2,17 @@
   <div class="pane-content">
     <div>
       <p id="intro">
-        Electricity is produced by many different sources of energy, including, but not limited to, wind, solar, nuclear, and fossil fuels. The type and amount of emissions produced depend on how electricity is generated in your region. Type in your zip code (or select a region) to view your power profile.
-        <a class="more-link" href="javascript:void(0)" @click="$parent.showMoreInfo = true">More Info</a>
+        Electricity is produced by many different sources of energy, including,
+        but not limited to, wind, solar, nuclear, and fossil fuels. The type and
+        amount of emissions produced depend on how electricity is generated in
+        your region. Type in your zip code (or select a region) to view your
+        power profile.
+        <a
+          class="more-link"
+          href="javascript:void(0)"
+          @click="$parent.showMoreInfo = true"
+          >More Info</a
+        >
       </p>
     </div>
     <subregionSelection></subregionSelection>
@@ -16,22 +25,27 @@
               href="https://www.epa.gov/egrid/forms/feedback"
               target="_blank"
               aria-label="Opens new window"
-            >How do you like the new Power Profiler site?</a>
+              >How do you like the new Power Profiler site?</a
+            >
           </strong>
         </p>
         <p>
-          Data source: 2019 data from the <a
+          Data source: 2019 data from the
+          <a
             href="https://www.epa.gov/egrid"
             target="_blank"
             aria-label="Opens new window"
-          >Emissions & Generation Resource Integrated Database (eGRID)</a> released February 23, 2021
+            >Emissions & Generation Resource Integrated Database (eGRID)</a
+          >
+          released February 23, 2021
         </p>
         <p>
           Excel version:
           <a
             href="https://www.epa.gov/sites/production/files/2020-11/power_profiler_zipcode_tool.xlsx"
             aria-label="Downloads Excel spreadsheet tool"
-          >Power Profiler Emissions Tool 2019 (XLSX)</a>
+            >Power Profiler Emissions Tool 2019 (XLSX)</a
+          >
           <span class="fileinfo">(3.56M)</span>
         </p>
         <p>
@@ -39,30 +53,37 @@
             href="https://www.epa.gov/egrid/forms/egrid-and-power-profiler-notification"
             target="_blank"
             aria-label="Opens new window"
-          >Sign up for the mailing list</a>
+            >Sign up for the mailing list</a
+          >
         </p>
         <p>
-          <a href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
-             target="_blank"
-             aria-label="Opens new window"
-          >Información relacionada en español</a>
+          <a
+            href="https://espanol.epa.gov/la-energia-y-el-medioambiente/perfilador-de-energia"
+            target="_blank"
+            aria-label="Opens new window"
+            >Información relacionada en español</a
+          >
         </p>
         <p>
           <a
             href="https://www.epa.gov/egrid/power-profiler-methodology"
             target="_blank"
             aria-label="Opens new window"
-          >Power Profiler Methodology</a>
+            >Power Profiler Methodology</a
+          >
         </p>
         <p>
           <a
             href="https://www.epa.gov/sites/production/files/2021-02/egrid2019_summary_tables.xlsx"
             aria-label="Downloads Excel spreadsheet summary tables"
-          >eGRID Summary Tables (XLSX)</a>
+            >eGRID Summary Tables (XLSX)</a
+          >
           <span class="fileinfo">(1 pg, 717 K)</span>
         </p>
         <p>
-          <a href="javascript:void(0)" @click="$parent.showResources = true">Additional Resources</a>
+          <a href="javascript:void(0)" @click="$parent.showResources = true"
+            >Additional Resources</a
+          >
         </p>
       </div>
     </div>
@@ -71,16 +92,14 @@
 <script>
 import subregionSelection from "./SubregionSelection.vue";
 
-
 export default {
   components: {
-    subregionSelection: subregionSelection,
-  },
+    subregionSelection: subregionSelection
+  }
 };
 </script>
 <style>
 #intro {
   padding: 1.3529em 1em;
 }
-
 </style>
