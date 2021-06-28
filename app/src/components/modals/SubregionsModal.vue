@@ -3,7 +3,7 @@
     "en": {
         "modalHeader": "eGRID Subregions",
         "modalBody": {
-            "content": "The 26 eGRID subregions in the US are defined by EPA using data from the Energy Information Administration (EIA) and the North American Electric Reliability Corporation (NERC). The subregions are defined to limit the amount of imports and exports across regions in order to best represent the electricity used in each of the subregions. More information can be found in section 3.4.2 of the {0}.",
+            "content": "The 27 eGRID subregions in the US are defined by EPA using data from the Energy Information Administration (EIA) and the North American Electric Reliability Corporation (NERC). The subregions are defined to limit the amount of imports and exports across regions in order to best represent the electricity used in each of the subregions. More information can be found in section 3.4.2 of the {0}.",
             "eGRIDTSDLink": "eGRID Technical Support Document"
         },
         "okButton": "OK",
@@ -14,7 +14,7 @@
     "es": {
         "modalHeader": "Subregiones de eGRID",
         "modalBody": {
-            "content": "Las 26 subregiones de eGRID en los Estados Unidos están definidas por la EPA utilizando los datos de la Administración de Información Energética (EIA, por sus siglas en inglés) y la Corporación de Confiabilidad Eléctrica de Norte America (NERC, por sus siglas en inglés). Las subregiones se han establecido para limitar la cantidad de importaciones y exportaciones entre regiones con el fin de adecuadamente representar la cantidad de electricidad utilizada en cada una de estas subregiones. Puede encontrar más información sobre este tema en la sección 3.4.2 del {0}.",
+            "content": "Las 27 subregiones de eGRID en los Estados Unidos están definidas por la EPA utilizando los datos de la Administración de Información Energética (EIA, por sus siglas en inglés) y la Corporación de Confiabilidad Eléctrica de Norte America (NERC, por sus siglas en inglés). Las subregiones se han establecido para limitar la cantidad de importaciones y exportaciones entre regiones con el fin de adecuadamente representar la cantidad de electricidad utilizada en cada una de estas subregiones. Puede encontrar más información sobre este tema en la sección 3.4.2 del {0}.",
             "eGRIDTSDLink": "Documento de Apoyo Técnico de eGRID"
         },
         "okButton": "Ir",

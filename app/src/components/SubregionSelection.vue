@@ -88,6 +88,7 @@
             <option value="NYCW">NYCW (NPCC NYC/Westchester)</option>
             <option value="NYLI">NYLI (NPCC Long Island)</option>
             <option value="NYUP">NYUP (NPCC Upstate NY)</option>
+            <option value="PRMS">PRMS (Puerto Rico Miscellaneous)</option>
             <option value="RFCE">RFCE (RFC East)</option>
             <option value="RFCM">RFCM (RFC Michigan)</option>
             <option value="RFCW">RFCW (RFC West)</option>

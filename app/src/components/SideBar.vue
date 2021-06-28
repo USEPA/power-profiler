@@ -13,8 +13,8 @@
       "title": "Additional Information",
       "feedback": "How do you like the new Power Profiler site?",
       "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Data source: 2018 data from the {0} released January 28, 2020",
-      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2018 (XLSX)",
+      "egridDataSource": "Data source: 2019 data from the {0} released February 23, 2021",
+      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2019 (XLSX)",
       "powerProfilerExcelVersion": "Excel version: {0}",
       "mailingList": "Sign up for the mailing list",
       "methodology": "Power Profiler Methodology",
@@ -35,8 +35,8 @@
       "title": "Información Adicional",
       "feedback": "¿Qué le parece el nuevo sitio del Analizador de consumo de energía?",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2018 del {0} actualizado el 01/28/2020",
-      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2018 (XLSX)",
+      "egridDataSource": "Fuente de datos: Datos de 2019 del {0} actualizado el 02/23/2021",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2019 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
       "mailingList": "Suscríbase a la lista de distribución",
       "methodology": "Metodología del Analizador de consumo de energía",
@@ -66,7 +66,7 @@
         <p>
           <strong>
             <a
-              href="https://epa.gov/energy/forms/egrid-and-power-profiler-feedback-and-questions"
+              href="https://www.epa.gov/egrid/forms/feedback"
               target="_blank"
               v-bind:aria-label="$t('ariaLabels.opensNewWin')"
               >{{ $t("additionalInfo.feedback") }}</a
@@ -93,7 +93,7 @@
           for="additionalInfo.powerProfilerExcelLink"
         >
           <a
-            href="https://epa.gov/sites/production/files/2020-03/power_profiler_zipcode_tool_2018_3_09_20._v9.xlsx"
+            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
             v-bind:aria-label="$t('ariaLabels.downloadsTool')"
             >{{ $t("additionalInfo.powerProfilerExcelLink") }}</a
           >
@@ -101,7 +101,7 @@
         </i18n>
         <p>
           <a
-            href="https://epa.gov/energy/forms/egrid-and-power-profiler-notification"
+            href="https://www.epa.gov/egrid/forms/egrid-and-power-profiler-notification"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
             >{{ $t("additionalInfo.mailingList") }}</a
@@ -109,7 +109,7 @@
         </p>
         <p>
           <a
-            href="https://epa.gov/energy/power-profiler-methodology"
+            href="https://www.epa.gov/egrid/power-profiler-methodology"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
             >{{ $t("additionalInfo.methodology") }}</a
@@ -117,11 +117,11 @@
         </p>
         <p>
           <a
-            href="https://www.epa.gov/sites/production/files/2020-01/egrid2018_summary_tables.xlsx"
+            href="https://www.epa.gov/sites/production/files/2021-02/egrid2019_summary_tables.xlsx"
             v-bind:aria-label="$t('ariaLabels.downloadsSummary')"
             >{{ $t("additionalInfo.summaryTables") }}</a
           >
-          <span class="fileinfo">(1 pg, 293 K)</span>
+          <span class="fileinfo">(1 pg, 717 K)</span>
         </p>
         <p>
           <a href="javascript:void(0)" @click="$parent.showResources = true">{{

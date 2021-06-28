@@ -84,7 +84,7 @@
         <i18n path="fuelMixBody.text" tag="p">
           <template #eGRIDSubregion>
             <a
-              href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+              href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
               target="_blank"
               >{{ $t("fuelMixBody.eGRIDSubregion") }}</a
             >
@@ -105,7 +105,7 @@
           </template>
           <template #eGRIDSubregion>
             <a
-              href="https://epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+              href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
               target="_blank"
               >{{ $t("emissionRateBody.eGRIDSubregion") }}</a
             >

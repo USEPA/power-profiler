@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { geoAlbersUsaTerritories } from "geo-albers-usa-territories";
 import { env } from "../config/env.js";
 import { allSubregions } from "../stores/allSubregions.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
@@ -38,8 +39,7 @@ export default {
   methods: {
     displayMap: function(elementID, data) {
       var self = this;
-      var projection = d3.geo
-        .albersUsa()
+      var projection = geoAlbersUsaTerritories()
         .translate([this.w / 2, this.h / 2])
         .scale([this.w + 100]);
       var path = d3.geo.path().projection(projection);
@@ -103,7 +103,6 @@ export default {
   fill-opacity: 0.7;
   fill: steelblue;
 }
-
 .map {
   fill-opacity: 0.5;
 }

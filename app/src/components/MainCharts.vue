@@ -93,7 +93,7 @@
       <i18n path="fuelMixBody.text" tag="p">
         <template #eGRIDSubregions>
           <a
-            href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
             target="_blank"
             >{{ $t("fuelMixBody.eGRIDSubregions") }}</a
           >
@@ -184,7 +184,6 @@ export default {
   components: {
     emissionRateChart: emissionRateChart
   },
-
   data() {
     return {
       nationalFeature: {},
@@ -216,24 +215,24 @@ export default {
       ],
       // Colors
       allFuelsColorRange: [
-        "#fdae61",
-        "#313695",
-        "#f46d43",
-        "#74add1",
-        "#abd9e9",
-        "#4575b4",
-        "#ffffbf",
-        "#d73027",
-        "#fee090",
-        "#e0f3f8",
-        "#a50026"
+        "#ff7f00",
+        "#878787",
+        "#6a3d9a",
+        "#1f78b4",
+        "#b2df8a",
+        "#33a02c",
+        "#e31a1c",
+        "#fdbf6f",
+        "#fb9a99",
+        "#cab2d6",
+        "#8c510a"
       ],
       renewableAndNonColors: ["#abdda4", "#d7191c"],
       renewableNonNuclearAndHydroColors: [
-        "#2b83ba",
+        "#1f78b4",
         "#abdda4",
         "#d7191c",
-        "#fdae61"
+        "#6a3d9a"
       ],
       subregions: {},
       sortedFuel: "",

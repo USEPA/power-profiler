@@ -79,7 +79,7 @@
         </template>
         <template #eGRIDSubregions>
           <a
-            href="https://epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
             target="_blank"
             >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
           >

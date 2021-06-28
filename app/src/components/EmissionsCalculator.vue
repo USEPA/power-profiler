@@ -313,7 +313,7 @@ export default {
       gridLoss: {},
       subregionEmissions: {},
       nationalEmissions: {},
-      nationalAverage: 1011,
+      nationalAverage: 877,
       emRatesColors: {
         national: "#2b83ba",
         subregion: "#e66101",
@@ -716,7 +716,7 @@ export default {
           340
         );
       } else {
-        this.nationalAverage = 1011;
+        this.nationalAverage = 877;
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
@@ -913,7 +913,6 @@ export default {
       );
 
       d3.selectAll(".gauge-title").call(textWrap, 20, oR);
-      //        .attr("transform", "translate(0," + -oR + ")");
 
       d3.selectAll(
         "#chart-gauge svg .y.axis path, #resultGraphs svg .axis line"
@@ -934,12 +933,12 @@ export default {
       }
     },
     calculateNationalEmissions: function(emissionFactorValue) {
-      var nationalTotal = 1011 * 12;
+      var nationalTotal = this.nationalAverage * 12;
       var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + 0.0448);
       return res;
     },
     calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
-      var nationalTotal = 1011 * 12;
+      var nationalTotal = this.nationalAverage * 12;
       var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + gridLoss);
       return res;
     },

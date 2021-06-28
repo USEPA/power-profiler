@@ -2,12 +2,7 @@ export { addLogoBottom, textWrap };
 import { env } from "../config/env.js";
 
 function addLogoBottom(svg, width, height) {
-  var a = svg
-    .append("svg:a")
-    .attr(
-      "xlink:href",
-      "https://www.epa.gov/energy/emissions-generation-resource-integrated-database-egrid"
-    );
+  var a = svg.append("svg:a").attr("xlink:href", "https://www.epa.gov/egrid");
 
   a.append("title").text("eGRID Home Page");
 
@@ -34,7 +29,7 @@ function textWrap(text, width, startHeight) {
       lineHeight = 1.1, // ems
       x = txt.attr("x"),
       y = txt.attr("y"),
-      dy = 0, //parseFloat(text.attr("dy")),
+      dy = 0,
       tspan = txt
         .text(null)
         .append("tspan")

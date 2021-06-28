@@ -1,5 +1,7 @@
 import pandas as pd
 import json
+from pathlib import Path
+
 # Load in Subregion data.
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
 snfm = pd.read_csv("./data/csv/subregion_fuel_mix.csv",delimiter=',',thousands=',')
@@ -20,17 +22,17 @@ renewables = {
     "pctHydro":"Percent Hydro net generation"
 }
 # Round values to the tenths for emission rates. Display a comma for thousands.
-sn['SRNOXRTA'] = sn['SRNOXRTA'].round(1)
-sn['SRSO2RTA'] = sn['SRSO2RTA'].round(1)
-sn['SRCO2RTA'] = sn['SRCO2RTA'].round(1)
-sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(1).astype('str')
-sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(1).astype('str')
+sn['SRNOXRTA'] = sn['SRNOXRTA'].round(3)
+sn['SRSO2RTA'] = sn['SRSO2RTA'].round(3)
+sn['SRCO2RTA'] = sn['SRCO2RTA'].round(3)
+sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(3).astype('str')
+sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(3).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
-n['USNOXRTA'] = n['USNOXRTA'].round(1)
-n['USSO2RTA'] = n['USSO2RTA'].round(1)
-n['USCO2RTA'] = n['USCO2RTA'].round(1)
-n['USNOXRTA_STR'] = n['USNOXRTA'].round(1).astype('str')
-n['USSO2RTA_STR'] = n['USSO2RTA'].round(1).astype('str')
+n['USNOXRTA'] = n['USNOXRTA'].round(3)
+n['USSO2RTA'] = n['USSO2RTA'].round(3)
+n['USCO2RTA'] = n['USCO2RTA'].round(3)
+n['USNOXRTA_STR'] = n['USNOXRTA'].round(3).astype('str')
+n['USSO2RTA_STR'] = n['USSO2RTA'].round(3).astype('str')
 n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
 # Set up lists for checking whether subregion is in one of the interconnect power grids.
 alaska = ['AKGD','AKMS']
@@ -38,8 +40,9 @@ hawaii = ['HIMS','HIOA']
 ercot = ['ERCT']
 eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE','NYCW','NYLI','NYUP','NEWE','SPSO','SPNO','MROW']
 western = ['CAMX','NWPP','AZNM','RMPA']
+pr = ['PRMS']
 # Read in Subregions json.
-with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
+with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
     data = json.load(read_file)
     for feature in data["features"]:
         # Add eGRID data values.
@@ -87,7 +90,7 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Hawaii']['GGRSLOSS_STR'].values[0],
                         "value" : gl[gl['REGION'] == 'Hawaii']['GGRSLOSS'].values[0]
-                    } 
+                    }
                 elif feature["properties"]["name"] in eastern:
                     feature["properties"]["gridLoss"] = {
                         "display": gl[gl['REGION'] == 'Eastern']['GGRSLOSS_STR'].values[0],
@@ -103,7 +106,13 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
                         "display": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS_STR'].values[0],
                         "value": gl[gl['REGION'] == 'ERCOT']['GGRSLOSS'].values[0]
                     }
-            
+                elif feature["properties"]["name"] in pr:
+                    feature["properties"]["gridLoss"] = {
+                        #Use the national values for the GGL in Puerto Rico
+                        "display": gl[gl['REGION'] == 'U.S.']['GGRSLOSS_STR'].values[0],
+                        "value": gl[gl['REGION'] == 'U.S.']['GGRSLOSS'].values[0]
+                    }
+
             # Add other fuel mix categories
             for index, row in snfm.iterrows():
                 if "name" in feature["properties"]:
@@ -126,7 +135,7 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
                             "nuclear": row[renewables["pctNuclear"]],
                             "hydro": row[renewables["pctHydro"]]
                         }
-            
+
     # Add national feature.
     national = {
         "type":"Feature",
@@ -174,5 +183,6 @@ with open("./data/shape/egrid_2016_subregions_states.json", "r") as read_file:
 
     data["features"].insert(52,national)
 
+Path("./result").mkdir(exist_ok=True)
 with open('./result/subregion.json', 'w') as outfile:
     json.dump(data, outfile)

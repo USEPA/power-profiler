@@ -14,8 +14,8 @@
   },
   "author": "Joe Kleinschmidt",
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/preset-env": "^7.8.7",
+    "@babel/core": "7.9.0",
+    "@babel/preset-env": "7.9.0",
     "@kazupon/vue-i18n-loader": "^0.5.0",
     "babel-loader": "^8.0.6",
     "copy-webpack-plugin": "^5.1.1",
@@ -29,10 +29,12 @@
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "vue-i18n": "^8.21.0",
+    "d3-geo": "^3.0.1",
+    "geo-albers-usa-territories": "^0.1.0",
     "vue-router": "^3.1.6",
     "webpack-merge": "^4.2.2"
   },

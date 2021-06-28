@@ -86,17 +86,17 @@ export default {
       var w = $(domElement).width();
       var h = 500;
       var allFuelsColorRange = [
-        "#fdae61",
-        "#313695",
-        "#f46d43",
-        "#74add1",
-        "#abd9e9",
-        "#4575b4",
-        "#ffffbf",
-        "#d73027",
-        "#fee090",
-        "#e0f3f8",
-        "#a50026"
+        "#ff7f00",
+        "#878787",
+        "#6a3d9a",
+        "#1f78b4",
+        "#b2df8a",
+        "#33a02c",
+        "#e31a1c",
+        "#fdbf6f",
+        "#fb9a99",
+        "#cab2d6",
+        "#8c510a"
       ];
       var fuels = [
         "gas",

@@ -28,7 +28,7 @@
     <i18n path="description.text" tag="p">
       <template #eGRIDSubregion>
         <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png"
+          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
           target="_blank"
           >{{ $t("description.eGRIDSubregion") }}</a
         >
@@ -50,6 +50,7 @@ import { addSubregionLabels } from "../helpers/MapHelpers.js";
 import { allSubregions } from "../stores/allSubregions.js";
 import { userSelection } from "../stores/userSelection.js";
 import { addTooltip } from "../helpers/Tooltip";
+import { geoAlbersUsaTerritories } from "geo-albers-usa-territories";
 
 export default {
   data() {
@@ -79,8 +80,7 @@ export default {
       this.subregionData = allSubregions.data;
     },
     createProjection: function() {
-      this.projection = d3.geo
-        .albersUsa()
+      this.projection = geoAlbersUsaTerritories()
         .translate([this.width / 2, this.height / 2])
         .scale([this.width + 100]);
       // Define path generator
