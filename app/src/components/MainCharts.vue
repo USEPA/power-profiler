@@ -675,13 +675,6 @@ export default {
 
       var x0 = x.domain(sortedSubregionData).copy();
       d3.selectAll("." + fuel.chart)
-        .style("opacity", function(d) {
-          if (d.name == fuel.name) {
-            return 1;
-          } else {
-            return 0.5;
-          }
-        })
         .attr("y", function(d) {
           if (d.name == fuel.name) {
             d3.select(this).attr("class", fuel.chart + " selected");
