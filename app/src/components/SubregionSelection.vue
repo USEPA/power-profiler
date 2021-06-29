@@ -6,7 +6,9 @@
     "placeHolder": "Zip code",
     "goButton": "Go",
     "moreInfo": "More Information",
-    "egridSubregions": "eGRID Subregions"
+    "egridSubregions": "eGRID Subregions",
+    "selectUtility": "Select your utility",
+    "invalidZip": "Please enter a valid zip code."
   },
   "es": {
     "title": "Analizador de consumo de energía",
@@ -14,7 +16,9 @@
     "placeHolder": "Código postal en EE. UU.",
     "goButton": "Ir",
     "moreInfo": "Más Información",
-    "egridSubregions": "Subregiones de eGRID"
+    "egridSubregions": "Subregiones de eGRID",
+    "selectUtility": "Seleccione su empresa de electricidad",
+    "invalidZip": "Por favor ingrese un código postal válido."
   }
 }
 </i18n>
@@ -32,7 +36,7 @@
               class="form-text"
               id="userLocation"
               maxlength="128"
-              size="60"
+              size="20"
               type="number"
               v-bind:placeholder="$t('placeHolder')"
               required
@@ -154,7 +158,7 @@ export default {
               self.utilArr = [];
               var subArr = [];
               var utilitySelectHTML = [
-                "<option disabled selected value>Select your utility</option>"
+                `<option disabled selected value>${self.$t("selectUtility")}</option>`
               ];
               for (var i = 0; i < data.length; i += 1) {
                 self.utilArr.push(data[i]);
@@ -181,13 +185,13 @@ export default {
               }
             } else {
               $("#errorMessage").show();
-              $("#errorMessage").html("<p>Please enter a valid zip code.</p>");
+              $("#errorMessage").html(`<p>${self.$t("invalidZip")}</p>`);
             }
           }
         );
       } else {
         $("#errorMessage").show();
-        $("#errorMessage").html("<p>Please enter a valid zip code.</p>");
+        $("#errorMessage").html(`<p>${self.$t("invalidZip")}</p>`);
       }
     },
     handleSelectChange: function(e) {
@@ -222,7 +226,7 @@ export default {
   color: white;
   position: relative;
   margin: 0 auto;
-  width: 100%;
+  width: 359px;
   background-position: 50%;
   background-repeat: no-repeat;
   height: 378px;
@@ -243,4 +247,5 @@ export default {
 #formContainer {
   padding-bottom: 0;
 }
+
 </style>
