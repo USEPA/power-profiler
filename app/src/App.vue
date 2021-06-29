@@ -61,7 +61,6 @@ import calculatorResults from "./components/CalculatorResults.vue";
 import printReport from "./components/PrintReport.vue";
 import mainPrintReport from "./components/MainPrintReport.vue";
 import AppDescription from "./components/AppDescription.vue";
-import { selectedSubregion } from "./stores/selectedSubregion.js";
 import { userSelection } from "./stores/userSelection.js";
 
 export default {

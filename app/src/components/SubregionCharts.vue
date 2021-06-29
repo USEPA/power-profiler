@@ -98,7 +98,7 @@
         <i18n path="emissionRateBody.text" tag="p">
           <template #MWhInfo>
             <a
-              @click="$parent.$parent.showMegaWattInfo = true"
+              @click="$parent.showMegaWattInfo = true"
               href="javascript:void(0)"
               >{{ $t("emissionRateBody.MWhInfo") }}</a
             >
@@ -141,7 +141,6 @@
 <script>
 import { allSubregions } from "../stores/allSubregions.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
-import { nationalFeature } from "../stores/nationalFeature.js";
 import subregionFuelMixChart from "./SubregionFuelMixChart.vue";
 import subregionEmissionRateChart from "./SubregionEmissionRateChart.vue";
 import emissionsCalculator from "./EmissionsCalculator.vue";
