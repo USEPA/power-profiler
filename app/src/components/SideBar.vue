@@ -80,7 +80,7 @@
           for="additionalInfo.egridLink"
         >
           <a
-            href="https://epa.gov/egrid"
+            href="https://www.epa.gov/egrid"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
             >{{ $t("additionalInfo.egridLink") }}</a
@@ -93,7 +93,7 @@
           for="additionalInfo.powerProfilerExcelLink"
         >
           <a
-            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+            href="https://www.epa.gov/sites/production/files/2020-11/power_profiler_zipcode_tool.xlsx"
             v-bind:aria-label="$t('ariaLabels.downloadsTool')"
             >{{ $t("additionalInfo.powerProfilerExcelLink") }}</a
           >
