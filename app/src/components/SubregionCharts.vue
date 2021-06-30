@@ -42,11 +42,11 @@
 </i18n>
 <template>
   <div v-if="dataLoaded">
+    <h3 id="kpis-section-title">
+      <span>{{ subregion.properties.name }}</span>
+      {{ $t("emissionRateHeader") }}
+    </h3>
     <div class="col row cols-3" id="kpis">
-      <h3 id="kpis-section-title">
-        <span>{{ subregion.properties.name }}</span>
-        {{ $t("emissionRateHeader") }}
-      </h3>
       <div class="col box special" value="co2EmissionRate">
         <h3 class="pane-title">CO<sub>2</sub></h3>
         <div class="pane-content">
@@ -75,10 +75,10 @@
         </div>
       </div>
     </div>
-    <div class="col row cols-2" id="selectedSubregion">
-      <p id="subregionButtons">
+    <p id="subregionButtons">
         <router-link :to="'/'">« {{ $t("backToAllSubregions") }}</router-link>
-      </p>
+    </p>
+    <div class="col row cols-2" id="selectedSubregion">
       <div id="fuelMixContainer" class="col">
         <h3>{{ $t("fuelMixHeader") }}</h3>
         <i18n path="fuelMixBody.text" tag="p">
@@ -191,3 +191,14 @@ export default {
   }
 };
 </script>
+<style>
+#selectedSubregion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#fuelMixContainer,
+#emissionRateContainer {
+  flex: 1 1 510px;
+}
+</style>

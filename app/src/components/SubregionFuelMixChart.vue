@@ -45,9 +45,7 @@
 </i18n>
 
 <template>
-  <div>
-    <div id="fuelMix"></div>
-  </div>
+  <div id="fuelMix"></div>
 </template>
 <script>
 import { addLogoBottom } from "../helpers/ChartHelpers.js";
@@ -112,11 +110,11 @@ export default {
         "otherUnknownFuel"
       ];
 
-      var margin = { top: 40, right: 30, bottom: 200, left: 50 },
+      var margin = { top: 40, right: 20, bottom: 200, left: 70 },
         width = w - margin.left - margin.right,
         height = h - margin.top - margin.bottom;
 
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.3);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.4);
 
       var y = d3.scale.linear().rangeRound([height, 0]);
 
@@ -262,7 +260,7 @@ export default {
         .append("g")
         .attr("class", "legendBottomSub")
         .attr("transform", function(d, i) {
-          var x = -48;
+          var x = width/8;
           // First col
           if (i === 0) {
             return "translate(" + x + "," + (height + 30) + ")";
