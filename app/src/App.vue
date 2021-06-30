@@ -104,9 +104,15 @@ export default {
       this.$root.$i18n.locale = newLang;
     }
   },
+
   mounted: function() {
     var self = this;
     var emissionRatePollutantId;
+
+    // update the langLink to be English if someone starts with Espanol
+    let curLang = this.$root.$i18n.locale;
+    let newLang = curLang === "en" ? "es" : "en";
+    this.langLink = this.langs[newLang];
 
     window.addEventListener("beforeprint", function(event) {
       if (self.$route.name == "subregion") {
@@ -240,6 +246,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #app {
   padding-left: 1em;
+  display: flex;
+  justify-content: space-between;
 }
 .select-pollutant-label,
 #nationalEmissionRateSortingStatus,
@@ -249,7 +257,9 @@ input[type="number"]::-webkit-outer-spin-button {
 #sidebar {
   background-color: #fafafa;
   border: 1px solid black;
+  max-width: 359px;
 }
+
 .modal-mask {
   position: fixed;
   z-index: 9998;

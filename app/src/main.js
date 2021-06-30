@@ -7,7 +7,7 @@ import { env } from "./config/env.js";
 
 Vue.use(VueI18n);
 const i18n = new VueI18n({
-  locale: "en",
+  locale: /^es\b/.test(navigator.language) ? "es" : "en",
   messages: {
     en: {},
     es: {}
@@ -43,3 +43,4 @@ if (typeof ga === "function") {
     ga("EPA.send", "pageview");
   });
 }
+

@@ -226,7 +226,7 @@ export default {
   color: white;
   position: relative;
   margin: 0 auto;
-  width: 359px;
+  width: 100%;
   background-position: 50%;
   background-repeat: no-repeat;
   height: 378px;
