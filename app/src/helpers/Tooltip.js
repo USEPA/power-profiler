@@ -22,13 +22,13 @@ function addTooltip(className){
           }
         },
         mousemove : function(e){
-          // Check if element is a national bar (on the righthand side of the page)
-          const natBar = $(this).parents('.nationalBar');
+          // Check if element is a national bar (on the right-hand-side of the page)
+          const natBar = $(this).closest('.nationalBar');
 
           if(natBar.length || e.target.classList.contains("nationalBar")){
-            positionTooltip(e, - $(".tooltip").width() - 90, 350);
+            positionTooltip(e, - $(".tooltip").width() - 55, 35);
           } else {
-            positionTooltip(e, 0, 350);
+            positionTooltip(e, 15, 35);
           }
         }
     });
