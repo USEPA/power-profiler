@@ -247,5 +247,4 @@ export default {
 #formContainer {
   padding-bottom: 0;
 }
-
 </style>
