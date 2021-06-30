@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>This map provides <a href="https://www.epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregion</a> renewable percentages.</p>
-        <div id="renewablesMap" class="row cols-2"></div>
+        <div id="renewablesMap" class="grid-row"></div>
     </div>
 </template>
 <script>
@@ -43,20 +43,20 @@ export default {
             var _this = this;
             var percentBins = [10,20,30,40,50,60,70,80,90,100];
             var redToGreen = ["#D73027","#F46D43","#FDAE61","#FEE08B","#FFFFBF","#D9EF8B","#A6D96A","#66BD63","#1A9850","#006837"];
-            
+
             var color = d3.scale.ordinal()
                 .domain(percentBins)
                 .range(redToGreen);
 
             var svg = d3.select(this.domElement)
                 .append("svg")
-                .attr("class","col size-4of5")
+                .attr("class","grid-col-11")
                 .attr("width", this.width)
                 .attr("height", this.height)
                 .attr("viewBox", "0 0 " + this.width + " " + this.height)
                 .attr("preserveAspectRatio","xMidYMid meet")
                 .attr("fill","gainsboro");
-            
+
             var aspect = this.width / this.height;
 
             $(window).on('resize', function(){
@@ -109,7 +109,7 @@ export default {
                 if(orientation == "horizontal"){
                     var svgLegend = d3.select(this.domElement)
                         .append("svg")
-                        .attr("class","col size-1of5")
+                        .attr("class","grid-col-1")
                         .attr("width", 150)
                         .attr("height",_this.height + 107);
 
@@ -117,7 +117,7 @@ export default {
                         .data(color.domain())
                         .enter().append("g")
                         .attr("class","renewables-legend");
-                    
+
                     var sqOffset = -20;
                     legend.append("rect")
                         .attr("x", 0)
@@ -128,7 +128,7 @@ export default {
                         .attr("width", 15)
                         .attr("height", 15)
                         .style("fill", color);
-                    
+
                     var txtOffset = -5;
                     legend.append("text")
                         .attr("x",25)
@@ -146,7 +146,7 @@ export default {
                 } else {
                     var svgLegendV = d3.select(this.domElement)
                         .append("svg")
-                        //.attr("class","col size-1of5")
+                        .attr("class","grid-col-1")
                         .attr("width", _this.width + 70)
                         .attr("height",40);
 
@@ -154,7 +154,7 @@ export default {
                         .data(color.domain())
                         .enter().append("g")
                         .attr("class","renewables-legend");
-                    
+
                     var sqOffsetV = -40;
                     legendV.append("rect")
                         .attr("y", 0)
@@ -165,7 +165,7 @@ export default {
                         .attr("width", 15)
                         .attr("height", 15)
                         .style("fill", color);
-                    
+
                     var txtOffsetV = -50;
                     legendV.append("text")
                         .attr("y",40)
