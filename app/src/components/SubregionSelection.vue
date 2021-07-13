@@ -6,7 +6,7 @@
                 <div id="formContainer" class="form-item form-type-textfield">
                     <form id="zipForm">
                         <label for="userLocation"><strong>Enter zip code:</strong></label>
-                        <input class="form-text" id="userLocation" maxlength="128" size="60" type="number" placeholder="Zip code" required>
+                        <input class="form-text" id="userLocation" maxlength="128" size="20" type="number" placeholder="Zip code" required>
                         <button id="goButton" class="usa-button" type="submit">Go</button>
                     </form>
                 </div>
