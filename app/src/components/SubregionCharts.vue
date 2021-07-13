@@ -108,3 +108,14 @@ export default {
     }
 };
 </script>
+<style>
+#selectedSubregion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#fuelMixContainer,
+#emissionRateContainer {
+  flex: 1 1 510px;
+}
+</style>

@@ -7,13 +7,13 @@
                     <form id="zipForm">
                         <label for="userLocation"><strong>Enter zip code:</strong></label>
                         <input class="form-text" id="userLocation" maxlength="128" size="60" type="number" placeholder="Zip code" required>
-                        <button id="goButton" type="submit">Go</button>
+                        <button id="goButton" class="usa-button" type="submit">Go</button>
                     </form>
                 </div>
                 <div id="errorMessage" style="display: none;"></div>
                 <div class="form-item form-type-select" id="utilitySelectDiv" style="display: none;"><select class="form-select" id="utilitySelect" style="height: 36px;"></select></div>
                 <div id="start-over-div">
-                    <button id="start-over" style="display: none;">Start Over</button>
+                    <button id="start-over" class="usa-button" style="display: none;">Start Over</button>
                 </div>
             </div>
             <div id="regionSelectionDiv">

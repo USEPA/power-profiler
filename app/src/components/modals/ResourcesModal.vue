@@ -22,7 +22,7 @@
                     <li><a aria-label="Opens new window" href="/statelocalenergy/state-local-and-tribal-inventory-tools" target="_blank">State, Local, and Tribal Greenhouse Gas Inventory Tools</a></li>
                 </ul>
                 </slot>
-                <button id="resources-ok" class="modal-default-button" @click="$emit('close')">
+                <button id="resources-ok" class="usa-button modal-default-button" @click="$emit('close')">
                     OK
                 </button>
             </div>

@@ -158,6 +158,7 @@ input[type=number]::-webkit-outer-spin-button {
 #sidebar {
     background-color: #FAFAFA;
     border: 1px solid black;
+    max-width: 359px;
 }
 .modal-mask {
   position: fixed;

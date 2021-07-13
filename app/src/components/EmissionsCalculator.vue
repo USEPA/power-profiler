@@ -5,7 +5,7 @@
             <div>
                 <p><label id="userMonthlyAverageLabel" for="userMonthlyAverageInput">Enter your <a href="javascript:void(0)" id="monthlyAverageLink" @click="showAverageInput = true">average monthly electricity use</a>.</label></p>
                 <form v-on:submit.prevent="displayMonthlyAverage" v-show="showAverageInput" id="userMonthlyAverage" method="POST">
-                <input id="userMonthlyAverageInput" required="" type="number" style="height: 36px;">&nbsp;kWh&nbsp;<button id="calculateMonthlyAverageButton" type="submit">Go</button></form>
+                <input id="userMonthlyAverageInput" required="" type="number" style="height: 36px;">&nbsp;kWh&nbsp;<button id="calculateMonthlyAverageButton" class="usa-button" type="submit">Go</button></form>
             </div>
             <div>
                 <p>Or enter your <a href="javascript:void(0)" id="monthlyActualLink" class="emissionsLink" @click="showAverageInput = false">actual electricity use for each month</a>.</p>
@@ -31,7 +31,7 @@
                         <div class="grid-col"><label for="userMonthlyActualInput12"><strong>December</strong></label> <div><input id="userMonthlyActualInput12" required="" type="number">&nbsp;kWh</div></div>
 
                     </div>
-                    <div><button id="calculateMonthlyActualButton" type="submit">Go</button></div>
+                    <div><button id="calculateMonthlyActualButton" class="usa-button" type="submit">Go</button></div>
                 </form>
             </div>
             <div>

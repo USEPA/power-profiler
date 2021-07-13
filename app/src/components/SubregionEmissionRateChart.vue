@@ -5,9 +5,9 @@
         <strong>Select:</strong>
       </p>
       <div id="pollutantSelectSub">
-        <button id="defaultPollutantSub" value="co2EmissionRate">CO<sub>2</sub></button>
-        <button value="so2EmissionRate">SO<sub>2</sub></button>
-        <button value="noxEmissionRate">NO<sub>X</sub></button>
+        <button id="defaultPollutantSub" class="usa-button" value="co2EmissionRate">CO<sub>2</sub></button>
+        <button class="usa-button" value="so2EmissionRate">SO<sub>2</sub></button>
+        <button class="usa-button" value="noxEmissionRate">NO<sub>X</sub></button>
       </div>
     </div>
   </div>

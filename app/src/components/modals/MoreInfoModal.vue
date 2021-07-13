@@ -14,7 +14,7 @@
                 <slot name="body">
                     <appDescription></appDescription>
                 </slot>
-                <button id="more-info-ok" class="modal-default-button" @click="$emit('close')">
+                <button id="more-info-ok" class="usa-button modal-default-button" @click="$emit('close')">
                     OK
                 </button>
             </div>

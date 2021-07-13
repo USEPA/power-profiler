@@ -11,57 +11,58 @@
           >eGRID subregions</a
         >. <strong>Select a fuel type to sort subregions by fuel.</strong>
       </p>
-      <label for="fuelRadios" id="select-fuel-category"
-            ><strong>Select:</strong></label
-          >
+
       <div id="select-offset-1">
         <div
           class="form-item form-type-radio form-item-radios grid-container"
           id="fuelRadios"
         >
-        <div class="grid-row grid-gap">
-          <div class="grid-col-2">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-1"
-              v-model="selectedFuelCategory"
-              value="allFuels"
-              name="fuelRadio"
-              checked
-            />
-            <label class="option" for="fuel-breakdown-1">All Fuels</label>
-          </div>
-          <div class="grid-col-4">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-2"
-              v-model="selectedFuelCategory"
-              value="renewableAndNon"
-              name="fuelRadio"
-            />
-            <label class="option" for="fuel-breakdown-2"
-              >Renewable/Non-renewable</label
-            >
-          </div>
-          <div class="grid-col-6">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-3"
-              v-model="selectedFuelCategory"
-              value="renewableNonNuclearAndHydro"
-              name="fuelRadio"
-            />
-            <label class="option" for="fuel-breakdown-3"
-              >Renewable/Non-renewable/Nuclear/Hydro</label
-            >
+        <label for="fuelRadios" id="select-fuel-category"
+        ><strong>Select:</strong></label
+      >
+          <div class="grid-row grid-gap">
+            <div class="grid-col-2">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-1"
+                v-model="selectedFuelCategory"
+                value="allFuels"
+                name="fuelRadio"
+                checked
+              />
+              <label class="option" for="fuel-breakdown-1">All Fuels</label>
+            </div>
+            <div class="grid-col-4">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-2"
+                v-model="selectedFuelCategory"
+                value="renewableAndNon"
+                name="fuelRadio"
+              />
+              <label class="option" for="fuel-breakdown-2"
+                >Renewable/Non-renewable</label
+              >
+            </div>
+            <div class="grid-col-6">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-3"
+                v-model="selectedFuelCategory"
+                value="renewableNonNuclearAndHydro"
+                name="fuelRadio"
+              />
+              <label class="option" for="fuel-breakdown-3"
+                >Renewable/Non-renewable/Nuclear/Hydro</label
+              >
+            </div>
           </div>
         </div>
       </div>
     </div>
-   </div>
     <div id="resetNationalFuelMixDiv">
       <p id="nationalFuelMixSortingStatus">
         <strong>This chart is sorted alphabetically A → Z by region.</strong>

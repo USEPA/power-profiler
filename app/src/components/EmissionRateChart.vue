@@ -5,9 +5,9 @@
             <p>This chart compares the average emission rates in pounds per <a @click="$parent.$parent.showMegaWattInfo = true" href="javascript:void(0)">MWh</a> in all <a href="https://epa.gov/sites/production/files/styles/large/public/2020-03/2018_egrid_subregions.png" target="_blank">eGRID subregions</a> to the national average emission rates for <a href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide" target="_blank">carbon dioxide (CO<sub>2</sub>)</a>, <a href="/so2-pollution" target="_blank">sulfur dioxide (SO<sub>2</sub>)</a>, and <a href="/no2-pollution" target="_blank">nitrogen oxide (NO<sub>X</sub>)</a>.</p>
             <p class="select-pollutant-label"><strong>Select: </strong></p>
             <div id="pollutantSelectAll">
-                <button @click="handlePollutantButton" id="defaultPollutantAll" value="co2EmissionRate">CO<sub>2</sub></button>
-                <button @click="handlePollutantButton" value="so2EmissionRate">SO<sub>2</sub></button>
-                <button @click="handlePollutantButton" value="noxEmissionRate">NO<sub>X</sub></button>
+                <button @click="handlePollutantButton" id="defaultPollutantAll" class="usa-button" value="co2EmissionRate">CO<sub>2</sub></button>
+                <button @click="handlePollutantButton" class="usa-button" value="so2EmissionRate">SO<sub>2</sub></button>
+                <button @click="handlePollutantButton" class="usa-button" value="noxEmissionRate">NO<sub>X</sub></button>
             </div>
             <div id="nationalEmissionRateGraph">
             </div>
@@ -24,11 +24,11 @@
             <div id="mapSelect" class="form-item form-type-radio form-item-radios grid-container">
               <div class="grid-row grid-gap">
                 <div class="grid-col-6">
-                    <input id="emissionRateMapChoice" name="mapChoice" class="form-radio" type="radio" value="1" v-model="currentMap">
+                    <input id="emissionRateMapChoice" name="mapChoice" class="usa-radio" type="radio" value="1" v-model="currentMap">
                     <label for="emissionRateMapChoice" class="option">Emission Rate Map</label>
                 </div>
                 <div class="grid-col-6">
-                    <input id="renewablesMapChoice" name="mapChoice" class="form-radio" type="radio" value="2" v-model="currentMap">
+                    <input id="renewablesMapChoice" name="mapChoice" class="usa-radio" type="radio" value="2" v-model="currentMap">
                     <label for="renewablesMapChoice" class="option">Renewable/Non-renewable Map</label>
                 </div>
               </div>
