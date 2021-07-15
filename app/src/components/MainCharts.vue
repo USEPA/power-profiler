@@ -1,23 +1,114 @@
+<i18n>
+{
+    "en": {
+        "fuelMixHeader": "Fuel Mix",
+        "fuelMixBody": {
+            "text": "This chart compares fuel mix (%) of sources used to generate electricity in all {eGRIDSubregions}. {selectFuel}.",
+            "eGRIDSubregions": "eGRID subregions",
+            "selectFuel": "Select a fuel type to sort subregions by fuel"
+        },
+        "fuelMixChart": {
+            "select": "Select:",
+            "allFuelsSelection": "All Fuels",
+            "renewableSelection": "Renewable/Non-renewable",
+            "hydroNuclearSelection": "Renewable/Non-renewable/Nuclear/Hydro",
+            "azSortDescription": "This chart is sorted alphabetically A → Z by region.",
+            "fuelSortDescription": "This chart is sorted by decreasing % of {fuel}.",
+            "sortLink": "Sort regions alphabetically (A → Z)",
+            "eGRIDSubregions": "eGRID subregions",
+            "yAxis": "Generation",
+            "nationalLabel": "National",
+            "fuel": "Fuel",
+            "fuelTooltip": "{name} accounts for {val} % of the fuel mix for {subregion}",
+            "nationalFuelTooltip": "{name} accounts for {val} % of the fuel mix nationally",
+            "fuels": {
+                "gas": "Gas",
+                "coal": "Coal",
+                "nuclear": "Nuclear",
+                "hydro": "Hydro",
+                "wind": "Wind",
+                "biomass": "Biomass",
+                "solar": "Solar",
+                "oil": "Oil",
+                "geothermal": "Geothermal",
+                "otherFossilFuel": "Other Fossil Fuel",
+                "otherUnknownFuel": "Other Uknown Fuel",
+                "renewable": "Renewable",
+                "non-renewable": "Non-renewable",
+                "renewable (excluding hydro)": "Renewable (excluding hydro)",
+                "non-renewable (excluding nuclear)": "Renewable (excluding nuclear)"
+            }
+        },
+        "printReport": "Print Report"
+    },
+    "es": {
+        "fuelMixHeader": "Combinación de combustibles",
+        "fuelMixBody": {
+            "text": "Este cuadro compara la combinación de combustibles (porcentajes) de las fuentes utilizadas para generar electricidad en todas las {eGRIDSubregions}. {selectFuel}.",
+            "eGRIDSubregions": "subregiones de eGRID en los Estados Unidos",
+            "selectFuel": "Seleccione un combustible para ordenar las subregiones por combustible",
+            "renewable": "Renewable",
+            "non-renewable": "Non-renewable"
+        },
+        "fuelMixChart": {
+            "select": "Seleccione:",
+            "allFuelsSelection": "Todos los Combustibles",
+            "renewableSelection": "Renovables/No-renovables",
+            "hydroNuclearSelection": "Renovables/No-renovables/Energía Nuclear/Energía Hidroeléctrica",
+            "azSortDescription": "Esta gráfica está ordenada alfabéticamente (A → Z) por región.",
+            "fuelSortDescription": "Esta gráfica está ordenada por el porciento (%) descendente de {fuel}.",
+            "sortLink": "Ordenar las regiones alfabéticamente (A → Z)",
+            "eGRIDSubregions": "Subregiones de eGRID",
+            "yAxis": "Generación",
+            "nationalLabel": "Nacional",
+            "fuel": "Combustibles",
+            "fuelTooltip": "{name} representa el {val} % la combinación de combustibles de {subregion}",
+            "nationalFuelTooltip": "{name} representa el {val} % la combinación de combustibles a nivel nacional",
+            "fuels": {
+                "gas": "Gas",
+                "coal": "Carbón",
+                "nuclear": "Energía Nuclear",
+                "hydro": "Energía Hidroeléctrica",
+                "wind": "Energía Eólica",
+                "biomass": "Biomasa",
+                "solar": "Energía Solar",
+                "oil": "Petróleo",
+                "geothermal": "Energía Geotérmica",
+                "otherFossilFuel": "Otros Combustibles Fósiles",
+                "otherUnknownFuel": "Otros Combustibles Desconocidos",
+                "renewable": "Renovable",
+                "non-renewable": "No-renovable",
+                "renewable (excluding hydro)": "Renovable (excluyendo energía hidroeléctrica)",
+                "non-renewable (excluding nuclear)": "Renovable (excluyendo energía nuclear)"
+            }
+        },
+        "printReport": "Imprima un reporte"
+    }
+}
+</i18n>
 <template>
   <div>
     <div id="nationalFuelMix">
-      <h3>Fuel Mix</h3>
-      <p>
-        This chart compares fuel mix (%) of sources used to generate electricity
-        in all
-        <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-          target="_blank"
-          >eGRID subregions</a
-        >. <strong>Select a fuel type to sort subregions by fuel.</strong>
-      </p>
+      <h3>{{ $t("fuelMixHeader") }}</h3>
+      <i18n path="fuelMixBody.text" tag="p">
+        <template #eGRIDSubregions>
+          <a
+            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+            target="_blank"
+            >{{ $t("fuelMixBody.eGRIDSubregions") }}</a
+          >
+        </template>
+        <template #selectFuel>
+          <strong>{{ $t("fuelMixBody.selectFuel") }}</strong>
+        </template>
+      </i18n>
       <div id="select-offset-1">
         <div
           class="form-item form-type-radio form-item-radios row cols-3"
           id="fuelRadios"
         >
           <label for="fuelRadios" id="select-fuel-category"
-            ><strong>Select:</strong></label
+            ><strong>{{ $t("fuelMixChart.select") }}</strong></label
           >
           <div class="col size-1of6">
             <input
@@ -29,7 +120,9 @@
               name="fuelRadio"
               checked
             />
-            <label class="option" for="fuel-breakdown-1">All Fuels</label>
+            <label class="option" for="fuel-breakdown-1">{{
+              $t("fuelMixChart.allFuelsSelection")
+            }}</label>
           </div>
           <div class="col size-1of3">
             <input
@@ -40,9 +133,9 @@
               value="renewableAndNon"
               name="fuelRadio"
             />
-            <label class="option" for="fuel-breakdown-2"
-              >Renewable/Non-renewable</label
-            >
+            <label class="option" for="fuel-breakdown-2">{{
+              $t("fuelMixChart.renewableSelection")
+            }}</label>
           </div>
           <div class="col size-1of2">
             <input
@@ -53,26 +146,28 @@
               value="renewableNonNuclearAndHydro"
               name="fuelRadio"
             />
-            <label class="option" for="fuel-breakdown-3"
-              >Renewable/Non-renewable/Nuclear/Hydro</label
-            >
+            <label class="option" for="fuel-breakdown-3">{{
+              $t("fuelMixChart.hydroNuclearSelection")
+            }}</label>
           </div>
         </div>
       </div>
     </div>
     <div id="resetNationalFuelMixDiv">
       <p id="nationalFuelMixSortingStatus">
-        <strong>This chart is sorted alphabetically A → Z by region.</strong>
+        <strong>{{ $t("fuelMixChart.azSortDescription") }}</strong>
       </p>
       <a
         href="javascript:void(0)"
         @click="handleSortReset"
         id="resetNationalFuelMix"
-        >A → Z Sort regions alphabetically</a
+        >{{ $t("fuelMixChart.sortLink") }}</a
       >
     </div>
     <emissionRateChart></emissionRateChart>
-    <p><a href="javascript:window.print()">&#128438; Print Report</a></p>
+    <p>
+      <a href="javascript:window.print()">&#128438; {{ $t("printReport") }}</a>
+    </p>
   </div>
 </template>
 
@@ -81,11 +176,7 @@ import { allSubregions } from "../stores/allSubregions.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { userSelection } from "../stores/userSelection.js";
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import emissionRateChart from "./EmissionRateChart.vue";
 import { addTooltip } from "../helpers/Tooltip";
 
@@ -244,7 +335,7 @@ export default {
     displayHorizontal: function(colors, fuelBreakdown, fuelKey) {
       var self = this;
 
-      var margin = { top: 30, right: 60, bottom: 140, left: 70 },
+      var margin = { top: 30, right: 70, bottom: 140, left: 70 },
         width = this.w - margin.left - margin.right,
         height = this.h - margin.top - margin.bottom;
 
@@ -354,7 +445,7 @@ export default {
           "transform",
           "translate(" + (width / 2 - 50) + "," + (height + 50) + ")"
         )
-        .text("eGRID Subregions");
+        .text(self.$t("fuelMixChart.eGRIDSubregions"));
 
       svg
         .append("g")
@@ -367,7 +458,7 @@ export default {
         .attr("x", 15)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
-        .text("Generation");
+        .text(self.$t("fuelMixChart.yAxis"));
 
       var subregion = svg
         .selectAll(".subregion")
@@ -385,7 +476,7 @@ export default {
         .append("g")
         .attr("class", "fuelContainer fuelMixTooltip")
         .attr("title", function(fuel) {
-          var fuelName = fuel.name;
+          var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
           var f = d3.format(".1f");
           return self.addHovertext(fuel, fuelName, f);
         });
@@ -426,7 +517,7 @@ export default {
         });
 
       fuels.append("desc").text(function(fuel) {
-        var fuelName = fuel.name;
+        var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
         var f = d3.format(".1f");
         return self.addHovertext(fuel, fuelName, f);
       });
@@ -447,7 +538,7 @@ export default {
         .append("g")
         .attr("class", "fuelContainer fuelMixTooltip")
         .attr("title", function(fuel) {
-          var fuelName = fuel.name;
+          var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
           var f = d3.format(".1f");
           return self.addHovertext(fuel, fuelName, f);
         });
@@ -485,7 +576,7 @@ export default {
         });
 
       nationalFuels.append("desc").text(function(fuel) {
-        var fuelName = fuel.name;
+        var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
         var f = d3.format(".1f");
         return self.addHovertext(fuel, fuelName, f);
       });
@@ -506,12 +597,12 @@ export default {
         .attr("transform", "translate(" + x.rangeBand() + "," + height + ")")
         .call(nationalBarXAxis)
         .append("text")
-        .text("National")
-        .attr("x", width - 15)
+        .text(self.$t("fuelMixChart.nationalLabel"))
+        .attr("x", width - 20)
         .attr("y", 30);
 
-      var offset1 = 250,
-        offset2 = 150;
+      var offset1 = 300,
+        offset2 = 170;
 
       var legendBottom = svg
         .selectAll(".legendBottom")
@@ -523,82 +614,42 @@ export default {
           if (self.selectedFuelCategory == "renewableNonNuclearAndHydro") {
             // First row
             if (i === 0) {
-              return (
-                "translate(" +
-                (width / 2 - offset1) +
-                "," +
-                (height + 120) +
-                ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 120})`;
             } else if (i === 1) {
-              return (
-                "translate(" + (width / 2 - offset1) + "," + (height + 60) + ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 60})`;
             } else if (i === 2) {
-              return (
-                "translate(" + (width / 2 - offset1) + "," + (height + 80) + ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 80})`;
             } else if (i === 3) {
-              return (
-                "translate(" +
-                (width / 2 - offset1) +
-                "," +
-                (height + 100) +
-                ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 100})`;
             }
           } else {
             // First row
             if (i === 0) {
-              return (
-                "translate(" + (width / 2 - offset1) + "," + (height + 60) + ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 60})`;
             } else if (i === 1) {
-              return (
-                "translate(" + (width / 2 - offset1) + "," + (height + 80) + ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 80})`;
             } else if (i === 2) {
-              return (
-                "translate(" +
-                (width / 2 - offset1) +
-                "," +
-                (height + 100) +
-                ")"
-              );
+              return `translate(${width / 2 - offset1},${height + 100})`;
             }
             // Sec row
             else if (i === 3) {
-              return (
-                "translate(" + (width / 2 - offset2) + "," + (height + 60) + ")"
-              );
+              return `translate(${width / 2 - offset2},${height + 60})`;
             } else if (i === 4) {
-              return (
-                "translate(" + (width / 2 - offset2) + "," + (height + 80) + ")"
-              );
+              return `translate(${width / 2 - offset2},${height + 80})`;
             } else if (i === 5) {
-              return (
-                "translate(" +
-                (width / 2 - offset2) +
-                "," +
-                (height + 100) +
-                ")"
-              );
+              return `translate(${width / 2 - offset2},${height + 100})`;
             }
             // Third row
             else if (i === 6) {
-              return "translate(" + width / 2 + "," + (height + 60) + ")";
+              return `translate(${width / 2},${height + 60})`;
             } else if (i === 7) {
-              return "translate(" + width / 2 + "," + (height + 80) + ")";
+              return `translate(${width / 2},${height + 80})`;
             } else if (i === 8) {
-              return "translate(" + width / 2 + "," + (height + 100) + ")";
+              return `translate(${width / 2},${height + 100})`;
             } else if (i === 9) {
-              return (
-                "translate(" + (width / 2 + offset2) + "," + (height + 60) + ")"
-              );
+              return `translate(${width / 2 + offset2},${height + 60})`;
             } else if (i === 10) {
-              return (
-                "translate(" + (width / 2 + offset2) + "," + (height + 80) + ")"
-              );
+              return `translate(${width / 2 + offset2},${height + 80})`;
             }
           }
         })
@@ -637,7 +688,7 @@ export default {
         .attr("x", 20)
         .attr("y", 10)
         .text(function(d, i) {
-          return formatFuelLabel(d);
+          return self.$t("fuelMixChart.fuels." + d);
         })
         .attr("class", "textselected")
         .style("text-anchor", "start")
@@ -744,7 +795,7 @@ export default {
     displayVertical: function(colors, fuelBreakdown, fuelKey) {
       var self = this;
       var margin = { top: 120, right: 20, bottom: 80, left: 65 },
-        width = 500 - margin.left - margin.right,
+        width = 600 - margin.left - margin.right,
         height = 800 - margin.top - margin.bottom;
 
       var x = d3.scale.linear().range([0, width]);
@@ -845,7 +896,7 @@ export default {
         .attr("x", 50)
         .attr("dy", "0.71em")
         .attr("text-anchor", "middle")
-        .text("Generation");
+        .text(self.$t("fuelMixChart.yAxis"));
 
       svg
         .selectAll("text")
@@ -876,7 +927,7 @@ export default {
         .append("g")
         .attr("class", "fuelContainer fuelMixTooltip")
         .attr("title", function(fuel) {
-          var fuelName = fuel.name;
+          var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
           var f = d3.format(".1f");
           return self.addHovertext(fuel, fuelName, f);
         });
@@ -914,7 +965,7 @@ export default {
         });
 
       fuels.append("desc").text(function(fuel) {
-        var fuelName = fuel.name;
+        var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
         var f = d3.format(".1f");
         return self.addHovertext(fuel, fuelName, f);
       });
@@ -935,7 +986,7 @@ export default {
         .append("g")
         .attr("class", "fuelContainer fuelMixTooltip")
         .attr("title", function(fuel) {
-          var fuelName = fuel.name;
+          var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
           var f = d3.format(".1f");
           return self.addHovertext(fuel, fuelName, f);
         });
@@ -973,7 +1024,7 @@ export default {
         });
 
       nationalFuels.append("desc").text(function(fuel) {
-        var fuelName = fuel.name;
+        var fuelName = self.$t("fuelMixChart.fuels." + fuel.name);
         var f = d3.format(".1f");
         return self.addHovertext(fuel, fuelName, f);
       });
@@ -992,11 +1043,12 @@ export default {
         .attr("class", "nationalY")
         .call(nationalBarYAxis)
         .append("text")
-        .text("National")
+        .text(self.$t("fuelMixChart.nationalLabel"))
         .attr("x", -65)
         .attr("y", height + 15);
 
-      var offsetL = 80;
+      var topLen = 0;
+      var midLen = 0;
 
       var legendTop = svg
         .selectAll(".legendTop")
@@ -1005,67 +1057,81 @@ export default {
         .append("g")
         .attr("class", "legendTop")
         .attr("transform", function(d, i) {
-          var topLen = 0;
-          var midLen = 0;
+          const initialOffset = 60;
+          const squareOffset = 20;
+          const multiplier = 5.5;
+          const wordLen = self.$t(`fuelMixChart.fuels.${d}`).length;
+
           if (self.selectedFuelCategory == "renewableNonNuclearAndHydro") {
             // First row
             if (i === 0) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -60 + ")";
+              if (wordLen > topLen) topLen = wordLen;
+              return `translate(${0 - initialOffset}, ${-60})`;
             } else if (i === 1) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -120 + ")";
+              if (wordLen > topLen) topLen = wordLen;
+              return `translate(${0 - initialOffset}, ${-120})`;
             } else if (i === 2) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -100 + ")";
+              if (wordLen > topLen) topLen = wordLen;
+              return `translate(${0 - initialOffset}, ${-100})`;
             } else if (i === 3) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -80 + ")";
+              if (wordLen > topLen) topLen = wordLen;
+              return `translate(${0 - initialOffset}, ${-80})`;
             }
           } else {
-            // First row
+            // First col
             if (i === 0) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -100 + ")";
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${0 - initialOffset}, ${-120})`;
             } else if (i === 1) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -80 + ")";
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${0 - initialOffset}, ${-100})`;
             } else if (i === 2) {
-              if (d.length > topLen) topLen = d.length;
-              return "translate(0," + -60 + ")";
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${0 - initialOffset}, ${-80})`;
+            } else if (i === 3) {
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${0 - initialOffset}, ${-60})`;
             }
-            // Sec row
-            else if (i === 3) {
-              if (d.length > midLen) midLen = d.length;
-              return "translate(" + (topLen + offsetL) + "," + -100 + ")";
-            } else if (i === 4) {
-              if (d.length > midLen) midLen = d.length;
-              return "translate(" + (topLen + offsetL) + "," + -80 + ")";
+            // Sec col
+            else if (i === 4) {
+              if (wordLen > midLen) {
+                midLen = wordLen;
+              }
+              return `translate(${topLen * multiplier - squareOffset}, -120)`;
             } else if (i === 5) {
-              if (d.length > midLen) midLen = d.length;
-              return "translate(" + (topLen + offsetL) + "," + -60 + ")";
-            }
-            // Third row
-            else if (i === 6) {
-              return (
-                "translate(" + (midLen + offsetL * 2 + 20) + "," + -100 + ")"
-              );
+              if (wordLen > midLen) {
+                midLen = wordLen;
+              }
+              return `translate(${topLen * multiplier - squareOffset}, -100)`;
+            } else if (i === 6) {
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${topLen * multiplier - squareOffset}, -80)`;
             } else if (i === 7) {
-              return (
-                "translate(" + (midLen + offsetL * 2 + 20) + "," + -80 + ")"
-              );
-            } else if (i === 8) {
-              return (
-                "translate(" + (midLen + offsetL * 2 + 20) + "," + -60 + ")"
-              );
+              if (wordLen > topLen) {
+                topLen = wordLen;
+              }
+              return `translate(${topLen * multiplier - squareOffset}, -60)`;
+            }
+            // Third col
+            else if (i === 8) {
+              return `translate(${(midLen + topLen) * multiplier +
+                squareOffset}, -120)`;
             } else if (i === 9) {
-              return (
-                "translate(" + (midLen + offsetL * 2 + 140) + "," + -100 + ")"
-              );
+              return `translate(${(midLen + topLen) * multiplier +
+                squareOffset}, -100)`;
             } else if (i === 10) {
-              return (
-                "translate(" + (midLen + offsetL * 2 + 140) + "," + -70 + ")"
-              );
+              return `translate(${(midLen + topLen) * multiplier +
+                squareOffset}, -80)`;
             }
           }
         })
@@ -1104,59 +1170,14 @@ export default {
         .attr("x", 20)
         .attr("y", 10)
         .text(function(d, i) {
-          if (d != "otherFossilFuel" && d != "otherUnknownFuel") {
-            return formatFuelLabel(d);
-          }
+          return self.$t("fuelMixChart.fuels." + d);
         })
         .attr("class", function(d) {
-          if (d == "otherFossilFuel" || d == "otherUnknownFuel") {
-            return "lgLabel textselected";
-          } else {
-            return "textselected";
-          }
+          return "textselected";
         })
         .style("text-anchor", "start")
         .style("font-size", 15);
 
-      var lgLabels = d3.selectAll(".lgLabel");
-
-      var sarr;
-
-      lgLabels.append("tspan").text(function(d) {
-        sarr = d.match(/[A-Z]*[^A-Z]+/g);
-        if (d == "otherFossilFuel") {
-          return (
-            sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1) + " " + sarr[1]
-          );
-        } else {
-          return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
-        }
-      });
-
-      lgLabels
-        .append("tspan")
-        .attr("x", 20)
-        .attr("y", 25)
-        .attr("class", function(d) {
-          if (d == "otherUnknownFuel") {
-            return "unknown";
-          }
-        })
-        .text(function(d) {
-          if (d == "otherFossilFuel") {
-            return sarr[2];
-          } else if (d == "otherUnknownFuel") {
-            return sarr[1];
-          }
-        });
-
-      d3.selectAll(".unknown")
-        .append("tspan")
-        .attr("x", 20)
-        .attr("y", 40)
-        .text(function(d) {
-          return "Fuel";
-        });
       var duration = { sub: 300, x: 0 };
       if (self.sortedFuel)
         self.sortVerticalBarChart(
@@ -1344,14 +1365,14 @@ export default {
 
       $("#sortingDiv > a").show();
       $("#nationalFuelMixSortingStatus").html(
-        "<strong>This chart is sorted by decreasing % of " +
-          self.selectedFuel +
-          "."
+        `<strong>${this.$t("fuelMixChart.fuelSortDescription", {
+          fuel: this.$t("fuelMixChart.fuels." + self.selectedFuel)
+        })}`
       );
       $("#nationalEmissionRateSortingStatus").html(
-        "<strong>This chart is sorted by decreasing % of " +
-          self.selectedFuel +
-          "."
+        `<strong>${this.$t("fuelMixChart.fuelSortDescription", {
+          fuel: this.$t("fuelMixChart.fuels." + self.selectedFuel)
+        })}`
       );
       self.updateChild("subregionFuels", fuel);
     },
@@ -1369,25 +1390,25 @@ export default {
       $("#sortAscendingEmissionRate").css("display", "inline");
       $("#sortDescendingEmissionRate").css("display", "inline");
       $("#nationalEmissionRateSortingStatus").html(
-        "<strong>This chart is sorted alphabetically A → Z by region.</strong>"
+        `<strong>${this.$t("fuelMixChart.azSortDescription")}</strong>`
       );
       $("#nationalFuelMixSortingStatus").html(
-        "<strong>This chart is sorted alphabetically A → Z by region.</strong>"
+        `<strong>${this.$t("fuelMixChart.azSortDescription")}</strong>`
       );
     },
     addHovertext: function(fuel, fuelName, f) {
-      if (fuel.name == "non-renewable (excluding nuclear)") {
-        fuelName = "non-renewable";
-      } else if (fuel.name == "renewable (excluding hydro)") {
-        fuelName = "renewable";
+      if (fuel.subregion === "National") {
+        return this.$t("fuelMixChart.nationalFuelTooltip", {
+          name: fuelName,
+          val: f(fuel.val)
+        });
+      } else {
+        return this.$t("fuelMixChart.fuelTooltip", {
+          name: fuelName,
+          val: f(fuel.val),
+          subregion: fuel.subregion
+        });
       }
-      return (
-        formatFuelLabel(fuelName) +
-        " accounts for " +
-        f(fuel.val) +
-        "% of the fuel mix " +
-        checkNational(fuel.subregion)
-      );
     },
     updateChild: function(sortState, fuel) {
       var emRateChart = this.$children[0];
@@ -1410,6 +1431,12 @@ export default {
     selectedRegion: function() {
       this.reset();
       this.show(this.selectedRegion);
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.reset();
+      }
     }
   }
 };

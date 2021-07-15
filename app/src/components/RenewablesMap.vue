@@ -1,14 +1,36 @@
+<i18n>
+{
+    "en": {
+        "description": {
+            "text": "This map provides {eGRIDSubregion} renewable percentages.",
+            "eGRIDSubregion": "eGRID subregion"
+        },
+        "tooltip": {
+            "text": "{subregionName} {sourceType} generation: {sourcePct}%"
+        }
+    },
+    "es": {
+        "description": {
+            "text": "Este mapa proporciona los porcentajes renovables de {eGRIDSubregion}.",
+            "eGRIDSubregion": "subregiones de eGRID"
+        },
+        "tooltip": {
+            "text": "Generación {sourceType} de {subregionName}: {sourcePct}%"
+        }
+    }
+}
+</i18n>
 <template>
   <div>
-    <p>
-      This map provides
-      <a
-        href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-        target="_blank"
-        >eGRID subregion</a
-      >
-      renewable percentages.
-    </p>
+    <i18n path="description.text" tag="p">
+      <template #eGRIDSubregion>
+        <a
+          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+          target="_blank"
+          >{{ $t("description.eGRIDSubregion") }}</a
+        >
+      </template>
+    </i18n>
     <div id="renewablesMap" class="row cols-2"></div>
   </div>
 </template>
@@ -95,14 +117,11 @@ export default {
         .append("g")
         .attr("class", "renewablesMapTooltip")
         .attr("title", function(d) {
-          return (
-            d.properties.fullName +
-            " " +
-            dataValue +
-            " generation: " +
-            d.properties.fuelMixCategories[dataValue] +
-            "%"
-          );
+          return _this.$t("tooltip.text", {
+            subregionName: d.properties.fullName,
+            sourceType: dataValue,
+            sourcePct: d.properties.fuelMixCategories[dataValue]
+          });
         });
 
       container

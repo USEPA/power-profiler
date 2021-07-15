@@ -1,11 +1,21 @@
 import Vue from "vue";
+import VueI18n from "vue-i18n";
 import App from "./App.vue";
 import router from "./router/router";
 import { selectedSubregion } from "./stores/selectedSubregion.js";
 import { env } from "./config/env.js";
 
+Vue.use(VueI18n);
+const i18n = new VueI18n({
+  locale: /^es\b/.test(navigator.language) ? "es" : "en",
+  messages: {
+    en: {},
+    es: {}
+  }
+});
 var vm = new Vue({
   el: "#app",
+  i18n,
   render: h => h(App),
   router,
   beforeCreate() {
@@ -33,3 +43,4 @@ if (typeof ga === "function") {
     ga("EPA.send", "pageview");
   });
 }
+

@@ -1,83 +1,110 @@
+<i18n>
+{
+  "en": {
+    "title": "Power Profiler",
+    "userLocation": "Enter zip code:",
+    "placeHolder": "Zip code",
+    "goButton": "Go",
+    "moreInfo": "More Information",
+    "egridSubregions": "eGRID Subregions",
+    "selectUtility": "Select your utility",
+    "invalidZip": "Please enter a valid zip code."
+  },
+  "es": {
+    "title": "Analizador de consumo de energía",
+    "userLocation": "Ingresa tu código postal:",
+    "placeHolder": "Código postal en EE. UU.",
+    "goButton": "Ir",
+    "moreInfo": "Más Información",
+    "egridSubregions": "Subregiones de eGRID",
+    "selectUtility": "Seleccione su empresa de electricidad",
+    "invalidZip": "Por favor ingrese un código postal válido."
+  }
+}
+</i18n>
 <template>
   <div id="selectionBox" class="box multi related-info">
     <div class="pane-content">
       <div id="zipFormDiv">
-        <h2>Power Profiler</h2>
+        <h2>{{ $t("title") }}</h2>
         <div id="formContainer" class="form-item form-type-textfield">
           <form id="zipForm">
-            <label for="userLocation"><strong>Enter zip code:</strong></label>
+            <label for="userLocation">
+              <strong>{{ $t("userLocation") }}</strong>
+            </label>
             <input
               class="form-text"
               id="userLocation"
               maxlength="128"
-              size="60"
+              size="20"
               type="number"
-              placeholder="Zip code"
+              v-bind:placeholder="$t('placeHolder')"
               required
             />
-            <button id="goButton" type="submit">Go</button>
+            <button id="goButton" type="submit">{{ $t("goButton") }}</button>
           </form>
         </div>
-        <div id="errorMessage" style="display: none;"></div>
+        <div id="errorMessage" style="display: none"></div>
         <div
           class="form-item form-type-select"
           id="utilitySelectDiv"
-          style="display: none;"
+          style="display: none"
         >
           <select
             class="form-select"
             id="utilitySelect"
-            style="height: 36px;"
+            style="height: 36px"
           ></select>
         </div>
         <div id="start-over-div">
-          <button id="start-over" style="display: none;">Start Over</button>
+          <button id="start-over" style="display: none">Start Over</button>
         </div>
       </div>
       <div id="regionSelectionDiv">
-        <label for="regionSelectionDropdown" id="subregionsHeader"
-          ><strong>eGRID Subregions</strong>
+        <label for="regionSelectionDropdown" id="subregionsHeader">
+          <strong>{{ $t("egridSubregions") }}</strong>
           <a
             href="javascript:void(0)"
             class="more-link"
             @click="$parent.$parent.showSubregionInfo = true"
-            >More Info</a
-          ></label
-        >
+            >{{ $t("moreInfo") }}</a
+          >
+        </label>
         <div class="form-item form-type-select">
           <select
             @change="handleSelectChange"
             class="form-select"
             id="regionSelectionDropdown"
-            ><option value="All">eGRID Subregions</option
-            ><option value="AKGD">AKGD (ASCC Alaska Grid)</option
-            ><option value="AKMS">AKMS (ASCC Miscellaneous)</option
-            ><option value="AZNM">AZNM (WECC Southwest)</option
-            ><option value="CAMX">CAMX (WECC California)</option
-            ><option value="ERCT">ERCT (ERCOT All)</option
-            ><option value="FRCC">FRCC (FRCC All)</option
-            ><option value="HIMS">HIMS (HICC Miscellaneous)</option
-            ><option value="HIOA">HIOA (HICC Oahu)</option
-            ><option value="MROE">MROE (MRO East)</option
-            ><option value="MROW">MROW (MRO West)</option
-            ><option value="NEWE">NEWE (NPCC New England)</option
-            ><option value="NWPP">NWPP (WECC Northwest)</option
-            ><option value="NYCW">NYCW (NPCC NYC/Westchester)</option
-            ><option value="NYLI">NYLI (NPCC Long Island)</option
-            ><option value="NYUP">NYUP (NPCC Upstate NY)</option
-            ><option value="PRMS">PRMS (Puerto Rico Miscellaneous)</option
-            ><option value="RFCE">RFCE (RFC East)</option
-            ><option value="RFCM">RFCM (RFC Michigan)</option
-            ><option value="RFCW">RFCW (RFC West)</option
-            ><option value="RMPA">RMPA (WECC Rockies)</option
-            ><option value="SPNO">SPNO (SPP North)</option
-            ><option value="SPSO">SPSO (SPP South)</option
-            ><option value="SRMV">SRMV (SERC Mississippi Valley)</option
-            ><option value="SRMW">SRMW (SERC Midwest)</option
-            ><option value="SRSO">SRSO (SERC South)</option
-            ><option value="SRTV">SRTV (SERC Tennessee Valley)</option
-            ><option value="SRVC">SRVC (SERC Virginia/Carolina)</option></select
           >
+            <option value="All">{{ $t("egridSubregions") }}</option>
+            <option value="AKGD">AKGD (ASCC Alaska Grid)</option>
+            <option value="AKMS">AKMS (ASCC Miscellaneous)</option>
+            <option value="AZNM">AZNM (WECC Southwest)</option>
+            <option value="CAMX">CAMX (WECC California)</option>
+            <option value="ERCT">ERCT (ERCOT All)</option>
+            <option value="FRCC">FRCC (FRCC All)</option>
+            <option value="HIMS">HIMS (HICC Miscellaneous)</option>
+            <option value="HIOA">HIOA (HICC Oahu)</option>
+            <option value="MROE">MROE (MRO East)</option>
+            <option value="MROW">MROW (MRO West)</option>
+            <option value="NEWE">NEWE (NPCC New England)</option>
+            <option value="NWPP">NWPP (WECC Northwest)</option>
+            <option value="NYCW">NYCW (NPCC NYC/Westchester)</option>
+            <option value="NYLI">NYLI (NPCC Long Island)</option>
+            <option value="NYUP">NYUP (NPCC Upstate NY)</option>
+            <option value="PRMS">PRMS (Puerto Rico Miscellaneous)</option>
+            <option value="RFCE">RFCE (RFC East)</option>
+            <option value="RFCM">RFCM (RFC Michigan)</option>
+            <option value="RFCW">RFCW (RFC West)</option>
+            <option value="RMPA">RMPA (WECC Rockies)</option>
+            <option value="SPNO">SPNO (SPP North)</option>
+            <option value="SPSO">SPSO (SPP South)</option>
+            <option value="SRMV">SRMV (SERC Mississippi Valley)</option>
+            <option value="SRMW">SRMW (SERC Midwest)</option>
+            <option value="SRSO">SRSO (SERC South)</option>
+            <option value="SRTV">SRTV (SERC Tennessee Valley)</option>
+            <option value="SRVC">SRVC (SERC Virginia/Carolina)</option>
+          </select>
         </div>
       </div>
       <subregionMap id="subregionMapContainer"></subregionMap>
@@ -131,7 +158,7 @@ export default {
               self.utilArr = [];
               var subArr = [];
               var utilitySelectHTML = [
-                "<option disabled selected value>Select your utility</option>"
+                `<option disabled selected value>${self.$t("selectUtility")}</option>`
               ];
               for (var i = 0; i < data.length; i += 1) {
                 self.utilArr.push(data[i]);
@@ -158,13 +185,13 @@ export default {
               }
             } else {
               $("#errorMessage").show();
-              $("#errorMessage").html("<p>Please enter a valid zip code.</p>");
+              $("#errorMessage").html(`<p>${self.$t("invalidZip")}</p>`);
             }
           }
         );
       } else {
         $("#errorMessage").show();
-        $("#errorMessage").html("<p>Please enter a valid zip code.</p>");
+        $("#errorMessage").html(`<p>${self.$t("invalidZip")}</p>`);
       }
     },
     handleSelectChange: function(e) {

@@ -1,34 +1,111 @@
+<i18n>
+{
+    "en": {
+        "emissionRateHeader": "Emission Rates",
+        "emissionRateBody": {
+            "text": "This chart compares the average emission rates in pounds per {MWhInfo} in all {eGRIDSubregions} to the national average emission rates for {co2}, {so2}, and {nox}.",
+            "MWhInfo": "MWh",
+            "eGRIDSubregions": "eGRID subregions",
+            "co2": "carbon dioxide",
+            "so2": "sulfur dioxide",
+            "nox": "nitrogen oxide"
+        },
+        "emissionRateChart": {
+            "selection": "Selection:",
+            "xAxis": "eGRID Subregions",
+            "sortedByAlphaLabel": "This chart is sorted alphabetically A → Z by region.",
+            "sortedByLabel": "This chart is sorted by {direction} {pollutant} emission rates.",
+            "ascending": "ascending",
+            "descending": "descending",
+            "sortAlphaLink": "A → Z Sort regions alphabetically",
+            "sortAscLink": "↑ Sort values ascending",
+            "sortDescLink": "↓ Sort values descending",
+            "regionTooltip": "Average {pollutant} rate: {rate} lbs/MWh",
+            "nationalTooltip": "Average emission rate: {rate} lbs/MWh",
+            "nationalBar": "National"
+        },
+        "maps": {
+            "header": "Maps",
+            "mapSelect": "Select",
+            "emissionRateMapChoice": "Emission Rate Map",
+            "renewableMapChoice": "Renewable/Non-renewable Map"
+        }
+    },
+    "es": {
+        "emissionRateHeader": "Tasas de emisión",
+        "emissionRateBody": {
+            "text": "Este cuadro compara las tasas de emisión promedio en libras por {MWhInfo} en todas las {eGRIDSubregions} con las tasas de emisión nacionales promedio para {co2}, {so2}, y {nox}.",
+            "MWhInfo": "MWh",
+            "eGRIDSubregions": "subregiones de eGRID",
+            "co2": "dióxido de carbono",
+            "so2": "dióxido de azufre",
+            "nox": "óxido de nitrógeno"
+        },
+        "emissionRateChart": {
+            "selection": "Seleccione:",
+            "xAxis": "eGRID Subregions",
+            "sortedByAlphaLabel": "Ordenar las regiones en forma alfabética (A → Z)",
+            "sortedByLabel": "Esta gráfica está ordenada en tasas de emisiones {direction} de {pollutant}",
+            "asc": "ascendentes",
+            "desc": "descendentes",
+            "sortAlphaLink": "Ordenar las regiones en forma alfabética (A → Z)",
+            "sortAscLink": "↑ Clasificar los valores en orden ascendente",
+            "sortDescLink": "↓ Clasificar los valores en orden descendente",
+            "regionTooltip": "Tasa de emisión promedio de {pollutant}: {rate} lbs/MWh",
+            "nationalTooltip": "Tasa de emisión promedio: {rate} lbs/MWh",
+            "nationalBar": "Nacional"
+
+        },
+        "maps": {
+            "header": "Mapas",
+            "mapSelect": "Seleccione",
+            "emissionRateMapChoice": "Mapa de las Tasas de Emisión",
+            "renewableMapChoice": "Mapa de Emisiones Renovables y No-Renovables"
+        }
+    }
+}
+</i18n>
 <template>
   <div>
     <div id="nationalEmissionRate">
-      <h3>Emission Rates</h3>
-      <p>
-        This chart compares the average emission rates in pounds per
-        <a
-          @click="$parent.$parent.showMegaWattInfo = true"
-          href="javascript:void(0)"
-          >MWh</a
-        >
-        in all
-        <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-          target="_blank"
-          >eGRID subregions</a
-        >
-        to the national average emission rates for
-        <a
-          href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
-          target="_blank"
-          >carbon dioxide (CO<sub>2</sub>)</a
-        >,
-        <a href="/so2-pollution" target="_blank"
-          >sulfur dioxide (SO<sub>2</sub>)</a
-        >, and
-        <a href="/no2-pollution" target="_blank"
-          >nitrogen oxide (NO<sub>X</sub>)</a
-        >.
+      <h3>{{ $t("emissionRateHeader") }}</h3>
+      <i18n path="emissionRateBody.text" tag="p">
+        <template #MWhInfo>
+          <a
+            @click="$parent.$parent.showMegaWattInfo = true"
+            href="javascript:void(0)"
+            >{{ $t("emissionRateBody.MWhInfo") }}</a
+          >
+        </template>
+        <template #eGRIDSubregions>
+          <a
+            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+            target="_blank"
+            >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
+          >
+        </template>
+        <template #co2>
+          <a
+            href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
+            target="_blank"
+            >{{ $t("emissionRateBody.co2") }} (CO<sub>2</sub>)</a
+          >
+        </template>
+        <template #so2>
+          <a href="/so2-pollution" target="_blank"
+            >{{ $t("emissionRateBody.so2") }} (SO<sub>2</sub>)</a
+          >
+        </template>
+        <template #nox>
+          <a href="/no2-pollution" target="_blank"
+            >{{ $t("emissionRateBody.nox") }} (NO<sub>X</sub>)</a
+          >
+        </template>
+      </i18n>
+
+      <p class="select-pollutant-label">
+        <strong> {{ $t("emissionRateChart.selection") }} </strong>
       </p>
-      <p class="select-pollutant-label"><strong>Select: </strong></p>
       <div id="pollutantSelectAll">
         <button
           @click="handlePollutantButton"
@@ -47,35 +124,37 @@
       <div id="nationalEmissionRateGraph"></div>
       <div id="sortingDiv">
         <p id="nationalEmissionRateSortingStatus">
-          <strong>This chart is sorted alphabetically A → Z by region.</strong>
+          <strong>{{ $t("emissionRateChart.sortedByAlphaLabel") }}</strong>
         </p>
         <a
           href="javascript:void(0)"
           @click="handleSortLink"
           id="sortAlphabeticallyEmissionRate"
-          >A → Z Sort regions alphabetically</a
+          >{{ $t("emissionRateChart.sortAlphaLink") }}</a
         >
         <a
           href="javascript:void(0)"
           @click="handleSortLink"
           id="sortAscendingEmissionRate"
-          >↑ Sort values ascending</a
+          >{{ $t("emissionRateChart.sortAscLink") }}</a
         >
         <a
           href="javascript:void(0)"
           @click="handleSortLink"
           id="sortDescendingEmissionRate"
-          >↓ Sort values descending</a
+          >{{ $t("emissionRateChart.sortDescLink") }}</a
         >
       </div>
     </div>
-    <h3>Maps</h3>
+    <h3>{{ $t("maps.header") }}</h3>
     <div>
       <div
         id="mapSelect"
         class="form-item form-type-radio form-item-radios row cols-2"
       >
-        <label><strong>Select:</strong></label>
+        <label
+          ><strong>{{ $t("maps.mapSelect") }}:</strong></label
+        >
         <div class="col size-1of2">
           <input
             id="emissionRateMapChoice"
@@ -85,9 +164,9 @@
             value="1"
             v-model="currentMap"
           />
-          <label for="emissionRateMapChoice" class="option"
-            >Emission Rate Map</label
-          >
+          <label for="emissionRateMapChoice" class="option">{{
+            $t("maps.emissionRateMapChoice")
+          }}</label>
         </div>
         <div class="col size-1of2">
           <input
@@ -98,9 +177,9 @@
             value="2"
             v-model="currentMap"
           />
-          <label for="renewablesMapChoice" class="option"
-            >Renewable/Non-renewable Map</label
-          >
+          <label for="renewablesMapChoice" class="option">{{
+            $t("maps.renewableMapChoice")
+          }}</label>
         </div>
       </div>
     </div>
@@ -113,11 +192,7 @@
 import { allSubregions } from "../stores/allSubregions.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import emissionRateMap from "./EmissionRateMap.vue";
 import renewablesMap from "./RenewablesMap.vue";
 import { userSelection } from "../stores/userSelection.js";
@@ -282,7 +357,7 @@ export default {
             "transform",
             "translate(" + (width / 2 - 50) + "," + (height + 50) + ")"
           )
-          .text("eGRID Subregions");
+          .text(self.$t("emissionRateChart.xAxis"));
 
         svg
           .append("g")
@@ -298,13 +373,13 @@ export default {
           .append("tspan")
           .text(function(d) {
             if (self.parameters[i] == "co2EmissionRate") {
-              pollutantLabelTooltip = "carbon dioxide";
+              pollutantLabelTooltip = self.$t("emissionRateBody.co2");
               return "CO";
             } else if (self.parameters[i] == "so2EmissionRate") {
-              pollutantLabelTooltip = "sulfur dioxide";
+              pollutantLabelTooltip = self.$t("emissionRateBody.so2");
               return "SO";
             } else if (self.parameters[i] == "noxEmissionRate") {
-              pollutantLabelTooltip = "nitrogen oxides";
+              pollutantLabelTooltip = self.$t("emissionRateBody.nox");
               return "NO";
             }
           })
@@ -335,13 +410,11 @@ export default {
           .append("g")
           .attr("class", "emissionRateTooltip")
           .attr("title", function(d) {
-            return (
-              "Average " +
-              pollutantLabelTooltip +
-              " rate: " +
-              d.properties.emissionFactor[self.selectedPollutantAll].display +
-              " lbs/MWh"
-            );
+            return self.$t("emissionRateChart.regionTooltip", {
+              pollutant: pollutantLabelTooltip,
+              rate:
+                d.properties.emissionFactor[self.selectedPollutantAll].display
+            });
           });
 
         container
@@ -397,11 +470,10 @@ export default {
           .append("g")
           .attr("class", "emissionRateTooltip")
           .attr("title", function(d) {
-            return (
-              "Average emission rate: " +
-              d.properties.emissionFactor[self.selectedPollutantAll].display +
-              " lbs/MWh"
-            );
+            return self.$t("emissionRateChart.nationalTooltip", {
+              rate:
+                d.properties.emissionFactor[self.selectedPollutantAll].display
+            });
           });
 
         nationalContainer
@@ -456,7 +528,7 @@ export default {
           .attr("transform", "translate(" + x.rangeBand() + "," + height + ")")
           .call(nationalBarXAxis)
           .append("text")
-          .text("National")
+          .text(self.$t("emissionRateChart.nationalBar"))
           .attr("x", width - 15)
           .attr("y", 30);
 
@@ -712,7 +784,7 @@ export default {
           .attr("transform", "translate(0,0)")
           .call(nationalBarYAxis)
           .append("text")
-          .text("National")
+          .text(self.$t("emissionRateChart.nationalBar"))
           .attr("x", -65)
           .attr("y", height + y.rangeBand());
 
@@ -831,15 +903,14 @@ export default {
     },
     updateStatus: function(pollutant, state) {
       if (state == "ascending" || state == "descending") {
-        return (
-          "<strong>This chart is sorted by " +
-          state +
-          " " +
-          pollutant +
-          " emission rates.</strong>"
-        );
+        return `<strong> ${this.$t("emissionRateChart.sortedByLabel", {
+          direction: this.$t(state),
+          pollutant: pollutant
+        })}<strong>`;
       } else if (state == "alphabetically") {
-        return "<strong>This chart is sorted alphabetically A → Z by region.</strong>";
+        return `<strong>${this.$t(
+          "emissionRateChart.sortedByAlphaLabel"
+        )}</strong>`;
       }
     },
     handlePollutantButton: function(e) {
@@ -935,6 +1006,12 @@ export default {
     },
     currentMap: function(m) {
       userSelection.currentMap = m;
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      }
     }
   }
 };

@@ -1,8 +1,30 @@
+<i18n>
+{
+  "en": {
+    "select": "Select",
+    "national": "National",
+    "so2EmissionRate": "sulfur dioxide",
+    "co2EmissionRate": "carbon dioxide",
+    "noxEmissionRate": "nitrogen oxides",
+    "subregionTooltip": "Average {pollutant} rate: {rate} lbs/MWh"
+
+  },
+  "es": {
+    "select": "Seleccione",
+    "national": "Nacional",
+    "so2EmissionRate": "dióxido de azufre",
+    "co2EmissionRate": "dióxido de carbono",
+    "noxEmissionRate": "óxido de nitrógeno",
+    "subregionTooltip": "Tasa de emisión promedio de {pollutant}: {rate} lbs/MWh"
+  }
+}
+</i18n>
+
 <template>
   <div id="emissionRate">
     <div id="select-offset-2">
       <p class="select-pollutant-label">
-        <strong>Select:</strong>
+        <strong>{{ $t("select") }}</strong>
       </p>
       <div id="pollutantSelectSub">
         <button id="defaultPollutantSub" value="co2EmissionRate">
@@ -15,11 +37,7 @@
   </div>
 </template>
 <script>
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { addTooltip } from "../helpers/Tooltip";
@@ -30,6 +48,14 @@ export default {
       data: [],
       selectedPollutantSub: "co2EmissionRate"
     };
+  },
+  watch: {
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      }
+    }
   },
   mounted: function() {
     var self = this;
@@ -58,6 +84,7 @@ export default {
   },
   methods: {
     display: function(data) {
+      let self = this;
       var domElement = "#emissionRate";
       var w = $(domElement).width();
       var h = 500 - ($("#select-offset-2").height() - 20);
@@ -94,7 +121,14 @@ export default {
           .axis()
           .outerTickSize(0)
           .scale(x)
-          .orient("bottom");
+          .orient("bottom")
+          .tickFormat(function(d) {
+            if (d === "National") {
+              return self.$t("national");
+            } else {
+              return d;
+            }
+          });
 
         var yAxis = d3.svg
           .axis()
@@ -146,13 +180,13 @@ export default {
           .append("tspan")
           .text(function(d) {
             if (selectedPollutantSub == "co2EmissionRate") {
-              pollutantLabelTooltip = "carbon dioxide";
+              pollutantLabelTooltip = self.$t("co2EmissionRate");
               return "CO";
             } else if (selectedPollutantSub == "so2EmissionRate") {
-              pollutantLabelTooltip = "sulfur dioxide";
+              pollutantLabelTooltip = self.$t("so2EmissionRate");
               return "SO";
             } else if (selectedPollutantSub == "noxEmissionRate") {
-              pollutantLabelTooltip = "nitrogen oxides";
+              pollutantLabelTooltip = self.$t("noxEmissionRate");
               return "NO";
             }
           })
@@ -183,13 +217,10 @@ export default {
           .append("g")
           .attr("class", "subEmissionRateTooltip")
           .attr("title", function(d) {
-            return (
-              "Average " +
-              pollutantLabelTooltip +
-              " rate: " +
-              d.properties.emissionFactor[parameters[i]].display +
-              " lbs/MWh"
-            );
+            return self.$t("subregionTooltip", {
+              pollutant: pollutantLabelTooltip,
+              rate: d.properties.emissionFactor[parameters[i]].display
+            });
           });
 
         container

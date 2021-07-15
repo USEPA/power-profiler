@@ -1,19 +1,46 @@
+<i18n>
+{
+    "en": {
+        "description": {
+            "text": "This map provides {eGRIDSubregion} average emission rates in pounds per {MWh}.",
+            "eGRIDSubregion": "eGRID subregion",
+            "MWh": "MWh"
+        },
+        "tooltip": {
+            "text": "{subregionName} average {pollutant} rate: {rate} lbs/MWh"
+        }
+    },
+    "es": {
+        "description": {
+            "text": "Este mapa incluye tasas de emisión promedio para las {eGRIDSubregion} en libras por {MWh}.",
+            "eGRIDSubregion": "subregiones de eGRID",
+            "MWh": "MWh"
+        },
+        "tooltip": {
+            "text": "Tasas de {pollutant} para las {subregionName}: {rate} lbs/MWh"
+        }
+    }
+}
+</i18n>
+
 <template>
   <div>
-    <p>
-      This map provides
-      <a
-        href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-        target="_blank"
-        >eGRID subregion</a
-      >
-      average emission rates in pounds per
-      <a
-        @click="$parent.$parent.$parent.showMegaWattInfo = true"
-        href="javascript:void(0)"
-        >MWh</a
-      >.
-    </p>
+    <i18n path="description.text" tag="p">
+      <template #eGRIDSubregion>
+        <a
+          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+          target="_blank"
+          >{{ $t("description.eGRIDSubregion") }}</a
+        >
+      </template>
+      <template #MWh>
+        <a
+          @click="$parent.$parent.$parent.showMegaWattInfo = true"
+          href="javascript:void(0)"
+          >{{ $t("description.MWh") }}</a
+        >
+      </template>
+    </i18n>
     <div class="row cols-2" id="emissionRatesHeatMap"></div>
   </div>
 </template>
@@ -123,7 +150,6 @@ export default {
       }
 
       var pollutantLabelTooltip = "";
-
       var legendLabel = this.svgGradient
         .append("text")
         .attr("y", 20)
@@ -304,14 +330,11 @@ export default {
         .append("g")
         .attr("class", "emissionRateMapTooltip")
         .attr("title", function(d) {
-          return (
-            d.properties.fullName +
-            " average " +
-            pollutantLabelTooltip +
-            " rate: " +
-            d.properties.emissionFactor[emissionRate].display +
-            " lbs/MWh"
-          );
+          return _this.$t("tooltip.text", {
+            subregionName: d.properties.fullName,
+            pollutant: pollutantLabelTooltip,
+            rate: d.properties.emissionFactor[emissionRate].display
+          });
         });
 
       container
@@ -352,6 +375,17 @@ export default {
         addLogoBottom(this.svgGradient, 30, _this.containerHeight);
       }
       addTooltip(".emissionRateMapTooltip");
+    }
+  },
+  watch: {
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.clear();
+        this.initialize(600, 300, "#emissionRatesHeatMap");
+        this.createProjection();
+        this.display(this.$parent.selectedPollutantAll, this.orientation);
+      }
     }
   }
 };

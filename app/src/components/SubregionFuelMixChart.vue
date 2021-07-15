@@ -1,14 +1,54 @@
+<i18n>
+{
+    "en": {
+      "fuel": "Fuel",
+      "generation": "Generation",
+      "national": "National",
+      "fuelTooltip": "{name} accounts for {val} % of the fuel mix for {subregion}",
+      "nationalFuelTooltip": "{name} accounts for {val} % of the fuel mix nationally",
+      "fuels": {
+        "gas": "Gas",
+        "coal": "Coal",
+        "nuclear": "Nuclear",
+        "hydro": "Hydro",
+        "wind": "Wind",
+        "biomass": "Biomass",
+        "solar": "Solar",
+        "oil": "Oil",
+        "geothermal": "Geothermal",
+        "otherFossilFuel": "Other Fossil Fuel",
+        "otherUnknownFuel": "Other Uknown Fuel"
+      }
+
+    },
+    "es": {
+      "fuel": "Combustibles",
+      "generation": "Generacion",
+      "national": "Nacional",
+      "fuelTooltip": "{name} representa el {val} % la combinación de combustibles del {subregion}",
+      "nationalFuelTooltip": "{name} representa el {val} % la combinación de combustibles a nivel nacional",
+      "fuels": {
+        "gas": "Gas",
+        "coal": "Carbón",
+        "nuclear": "Energía Nuclear",
+        "hydro": "Energía Hidroeléctrica",
+        "wind": "Energía Eólica",
+        "biomass": "Biomasa",
+        "solar": "Energía Solar",
+        "oil": "Petróleo",
+        "geothermal": "Energía Geotérmica",
+        "otherFossilFuel": "Otros Combustibles Fósiles",
+        "otherUnknownFuel": "Otros Combustibles Desconocidos"
+      }
+    }
+}
+</i18n>
+
 <template>
-  <div>
-    <div id="fuelMix"></div>
-  </div>
+  <div id="fuelMix"></div>
 </template>
 <script>
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational
-} from "../helpers/ChartHelpers.js";
+import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { addTooltip } from "../helpers/Tooltip";
@@ -18,6 +58,14 @@ export default {
     return {
       graphData: []
     };
+  },
+  watch: {
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
+      }
+    }
   },
   mounted: function() {
     var self = this;
@@ -62,11 +110,11 @@ export default {
         "otherUnknownFuel"
       ];
 
-      var margin = { top: 40, right: 30, bottom: 180, left: 50 },
+      var margin = { top: 40, right: 20, bottom: 200, left: 70 },
         width = w - margin.left - margin.right,
         height = h - margin.top - margin.bottom;
 
-      var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.3);
+      var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.4);
 
       var y = d3.scale.linear().rangeRound([height, 0]);
 
@@ -79,7 +127,14 @@ export default {
         .axis()
         .scale(x)
         .outerTickSize(0)
-        .orient("bottom");
+        .orient("bottom")
+        .tickFormat(function(d) {
+          if (d === "National") {
+            return _this.$t("national");
+          } else {
+            return d;
+          }
+        });
 
       var yAxis = d3.svg
         .axis()
@@ -139,16 +194,20 @@ export default {
         .attr("x", 30)
         .attr("dy", "0.71em")
         .attr("text-anchor", "end")
-        .text("Generation");
+        .text(this.$t("generation"));
 
       svg
         .append("text")
-        .attr("y", height + 130)
-        .attr("x", -35)
+        .attr("y", height + 180)
+        .attr("x", width / 8)
         .attr("class", "legendTitle")
         .attr("dy", "0.71em")
         .attr("text-anchor", "beginning")
-        .text("Fuel (" + data[1].properties.name + " Generation %)");
+        .text(
+          `${this.$t("fuel")} (${data[1].properties.name} ${this.$t(
+            "generation"
+          )} %)`
+        );
 
       var subregion = svg
         .selectAll(".subregion")
@@ -175,13 +234,18 @@ export default {
           return y(d.y1);
         })
         .attr("title", function(fuel) {
-          return (
-            formatFuelLabel(fuel.name) +
-            " accounts for " +
-            f(fuel.val) +
-            "% of the fuel mix " +
-            checkNational(fuel.subregion)
-          );
+          if (fuel.subregion === "National") {
+            return _this.$t("nationalFuelTooltip", {
+              name: _this.$t("fuels." + fuel.name),
+              val: f(fuel.val)
+            });
+          } else {
+            return _this.$t("fuelTooltip", {
+              name: _this.$t("fuels." + fuel.name),
+              val: f(fuel.val),
+              subregion: fuel.subregion
+            });
+          }
         })
         .attr("height", function(d) {
           return y(d.y0) - y(d.y1);
@@ -189,7 +253,6 @@ export default {
         .style("fill", function(d) {
           return color(d.name);
         });
-
       var legendBottomSub = svg
         .selectAll(".legendBottomSub")
         .data(color.domain())
@@ -197,7 +260,7 @@ export default {
         .append("g")
         .attr("class", "legendBottomSub")
         .attr("transform", function(d, i) {
-          var x = -45;
+          var x = width/8;
           // First col
           if (i === 0) {
             return "translate(" + x + "," + (height + 30) + ")";
@@ -207,24 +270,21 @@ export default {
             return "translate(" + x + "," + (height + 70) + ")";
           } else if (i === 3) {
             return "translate(" + x + "," + (height + 90) + ")";
-          }
-          // Sec col
-          else if (i === 4) {
-            return "translate(" + (x + 110) + "," + (height + 30) + ")";
+          } else if (i === 4) {
+            return "translate(" + x + "," + (height + 110) + ")";
           } else if (i === 5) {
-            return "translate(" + (x + 110) + "," + (height + 50) + ")";
+            return "translate(" + x + "," + (height + 130) + ")";
+            // Sec col
           } else if (i === 6) {
-            return "translate(" + (x + 110) + "," + (height + 70) + ")";
+            return "translate(" + (x + 181) + "," + (height + 30) + ")";
           } else if (i === 7) {
-            return "translate(" + (x + 110) + "," + (height + 90) + ")";
-          }
-          // Third col
-          else if (i === 8) {
-            return "translate(" + (x + 230) + "," + (height + 30) + ")";
+            return "translate(" + (x + 181) + "," + (height + 50) + ")";
+          } else if (i === 8) {
+            return "translate(" + (x + 181) + "," + (height + 70) + ")";
           } else if (i === 9) {
-            return "translate(" + (x + 230) + "," + (height + 60) + ")";
+            return "translate(" + (x + 181) + "," + (height + 90) + ")";
           } else if (i === 10) {
-            return "translate(" + (x + 230) + "," + (height + 90) + ")";
+            return "translate(" + (x + 181) + "," + (height + 110) + ")";
           }
         });
 
@@ -234,6 +294,8 @@ export default {
         .attr("y", 0)
         .attr("width", 10)
         .attr("height", 10)
+        //A dark border around the square to distinguish colors from background
+        .style("stroke", "#212121")
         .style("fill", color);
 
       legendBottomSub
@@ -241,73 +303,20 @@ export default {
         .attr("x", 20)
         .attr("y", 10)
         .text(function(d, i) {
-          if (
-            d != "otherFossilFuel" &&
-            d != "otherUnknownFuel" &&
-            d != "geothermal"
-          ) {
-            return (
-              formatFuelLabel(d) + " (" + data[1].properties.fuelMix[d] + "%)"
-            );
-          }
+          return `${_this.$t(
+            "fuels." + d
+          )} (${data[1].properties.fuelMix[d]} %)`;
         })
         .attr("class", function(d) {
-          if (
-            d == "otherFossilFuel" ||
-            d == "otherUnknownFuel" ||
-            d == "geothermal"
-          ) {
-            return "lgLabel textselected";
-          } else {
-            return "textselected";
-          }
+          return "textselected";
         })
         .style("text-anchor", "start");
 
       var lgLabels = svg.selectAll(domElement + " .lgLabel");
 
-      var sarr;
-
       lgLabels.append("tspan").text(function(d) {
-        sarr = d.match(/[A-Z]*[^A-Z]+/g);
-        if (d == "geothermal") {
-          return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
-        } else if (d == "otherFossilFuel") {
-          return (
-            sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1) + " " + sarr[1]
-          );
-        } else {
-          return sarr[0].charAt(0).toUpperCase(1) + sarr[0].substr(1);
-        }
+        return _this.$t("fuels." + d);
       });
-
-      lgLabels
-        .append("tspan")
-        .attr("x", 20)
-        .attr("y", 25)
-        .attr("class", function(d) {
-          if (d == "otherUnknownFuel") {
-            return "unknown";
-          }
-        })
-        .text(function(d) {
-          if (d == "geothermal") {
-            return "(" + data[1].properties.fuelMix[d] + "%)";
-          } else if (d == "otherFossilFuel") {
-            return sarr[2] + " (" + data[1].properties.fuelMix[d] + "%)";
-          } else if (d == "otherUnknownFuel") {
-            return sarr[1];
-          }
-        });
-
-      lgLabels
-        .selectAll(".unknown")
-        .append("tspan")
-        .attr("x", 20)
-        .attr("y", 40)
-        .text(function(d) {
-          return "Fuel (" + data[1].properties.fuelMix[d] + "%)";
-        });
 
       var baseline = (height + margin.top + margin.bottom) * 0.34;
       addLogoBottom(svg, width - 100, height + baseline);

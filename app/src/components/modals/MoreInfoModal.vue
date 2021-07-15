@@ -1,3 +1,15 @@
+<i18n>
+{
+    "en": {
+        "modalHeader": "What is Power Profiler?",
+        "okButton": "OK"
+    },
+    "es": {
+        "modalHeader": "¿Qué es el analizador de consumo energía?",
+        "okButton": "Ir"
+    }
+}
+</i18n>
 <template>
   <transition name="modal">
     <div class="modal-mask">
@@ -5,7 +17,7 @@
         <div class="modal-container">
           <div class="modal-header">
             <slot name="header">
-              <h3>What is Power Profiler?</h3>
+              <h3>{{ $t("modalHeader") }}</h3>
             </slot>
           </div>
 
@@ -18,7 +30,7 @@
               class="modal-default-button"
               @click="$emit('close')"
             >
-              OK
+              {{ $t("okButton") }}
             </button>
           </div>
         </div>

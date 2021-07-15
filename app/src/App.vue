@@ -1,6 +1,25 @@
+<i18n>
+{
+  "en": {
+    "title": "Power Profiler",
+    "subTitle": "How clean is the electricity you use?"
+  },
+  "es": {
+    "title": "Analizador de consumo de energía",
+    "subTitle": "¿Qué tan limpia es la electricidad que consume?",
+    "linkLangNote": "Nota: La mayoría de los enlaces en estas páginas le llevarán a páginas web en inglés"
+  }
+}
+</i18n>
+
 <template>
   <div>
-    <h3>How clean is the electricity you use?</h3>
+    <div class="locale-changer">
+      <a v-on:click="toggleLang" href="javascript:void(0)">{{ langLink }}</a>
+    </div>
+    <h1 class="page-title">{{ $t("title") }}</h1>
+    <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
+    <h3>{{ $t("subTitle") }}</h3>
     <div id="app" class="row cols-2">
       <sideBar id="sidebar" class="col size-1of3 box simple"></sideBar>
       <div v-if="subregionJSONLoaded" id="main-charts" class="col size-2of3">
@@ -42,7 +61,6 @@ import calculatorResults from "./components/CalculatorResults.vue";
 import printReport from "./components/PrintReport.vue";
 import mainPrintReport from "./components/MainPrintReport.vue";
 import AppDescription from "./components/AppDescription.vue";
-import { selectedSubregion } from "./stores/selectedSubregion.js";
 import { userSelection } from "./stores/userSelection.js";
 
 export default {
@@ -70,12 +88,31 @@ export default {
       subregionSelected: false,
       showResult: false,
       showMain: false,
-      showMainReport: false
+      showMainReport: false,
+      langs: {
+        en: "English",
+        es: "Español"
+      },
+      langLink: "Español"
     };
   },
+  methods: {
+    toggleLang: function() {
+      let curLang = this.$root.$i18n.locale;
+      let newLang = curLang === "en" ? "es" : "en";
+      this.langLink = this.langs[curLang];
+      this.$root.$i18n.locale = newLang;
+    }
+  },
+
   mounted: function() {
     var self = this;
     var emissionRatePollutantId;
+
+    // update the langLink to be English if someone starts with Espanol
+    let curLang = this.$root.$i18n.locale;
+    let newLang = curLang === "en" ? "es" : "en";
+    this.langLink = this.langs[newLang];
 
     window.addEventListener("beforeprint", function(event) {
       if (self.$route.name == "subregion") {
@@ -209,6 +246,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #app {
   padding-left: 1em;
+  display: flex;
+  justify-content: space-between;
 }
 .select-pollutant-label,
 #nationalEmissionRateSortingStatus,
@@ -218,7 +257,9 @@ input[type="number"]::-webkit-outer-spin-button {
 #sidebar {
   background-color: #fafafa;
   border: 1px solid black;
+  max-width: 359px;
 }
+
 .modal-mask {
   position: fixed;
   z-index: 9998;

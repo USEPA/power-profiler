@@ -1,19 +1,110 @@
+<i18n>
+{
+    "en": {
+        "title": "Estimate Your Emissions",
+        "calculatorForm": {
+          "avgUse": "Enter your ",
+          "linkToAvgUse": "average monthly electricity use",
+          "monUse": "Or enter your ",
+          "monUseLink": "actual electricity use for each month",
+          "months": {
+            "jan": "January",
+            "feb": "February",
+            "mar": "March",
+            "apr": "April",
+            "may": "May",
+            "jun": "June",
+            "jul": "July",
+            "aug": "August",
+            "sep": "September",
+            "oct": "October",
+            "nov": "November",
+            "dec": "December"
+          },
+          "natAvgUse": "Or use the",
+          "natAvgUseLink": "national average electricity use",
+          "goButton": "Go"
+        },
+        "results": {
+          "natAnnGauge":"National Annual Electricity Use",
+          "youAnnGauge":"Your Annual Electricity Use",
+          "compareAnnGauge":"Your Electricity Use Compared to the National Average",
+          "charts" : {
+            "co2Title": "Carbon Dioxide",
+            "so2Title": "Sulfur Dioxide",
+            "noxTitle": "Nitrogen Oxides",
+            "nat": "National Average",
+            "reg": " Average",
+            "you": "Your Emissions"
+          },
+          "avgSubheader": "Average Monthly Electricity Use",
+          "actualSubheader": "Actual Monthly Electricity Use",
+          "nationalSubheader": "National Average Electricity Use",
+          "commercialSubheader": "National Average Electricity Use for Commercial Customers"
+        }
+    },
+    "es": {
+        "title": "Calcule sus emisiones",
+        "calculatorForm": {
+          "avgUse": "Ingrese su ",
+          "linkToAvgUse": "consumo mensual promedio de electricidad",
+          "monUse": "O ingrese su ",
+          "monUseLink": "consumo real de electricidad para cada mes",
+          "months": {
+            "jan": "enero",
+            "feb": "febrero",
+            "mar": "marzo",
+            "apr": "abril",
+            "may": "mayo",
+            "jun": "junio",
+            "jul": "julio",
+            "aug": "agosto",
+            "sep": "septiembre",
+            "oct": "octubre",
+            "nov": "noviembre",
+            "dec": "diciembre"
+          },
+          "natAvgUse": "O use el",
+          "natAvgUseLink": "consumo nacional promedio de electricidad",
+          "goButton": "Ir"
+        },
+        "results": {
+          "natAnnGauge":"Consumo nacional eléctrico anual",
+          "youAnnGauge":"Su consumo eléctrico anual",
+          "compareAnnGauge":"Su consumo eléctrico comparado con el promedio nacional",
+          "charts" : {
+            "co2Title": "dióxido de carbono",
+            "so2Title": "dióxido de azufre",
+            "noxTitle": "óxido de nitrógeno",
+            "nat": "Promedio nacional",
+            "reg": " promedio",
+            "you": "Sus emisiones"
+          },
+          "avgSubheader": "Consumo mensual promedio de electricidad",
+          "actualSubheader": "Consumo mensual de electricidad",
+          "nationalSubheader": "Consumo nacional promedio de electricidad",
+          "commercialSubheader": "Uso promedio nacional de electricidad para clientes comerciales"
+        }
+    }
+}
+</i18n>
 <template>
   <div id="emissionsCalculator">
-    <h3>Estimate Your Emissions</h3>
+    <h3>{{ $t("title") }}</h3>
     <div>
       <div>
-        <p>
-          <label id="userMonthlyAverageLabel" for="userMonthlyAverageInput"
-            >Enter your
-            <a
-              href="javascript:void(0)"
-              id="monthlyAverageLink"
-              @click="showAverageInput = true"
-              >average monthly electricity use</a
-            >.</label
+        <label id="userMonthlyAverageLabel" for="userMonthlyAverageInput">
+          {{ $t("calculatorForm.avgUse") }}
+          <a
+            href="javascript:void(0)"
+            id="monthlyAverageLink"
+            @click="showAverageInput = true"
+            v-if="showAverageInput === false"
+            >{{ $t("calculatorForm.linkToAvgUse") }}</a
           >
-        </p>
+          <span v-else>{{ $t("calculatorForm.linkToAvgUse") }}</span
+          >.
+        </label>
         <form
           v-on:submit.prevent="displayMonthlyAverage"
           v-show="showAverageInput"
@@ -24,24 +115,27 @@
             id="userMonthlyAverageInput"
             required=""
             type="number"
-            style="height: 36px;"
+            style="height: 36px"
           />&nbsp;kWh&nbsp;<button
             id="calculateMonthlyAverageButton"
             type="submit"
           >
-            Go
+            {{ $t("calculatorForm.goButton") }}
           </button>
         </form>
       </div>
       <div>
         <p>
-          Or enter your
+          {{ $t("calculatorForm.monUse") }}
           <a
             href="javascript:void(0)"
             id="monthlyActualLink"
             class="emissionsLink"
             @click="showAverageInput = false"
-            >actual electricity use for each month</a
+            v-if="showAverageInput === true"
+            >{{ $t("calculatorForm.monUseLink") }}</a
+          >
+          <span v-else>{{ $t("calculatorForm.monUseLink") }}</span
           >.
         </p>
         <form
@@ -53,7 +147,7 @@
           <div class="row cols-3">
             <div class="col">
               <label for="userMonthlyActualInput1"
-                ><strong>January</strong></label
+                ><strong>{{ $t("calculatorForm.months.jan") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput1"
@@ -63,7 +157,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput2"
-                ><strong>February</strong></label
+                ><strong>{{ $t("calculatorForm.months.feb") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput2"
@@ -73,7 +167,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput3"
-                ><strong>March</strong></label
+                ><strong>{{ $t("calculatorForm.months.mar") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput3"
@@ -85,7 +179,7 @@
           <div class="row cols-3">
             <div class="col">
               <label for="userMonthlyActualInput4"
-                ><strong>April</strong></label
+                ><strong>{{ $t("calculatorForm.months.apr") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput4"
@@ -94,7 +188,9 @@
               />&nbsp;kWh
             </div>
             <div class="col">
-              <label for="userMonthlyActualInput5"><strong>May</strong></label>
+              <label for="userMonthlyActualInput5"
+                ><strong>{{ $t("calculatorForm.months.may") }}</strong></label
+              >
               <input
                 id="userMonthlyActualInput5"
                 required=""
@@ -102,7 +198,9 @@
               />&nbsp;kWh
             </div>
             <div class="col">
-              <label for="userMonthlyActualInput6"><strong>June</strong></label>
+              <label for="userMonthlyActualInput6"
+                ><strong>{{ $t("calculatorForm.months.jun") }}</strong></label
+              >
               <input
                 id="userMonthlyActualInput6"
                 required=""
@@ -112,7 +210,9 @@
           </div>
           <div class="row cols-3">
             <div class="col">
-              <label for="userMonthlyActualInput7"><strong>July</strong></label>
+              <label for="userMonthlyActualInput7"
+                ><strong>{{ $t("calculatorForm.months.jul") }}</strong></label
+              >
               <input
                 id="userMonthlyActualInput7"
                 required=""
@@ -121,7 +221,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput8"
-                ><strong>August</strong></label
+                ><strong>{{ $t("calculatorForm.months.aug") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput8"
@@ -131,7 +231,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput9"
-                ><strong>September</strong></label
+                ><strong>{{ $t("calculatorForm.months.sep") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput9"
@@ -143,7 +243,7 @@
           <div class="row cols-3">
             <div class="col">
               <label for="userMonthlyActualInput10"
-                ><strong>October</strong></label
+                ><strong>{{ $t("calculatorForm.months.oct") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput10"
@@ -153,7 +253,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput11"
-                ><strong>November</strong></label
+                ><strong>{{ $t("calculatorForm.months.nov") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput11"
@@ -163,7 +263,7 @@
             </div>
             <div class="col">
               <label for="userMonthlyActualInput12"
-                ><strong>December</strong></label
+                ><strong>{{ $t("calculatorForm.months.dec") }}</strong></label
               >
               <input
                 id="userMonthlyActualInput12"
@@ -173,7 +273,7 @@
                 id="calculateMonthlyActualButton"
                 type="submit"
               >
-                Go
+                {{ $t("calculatorForm.goButton") }}
               </button>
             </div>
           </div>
@@ -181,13 +281,13 @@
       </div>
       <div>
         <p>
-          Or use the
+          {{ $t("calculatorForm.natAvgUse") }}
           <a
             v-on:click.prevent="displayNationalAverage"
             href="javascript:void(0)"
             id="nationalAverageLink"
             class="emissionsLink"
-            >national average electricity use</a
+            >{{ $t("calculatorForm.natAvgUseLink") }}</a
           >.
         </p>
       </div>
@@ -198,11 +298,8 @@
 <script>
 import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
-import {
-  addLogoBottom,
-  formatFuelLabel,
-  checkNational
-} from "../helpers/ChartHelpers.js";
+import { userSelection } from "../stores/userSelection.js";
+import { addLogoBottom, textWrap } from "../helpers/ChartHelpers.js";
 
 export default {
   data() {
@@ -228,8 +325,9 @@ export default {
       emissionsResultsWidth: 0,
       emissionsResultsHeight: 0,
       residentialMode: true,
+      userSelectionStore: userSelection,
       commercialCustomerForm: false,
-      squareFootage: 0
+      sqrFootage: 0
     };
   },
   mounted: function() {
@@ -344,8 +442,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         this.nationalAverage * 12,
-        "National Annual",
-        "Electricity Use",
+        this.$t("results.natAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -353,8 +450,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         userMonthlyAverage * 12,
-        "Your Annual",
-        "Electricity Use",
+        this.$t("results.youAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -362,8 +458,7 @@ export default {
         this.emissionsResultsHeight / 2,
         percentMax,
         userPercent,
-        "Your Electricity Use",
-        "Compared to the National Average",
+        this.$t("results.compareAnnGauge"),
         true
       );
       d3.selectAll("#resultGraphs svg").remove();
@@ -387,7 +482,7 @@ export default {
       $("#resultGraphs").show();
       $("#annual-results-text").show();
       $("#national-avg-annual-results-text").hide();
-      $("#result-subheader").html("Average Monthly Electricity Use");
+      $("#result-subheader").html(self.$t("results.avgSubheader"));
       $("#result").show();
     },
     displayMonthlyActual: function() {
@@ -493,8 +588,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         this.nationalAverage * 12,
-        "National Annual",
-        "Electricity Use",
+        this.$t("results.natAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -502,8 +596,7 @@ export default {
         this.emissionsResultsHeight / 2,
         gaugeMax,
         total,
-        "Your Annual",
-        "Electricity Use",
+        this.$t("results.youAnnGauge"),
         false
       );
       this.gaugeChart(
@@ -511,8 +604,7 @@ export default {
         this.emissionsResultsHeight / 2,
         percentMax,
         userPercent,
-        "Your Annual Electricity Use",
-        "Compared to the National Average",
+        this.$t("results.compareAnnGauge"),
         true
       );
       d3.selectAll("#resultGraphs svg").remove();
@@ -536,7 +628,7 @@ export default {
       $("#resultGraphs").show();
       $("#annual-results-text").show();
       $("#national-avg-annual-results-text").hide();
-      $("#result-subheader").html("Actual Monthly Electricity Use");
+      $("#result-subheader").html(self.$t("results.actualSubheader"));
       $("#result").show();
     },
     displayNationalAverage: function(e) {
@@ -588,14 +680,11 @@ export default {
       if ($("#chart-gauge").children.length > 3) {
         d3.selectAll("#chart-gauge svg").remove();
       }
-
       if (this.residentialMode == false) {
         var gaugeMax = 24000;
-        this.nationalAverage = this.squareFootage * 1.22;
+        this.nationalAverage = this.sqrFootage * 1.22;
         $("#resultGraphs").hide();
-        $("#result-subheader").html(
-          "National Average Electricity Use for Commercial Customers"
-        );
+        $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
         $("#chart-gauge").attr("class", "pane-content row cols-4");
         if (this.nationalAverage * 12 > 24000) {
@@ -606,8 +695,7 @@ export default {
           this.emissionsResultsHeight / 2,
           gaugeMax,
           this.nationalAverage * 12,
-          "Your Annual",
-          "Electricity Use",
+          this.$t("results.youAnnGauge"),
           false
         );
         this.displayUserAndNationalEmissions(
@@ -630,7 +718,7 @@ export default {
       } else {
         this.nationalAverage = 877;
         $("#resultGraphs").hide();
-        $("#result-subheader").html("National Average Electricity Use");
+        $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
         d3.selectAll("#chart-gauge svg").remove();
         $("#chart-gauge").attr("class", "pane-content row cols-4");
@@ -639,8 +727,7 @@ export default {
           this.emissionsResultsHeight / 2,
           24000,
           this.nationalAverage * 12,
-          "Your Annual",
-          "Electricity Use",
+          this.$t("results.youAnnGauge"),
           false
         );
         this.displayUserAndNationalEmissions(
@@ -687,7 +774,7 @@ export default {
       );
 
       $("#commercialCustomersLink").click(function() {
-        this.commercialCustomerForm = true;
+        self.commercialCustomerForm = true;
         $("#residentialCustomersButton").show();
         $("#customerText").hide();
         $("#commercialCustomersForm").show();
@@ -695,28 +782,27 @@ export default {
 
       $("#commercialCustomersForm").on("submit", function(e) {
         e.preventDefault();
-        this.squareFootage = $("#squareFootage").val();
-        this.residentialMode = false;
-        $("#nationalAverageLink").trigger("click");
-        $("#nat-em-rpt-intro-2").html(
-          "estimated from the national average electricity consumption of 1.22 kWh/sq. ft./month for commercial customers and"
-        );
+        const input = $("#squareFootage").val();
+        self.sqrFootage = input;
+        self.residentialMode = false;
+        self.displayNationalAverage();
+        self.userSelectionStore.setResidentialMode(false);
       });
 
       $("#residentialCustomersButton").click(function() {
-        this.commercialCustomerForm = false;
-        this.residentialMode = true;
-        $("#nationalAverageLink").trigger("click");
-        $("#nat-em-rpt-intro-2").html(
-          "estimated from the average home consumption of 1,011 kWh/month and"
-        );
+        self.commercialCustomerForm = false;
+        self.residentialMode = true;
+        self.userSelectionStore.setResidentialMode(true);
+        self.displayNationalAverage();
+        $("#customerText").show();
+        $("#residentialCustomersButton").hide();
       });
 
       $("#annual-results-text").hide();
       $("#national-avg-annual-results-text").show();
       $("#result").show();
     },
-    gaugeChart: function(width, height, maxVal, num, text1, text2, percent) {
+    gaugeChart: function(width, height, maxVal, num, text, percent) {
       // Set Up
       var pi = Math.PI;
       var iR = 60;
@@ -749,17 +835,10 @@ export default {
       svg
         .append("text")
         .attr("class", "gauge-title")
-        .attr("transform", "translate(0,-105)")
+        .attr("transform", "translate(0," + -oR + ")")
         .attr("text-anchor", "middle")
-        .text(text1);
+        .text(text);
 
-      svg
-        .append("text")
-        .attr("class", "gauge-title")
-        .attr("transform", "translate(0,-90)")
-        .attr("text-anchor", "middle")
-        .text(text2);
-      // Append background arc to svg
       var background = svg
         .append("path")
         .datum({ endAngle: 90 * (pi / 180) })
@@ -833,6 +912,8 @@ export default {
         "'Source Sans Pro', 'Helvetica Neue', 'Helvetica', 'Roboto', 'Arial', sans-serif"
       );
 
+      d3.selectAll(".gauge-title").call(textWrap, 20, oR);
+
       d3.selectAll(
         "#chart-gauge svg .y.axis path, #resultGraphs svg .axis line"
       )
@@ -883,6 +964,7 @@ export default {
       w,
       h
     ) {
+      let self = this;
       var pollutants = ["co2", "so2", "nox"];
 
       for (var i = 0; i < pollutants.length; i += 1) {
@@ -898,21 +980,23 @@ export default {
             display: Number(
               parseFloat(national[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: "National Average"
+            name: self.$t("results.charts.nat")
           },
           {
             value: parseFloat(subregion[pollutants[i]]),
             display: Number(
               parseFloat(subregion[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: this.selectedSubregion.properties.name + " Average"
+            name:
+              this.selectedSubregion.properties.name +
+              self.$t("results.charts.reg")
           },
           {
             value: parseFloat(user[pollutants[i]]),
             display: Number(
               parseFloat(user[pollutants[i]]).toFixed(0)
             ).toLocaleString(),
-            name: "Your Emissions"
+            name: self.$t("results.charts.you")
           }
         ];
 
@@ -989,11 +1073,11 @@ export default {
           .attr("font-weight", "bold")
           .text(function() {
             if (pollutants[i] == "co2") {
-              return "Carbon Dioxide";
+              return self.$t("results.charts.co2Title");
             } else if (pollutants[i] == "so2") {
-              return "Sulfur Dioxide";
+              return self.$t("results.charts.so2Title");
             } else if (pollutants[i] == "nox") {
-              return "Nitrogen Oxides";
+              return self.$t("results.charts.noxTitle");
             }
           });
 
@@ -1146,6 +1230,12 @@ export default {
       if (to !== from) {
         self.selectedSubregion = selectedSubregion.data;
         self.update();
+      }
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.update();
       }
     }
   }
