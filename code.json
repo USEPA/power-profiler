@@ -1,0 +1,31 @@
+[  
+	{
+		"name": "USEPA/power-profiler",
+		"organization": "usepa",
+		"description": "Power Profiler is an interactive tool to visualize a subset of eGRID data.",
+		"version": "",
+		"status": "Production",
+		"permissions": {
+			"usageType": "openSource",
+			"licenses": [{
+				"URL": "https://github.com/USEPA/power-profiler/blob/master/LICENSE.md"
+			}]
+		},
+		"homepageURL": "https://www.epa.gov/egrid/power-profiler#/",
+		"repositoryURL": "https://github.com/USEPA/power-profiler",
+		"vcs": "git",
+		"laborHours": 0,
+		"tags": [
+			"usepa"
+		],
+		"languages": [],
+		"contact": {
+			"name": "USEPA"
+		},
+		"date": {
+			"created": "2019-05-23",
+			"lastModified": "2020-04-29",
+			"metadataLastUpdated": "2021-07-21"
+		}
+	  }
+]
