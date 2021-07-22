@@ -31,7 +31,7 @@
         >
       </template>
     </i18n>
-    <div id="renewablesMap" class="row cols-2"></div>
+    <div id="renewablesMap" class="grid-row"></div>
   </div>
 </template>
 <script>
@@ -93,7 +93,7 @@ export default {
       var svg = d3
         .select(this.domElement)
         .append("svg")
-        .attr("class", "col size-4of5")
+        .attr("class", "grid-col-11")
         .attr("width", this.width)
         .attr("height", this.height)
         .attr("viewBox", "0 0 " + this.width + " " + this.height)
@@ -162,7 +162,7 @@ export default {
         var svgLegend = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class", "col size-1of5")
+          .attr("class", "grid-col-1")
           .attr("width", 150)
           .attr("height", _this.height + 107);
 
@@ -204,7 +204,7 @@ export default {
         var svgLegendV = d3
           .select(this.domElement)
           .append("svg")
-          //.attr("class","col size-1of5")
+          .attr("class","grid-col-1")
           .attr("width", _this.width + 70)
           .attr("height", 40);
 

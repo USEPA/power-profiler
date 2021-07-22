@@ -42,94 +42,102 @@
 </i18n>
 <template>
   <div v-if="dataLoaded">
-    <h3 id="kpis-section-title">
-      <span>{{ subregion.properties.name }}</span>
-      {{ $t("emissionRateHeader") }}
-    </h3>
-    <div class="col row cols-3" id="kpis">
-      <div class="col box special" value="co2EmissionRate">
-        <h3 class="pane-title">CO<sub>2</sub></h3>
-        <div class="pane-content">
-          <h2 id="co2-pane-content">
-            {{ subregion.properties.emissionFactor.co2EmissionRate.display }}
-          </h2>
-          <p>(lbs/MWh)</p>
-        </div>
+
+    <div class="grid-col grid-container" id="kpis">
+      <div class="grid-row grid-gap">
+        <h3 id="kpis-section-title">
+          <span>{{ subregion.properties.name }}</span>
+          {{ $t("emissionRateHeader") }}
+        </h3>
       </div>
-      <div class="col box special" value="so2EmissionRate">
-        <h3 class="pane-title">SO<sub>2</sub></h3>
-        <div class="pane-content">
-          <h2 id="so2-pane-content">
-            {{ subregion.properties.emissionFactor.so2EmissionRate.display }}
-          </h2>
-          <p>(lbs/MWh)</p>
+      <div class="grid-row grid-gap">
+        <div class="grid-col box special" value="co2EmissionRate">
+          <h3 class="pane-title">CO<sub>2</sub></h3>
+          <div class="pane-content">
+            <h2 id="co2-pane-content">
+              {{ subregion.properties.emissionFactor.co2EmissionRate.display }}
+            </h2>
+            <p>(lbs/MWh)</p>
+          </div>
         </div>
-      </div>
-      <div class="col box special" value="noxEmissionRate">
-        <h3 class="pane-title">NO<sub>X</sub></h3>
-        <div class="pane-content">
-          <h2 id="nox-pane-content">
-            {{ subregion.properties.emissionFactor.noxEmissionRate.display }}
-          </h2>
-          <p>(lbs/MWh)</p>
+        <div class="grid-col box special" value="so2EmissionRate">
+          <h3 class="pane-title">SO<sub>2</sub></h3>
+          <div class="pane-content">
+            <h2 id="so2-pane-content">
+              {{ subregion.properties.emissionFactor.so2EmissionRate.display }}
+            </h2>
+            <p>(lbs/MWh)</p>
+          </div>
+        </div>
+        <div class="grid-col box special" value="noxEmissionRate">
+          <h3 class="pane-title">NO<sub>X</sub></h3>
+          <div class="pane-content">
+            <h2 id="nox-pane-content">
+              {{ subregion.properties.emissionFactor.noxEmissionRate.display }}
+            </h2>
+            <p>(lbs/MWh)</p>
+          </div>
         </div>
       </div>
     </div>
-    <p id="subregionButtons">
-        <router-link :to="'/'">« {{ $t("backToAllSubregions") }}</router-link>
-    </p>
-    <div class="col row cols-2" id="selectedSubregion">
-      <div id="fuelMixContainer" class="col">
-        <h3>{{ $t("fuelMixHeader") }}</h3>
-        <i18n path="fuelMixBody.text" tag="p">
-          <template #eGRIDSubregion>
-            <a
-              href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-              target="_blank"
-              >{{ $t("fuelMixBody.eGRIDSubregion") }}</a
-            >
-          </template>
-        </i18n>
-        <subregionFuelMixChart></subregionFuelMixChart>
-      </div>
-      <div id="printMap"></div>
-      <div id="emissionRateContainer" class="col">
-        <h3>{{ $t("emissionRateHeader") }}</h3>
-        <i18n path="emissionRateBody.text" tag="p">
-          <template #MWhInfo>
-            <a
-              @click="$parent.showMegaWattInfo = true"
-              href="javascript:void(0)"
-              >{{ $t("emissionRateBody.MWhInfo") }}</a
-            >
-          </template>
-          <template #eGRIDSubregion>
-            <a
-              href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-              target="_blank"
-              >{{ $t("emissionRateBody.eGRIDSubregion") }}</a
-            >
-          </template>
-          <template #co2>
-            <a
-              href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
-              target="_blank"
-              >{{ $t("emissionRateBody.co2") }} (CO<sub>2</sub>)</a
-            >
-          </template>
-          <template #so2>
-            <a href="/so2-pollution" target="_blank"
-              >{{ $t("emissionRateBody.so2") }} (SO<sub>2</sub>)</a
-            >
-          </template>
-          <template #nox>
-            <a href="/no2-pollution" target="_blank"
-              >{{ $t("emissionRateBody.nox") }} (NO<sub>X</sub>)</a
-            >
-          </template>
-        </i18n>
 
-        <subregionEmissionRateChart></subregionEmissionRateChart>
+    <div class="grid-col grid-container" id="selectedSubregion">
+      <div class="grid-row grid-gap">
+        <p id="subregionButtons">
+          <router-link :to="'/'">« {{ $t("backToAllSubregions") }}</router-link>
+        </p>
+        <div id="fuelMixContainer" class="grid-col">
+          <h3>{{ $t("fuelMixHeader") }}</h3>
+          <i18n path="fuelMixBody.text" tag="p">
+            <template #eGRIDSubregion>
+              <a
+                href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+                target="_blank"
+                >{{ $t("fuelMixBody.eGRIDSubregion") }}</a
+              >
+            </template>
+          </i18n>
+          <subregionFuelMixChart></subregionFuelMixChart>
+        </div>
+        <div id="printMap"></div>
+        <div id="emissionRateContainer" class="grid-col">
+          <h3>{{ $t("emissionRateHeader") }}</h3>
+          <i18n path="emissionRateBody.text" tag="p">
+            <template #MWhInfo>
+              <a
+                @click="$parent.showMegaWattInfo = true"
+                href="javascript:void(0)"
+                >{{ $t("emissionRateBody.MWhInfo") }}</a
+              >
+            </template>
+            <template #eGRIDSubregion>
+              <a
+                href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+                target="_blank"
+                >{{ $t("emissionRateBody.eGRIDSubregion") }}</a
+              >
+            </template>
+            <template #co2>
+              <a
+                href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
+                target="_blank"
+                >{{ $t("emissionRateBody.co2") }} (CO<sub>2</sub>)</a
+              >
+            </template>
+            <template #so2>
+              <a href="/so2-pollution" target="_blank"
+                >{{ $t("emissionRateBody.so2") }} (SO<sub>2</sub>)</a
+              >
+            </template>
+            <template #nox>
+              <a href="/no2-pollution" target="_blank"
+                >{{ $t("emissionRateBody.nox") }} (NO<sub>X</sub>)</a
+              >
+            </template>
+          </i18n>
+
+          <subregionEmissionRateChart></subregionEmissionRateChart>
+        </div>
       </div>
     </div>
     <p>

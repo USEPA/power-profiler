@@ -110,11 +110,11 @@
             required=""
             type="number"
           />&nbsp;
-          <button id="commercialCustomersButton" type="submit">
+          <button id="commercialCustomersButton" class="usa-button" type="submit">
             {{ $t("commercialCustButton") }}
           </button>
         </form>
-        <button id="residentialCustomersButton" style="display: none">
+        <button id="residentialCustomersButton" class="usa-button" style="display: none">
           {{ $t("switchToResButton") }}
         </button>
       </div>
@@ -149,11 +149,13 @@
         </template>
       </i18n>
     </div>
-    <div class="box special">
-      <div id="chart-gauge" class="pane-content row cols-3"></div>
-    </div>
-    <div class="box special">
-      <div id="resultGraphs" class="row cols-3 pane-content"></div>
+    <div class="box special grid-container">
+      <div class="grid-row grid-gap">
+        <div id="chart-gauge" class="pane-content"></div>
+      </div>
+      <div class="grid-row grid-gap">
+        <div id="resultGraphs" class="pane-content"></div>
+      </div>
     </div>
     <div>
       <p>

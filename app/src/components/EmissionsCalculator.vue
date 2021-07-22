@@ -118,6 +118,7 @@
             style="height: 36px"
           />&nbsp;kWh&nbsp;<button
             id="calculateMonthlyAverageButton"
+            class="usa-button"
             type="submit"
           >
             {{ $t("calculatorForm.goButton") }}
@@ -144,138 +145,167 @@
           id="calculateMonthlyActualForm"
           method="POST"
         >
-          <div class="row cols-3">
-            <div class="col">
+          <div class="grid-row grid-gap">
+            <div class="grid-col">
               <label for="userMonthlyActualInput1"
                 ><strong>{{ $t("calculatorForm.months.jan") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput1"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput1"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput2"
                 ><strong>{{ $t("calculatorForm.months.feb") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput2"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput2"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput3"
                 ><strong>{{ $t("calculatorForm.months.mar") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput3"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput3"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
           </div>
-          <div class="row cols-3">
-            <div class="col">
+          <div class="grid-row grid-gap">
+            <div class="grid-col">
               <label for="userMonthlyActualInput4"
                 ><strong>{{ $t("calculatorForm.months.apr") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput4"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput4"
+                  required=""
+                  type="number"
+                />&nbsp;kWh`
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput5"
                 ><strong>{{ $t("calculatorForm.months.may") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput5"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput5"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput6"
                 ><strong>{{ $t("calculatorForm.months.jun") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput6"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput6"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
           </div>
-          <div class="row cols-3">
-            <div class="col">
+          <div class="grid-row grid-gap">
+            <div class="grid-col">
               <label for="userMonthlyActualInput7"
                 ><strong>{{ $t("calculatorForm.months.jul") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput7"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput7"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput8"
                 ><strong>{{ $t("calculatorForm.months.aug") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput8"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput8"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput9"
                 ><strong>{{ $t("calculatorForm.months.sep") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput9"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput9"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
           </div>
-          <div class="row cols-3">
-            <div class="col">
+          <div class="grid-row grid-gap">
+            <div class="grid-col">
               <label for="userMonthlyActualInput10"
                 ><strong>{{ $t("calculatorForm.months.oct") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput10"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput10"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput11"
                 ><strong>{{ $t("calculatorForm.months.nov") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput11"
-                required=""
-                type="number"
-              />&nbsp;kWh
+              <div>
+                <input
+                  id="userMonthlyActualInput11"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
             </div>
-            <div class="col">
+            <div class="grid-col">
               <label for="userMonthlyActualInput12"
                 ><strong>{{ $t("calculatorForm.months.dec") }}</strong></label
               >
-              <input
-                id="userMonthlyActualInput12"
-                required=""
-                type="number"
-              />&nbsp;kWh <br /><button
-                id="calculateMonthlyActualButton"
-                type="submit"
-              >
-                {{ $t("calculatorForm.goButton") }}
-              </button>
+              <div>
+                <input
+                  id="userMonthlyActualInput12"
+                  required=""
+                  type="number"
+                />&nbsp;kWh
+              </div>
+              <br />
+
             </div>
+          </div>
+          <div>
+            <button
+                  id="calculateMonthlyActualButton"
+                  type="submit"
+                >
+                  {{ $t("calculatorForm.goButton") }}
+            </button>
           </div>
         </form>
       </div>
@@ -436,7 +466,7 @@ export default {
       }
 
       d3.selectAll("#chart-gauge svg").remove();
-      $("#chart-gauge").attr("class", "pane-content row cols-3");
+      $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
       this.gaugeChart(
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
@@ -582,7 +612,7 @@ export default {
       }
 
       d3.selectAll("#chart-gauge svg").remove();
-      $("#chart-gauge").attr("class", "pane-content row cols-3");
+      $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
       this.gaugeChart(
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
@@ -686,7 +716,7 @@ export default {
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
-        $("#chart-gauge").attr("class", "pane-content row cols-4");
+        $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
         if (this.nationalAverage * 12 > 24000) {
           gaugeMax = this.nationalAverage * 12;
         }
@@ -721,7 +751,7 @@ export default {
         $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
         d3.selectAll("#chart-gauge svg").remove();
-        $("#chart-gauge").attr("class", "pane-content row cols-4");
+        $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
         this.gaugeChart(
           this.emissionsResultsWidth,
           this.emissionsResultsHeight / 2,
@@ -825,7 +855,7 @@ export default {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("class", "col")
+        .attr("class", "grid-col")
         .append("g")
         .attr(
           "transform",
@@ -1046,7 +1076,7 @@ export default {
           .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
-          .attr("class", "col")
+          .attr("class", "grid-col")
           .append("g")
           .attr(
             "transform",

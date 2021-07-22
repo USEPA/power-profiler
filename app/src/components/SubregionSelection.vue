@@ -41,7 +41,7 @@
               v-bind:placeholder="$t('placeHolder')"
               required
             />
-            <button id="goButton" type="submit">{{ $t("goButton") }}</button>
+            <button id="goButton" class="usa-button" type="submit">{{ $t("goButton") }}</button>
           </form>
         </div>
         <div id="errorMessage" style="display: none"></div>
@@ -57,7 +57,7 @@
           ></select>
         </div>
         <div id="start-over-div">
-          <button id="start-over" style="display: none">Start Over</button>
+          <button id="start-over" class="usa-button" style="display: none">Start Over</button>
         </div>
       </div>
       <div id="regionSelectionDiv">

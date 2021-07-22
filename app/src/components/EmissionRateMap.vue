@@ -41,7 +41,7 @@
         >
       </template>
     </i18n>
-    <div class="row cols-2" id="emissionRatesHeatMap"></div>
+    <div class="grid-row" id="emissionRatesHeatMap"></div>
   </div>
 </template>
 <script>
@@ -106,7 +106,7 @@ export default {
       var svg = d3
         .select(_this.domElement)
         .append("svg")
-        .attr("class", "col size-4of5")
+        .attr("class", "grid-col")
         .attr("width", _this.width)
         .attr("height", _this.height)
         .attr("viewBox", "0 0 " + _this.width + " " + _this.height)
@@ -137,7 +137,7 @@ export default {
         this.svgGradient = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class", "col size-1of5")
+          .attr("class", "grid-col")
           .attr("width", 100)
           .attr("height", this.containerHeight);
       } else if (this.orientation == "vertical") {

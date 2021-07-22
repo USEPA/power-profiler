@@ -20,9 +20,9 @@
     <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
-    <div id="app" class="row cols-2">
-      <sideBar id="sidebar" class="col size-1of3 box simple"></sideBar>
-      <div v-if="subregionJSONLoaded" id="main-charts" class="col size-2of3">
+    <div id="app" class="grid-row">
+      <sideBar id="sidebar" class="grid-col-4 box simple"></sideBar>
+      <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
         <mainCharts v-show="showMain"></mainCharts>
         <router-view v-show="!showMain"></router-view>
       </div>
