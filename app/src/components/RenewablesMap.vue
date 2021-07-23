@@ -25,7 +25,7 @@
     <i18n path="description.text" tag="p">
       <template #eGRIDSubregion>
         <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+          href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
           target="_blank"
           >{{ $t("description.eGRIDSubregion") }}</a
         >
@@ -204,7 +204,7 @@ export default {
         var svgLegendV = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class","grid-col-1")
+          .attr("class", "grid-col-1")
           .attr("width", _this.width + 70)
           .attr("height", 40);
 

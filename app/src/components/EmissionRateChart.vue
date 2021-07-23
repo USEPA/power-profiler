@@ -79,7 +79,7 @@
           </template>
           <template #eGRIDSubregions>
             <a
-              href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+              href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
               target="_blank"
               >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
             >
@@ -115,10 +115,18 @@
           >
             CO<sub>2</sub>
           </button>
-          <button @click="handlePollutantButton" class="usa-button" value="so2EmissionRate">
+          <button
+            @click="handlePollutantButton"
+            class="usa-button"
+            value="so2EmissionRate"
+          >
             SO<sub>2</sub>
           </button>
-          <button @click="handlePollutantButton" class="usa-button" value="noxEmissionRate">
+          <button
+            @click="handlePollutantButton"
+            class="usa-button"
+            value="noxEmissionRate"
+          >
             NO<sub>X</sub>
           </button>
         </div>
@@ -184,8 +192,8 @@
         </div>
       </div>
     </div>
-      <emissionRateMap v-if="currentMap == 1"></emissionRateMap>
-      <renewablesMap v-if="currentMap == 2"></renewablesMap>
+    <emissionRateMap v-if="currentMap == 1"></emissionRateMap>
+    <renewablesMap v-if="currentMap == 2"></renewablesMap>
   </div>
 </template>
 
