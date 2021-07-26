@@ -72,11 +72,11 @@
           <template #SO2>
             <strong>SO<sub>2</sub></strong>
           </template>
-          <template #lbsNOx>
+          <template #lbsNOX>
             <strong><span id="pounds-of-nox"></span> </strong>
           </template>
           <template #NOX>
-            <strong>NO<sub>2</sub></strong>
+            <strong>NO<sub>x</sub></strong>
           </template>
         </i18n>
       </div>
@@ -126,10 +126,10 @@
       </div>
       <i18n path="seedlingParagraph" tag="p">
         <template #numSeedlings>
-          <span id="no-of-tree-seedlings"></span>
+          <span id="nat-no-of-tree-seedlings"></span>
         </template>
         <template #numAcres>
-          <span id="acres-of-forests"></span>
+          <span id="nat-acres-of-forests"></span>
         </template>
         <template #CO2>
           <span id="em-rpt-offset-4"> CO<sub>2</sub></span>
