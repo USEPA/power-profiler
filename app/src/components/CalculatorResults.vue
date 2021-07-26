@@ -9,8 +9,8 @@
     "GHGCalc": "EPA's Greenhouse Gas Equivalencies Calculator",
     "GHGSite": "EPA's Greenhouse Gas Emissions site",
     "nationalAvgParagraph": "This is an estimate of the pounds of air pollutants caused by the electricity you use in your home or business during one year. Your annual emissions are {estimate} and the eGRID subregion {eGRIDAcronym} ({eGRIDName}) emission rates and include a grid region specific adjustment for line losses of {natPctLineLoss}.",
-    "commercialEstimate": "estimated from the national average electricity consumption of 1.22 kWh/sq. ft./month for commercial customers",
-    "homeEstimate": "estimated from the average home consumption of 990 kWh/month",
+    "commercialEstimate": "estimated from the national average electricity consumption of {avgSqft} kWh/sq. ft./month for commercial customers",
+    "homeEstimate": "estimated from the average home consumption of {natAvg} kWh/month",
     "commercialCustText": "Estimate annual emissions for commercial customers {hereLink}.",
     "hereLink": "here",
     "commercialCustForm": "Enter your square footage:",
@@ -28,8 +28,8 @@
     "GHGCalc": "visite la Calculadora de equivalencias de gases de efecto invernadero de la EPA,",
     "GHGSite": "el sitio de Emisiones de gases de efecto invernadero de la EPA",
     "nationalAvgParagraph": "Es una estimación de la cantidad de libras de contaminantes del aire causadas por la electricidad que usted consume en su hogar o empresa durante un año. Sus emisiones anuales se calculan en función {estimate} y de las tasas de emisión del {eGRIDAcronym} ({eGRIDName}) para la subregión de eGRID e incluyen un ajuste de {natPctLineLoss} por pérdidas de energía en los cables específico para la región de la red eléctrica.",
-    "commercialEstimate": "estimado del consumo promedio nacional de electricidad de 1.22 kWh/sq. ft/mes para clientes comerciales",
-    "homeEstimate": "estimado del consumo promedio de viviendas de 990 kWh/mes",
+    "commercialEstimate": "estimado del consumo promedio nacional de electricidad de {avgSqft} kWh/sq. ft/mes para clientes comerciales",
+    "homeEstimate": "estimado del consumo promedio de viviendas de {natAvg} kWh/mes",
     "commercialCustText": "Calcule las emisiones anuales para clientes comerciales {hereLink}.",
     "hereLink": "aquí",
     "commercialCustForm": "Ingrese su cantidad de pies cuadrados:",
@@ -84,9 +84,9 @@
         <i18n path="nationalAvgParagraph" tag="p">
           <template #estimate>
             <span v-if="userSelectionStore.getResidentialMode()">{{
-              $t("homeEstimate")
+              $t("homeEstimate",{natAvg: natAverage})
             }}</span>
-            <span v-else>{{ $t("commercialEstimate") }}</span>
+            <span v-else>{{ $t("commercialEstimate",{avgSqft: avgKWhSqft}) }}</span>
           </template>
           <template #eGRIDAcronym>
             <strong><span id="nat-egrid-subregion-acronym"></span></strong>
@@ -172,10 +172,13 @@
 </template>
 <script>
 import { userSelection } from "../stores/userSelection.js";
+import { constVal } from "../helpers/const.js";
 export default {
   data() {
     return {
-      userSelectionStore: userSelection
+      userSelectionStore: userSelection,
+      natAverage: constVal.nationalAverage,
+      avgKWhSqft: constVal.avgConsumptionSqft
     };
   }
 };
