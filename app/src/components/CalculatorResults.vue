@@ -126,10 +126,10 @@
       </div>
       <i18n path="seedlingParagraph" tag="p">
         <template #numSeedlings>
-          <span id="nat-no-of-tree-seedlings"></span>
+          <span id="no-of-tree-seedlings"></span>
         </template>
         <template #numAcres>
-          <span id="nat-acres-of-forests"></span>
+          <span id="acres-of-forests"></span>
         </template>
         <template #CO2>
           <span id="em-rpt-offset-4"> CO<sub>2</sub></span>

@@ -766,13 +766,13 @@ export default {
       $("#nat-estimated-annual-electricity-use").html(
         (this.nationalAverage * 12).toLocaleString()
       );
-      $("#nat-pounds-of-co2").html(userCarbon);
-      $("#nat-pounds-of-so2").html(userSulfur);
-      $("#nat-pounds-of-nox").html(userNitrogen);
-      $("#nat-no-of-tree-seedlings").html(
+      $("#pounds-of-co2").html(userCarbon);
+      $("#pounds-of-so2").html(userSulfur);
+      $("#pounds-of-nox").html(userNitrogen);
+      $("#no-of-tree-seedlings").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).trees
       );
-      $("#nat-acres-of-forests").html(
+      $("#acres-of-forests").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).acres
       );
 
