@@ -105,7 +105,7 @@
         <form id="commercialCustomersForm" method="POST">
           <label for="squareFootage" class="usa-label">{{ $t("commercialCustForm") }}</label>
           <input
-            class="usa-input"
+            class="usa-input--sm"
             id="squareFootage"
             max="99999"
             required=""
