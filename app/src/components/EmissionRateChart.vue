@@ -156,12 +156,13 @@
         </div>
       </div>
       <h3>{{ $t("maps.header") }}</h3>
-      <label class="grid-col"><strong>{{ $t("maps.mapSelect") }}:</strong></label>
+
     <div>
       <div
         id="mapSelect"
         class="form-item form-type-radio form-item-radios grid-container"
       >
+        <label for="mapSelect"><strong>{{ $t("maps.mapSelect") }}</strong></label>
         <div class="grid-row grid-gap">
           <div class="grid-col-6">
             <input

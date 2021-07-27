@@ -42,36 +42,36 @@
 </i18n>
 <template>
   <div v-if="dataLoaded">
-    <div class="grid-col grid-container" id="kpis">
+    <div class="grid-container" id="kpis">
       <div class="grid-row grid-gap">
         <h3 id="kpis-section-title">
           <span>{{ subregion.properties.name }}</span>
           {{ $t("emissionRateHeader") }}
         </h3>
       </div>
-      <div class="grid-row grid-gap">
-        <div class="grid-col box special" value="co2EmissionRate">
-          <h3 class="pane-title">CO<sub>2</sub></h3>
-          <div class="pane-content">
-            <h2 id="co2-pane-content">
+      <div class="grid-row grid-gap flex-wrap">
+        <div class="grid-col-4 box box--special" value="co2EmissionRate">
+          <h3 class="box__title">CO<sub>2</sub></h3>
+          <div class="box__content">
+            <h2 id="co2-box__content">
               {{ subregion.properties.emissionFactor.co2EmissionRate.display }}
             </h2>
             <p>(lbs/MWh)</p>
           </div>
         </div>
-        <div class="grid-col box special" value="so2EmissionRate">
-          <h3 class="pane-title">SO<sub>2</sub></h3>
-          <div class="pane-content">
-            <h2 id="so2-pane-content">
+        <div class="grid-col-4 box box--special" value="so2EmissionRate">
+          <h3 class="box__title">SO<sub>2</sub></h3>
+          <div class="box__content">
+            <h2 id="so2-box__content">
               {{ subregion.properties.emissionFactor.so2EmissionRate.display }}
             </h2>
             <p>(lbs/MWh)</p>
           </div>
         </div>
-        <div class="grid-col box special" value="noxEmissionRate">
-          <h3 class="pane-title">NO<sub>X</sub></h3>
-          <div class="pane-content">
-            <h2 id="nox-pane-content">
+        <div class="grid-col-4 box box--special" value="noxEmissionRate">
+          <h3 class="box__title">NO<sub>X</sub></h3>
+          <div class="box__content">
+            <h2 id="nox-box__content">
               {{ subregion.properties.emissionFactor.noxEmissionRate.display }}
             </h2>
             <p>(lbs/MWh)</p>
@@ -80,11 +80,13 @@
       </div>
     </div>
 
-    <div class="grid-col grid-container" id="selectedSubregion">
+    <div class="grid-col grid-container flex-wrap" id="selectedSubregion">
       <div class="grid-row grid-gap">
         <p id="subregionButtons">
           <router-link :to="'/'">« {{ $t("backToAllSubregions") }}</router-link>
         </p>
+      </div>
+      <div class="grid-row grid-gap">
         <div id="fuelMixContainer" class="grid-col">
           <h3>{{ $t("fuelMixHeader") }}</h3>
           <i18n path="fuelMixBody.text" tag="p">
@@ -199,11 +201,6 @@ export default {
 };
 </script>
 <style>
-#selectedSubregion {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
 #fuelMixContainer,
 #emissionRateContainer {
   flex: 1 1 510px;

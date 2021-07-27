@@ -40,7 +40,7 @@
 }
 </i18n>
 <template>
-  <div id="result">
+  <div id="result" class="flex-align-stretch">
     <h3>{{ $t("header") }}</h3>
     <h4 id="result-subheader">Result Subheader</h4>
     <div id="emissionsDescription">
@@ -103,8 +103,9 @@
         </span>
 
         <form id="commercialCustomersForm" method="POST">
-          <label for="squareFootage">{{ $t("commercialCustForm") }}</label>
+          <label for="squareFootage" class="usa-label">{{ $t("commercialCustForm") }}</label>
           <input
+            class="usa-input"
             id="squareFootage"
             max="99999"
             required=""
@@ -149,12 +150,12 @@
         </template>
       </i18n>
     </div>
-    <div class="box special grid-container">
-      <div class="grid-row grid-gap">
-        <div id="chart-gauge" class="pane-content"></div>
+    <div class="box box--special grid-container">
+      <div class="grid-row grid-gap flex-wrap flex-justify-center">
+        <div id="chart-gauge" class="box__content"></div>
       </div>
-      <div class="grid-row grid-gap">
-        <div id="resultGraphs" class="pane-content"></div>
+      <div class="grid-row grid-gap flex-wrap flex-justify-center">
+        <div id="resultGraphs" class="box__content"></div>
       </div>
     </div>
     <div>
@@ -179,5 +180,8 @@ export default {
 <style>
 #result {
   display: none;
+  /* The sum of the sidebar + the main-charts min-widths */
+  min-width: 1320px;
+  width: 100%;
 }
 </style>

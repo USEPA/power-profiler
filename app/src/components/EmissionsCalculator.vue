@@ -93,7 +93,7 @@
     <h3>{{ $t("title") }}</h3>
     <div>
       <div>
-        <label id="userMonthlyAverageLabel" for="userMonthlyAverageInput">
+        <label id="userMonthlyAverageLabel" class="usa-label" for="userMonthlyAverageInput">
           {{ $t("calculatorForm.avgUse") }}
           <a
             href="javascript:void(0)"
@@ -113,6 +113,7 @@
         >
           <input
             id="userMonthlyAverageInput"
+            class="usa-input--sm"
             required=""
             type="number"
             style="height: 36px"
@@ -147,36 +148,39 @@
         >
           <div class="grid-row grid-gap">
             <div class="grid-col">
-              <label for="userMonthlyActualInput1"
+              <label for="userMonthlyActualInput1" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.jan") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput1"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput2"
+              <label for="userMonthlyActualInput2" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.feb") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput2"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput3"
+              <label for="userMonthlyActualInput3" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.mar") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput3"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
@@ -185,36 +189,39 @@
           </div>
           <div class="grid-row grid-gap">
             <div class="grid-col">
-              <label for="userMonthlyActualInput4"
+              <label for="userMonthlyActualInput4" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.apr") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput4"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh`
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput5"
+              <label for="userMonthlyActualInput5" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.may") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput5"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput6"
+              <label for="userMonthlyActualInput6" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.jun") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput6"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
@@ -223,36 +230,39 @@
           </div>
           <div class="grid-row grid-gap">
             <div class="grid-col">
-              <label for="userMonthlyActualInput7"
+              <label for="userMonthlyActualInput7" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.jul") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput7"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput8"
+              <label for="userMonthlyActualInput8" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.aug") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput8"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput9"
+              <label for="userMonthlyActualInput9" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.sep") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput9"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
@@ -261,36 +271,39 @@
           </div>
           <div class="grid-row grid-gap">
             <div class="grid-col">
-              <label for="userMonthlyActualInput10"
+              <label for="userMonthlyActualInput10" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.oct") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput10"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput11"
+              <label for="userMonthlyActualInput11" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.nov") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput11"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
-              <label for="userMonthlyActualInput12"
+              <label for="userMonthlyActualInput12" class="usa-label"
                 ><strong>{{ $t("calculatorForm.months.dec") }}</strong></label
               >
               <div>
                 <input
                   id="userMonthlyActualInput12"
+                  class="usa-input--sm"
                   required=""
                   type="number"
                 />&nbsp;kWh
@@ -302,6 +315,7 @@
           <div>
             <button
                   id="calculateMonthlyActualButton"
+                  class="usa-button"
                   type="submit"
                 >
                   {{ $t("calculatorForm.goButton") }}
@@ -466,7 +480,6 @@ export default {
       }
 
       d3.selectAll("#chart-gauge svg").remove();
-      $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
       this.gaugeChart(
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
@@ -612,7 +625,6 @@ export default {
       }
 
       d3.selectAll("#chart-gauge svg").remove();
-      $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
       this.gaugeChart(
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
@@ -716,7 +728,6 @@ export default {
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
-        $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
         if (this.nationalAverage * 12 > 24000) {
           gaugeMax = this.nationalAverage * 12;
         }
@@ -751,10 +762,9 @@ export default {
         $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
         d3.selectAll("#chart-gauge svg").remove();
-        $("#chart-gauge").attr("class", "pane-content grid-row grid-gap");
         this.gaugeChart(
-          this.emissionsResultsWidth,
-          this.emissionsResultsHeight / 2,
+          this.emissionsResultsWidth*.75,
+          this.emissionsResultsHeight,
           24000,
           this.nationalAverage * 12,
           this.$t("results.youAnnGauge"),
@@ -796,10 +806,10 @@ export default {
       $("#nat-pounds-of-co2").html(userCarbon);
       $("#nat-pounds-of-so2").html(userSulfur);
       $("#nat-pounds-of-nox").html(userNitrogen);
-      $("#nat-no-of-tree-seedlings").html(
+      $("#no-of-tree-seedlings").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).trees
       );
-      $("#nat-acres-of-forests").html(
+      $("#acres-of-forests").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).acres
       );
 

@@ -24,16 +24,16 @@
 </i18n>
 <template>
   <div id="selectionBox" class="box multi related-info">
-    <div class="pane-content">
+    <div class="box__content">
       <div id="zipFormDiv">
         <h2>{{ $t("title") }}</h2>
-        <div id="formContainer" class="form-item form-type-textfield">
+        <div id="formContainer">
           <form id="zipForm">
-            <label for="userLocation">
+            <label for="userLocation" class="usa-label">
               <strong>{{ $t("userLocation") }}</strong>
             </label>
             <input
-              class="form-text"
+              class="usa-input--sm"
               id="userLocation"
               maxlength="128"
               size="20"
@@ -219,14 +219,14 @@ export default {
 };
 </script>
 <style>
-#selectionBox > .pane-content {
+#selectionBox > .box__content {
   padding: 0;
 }
 #zipFormDiv {
   color: white;
   position: relative;
   margin: 0 auto;
-  width: 100%;
+  background-size: cover;
   background-position: 50%;
   background-repeat: no-repeat;
   height: 378px;

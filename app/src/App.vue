@@ -20,9 +20,10 @@
     <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
-    <div id="app" class="grid-row">
-      <sideBar id="sidebar" class="grid-col-4 box simple"></sideBar>
-      <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
+
+    <div id="app" class="grid-row grid-gap flex-no-wrap flex-row">
+      <sideBar id="sidebar" class="grid-col-4 box simple flex-column flex-align-start"></sideBar>
+      <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8  flex-wrap flex-column flex-align-stretch">
         <mainCharts v-show="showMain"></mainCharts>
         <router-view v-show="!showMain"></router-view>
       </div>
@@ -233,7 +234,7 @@ input[type="number"]::-webkit-outer-spin-button {
   fill: none;
 }
 #kpis div,
-#kpis .pane-title,
+#kpis .box__title,
 #mapSelect,
 .select-pollutant-label,
 #pollutantSelectAll,
@@ -246,9 +247,14 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #app {
   padding-left: 1em;
-  display: flex;
-  justify-content: space-between;
 }
+#main-charts {
+  /* Shrink and grow the main charts according to min-width of charts */
+  flex: 1 1 auto;
+  width: min-content;
+  display: inline-flex;
+}
+
 .select-pollutant-label,
 #nationalEmissionRateSortingStatus,
 #nationalFuelMixSortingStatus {
@@ -257,7 +263,10 @@ input[type="number"]::-webkit-outer-spin-button {
 #sidebar {
   background-color: #fafafa;
   border: 1px solid black;
-  max-width: 359px;
+  /* Set the width based on the background image size and prevent the sidebar from growing or shrinking which cuts off the image and squeezes the text */
+  width:min-content;
+  display: inline-flex;
+  flex: 0 0 auto;
 }
 
 .modal-mask {
@@ -293,6 +302,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .modal-default-button {
   float: right;
+}
+/* The usa-button has width:100% by default and on small screens makes the button super wide */
+.usa-button {
+  width: auto;
 }
 .tooltip {
   display: none;

@@ -335,7 +335,6 @@ export default {
         "font-size",
         "0.7em"
       );
-      $("#fuelMix > svg").css("margin-top", "25%");
 
       addTooltip(".subFuelMixTooltip");
     },

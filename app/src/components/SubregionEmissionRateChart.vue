@@ -1,7 +1,7 @@
 <i18n>
 {
   "en": {
-    "select": "Select",
+    "select": "Select:",
     "national": "National",
     "so2EmissionRate": "sulfur dioxide",
     "co2EmissionRate": "carbon dioxide",
@@ -10,7 +10,7 @@
 
   },
   "es": {
-    "select": "Seleccione",
+    "select": "Seleccione:",
     "national": "Nacional",
     "so2EmissionRate": "dióxido de azufre",
     "co2EmissionRate": "dióxido de carbono",
