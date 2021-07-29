@@ -300,6 +300,7 @@ import { selectedSubregion } from "../stores/selectedSubregion.js";
 import { nationalFeature } from "../stores/nationalFeature.js";
 import { userSelection } from "../stores/userSelection.js";
 import { addLogoBottom, textWrap } from "../helpers/ChartHelpers.js";
+import { constVal } from "../helpers/const.js";
 
 export default {
   data() {
@@ -308,12 +309,13 @@ export default {
       resultsFunction: "",
       selectedSubregion: {},
       nationalFeature: {},
+      natGridloss: {},
       emissionFactors: {},
       userEmissions: {},
       gridLoss: {},
       subregionEmissions: {},
       nationalEmissions: {},
-      nationalAverage: 877,
+      nationalAverage: constVal.nationalAverage,
       emRatesColors: {
         national: "#2b83ba",
         subregion: "#e66101",
@@ -333,6 +335,7 @@ export default {
   mounted: function() {
     this.selectedSubregion = selectedSubregion.data;
     this.nationalFeature = nationalFeature.data;
+    this.natGridloss = this.nationalFeature[0].properties.gridLoss;
     this.emissionFactors = this.selectedSubregion.properties.emissionFactor;
     this.gridLoss = this.selectedSubregion.properties.gridLoss;
     $(window).width() > 950
@@ -500,7 +503,7 @@ export default {
 
       function calculateEmissions(emissionFactorValue, total) {
         var res =
-          ((total * emissionFactorValue) / 1000) * (1 + self.gridLoss.value);
+          ((total * emissionFactorValue) * 0.001) * (1 + self.gridLoss.value);
         return res;
       }
 
@@ -638,7 +641,7 @@ export default {
 
       function calculateEmissions(emissionFactorValue, monthlyAverage) {
         var res =
-          ((monthlyAverage * 12 * emissionFactorValue) / 1000) *
+          ((monthlyAverage * 12 * emissionFactorValue) * 0.001) *
           (1 + self.gridLoss.value);
         return res;
       }
@@ -716,7 +719,7 @@ export default {
           340
         );
       } else {
-        this.nationalAverage = 877;
+        this.nationalAverage = constVal.nationalAverage;
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
@@ -763,13 +766,13 @@ export default {
       $("#nat-estimated-annual-electricity-use").html(
         (this.nationalAverage * 12).toLocaleString()
       );
-      $("#nat-pounds-of-co2").html(userCarbon);
-      $("#nat-pounds-of-so2").html(userSulfur);
-      $("#nat-pounds-of-nox").html(userNitrogen);
-      $("#nat-no-of-tree-seedlings").html(
+      $("#pounds-of-co2").html(userCarbon);
+      $("#pounds-of-so2").html(userSulfur);
+      $("#pounds-of-nox").html(userNitrogen);
+      $("#no-of-tree-seedlings").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).trees
       );
-      $("#nat-acres-of-forests").html(
+      $("#acres-of-forests").html(
         this.calculateCarbonOffset(parseFloat(this.userEmissions.co2)).acres
       );
 
@@ -934,12 +937,13 @@ export default {
     },
     calculateNationalEmissions: function(emissionFactorValue) {
       var nationalTotal = this.nationalAverage * 12;
-      var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + 0.0448);
+      var nationalGridloss = this.natGridloss.value;
+      var res = ((nationalTotal * emissionFactorValue) * 0.001) * (1 + nationalGridloss);
       return res;
     },
     calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
       var nationalTotal = this.nationalAverage * 12;
-      var res = ((nationalTotal * emissionFactorValue) / 1000) * (1 + gridLoss);
+      var res = ((nationalTotal * emissionFactorValue) * 0.001) * (1 + gridLoss);
       return res;
     },
     calculateCarbonOffset: function(carbon) {
@@ -951,10 +955,11 @@ export default {
       var trees = (carbon / (23.2 * (44 / 12))).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
-      var acres = (carbon / (0.85 * 2204.6)).toLocaleString(undefined, {
+      var carbonSByYear = constVal.carbonSequesteredByYear;
+      var acres = (carbon / (carbonSByYear * 2204.6)).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
-      return { trees: trees, acres: acres };
+      return { "trees": trees, "acres": acres };
     },
     displayUserAndNationalEmissions: function(
       user,
