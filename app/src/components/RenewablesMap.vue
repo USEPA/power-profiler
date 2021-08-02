@@ -31,7 +31,7 @@
         >
       </template>
     </i18n>
-    <div id="renewablesMap" class="grid-row"></div>
+    <div id="renewablesMap" class="grid-row flex-wrap flex-justify-center flex-align-center"></div>
   </div>
 </template>
 <script>
@@ -162,7 +162,7 @@ export default {
         var svgLegend = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class", "grid-col-1")
+          .attr("class", "grid-col")
           .attr("width", 150)
           .attr("height", _this.height + 107);
 
@@ -204,7 +204,6 @@ export default {
         var svgLegendV = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class", "grid-col-1")
           .attr("width", _this.width + 70)
           .attr("height", 40);
 

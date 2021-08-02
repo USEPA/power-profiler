@@ -150,13 +150,9 @@
         </template>
       </i18n>
     </div>
-    <div class="box box--special grid-container">
-      <div class="grid-row grid-gap flex-wrap flex-justify-center">
-        <div id="chart-gauge" class="box__content"></div>
-      </div>
-      <div class="grid-row grid-gap flex-wrap flex-justify-center">
-        <div id="resultGraphs" class="box__content"></div>
-      </div>
+    <div>
+      <div id="chart-gauge" class="grid-row flex-wrap flex-justify-center"></div>
+      <div id="resultGraphs" class="grid-row flex-wrap flex-justify-center"></div>
     </div>
     <div>
       <p>
@@ -180,8 +176,6 @@ export default {
 <style>
 #result {
   display: none;
-  /* The sum of the sidebar + the main-charts min-widths */
-  min-width: 1320px;
   width: 100%;
 }
 </style>

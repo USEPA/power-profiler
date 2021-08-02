@@ -865,7 +865,7 @@ export default {
         .append("svg")
         .attr("width", width)
         .attr("height", height)
-        .attr("class", "grid-col")
+        .attr("class", "flex-col")
         .append("g")
         .attr(
           "transform",
@@ -1086,7 +1086,7 @@ export default {
           .append("svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
-          .attr("class", "grid-col")
+          .attr("class", "flex-col")
           .append("g")
           .attr(
             "transform",

@@ -249,9 +249,10 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-left: 1em;
 }
 #main-charts {
-  /* Shrink and grow the main charts according to min-width of charts */
+  /* Prevent too much shrinkage*/
   flex: 1 1 auto;
   width: min-content;
+  min-width: 1000px;
   display: inline-flex;
 }
 
