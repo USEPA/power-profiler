@@ -72,23 +72,20 @@ export default {
     display: function(dataValue, orientation) {
       var _this = this;
       var percentBins = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-      var redToGreen = [
-        "#D73027",
-        "#F46D43",
-        "#FDAE61",
-        "#FEE08B",
-        "#FFFFBF",
-        "#D9EF8B",
-        "#A6D96A",
-        "#66BD63",
-        "#1A9850",
-        "#006837"
+      var binColors = [
+        "#e6efea",
+        "#ccdfd4",
+        "#b3d0bf",
+        "#99c0a9",
+        "#80b094",
+        "#67a07f",
+        "#4d9069",
+        "#348154",
+        "#1a713e",
+        "#015725"
       ];
 
-      var color = d3.scale
-        .ordinal()
-        .domain(percentBins)
-        .range(redToGreen);
+      var color = d3.scale.ordinal().domain(percentBins).range(binColors);
 
       var svg = d3
         .select(this.domElement)
