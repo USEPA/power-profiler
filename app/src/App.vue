@@ -149,8 +149,8 @@ export default {
             .clone()
             .css({ display: "inline-block", height: "443px" })
         );
-        $("#printReportMain").hide();
         self.showReport = true;
+        $("#printReportMain").hide();
         $("#printReport").show();
       } else {
         $("#print-main-map").html("");
@@ -187,6 +187,8 @@ export default {
     window.addEventListener("afterprint", function(event) {
       self.showReport = false;
       self.showMainReport = false;
+      $("#printReport").hide();
+      $("#printReportMain").hide();
     });
 
     if ($(window).width() < 1025) {
