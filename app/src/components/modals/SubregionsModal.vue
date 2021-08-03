@@ -53,7 +53,7 @@
             </slot>
             <button
               id="subregions-ok"
-              class="modal-default-button"
+              class="usa-button modal-default-button"
               @click="$emit('close')"
             >
               {{ $t("okButton") }}

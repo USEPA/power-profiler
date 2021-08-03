@@ -25,18 +25,13 @@ function addTooltip(className) {
     },
     mousemove: function(e) {
       // Check if element is a national bar (on the righthand side of the page)
-      if (e.srcElement.parentElement) {
-        if (
-          e.srcElement.parentElement.parentElement.className.baseVal ==
-            "nationalBar" ||
-          e.srcElement.classList[0] == "nationalBar"
-        ) {
-          positionTooltip(e, -$(".tooltip").width() - 20, 170);
-        } else {
-          positionTooltip(e, 20, 170);
-        }
+      // Check if element is a national bar (on the right-hand-side of the page)
+      const natBar = $(this).closest('.nationalBar');
+
+      if(natBar.length || e.target.classList.contains("nationalBar")){
+        positionTooltip(e, - $(".tooltip").width() - 55, 35);
       } else {
-        positionTooltip(e, 20, 170);
+        positionTooltip(e, 15, 35);
       }
     }
   });
@@ -45,5 +40,5 @@ function addTooltip(className) {
 function positionTooltip(e, x, y) {
   var mousex = e.pageX + x; // Get X coordinates
   var mousey = e.pageY - y; // Get Y coordinates
-  $(".tooltip").css({ top: mousey, left: mousex });
+  $(".tooltip").css({ top: mousey + 'px', left: mousex + 'px'});
 }

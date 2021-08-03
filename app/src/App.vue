@@ -20,11 +20,14 @@
     <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
-    <div id="app" class="row cols-2">
-      <sideBar id="sidebar" class="col size-1of3 box simple"></sideBar>
-      <div v-if="subregionJSONLoaded" id="main-charts" class="col size-2of3">
-        <mainCharts v-show="showMain"></mainCharts>
-        <router-view v-show="!showMain"></router-view>
+
+    <div id="app" class="grid-container">
+      <div class="grid-row grid-gap flex-no-wrap">
+        <sideBar id="sidebar" class="grid-col-4"></sideBar>
+        <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
+          <mainCharts v-show="showMain"></mainCharts>
+          <router-view v-show="!showMain"></router-view>
+        </div>
       </div>
       <moreInfoModal
         v-if="showMoreInfo"
@@ -183,7 +186,7 @@ export default {
       self.showMainReport = false;
     });
 
-    if ($(window).width() < 950) {
+    if ($(window).width() < 1025) {
       userSelection.data.fuelMixOrientation = "vertical";
       userSelection.data.emissionRatesOrientation = "vertical";
     } else {
@@ -233,7 +236,7 @@ input[type="number"]::-webkit-outer-spin-button {
   fill: none;
 }
 #kpis div,
-#kpis .pane-title,
+#kpis .box__title,
 #mapSelect,
 .select-pollutant-label,
 #pollutantSelectAll,
@@ -246,9 +249,12 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #app {
   padding-left: 1em;
-  display: flex;
-  justify-content: space-between;
 }
+#main-charts {
+  /* Prevent too much shrinkage*/
+  min-width: 600px;
+}
+
 .select-pollutant-label,
 #nationalEmissionRateSortingStatus,
 #nationalFuelMixSortingStatus {
@@ -257,7 +263,9 @@ input[type="number"]::-webkit-outer-spin-button {
 #sidebar {
   background-color: #fafafa;
   border: 1px solid black;
-  max-width: 359px;
+  /* Set the width based on the background image size and prevent the sidebar from growing or shrinking which cuts off the image and squeezes the text */
+  min-width: 359px;
+  max-width: 458px;
 }
 
 .modal-mask {
@@ -293,6 +301,10 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .modal-default-button {
   float: right;
+}
+/* The usa-button has width:100% by default and on small screens makes the button super wide */
+.usa-button {
+  width: auto;
 }
 .tooltip {
   display: none;

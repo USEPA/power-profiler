@@ -28,7 +28,7 @@
     <i18n path="description.text" tag="p">
       <template #eGRIDSubregion>
         <a
-          href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+          href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
           target="_blank"
           >{{ $t("description.eGRIDSubregion") }}</a
         >
@@ -41,7 +41,7 @@
         >
       </template>
     </i18n>
-    <div class="row cols-2" id="emissionRatesHeatMap"></div>
+    <div class="grid-row flex-justify-center flex-align-center" id="emissionRatesHeatMap"></div>
   </div>
 </template>
 <script>
@@ -106,7 +106,7 @@ export default {
       var svg = d3
         .select(_this.domElement)
         .append("svg")
-        .attr("class", "col size-4of5")
+        .attr("class", "grid-col-10")
         .attr("width", _this.width)
         .attr("height", _this.height)
         .attr("viewBox", "0 0 " + _this.width + " " + _this.height)
@@ -137,7 +137,6 @@ export default {
         this.svgGradient = d3
           .select(this.domElement)
           .append("svg")
-          .attr("class", "col size-1of5")
           .attr("width", 100)
           .attr("height", this.containerHeight);
       } else if (this.orientation == "vertical") {
@@ -246,7 +245,7 @@ export default {
         }
 
         this.svgGradient
-          .attr("class", "axis gradient")
+          .attr("class", "axis gradient grid-col")
           .append("g")
           .attr("transform", "translate(50, " + titleOffset + ")")
           .call(axisLeg);
@@ -276,7 +275,7 @@ export default {
           .append("rect")
           .attr("width", 370)
           .attr("height", _this.containerHeight / 6)
-          .attr("transform", "translate(20," + titleOffset + ")")
+          .attr("transform", "translate(0," + titleOffset + ")")
           .attr("stroke", "black")
           .style("fill", "url(#linear-gradient)");
 

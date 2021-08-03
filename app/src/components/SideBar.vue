@@ -47,7 +47,7 @@
 }
 </i18n>
 <template>
-  <div class="pane-content">
+  <div>
     <div>
       <p id="intro">
         {{ $t("intro") }}
@@ -61,8 +61,8 @@
     </div>
     <subregionSelection></subregionSelection>
     <div class="box multi related-info" id="info">
-      <h3 class="pane-title">{{ $t("additionalInfo.title") }}</h3>
-      <div class="pane-content">
+      <h3 class="box__title">{{ $t("additionalInfo.title") }}</h3>
+      <div class="box__content">
         <p>
           <strong>
             <a

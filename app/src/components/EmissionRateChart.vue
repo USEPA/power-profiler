@@ -11,7 +11,7 @@
             "nox": "nitrogen oxide"
         },
         "emissionRateChart": {
-            "selection": "Selection:",
+            "selection": "Select:",
             "xAxis": "eGRID Subregions",
             "sortedByAlphaLabel": "This chart is sorted alphabetically A → Z by region.",
             "sortedByLabel": "This chart is sorted by {direction} {pollutant} emission rates.",
@@ -26,7 +26,7 @@
         },
         "maps": {
             "header": "Maps",
-            "mapSelect": "Select",
+            "mapSelect": "Select:",
             "emissionRateMapChoice": "Emission Rate Map",
             "renewableMapChoice": "Renewable/Non-renewable Map"
         }
@@ -67,119 +67,129 @@
 </i18n>
 <template>
   <div>
-    <div id="nationalEmissionRate">
-      <h3>{{ $t("emissionRateHeader") }}</h3>
-      <i18n path="emissionRateBody.text" tag="p">
-        <template #MWhInfo>
-          <a
-            @click="$parent.$parent.showMegaWattInfo = true"
-            href="javascript:void(0)"
-            >{{ $t("emissionRateBody.MWhInfo") }}</a
-          >
-        </template>
-        <template #eGRIDSubregions>
-          <a
-            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
-            target="_blank"
-            >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
-          >
-        </template>
-        <template #co2>
-          <a
-            href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
-            target="_blank"
-            >{{ $t("emissionRateBody.co2") }} (CO<sub>2</sub>)</a
-          >
-        </template>
-        <template #so2>
-          <a href="/so2-pollution" target="_blank"
-            >{{ $t("emissionRateBody.so2") }} (SO<sub>2</sub>)</a
-          >
-        </template>
-        <template #nox>
-          <a href="/no2-pollution" target="_blank"
-            >{{ $t("emissionRateBody.nox") }} (NO<sub>X</sub>)</a
-          >
-        </template>
-      </i18n>
+      <div id="nationalEmissionRate">
+        <h3>{{ $t("emissionRateHeader") }}</h3>
+        <i18n path="emissionRateBody.text" tag="p">
+          <template #MWhInfo>
+            <a
+              @click="$parent.$parent.showMegaWattInfo = true"
+              href="javascript:void(0)"
+              >{{ $t("emissionRateBody.MWhInfo") }}</a
+            >
+          </template>
+          <template #eGRIDSubregions>
+            <a
+              href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
+              target="_blank"
+              >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
+            >
+          </template>
+          <template #co2>
+            <a
+              href="/ghgemissions/overview-greenhouse-gases#carbon-dioxide"
+              target="_blank"
+              >{{ $t("emissionRateBody.co2") }} (CO<sub>2</sub>)</a
+            >
+          </template>
+          <template #so2>
+            <a href="/so2-pollution" target="_blank"
+              >{{ $t("emissionRateBody.so2") }} (SO<sub>2</sub>)</a
+            >
+          </template>
+          <template #nox>
+            <a href="/no2-pollution" target="_blank"
+              >{{ $t("emissionRateBody.nox") }} (NO<sub>X</sub>)</a
+            >
+          </template>
+        </i18n>
 
-      <p class="select-pollutant-label">
-        <strong> {{ $t("emissionRateChart.selection") }} </strong>
-      </p>
-      <div id="pollutantSelectAll">
-        <button
-          @click="handlePollutantButton"
-          id="defaultPollutantAll"
-          value="co2EmissionRate"
-        >
-          CO<sub>2</sub>
-        </button>
-        <button @click="handlePollutantButton" value="so2EmissionRate">
-          SO<sub>2</sub>
-        </button>
-        <button @click="handlePollutantButton" value="noxEmissionRate">
-          NO<sub>X</sub>
-        </button>
-      </div>
-      <div id="nationalEmissionRateGraph"></div>
-      <div id="sortingDiv">
-        <p id="nationalEmissionRateSortingStatus">
-          <strong>{{ $t("emissionRateChart.sortedByAlphaLabel") }}</strong>
+        <p class="select-pollutant-label">
+          <strong> {{ $t("emissionRateChart.selection") }} </strong>
         </p>
-        <a
-          href="javascript:void(0)"
-          @click="handleSortLink"
-          id="sortAlphabeticallyEmissionRate"
-          >{{ $t("emissionRateChart.sortAlphaLink") }}</a
-        >
-        <a
-          href="javascript:void(0)"
-          @click="handleSortLink"
-          id="sortAscendingEmissionRate"
-          >{{ $t("emissionRateChart.sortAscLink") }}</a
-        >
-        <a
-          href="javascript:void(0)"
-          @click="handleSortLink"
-          id="sortDescendingEmissionRate"
-          >{{ $t("emissionRateChart.sortDescLink") }}</a
-        >
+        <div id="pollutantSelectAll">
+          <button
+            @click="handlePollutantButton"
+            class="usa-button"
+            id="defaultPollutantAll"
+            value="co2EmissionRate"
+          >
+            CO<sub>2</sub>
+          </button>
+          <button
+            @click="handlePollutantButton"
+            class="usa-button"
+            value="so2EmissionRate"
+          >
+            SO<sub>2</sub>
+          </button>
+          <button
+            @click="handlePollutantButton"
+            class="usa-button"
+            value="noxEmissionRate"
+          >
+            NO<sub>X</sub>
+          </button>
+        </div>
+        <div id="nationalEmissionRateGraph"></div>
+        <div id="sortingDiv">
+          <p id="nationalEmissionRateSortingStatus">
+            <strong>{{ $t("emissionRateChart.sortedByAlphaLabel") }}</strong>
+          </p>
+          <a
+            href="javascript:void(0)"
+            @click="handleSortLink"
+            id="sortAlphabeticallyEmissionRate"
+            >{{ $t("emissionRateChart.sortAlphaLink") }}</a
+          >
+          <a
+            href="javascript:void(0)"
+            @click="handleSortLink"
+            id="sortAscendingEmissionRate"
+            >{{ $t("emissionRateChart.sortAscLink") }}</a
+          >
+          <a
+            href="javascript:void(0)"
+            @click="handleSortLink"
+            id="sortDescendingEmissionRate"
+            >{{ $t("emissionRateChart.sortDescLink") }}</a
+          >
+        </div>
       </div>
-    </div>
-    <h3>{{ $t("maps.header") }}</h3>
+      <h3>{{ $t("maps.header") }}</h3>
+
     <div>
       <div
         id="mapSelect"
-        class="form-item form-type-radio form-item-radios row cols-2"
+        class="form-item form-type-radio form-item-radios grid-container"
       >
-        <label
-          ><strong>{{ $t("maps.mapSelect") }}:</strong></label
-        >
-        <div class="col size-1of2">
-          <input
-            id="emissionRateMapChoice"
-            name="mapChoice"
-            class="form-radio"
-            type="radio"
-            value="1"
-            v-model="currentMap"
-          />
-          <label for="emissionRateMapChoice" class="option">{{
-            $t("maps.emissionRateMapChoice")
-          }}</label>
-        </div>
-        <div class="col size-1of2">
-          <input
-            id="renewablesMapChoice"
-            name="mapChoice"
-            class="form-radio"
-            type="radio"
-            value="2"
-            v-model="currentMap"
-          />
-          <label for="renewablesMapChoice" class="option">{{
-            $t("maps.renewableMapChoice")
-          }}</label>
+        <label for="mapSelect"><strong>{{ $t("maps.mapSelect") }}</strong></label>
+        <div class="grid-row grid-gap">
+          <div class="grid-col-6">
+            <input
+              id="emissionRateMapChoice"
+              name="mapChoice"
+              class="usa-radio"
+              type="radio"
+              value="1"
+              v-model="currentMap"
+            />
+            <label for="emissionRateMapChoice" class="option">{{
+              $t("maps.emissionRateMapChoice")
+            }}</label>
+          </div>
+          <div class="grid-col-6">
+            <input
+              id="renewablesMapChoice"
+              name="mapChoice"
+              class="usa-radio"
+              type="radio"
+              value="2"
+              v-model="currentMap"
+            />
+            <label for="renewablesMapChoice" class="option">{{
+              $t("maps.renewableMapChoice")
+            }}</label>
+          </div>
         </div>
       </div>
     </div>
@@ -285,7 +295,7 @@ export default {
     },
     displayHorizontal: function() {
       var self = this;
-      var margin = { top: 30, right: 60, bottom: 70, left: 70 },
+      var margin = { top: 30, right: 70, bottom: 70, left: 70 },
         width = self.w - margin.left - margin.right,
         height = self.h - margin.top - margin.bottom;
 

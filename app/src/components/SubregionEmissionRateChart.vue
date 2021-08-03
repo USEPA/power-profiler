@@ -1,7 +1,7 @@
 <i18n>
 {
   "en": {
-    "select": "Select",
+    "select": "Select:",
     "national": "National",
     "so2EmissionRate": "sulfur dioxide",
     "co2EmissionRate": "carbon dioxide",
@@ -10,7 +10,7 @@
 
   },
   "es": {
-    "select": "Seleccione",
+    "select": "Seleccione:",
     "national": "Nacional",
     "so2EmissionRate": "dióxido de azufre",
     "co2EmissionRate": "dióxido de carbono",
@@ -27,11 +27,11 @@
         <strong>{{ $t("select") }}</strong>
       </p>
       <div id="pollutantSelectSub">
-        <button id="defaultPollutantSub" value="co2EmissionRate">
+        <button id="defaultPollutantSub" class="usa-button" value="co2EmissionRate">
           CO<sub>2</sub>
         </button>
-        <button value="so2EmissionRate">SO<sub>2</sub></button>
-        <button value="noxEmissionRate">NO<sub>X</sub></button>
+        <button class="usa-button" value="so2EmissionRate">SO<sub>2</sub></button>
+        <button class="usa-button" value="noxEmissionRate">NO<sub>X</sub></button>
       </div>
     </div>
   </div>

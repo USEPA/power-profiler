@@ -93,7 +93,7 @@
       <i18n path="fuelMixBody.text" tag="p">
         <template #eGRIDSubregions>
           <a
-            href="https://www.epa.gov/sites/production/files/styles/large/public/2021-02/2019_egrid_subregions.png"
+            href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
             target="_blank"
             >{{ $t("fuelMixBody.eGRIDSubregions") }}</a
           >
@@ -104,51 +104,53 @@
       </i18n>
       <div id="select-offset-1">
         <div
-          class="form-item form-type-radio form-item-radios row cols-3"
+          class="form-item form-type-radio form-item-radios grid-container"
           id="fuelRadios"
         >
           <label for="fuelRadios" id="select-fuel-category"
             ><strong>{{ $t("fuelMixChart.select") }}</strong></label
           >
-          <div class="col size-1of6">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-1"
-              v-model="selectedFuelCategory"
-              value="allFuels"
-              name="fuelRadio"
-              checked
-            />
-            <label class="option" for="fuel-breakdown-1">{{
-              $t("fuelMixChart.allFuelsSelection")
-            }}</label>
-          </div>
-          <div class="col size-1of3">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-2"
-              v-model="selectedFuelCategory"
-              value="renewableAndNon"
-              name="fuelRadio"
-            />
-            <label class="option" for="fuel-breakdown-2">{{
-              $t("fuelMixChart.renewableSelection")
-            }}</label>
-          </div>
-          <div class="col size-1of2">
-            <input
-              class="form-radio"
-              type="radio"
-              id="fuel-breakdown-3"
-              v-model="selectedFuelCategory"
-              value="renewableNonNuclearAndHydro"
-              name="fuelRadio"
-            />
-            <label class="option" for="fuel-breakdown-3">{{
-              $t("fuelMixChart.hydroNuclearSelection")
-            }}</label>
+          <div class="grid-row grid-gap">
+            <div class="grid-col-2">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-1"
+                v-model="selectedFuelCategory"
+                value="allFuels"
+                name="fuelRadio"
+                checked
+              />
+              <label class="option" for="fuel-breakdown-1">{{
+                $t("fuelMixChart.allFuelsSelection")
+              }}</label>
+            </div>
+            <div class="grid-col-4">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-2"
+                v-model="selectedFuelCategory"
+                value="renewableAndNon"
+                name="fuelRadio"
+              />
+              <label class="option" for="fuel-breakdown-2">{{
+                $t("fuelMixChart.renewableSelection")
+              }}</label>
+            </div>
+            <div class="grid-col-6">
+              <input
+                class="usa-radio"
+                type="radio"
+                id="fuel-breakdown-3"
+                v-model="selectedFuelCategory"
+                value="renewableNonNuclearAndHydro"
+                name="fuelRadio"
+              />
+              <label class="option" for="fuel-breakdown-3">{{
+                $t("fuelMixChart.hydroNuclearSelection")
+              }}</label>
+            </div>
           </div>
         </div>
       </div>
@@ -255,7 +257,7 @@ export default {
     $("#resetNationalFuelMix").css("visibility", "hidden");
 
     $(window).on("resize", function() {
-      if ($(window).width() < 950) {
+      if ($(window).width() < 1025) {
         self.orientation = "vertical";
         self.$children[0].orientation = "vertical";
       } else {

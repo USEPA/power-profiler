@@ -24,16 +24,16 @@
 </i18n>
 <template>
   <div id="selectionBox" class="box multi related-info">
-    <div class="pane-content">
+    <div class="box__content">
       <div id="zipFormDiv">
         <h2>{{ $t("title") }}</h2>
-        <div id="formContainer" class="form-item form-type-textfield">
+        <div id="formContainer">
           <form id="zipForm">
-            <label for="userLocation">
+            <label for="userLocation" class="usa-label">
               <strong>{{ $t("userLocation") }}</strong>
             </label>
             <input
-              class="form-text"
+              class="usa-input--sm"
               id="userLocation"
               maxlength="128"
               size="20"
@@ -41,7 +41,7 @@
               v-bind:placeholder="$t('placeHolder')"
               required
             />
-            <button id="goButton" type="submit">{{ $t("goButton") }}</button>
+            <button id="goButton" class="usa-button" type="submit">{{ $t("goButton") }}</button>
           </form>
         </div>
         <div id="errorMessage" style="display: none"></div>
@@ -57,7 +57,7 @@
           ></select>
         </div>
         <div id="start-over-div">
-          <button id="start-over" style="display: none">Start Over</button>
+          <button id="start-over" class="usa-button" style="display: none">Start Over</button>
         </div>
       </div>
       <div id="regionSelectionDiv">
@@ -219,14 +219,14 @@ export default {
 };
 </script>
 <style>
-#selectionBox > .pane-content {
+#selectionBox > .box__content {
   padding: 0;
 }
 #zipFormDiv {
   color: white;
   position: relative;
   margin: 0 auto;
-  width: 100%;
+  background-size: cover;
   background-position: 50%;
   background-repeat: no-repeat;
   height: 378px;

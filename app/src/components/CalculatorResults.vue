@@ -40,7 +40,7 @@
 }
 </i18n>
 <template>
-  <div id="result">
+  <div id="result" class="flex-align-stretch">
     <h3>{{ $t("header") }}</h3>
     <h4 id="result-subheader">Result Subheader</h4>
     <div id="emissionsDescription">
@@ -109,18 +109,19 @@
         </span>
 
         <form id="commercialCustomersForm" method="POST">
-          <label for="squareFootage">{{ $t("commercialCustForm") }}</label>
+          <label for="squareFootage" class="usa-label">{{ $t("commercialCustForm") }}</label>
           <input
+            class="usa-input--sm"
             id="squareFootage"
             max="99999"
             required=""
             type="number"
           />&nbsp;
-          <button id="commercialCustomersButton" type="submit">
+          <button id="commercialCustomersButton" class="usa-button" type="submit">
             {{ $t("commercialCustButton") }}
           </button>
         </form>
-        <button id="residentialCustomersButton" style="display: none">
+        <button id="residentialCustomersButton" class="usa-button" style="display: none">
           {{ $t("switchToResButton") }}
         </button>
       </div>
@@ -155,11 +156,9 @@
         </template>
       </i18n>
     </div>
-    <div class="box special">
-      <div id="chart-gauge" class="pane-content row cols-3"></div>
-    </div>
-    <div class="box special">
-      <div id="resultGraphs" class="row cols-3 pane-content"></div>
+    <div>
+      <div id="chart-gauge" class="grid-row flex-wrap flex-justify-center"></div>
+      <div id="resultGraphs" class="grid-row flex-wrap flex-justify-center"></div>
     </div>
     <div>
       <p>
@@ -186,5 +185,6 @@ export default {
 <style>
 #result {
   display: none;
+  width: 100%;
 }
 </style>
