@@ -47,7 +47,7 @@
 }
 </i18n>
 <template>
-  <div class="box__content">
+  <div>
     <div>
       <p id="intro">
         {{ $t("intro") }}

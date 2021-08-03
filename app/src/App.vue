@@ -21,11 +21,13 @@
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
 
-    <div id="app" class="grid-row grid-gap flex-no-wrap flex-row">
-      <sideBar id="sidebar" class="grid-col-4 box simple flex-column flex-align-start"></sideBar>
-      <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8  flex-wrap flex-column flex-align-stretch">
-        <mainCharts v-show="showMain"></mainCharts>
-        <router-view v-show="!showMain"></router-view>
+    <div id="app" class="grid-container">
+      <div class="grid-row grid-gap flex-no-wrap">
+        <sideBar id="sidebar" class="grid-col-4"></sideBar>
+        <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
+          <mainCharts v-show="showMain"></mainCharts>
+          <router-view v-show="!showMain"></router-view>
+        </div>
       </div>
       <moreInfoModal
         v-if="showMoreInfo"
@@ -184,7 +186,7 @@ export default {
       self.showMainReport = false;
     });
 
-    if ($(window).width() < 950) {
+    if ($(window).width() < 1025) {
       userSelection.data.fuelMixOrientation = "vertical";
       userSelection.data.emissionRatesOrientation = "vertical";
     } else {
@@ -250,10 +252,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 #main-charts {
   /* Prevent too much shrinkage*/
-  flex: 1 1 auto;
-  width: min-content;
-  min-width: 1000px;
-  display: inline-flex;
+  min-width: 600px;
 }
 
 .select-pollutant-label,
@@ -265,10 +264,8 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #fafafa;
   border: 1px solid black;
   /* Set the width based on the background image size and prevent the sidebar from growing or shrinking which cuts off the image and squeezes the text */
-  width: min-content;
   min-width: 359px;
-  display: inline-flex;
-  flex: 0 1 auto;
+  max-width: 458px;
 }
 
 .modal-mask {

@@ -382,8 +382,9 @@ export default {
     this.natGridloss = this.nationalFeature[0].properties.gridLoss;
     this.emissionFactors = this.selectedSubregion.properties.emissionFactor;
     this.gridLoss = this.selectedSubregion.properties.gridLoss;
-    $(window).width() > 950
-      ? (this.emissionsResultsWidth = $(window).width() / 4)
+    $("#result").width() > 950
+    // slightly less than 1/4 the width so they fit in one row and don't wrap 
+      ? (this.emissionsResultsWidth = $("#result").width()*0.22)
       : (this.emissionsResultsWidth = 250);
     this.emissionsResultsHeight = 340;
   },
@@ -766,7 +767,7 @@ export default {
         $("#commercialCustomersForm").hide();
         d3.selectAll("#chart-gauge svg").remove();
         this.gaugeChart(
-          this.emissionsResultsWidth*.75,
+          this.emissionsResultsWidth,
           this.emissionsResultsHeight,
           24000,
           this.nationalAverage * 12,

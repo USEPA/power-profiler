@@ -295,7 +295,7 @@ export default {
     },
     displayHorizontal: function() {
       var self = this;
-      var margin = { top: 30, right: 60, bottom: 70, left: 70 },
+      var margin = { top: 30, right: 70, bottom: 70, left: 70 },
         width = self.w - margin.left - margin.right,
         height = self.h - margin.top - margin.bottom;
 

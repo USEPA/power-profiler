@@ -257,7 +257,7 @@ export default {
     $("#resetNationalFuelMix").css("visibility", "hidden");
 
     $(window).on("resize", function() {
-      if ($(window).width() < 950) {
+      if ($(window).width() < 1025) {
         self.orientation = "vertical";
         self.$children[0].orientation = "vertical";
       } else {
