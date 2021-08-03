@@ -124,13 +124,13 @@ export default {
         $("#print-emission-rates").html("");
         var clonedMap = $("#subregionMap > svg")
           .clone()
-          .css({ verticalAlign: "top", width: "166px", height: "100px" });
+          .css({ verticalAlign: "top", width: "300px", height: "200px" });
         $("#print-map").append(clonedMap);
         $("#print-fuel-mix").append($("#fuelMixContainer").clone());
         $("#print-fuel-mix svg").css({
           marginTop: "0",
-          height: "480px",
-          width: "347px"
+          height: "100%",
+          width: "100%"
         });
         $("#print-emission-rates").append("<h3>Emission Rates</h3>");
         $("#print-emission-rates").append($("#emRatesDescription").clone());
@@ -151,6 +151,7 @@ export default {
         );
         $("#printReportMain").hide();
         self.showReport = true;
+        $("#printReport").show();
       } else {
         $("#print-main-map").html("");
         $("#print-main-fuel-mix").html("");
@@ -177,8 +178,10 @@ export default {
         $("#print-main-emission-rates > #nationalEmissionRateGraph > svg").css({
           display: "inline-block"
         });
-        $("#printReport").hide();
         self.showMainReport = true;
+        $("#printReportMain").show();
+        $("#printReport").hide();
+
       }
     });
     window.addEventListener("afterprint", function(event) {
