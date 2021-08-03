@@ -265,9 +265,10 @@ input[type="number"]::-webkit-outer-spin-button {
   background-color: #fafafa;
   border: 1px solid black;
   /* Set the width based on the background image size and prevent the sidebar from growing or shrinking which cuts off the image and squeezes the text */
-  width:min-content;
+  width: min-content;
+  min-width: 359px;
   display: inline-flex;
-  flex: 0 0 auto;
+  flex: 0 1 auto;
 }
 
 .modal-mask {

@@ -106,7 +106,7 @@ export default {
       var svg = d3
         .select(_this.domElement)
         .append("svg")
-        .attr("class", "grid-col-11")
+        .attr("class", "grid-col-10")
         .attr("width", _this.width)
         .attr("height", _this.height)
         .attr("viewBox", "0 0 " + _this.width + " " + _this.height)
