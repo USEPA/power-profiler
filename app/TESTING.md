@@ -61,7 +61,7 @@ A general testing guide for manual review of changes to the Power Profiler.
                 * Check to see if the value for a selected subregion shows up above the bar for that region and the region is bolded in the x*axis
     * Maps
         * Test all links in description
-        * Emisssion Rate Map
+        * Emission Rate Map
             * Test tooltips in English and Spanish
         * Renewable/Non*renewable Map
             * Test tooltips in English and Spanish
@@ -106,7 +106,7 @@ A general testing guide for manual review of changes to the Power Profiler.
             □ Opens an input box for entering square footage
             □ The first paragraph and all charts change when entering square footage
         * Test that the switch to residential button hides the commercial customer input and changes all text and charts to the previous text for the residential inputs
-    * Test that all the charts (Guage chart, CO2, SO2, and NOx) charts are present and change when input changes
+    * Test that all the charts (Gauge chart, CO2, SO2, and NOx) charts are present and change when input changes
 
 * Print report
     * Check that the print report feature works and shows all the information that is present on the screen at the time of clicking the button

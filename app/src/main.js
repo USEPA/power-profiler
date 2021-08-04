@@ -27,6 +27,14 @@ var vm = new Vue({
 });
 
 vm.$on("subregionSelected", function(d) {
+  if (d === "All") {
+    $(".map").css({ fill: "" });
+    this.$children[0].$children[4].$children[0].selectedRegion = {};
+    this.$children[0].$children[4].selectedRegion = {};
+    this.$root.showMain = true;
+    this.$root.selectedSubregion = false;
+  }
+  else{
   selectedSubregion.update(d);
   this.$children[0].$children[4].$children[0].selectedRegion =
     selectedSubregion.data;
@@ -34,7 +42,7 @@ vm.$on("subregionSelected", function(d) {
   $(".map").css({ fill: "" });
   $("." + d.properties.name).css({ fill: "steelblue" });
   $("#regionSelectionDropdown").val(d.properties.name);
-  router.push(d.properties.name);
+  router.push(d.properties.name); }
 });
 
 if (typeof ga === "function") {
