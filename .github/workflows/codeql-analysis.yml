@@ -76,7 +76,7 @@ jobs:
     needs: analyze
     steps:
     - name: Prepare message
-      run: echo '::set-output name=MESSAGE::$GITHUB_ACTOR created a $GITHUB_EVENT_NAME.  CodeQL has run. Check [code scanning alerts](https://github.com/USEPA/power-profiler/security/code-scanning) for details.'
+      run: echo "::set-output name=MESSAGE::$GITHUB_ACTOR created a $GITHUB_EVENT_NAME.  CodeQL has run. Check [code scanning alerts](https://github.com/USEPA/power-profiler/security/code-scanning) for details."
       id: prepared-message
     
     - name: Send message to ms teams
