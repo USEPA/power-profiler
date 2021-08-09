@@ -201,6 +201,11 @@ export default {
       this.selectedSubregion = allSubregions.data.filter(
         d => d.properties.name == subAcronym
       )[0];
+      if(subAcronym === "All") {  
+        this.$router.push({name: 'home'});   
+        this.$root.$emit("subregionSelected", subAcronym);
+        return;
+      }
       this.$root.$emit("subregionSelected", this.selectedSubregion);
     }
   },
