@@ -6,5 +6,10 @@ app/node_modules/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-# Ignore the cloudgov dist files
-app/dist/cloudgov/*
+# Ignore the dist files
+app/dist/*
+# Ignore prep data folder except the states.json file
+prep/data/csv/*
+prep/data/shape/egrid_*
+prep/result/*
+!prep/data/shape/states.json
