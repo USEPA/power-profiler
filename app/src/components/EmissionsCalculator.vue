@@ -394,14 +394,11 @@ export default {
       this.resultsFunction = "monthlyAverage";
       var userMonthlyAverage = $("#userMonthlyAverageInput").val();
       var total = userMonthlyAverage * 12;
+      
       // Formula to find lbs of emissions given monthly kWh value
       function calculateEmissions(emissionFactorValue, monthlyAverage) {
-        var res =
-          monthlyAverage *
-          12 *
-          emissionFactorValue *
-          0.001 *
-          (1 + self.gridLoss.value);
+        var emissionsAttr = monthlyAverage * 12 * emissionFactorValue * 0.001;
+        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr) / (1 - self.gridLoss.value));
         return res;
       }
 
@@ -546,9 +543,9 @@ export default {
       }, 0);
 
       function calculateEmissions(emissionFactorValue, total) {
-        var res =
-          ((total * emissionFactorValue) * 0.001) * (1 + self.gridLoss.value);
-        return res;
+        var emissionsAttr = total * emissionFactorValue * 0.001;
+        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr)/(1 - self.gridLoss.value));
+         return res;
       }
 
       this.nationalEmissions = {
@@ -683,9 +680,8 @@ export default {
       this.resultsFunction = "nationalAverage";
 
       function calculateEmissions(emissionFactorValue, monthlyAverage) {
-        var res =
-          ((monthlyAverage * 12 * emissionFactorValue) * 0.001) *
-          (1 + self.gridLoss.value);
+        var emissionsAttr = monthlyAverage * 12 * emissionFactorValue * 0.001;
+        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr)/(1 - self.gridLoss.value));
         return res;
       }
 
@@ -979,12 +975,14 @@ export default {
     calculateNationalEmissions: function(emissionFactorValue) {
       var nationalTotal = this.nationalAverage * 12;
       var nationalGridloss = this.natGridloss.value;
-      var res = ((nationalTotal * emissionFactorValue) * 0.001) * (1 + nationalGridloss);
+      var emissionsAttr = nationalTotal * emissionFactorValue * 0.001;
+      var res = emissionsAttr + ((nationalGridloss * emissionsAttr) / (1 - nationalGridloss));
       return res;
     },
     calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
       var nationalTotal = this.nationalAverage * 12;
-      var res = ((nationalTotal * emissionFactorValue) * 0.001) * (1 + gridLoss);
+      var emissionsAttr = nationalTotal * emissionFactorValue * 0.001;
+      var res = emissionsAttr + ((gridLoss * emissionsAttr) / (1 - gridLoss));
       return res;
     },
     calculateCarbonOffset: function(carbon) {
