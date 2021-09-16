@@ -1,8 +1,8 @@
 export const constVal = {
-    carbonSequesteredByYear: 0.82,
-    carbonSequesteredByAcre: 146.27,
+    carbonSequesteredByYear: 0.84,
+    carbonSequesteredByAcre: 148.26,
     avgConsumptionSqft: 1.22, 
-    annualAverage: 11880,
+    nationalTotal: 11880,
     nationalAverage: 990
 };
 
