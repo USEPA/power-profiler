@@ -848,6 +848,24 @@ export default {
         $("#residentialCustomersButton").hide();
       });
 
+      $("#calculateMonthlyAverageButton").click(function() {
+        self.commercialCustomerForm = false;
+        self.residentialMode = true;
+        self.userSelectionStore.setResidentialMode(true);
+        self.displayNationalAverage();
+        $("#customerText").show();
+        $("#residentialCustomersButton").hide();     
+      });
+
+      $("#calculateMonthlyActualButton").click(function() {
+        self.commercialCustomerForm = false;
+        self.residentialMode = true;
+        self.userSelectionStore.setResidentialMode(true);
+        self.displayNationalAverage();
+        $("#customerText").show();
+        $("#residentialCustomersButton").hide();        
+      });
+
       $("#annual-results-text").hide();
       $("#national-avg-annual-results-text").show();
       $("#result").show();
