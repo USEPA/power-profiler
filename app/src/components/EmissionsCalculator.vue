@@ -309,7 +309,6 @@
                 />&nbsp;kWh
               </div>
               <br />
-
             </div>
           </div>
           <div>
@@ -360,6 +359,7 @@ export default {
       subregionEmissions: {},
       nationalEmissions: {},
       nationalAverage: constVal.nationalAverage,
+      nationalTotal: constVal.nationalTotal,
       emRatesColors: {
         national: "#2b83ba",
         subregion: "#e66101",
@@ -367,7 +367,6 @@ export default {
         so2EmissionRate: "#008837",
         noxEmissionRate: "#7b3294"
       },
-      resultsFunction: "",
       emissionsResultsWidth: 0,
       emissionsResultsHeight: 0,
       residentialMode: true,
@@ -393,63 +392,68 @@ export default {
       var self = this;
       this.resultsFunction = "monthlyAverage";
       var userMonthlyAverage = $("#userMonthlyAverageInput").val();
-      var total = userMonthlyAverage * 12;
+      var userTotal = userMonthlyAverage * 12;
       
-      // Formula to find lbs of emissions given monthly kWh value
-      function calculateEmissions(emissionFactorValue, monthlyAverage) {
-        var emissionsAttr = monthlyAverage * 12 * emissionFactorValue * 0.001;
-        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr) / (1 - self.gridLoss.value));
-        return res;
-      }
-
       this.userEmissions = {
-        co2: calculateEmissions(
+        co2: this.calculateEmissionsAll(
           this.emissionFactors.co2EmissionRate.value,
-          userMonthlyAverage
+          this.gridLoss.value,
+          userTotal
         ),
-        so2: calculateEmissions(
+        so2: this.calculateEmissionsAll(
           this.emissionFactors.so2EmissionRate.value,
-          userMonthlyAverage
+          this.gridLoss.value,
+          userTotal
         ),
-        nox: calculateEmissions(
+        nox: this.calculateEmissionsAll(
           this.emissionFactors.noxEmissionRate.value,
-          userMonthlyAverage
+          this.gridLoss.value,
+          userTotal
         )
       };
 
       this.subregionEmissions = {
-        co2: self.calculateSubregionEmissions(
+        co2: this.calculateEmissionsAll(
           this.emissionFactors.co2EmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        so2: self.calculateSubregionEmissions(
+        so2: this.calculateEmissionsAll(
           this.emissionFactors.so2EmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        nox: self.calculateSubregionEmissions(
+        nox: this.calculateEmissionsAll(
           this.emissionFactors.noxEmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         )
       };
 
       this.nationalEmissions = {
-        co2: self.calculateNationalEmissions(
+        co2: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
-            .value
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal
         ),
-        so2: self.calculateNationalEmissions(
+        so2: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
-            .value
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal            
         ),
-        nox: self.calculateNationalEmissions(
+        nox: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
-            .value
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal            
         )
       };
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
-      var userNitrogen = Math.round(this.userEmissions.nox).toLocaleString();
-      var userSulfur = Math.round(this.userEmissions.so2).toLocaleString();
+      var userNitrogen = this.userEmissions.nox.toLocaleString();
+      var userSulfur = this.userEmissions.so2.toLocaleString();
 
       $("#egrid-subregion-acronym").html(
         this.selectedSubregion.properties.name
@@ -458,7 +462,7 @@ export default {
         this.selectedSubregion.properties.fullName
       );
       $("#percent-line-loss").html(this.gridLoss.display);
-      $("#estimated-annual-electricity-use").html(total.toLocaleString());
+      $("#estimated-annual-electricity-use").html(userTotal.toLocaleString());
       $("#pounds-of-co2").html(userCarbon);
       $("#pounds-of-so2").html(userSulfur);
       $("#pounds-of-nox").html(userNitrogen);
@@ -470,12 +474,12 @@ export default {
       );
 
       var gaugeMax = 24000;
-      if (userMonthlyAverage * 12 > gaugeMax) {
-        gaugeMax = userMonthlyAverage * 12;
+      if (userTotal > gaugeMax) {
+        gaugeMax = userTotal;
       }
       var percentMax = 100;
       var userPercent =
-        ((userMonthlyAverage * 12) / (this.nationalAverage * 12)) * 100;
+        (userTotal / this.nationalTotal) * 100;
       if (userPercent > percentMax) {
         percentMax = userPercent;
       }
@@ -485,7 +489,7 @@ export default {
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
         gaugeMax,
-        this.nationalAverage * 12,
+        this.nationalTotal,
         this.$t("results.natAnnGauge"),
         false
       );
@@ -493,7 +497,7 @@ export default {
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
         gaugeMax,
-        userMonthlyAverage * 12,
+        userTotal,
         this.$t("results.youAnnGauge"),
         false
       );
@@ -542,60 +546,66 @@ export default {
         return parseFloat(a) + parseFloat(b);
       }, 0);
 
-      function calculateEmissions(emissionFactorValue, total) {
-        var emissionsAttr = total * emissionFactorValue * 0.001;
-        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr)/(1 - self.gridLoss.value));
-         return res;
-      }
-
-      this.nationalEmissions = {
-        co2: this.calculateNationalEmissions(
-          this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
-            .value
+      this.userEmissions = {
+        co2: this.calculateEmissionsAll(
+          this.emissionFactors.co2EmissionRate.value,
+          this.gridLoss.value,
+          total
         ),
-        so2: this.calculateNationalEmissions(
-          this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
-            .value
+        so2: this.calculateEmissionsAll(
+          this.emissionFactors.so2EmissionRate.value,
+          this.gridLoss.value,
+          total
         ),
-        nox: this.calculateNationalEmissions(
-          this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
-            .value
+        nox: this.calculateEmissionsAll(
+          this.emissionFactors.noxEmissionRate.value,
+          this.gridLoss.value,
+          total
         )
       };
 
       this.subregionEmissions = {
-        co2: this.calculateSubregionEmissions(
+        co2: this.calculateEmissionsAll(
           this.emissionFactors.co2EmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        so2: this.calculateSubregionEmissions(
+        so2: this.calculateEmissionsAll(
           this.emissionFactors.so2EmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        nox: this.calculateSubregionEmissions(
+        nox: this.calculateEmissionsAll(
           this.emissionFactors.noxEmissionRate.value,
-          this.gridLoss.value
+          this.gridLoss.value,
+          this.nationalTotal
         )
       };
 
-      this.userEmissions = {
-        co2: calculateEmissions(
-          this.emissionFactors.co2EmissionRate.value,
-          total
+      this.nationalEmissions = {
+        co2: this.calculateEmissionsAll(
+          this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal
         ),
-        so2: calculateEmissions(
-          this.emissionFactors.so2EmissionRate.value,
-          total
+        so2: this.calculateEmissionsAll(
+          this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal            
         ),
-        nox: calculateEmissions(
-          this.emissionFactors.noxEmissionRate.value,
-          total
+        nox: this.calculateEmissionsAll(
+          this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
+            .value,
+          this.natGridloss.value,
+          this.nationalTotal            
         )
-      };
+      };      
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
-      var userNitrogen = Math.round(this.userEmissions.nox).toLocaleString();
-      var userSulfur = Math.round(this.userEmissions.so2).toLocaleString();
+      var userNitrogen = this.userEmissions.nox.toLocaleString();
+      var userSulfur = this.userEmissions.so2.toLocaleString();
 
       $("#egrid-subregion-acronym").html(
         this.selectedSubregion.properties.name
@@ -620,7 +630,7 @@ export default {
         gaugeMax = total;
       }
       var percentMax = 100;
-      var userPercent = (total / (this.nationalAverage * 12)) * 100;
+      var userPercent = (total / this.nationalTotal) * 100;
       if (userPercent > percentMax) {
         percentMax = userPercent;
       }
@@ -630,7 +640,7 @@ export default {
         this.emissionsResultsWidth,
         this.emissionsResultsHeight / 2,
         gaugeMax,
-        this.nationalAverage * 12,
+        this.nationalTotal,
         this.$t("results.natAnnGauge"),
         false
       );
@@ -679,44 +689,44 @@ export default {
       // Only display national graphs
       this.resultsFunction = "nationalAverage";
 
-      function calculateEmissions(emissionFactorValue, monthlyAverage) {
-        var emissionsAttr = monthlyAverage * 12 * emissionFactorValue * 0.001;
-        var res = emissionsAttr + ((self.gridLoss.value * emissionsAttr)/(1 - self.gridLoss.value));
-        return res;
-      }
-
       this.nationalEmissions = {
-        co2: calculateEmissions(
+        co2: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
             .value,
-          this.nationalAverage
+          this.natGridloss.value,
+          this.nationalTotal
         ),
-        so2: calculateEmissions(
+        so2: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
             .value,
-          this.nationalAverage
+           this.natGridloss.value, 
+          this.nationalTotal
         ),
-        nox: calculateEmissions(
+        nox: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value,
-          this.nationalAverage
+          this.natGridloss.value,  
+          this.nationalTotal
         )
       };
 
       this.subregionEmissions = {};
 
       this.userEmissions = {
-        co2: calculateEmissions(
+        co2: this.calculateEmissionsAll(
           this.emissionFactors.co2EmissionRate.value,
-          this.nationalAverage
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        so2: calculateEmissions(
+        so2: this.calculateEmissionsAll(
           this.emissionFactors.so2EmissionRate.value,
-          this.nationalAverage
+          this.gridLoss.value,
+          this.nationalTotal
         ),
-        nox: calculateEmissions(
+        nox: this.calculateEmissionsAll(
           this.emissionFactors.noxEmissionRate.value,
-          this.nationalAverage
+          this.gridLoss.value,
+          this.nationalTotal
         )
       };
       if ($("#chart-gauge").children.length > 3) {
@@ -724,18 +734,18 @@ export default {
       }
       if (this.residentialMode == false) {
         var gaugeMax = 24000;
-        this.nationalAverage = this.sqrFootage * 1.22;
+        this.nationalTotal = this.sqrFootage * constVal.avgConsumptionSqft * 12; 
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
-        if (this.nationalAverage * 12 > 24000) {
-          gaugeMax = this.nationalAverage * 12;
+        if (this.nationalTotal > 24000) {
+          gaugeMax = this.nationalTotal;
         }
         this.gaugeChart(
           this.emissionsResultsWidth,
           this.emissionsResultsHeight / 2,
           gaugeMax,
-          this.nationalAverage * 12,
+          this.nationalTotal,
           this.$t("results.youAnnGauge"),
           false
         );
@@ -757,7 +767,7 @@ export default {
           340
         );
       } else {
-        this.nationalAverage = constVal.nationalAverage;
+        this.nationalTotal = constVal.nationalTotal;
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.nationalSubheader"));
         $("#commercialCustomersForm").hide();
@@ -766,7 +776,7 @@ export default {
           this.emissionsResultsWidth,
           this.emissionsResultsHeight,
           24000,
-          this.nationalAverage * 12,
+          this.nationalTotal,
           this.$t("results.youAnnGauge"),
           false
         );
@@ -790,8 +800,8 @@ export default {
       }
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
-      var userNitrogen = Math.round(this.userEmissions.nox).toLocaleString();
-      var userSulfur = Math.round(this.userEmissions.so2).toLocaleString();
+      var userNitrogen = this.userEmissions.nox.toLocaleString();
+      var userSulfur = this.userEmissions.so2.toLocaleString();
 
       $("#nat-egrid-subregion-acronym").html(
         this.selectedSubregion.properties.name
@@ -801,7 +811,7 @@ export default {
       );
       $("#nat-percent-line-loss").html(this.gridLoss.display);
       $("#nat-estimated-annual-electricity-use").html(
-        (this.nationalAverage * 12).toLocaleString()
+        (this.nationalTotal).toLocaleString()
       );
       $("#pounds-of-co2").html(userCarbon);
       $("#pounds-of-so2").html(userSulfur);
@@ -972,24 +982,18 @@ export default {
         });
       }
     },
-    calculateNationalEmissions: function(emissionFactorValue) {
-      var nationalTotal = this.nationalAverage * 12;
-      var nationalGridloss = this.natGridloss.value;
-      var emissionsAttr = nationalTotal * emissionFactorValue * 0.001;
-      var res = emissionsAttr + ((nationalGridloss * emissionsAttr) / (1 - nationalGridloss));
+    calculateEmissionsAll: function(emissionFactorValue, gridLoss, total) {
+      var emFactor = Math.round(emissionFactorValue*10)/10;
+      var emissionsAttr = total * emFactor * 0.001;
+      var totEm = emissionsAttr + ((gridLoss * emissionsAttr) / (1 - gridLoss));
+      var res = totEm.toFixed(1);
       return res;
-    },
-    calculateSubregionEmissions: function(emissionFactorValue, gridLoss) {
-      var nationalTotal = this.nationalAverage * 12;
-      var emissionsAttr = nationalTotal * emissionFactorValue * 0.001;
-      var res = emissionsAttr + ((gridLoss * emissionsAttr) / (1 - gridLoss));
-      return res;
-    },
+    },  
     calculateCarbonOffset: function(carbon) {
       // 23.2 pounds of carbon a medium growth tree, planted in an urban setting, and allowed to grow for 10 years sequesters
       // 44 units CO2
       // 12 Units C
-      // 0.85 metric tons of CO2 sequestered annually by one acre of average US forest
+      // 0.84 metric tons of CO2 sequestered annually by one acre of average US forest
       // 1 metric ton = 2204.6 lbs
       var trees = (carbon / (23.2 * (44 / 12))).toLocaleString(undefined, {
         maximumFractionDigits: 0
@@ -1016,30 +1020,35 @@ export default {
           width = w - margin.left - margin.right,
           height = h - margin.top - margin.bottom;
 
+        if (pollutants[i] == "co2") {
+
+          var nationalDisplay = Number(parseFloat(national[pollutants[i]]).toFixed(0)).toLocaleString();
+          var subregionDisplay = Number(parseFloat(subregion[pollutants[i]]).toFixed(0)).toLocaleString();
+          var userDisplay = Number(parseFloat(user[pollutants[i]]).toFixed(0)).toLocaleString();
+        } else {
+          var nationalDisplay = Number(parseFloat(national[pollutants[i]]).toFixed(1)).toLocaleString(undefined, {minimumFractionDigits: 1});
+          var subregionDisplay = Number(parseFloat(subregion[pollutants[i]]).toFixed(1)).toLocaleString(undefined, {minimumFractionDigits: 1});
+          var userDisplay = Number(parseFloat(user[pollutants[i]]).toFixed(1)).toLocaleString(undefined, {minimumFractionDigits: 1});
+        }
+
         var x = d3.scale.ordinal().rangeRoundBands([0, width], 0.3);
 
         var arr = [
           {
             value: parseFloat(national[pollutants[i]]),
-            display: Number(
-              parseFloat(national[pollutants[i]]).toFixed(0)
-            ).toLocaleString(),
+            display: nationalDisplay,            
             name: self.$t("results.charts.nat")
           },
           {
             value: parseFloat(subregion[pollutants[i]]),
-            display: Number(
-              parseFloat(subregion[pollutants[i]]).toFixed(0)
-            ).toLocaleString(),
+            display: subregionDisplay,
             name:
               this.selectedSubregion.properties.name +
               self.$t("results.charts.reg")
           },
           {
             value: parseFloat(user[pollutants[i]]),
-            display: Number(
-              parseFloat(user[pollutants[i]]).toFixed(0)
-            ).toLocaleString(),
+            display: userDisplay,
             name: self.$t("results.charts.you")
           }
         ];

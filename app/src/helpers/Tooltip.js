@@ -24,7 +24,6 @@ function addTooltip(className) {
       }
     },
     mousemove: function(e) {
-      // Check if element is a national bar (on the righthand side of the page)
       // Check if element is a national bar (on the right-hand-side of the page)
       const natBar = $(this).closest('.nationalBar');
 

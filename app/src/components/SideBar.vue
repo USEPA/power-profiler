@@ -93,7 +93,7 @@
           for="additionalInfo.powerProfilerExcelLink"
         >
           <a
-            href="https://www.epa.gov/sites/production/files/2020-11/power_profiler_zipcode_tool.xlsx"
+            href="https://www.epa.gov/system/files/other-files/2021-09/power_profiler_zipcode_tool_2019.xlsx"
             v-bind:aria-label="$t('ariaLabels.downloadsTool')"
             >{{ $t("additionalInfo.powerProfilerExcelLink") }}</a
           >
@@ -101,7 +101,7 @@
         </i18n>
         <p>
           <a
-            href="https://www.epa.gov/egrid/forms/egrid-and-power-profiler-notification"
+            href="https://lp.constantcontactpages.com/su/sG18AaT"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
             >{{ $t("additionalInfo.mailingList") }}</a
