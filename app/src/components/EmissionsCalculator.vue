@@ -396,7 +396,7 @@ export default {
       
       this.userEmissions = {
         co2: this.calculateEmissionsAll(
-          this.emissionFactors.co2EmissionRate.value,
+          Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
           this.gridLoss.value,
           userTotal
         ),
@@ -414,7 +414,7 @@ export default {
 
       this.subregionEmissions = {
         co2: this.calculateEmissionsAll(
-          this.emissionFactors.co2EmissionRate.value,
+          Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
           this.gridLoss.value,
           this.nationalTotal
         ),
@@ -432,8 +432,8 @@ export default {
 
       this.nationalEmissions = {
         co2: this.calculateEmissionsAll(
-          this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
-            .value,
+          Math.round(this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
+            .value*10)/10,
           this.natGridloss.value,
           this.nationalTotal
         ),
@@ -548,7 +548,7 @@ export default {
 
       this.userEmissions = {
         co2: this.calculateEmissionsAll(
-          this.emissionFactors.co2EmissionRate.value,
+          Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
           this.gridLoss.value,
           total
         ),
@@ -566,7 +566,7 @@ export default {
 
       this.subregionEmissions = {
         co2: this.calculateEmissionsAll(
-          this.emissionFactors.co2EmissionRate.value,
+          Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
           this.gridLoss.value,
           this.nationalTotal
         ),
@@ -584,8 +584,8 @@ export default {
 
       this.nationalEmissions = {
         co2: this.calculateEmissionsAll(
-          this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
-            .value,
+          Math.round(this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
+            .value*10)/10,
           this.natGridloss.value,
           this.nationalTotal
         ),
@@ -691,8 +691,8 @@ export default {
 
       this.nationalEmissions = {
         co2: this.calculateEmissionsAll(
-          this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
-            .value,
+          Math.round(this.nationalFeature[0].properties.emissionFactor.co2EmissionRate
+            .value*10)/10,
           this.natGridloss.value,
           this.nationalTotal
         ),
@@ -714,7 +714,7 @@ export default {
 
       this.userEmissions = {
         co2: this.calculateEmissionsAll(
-          this.emissionFactors.co2EmissionRate.value,
+          Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
           this.gridLoss.value,
           this.nationalTotal
         ),
@@ -1001,8 +1001,7 @@ export default {
       }
     },
     calculateEmissionsAll: function(emissionFactorValue, gridLoss, total) {
-      var emFactor = Math.round(emissionFactorValue*10)/10;
-      var emissionsAttr = total * emFactor * 0.001;
+      var emissionsAttr = total * emissionFactorValue * 0.001;
       var totEm = emissionsAttr + ((gridLoss * emissionsAttr) / (1 - gridLoss));
       var res = totEm.toFixed(1);
       return res;
