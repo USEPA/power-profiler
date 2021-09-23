@@ -17,7 +17,6 @@
     <div class="locale-changer">
       <a v-on:click="toggleLang" href="javascript:void(0)">{{ langLink }}</a>
     </div>
-    <h1 class="page-title">{{ $t("title") }}</h1>
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
 
@@ -105,7 +104,13 @@ export default {
       let newLang = curLang === "en" ? "es" : "en";
       this.langLink = this.langs[curLang];
       this.$root.$i18n.locale = newLang;
-    }
+
+    },
+    updateTitle: function() {
+      // Necessary becuase of the required title that comes from Drupal
+      // which is in English
+      $(".page-title").html(this.$t("title"));
+    },
   },
 
   mounted: function() {
@@ -205,6 +210,12 @@ export default {
     $route: function(to, from) {
       if (to.name == "home") this.showMain = true;
       $("#result").hide();
+    },
+    "$root.$i18n.locale": {
+      deep: true,
+      handler() {
+        this.updateTitle();
+      }
     }
   }
 };
