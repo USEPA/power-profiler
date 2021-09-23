@@ -22,13 +22,23 @@ Most of the text content in the app can be found within the `template` sections 
 
 ## Deployment
 
+### Production checklist for updates for new eGRID data year or significant changes
+
+- Tag and create a release within GitHub
+- Update the `subregion.json`(Subregion Data for Power Profiler) and `zip.csv` (eGRID zip code lookup) files within Drupal
+  - Check the prod.config.js in the webpack folder for the exact links
+- Update any supporting files linked in the sidebar (e.g. zipcode tool, methodology, summary tables, etc) within Drupal
+- Update any photos (e.g. eGRID subregion map) in Drupal
+- Change any links in the power-profiler code to reflect any new links for media in Drupal
+
 To deploy the the app onto either the [production EPA Drupal site](https://beta.epa.gov) or the [staging app dev server](https://webcms.appdev.epa.gov), verify that the correct paths to the `subregion.json` and `zip.csv` files are both correct in the webpack config file (`prod.config.js` or `stag.config.js`), located in the `webpack` folder.
 
 Then, use one the following commands to deploy:
 - Staging: `npm run stage`
 - Production: `npm run prod`
 
-Note, these commands will clear any existing folder with built resources located in either `dist/stag` or `dist/prod`. Then, it will create a `bundle.js` file and `index.html`. Using only the `bundle.js` minified JS, you can copy and paste this code into the "Page Javascript" input field in Drupal.
+Note, these commands will clear any existing folder with built resources located in either `dist/stag` or `dist/prod`. Then, it will create a `bundle.js` file and `index.html`. Using only the `bundle.js` minified JS, you can copy and paste this code into the "Page Javascript" input field in Drupal. 
+> You can use `cat dist/prod/bundle.js > /dev/clipboard` within git bash on Windows to pipe the contents of `bundle.js` into your clipboard
 
 If deploying to one of these environments, make sure to provide the app the URL of the D3 library hosted on EPA's website and assign the variable `&` to `jQuery` (shown below).
 
