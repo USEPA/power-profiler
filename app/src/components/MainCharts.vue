@@ -32,7 +32,7 @@
                 "oil": "Oil",
                 "geothermal": "Geothermal",
                 "otherFossilFuel": "Other Fossil Fuel",
-                "otherUnknownFuel": "Other Uknown Fuel",
+                "otherUnknownFuel": "Other Unknown Fuel",
                 "renewable": "Renewable",
                 "non-renewable": "Non-renewable",
                 "renewable (excluding hydro)": "Renewable (excluding hydro)",

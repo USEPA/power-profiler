@@ -17,7 +17,7 @@
         "oil": "Oil",
         "geothermal": "Geothermal",
         "otherFossilFuel": "Other Fossil Fuel",
-        "otherUnknownFuel": "Other Uknown Fuel"
+        "otherUnknownFuel": "Other Unknown Fuel"
       }
 
     },
