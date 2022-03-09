@@ -79,7 +79,7 @@
           </template>
           <template #eGRIDSubregions>
             <a
-              href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
+              :href=egridSubregionMap
               target="_blank"
               >{{ $t("emissionRateBody.eGRIDSubregions") }}</a
             >
@@ -207,6 +207,7 @@ import emissionRateMap from "./EmissionRateMap.vue";
 import renewablesMap from "./RenewablesMap.vue";
 import { userSelection } from "../stores/userSelection.js";
 import { addTooltip } from "../helpers/Tooltip";
+import { constVal } from "../helpers/const.js";
 
 export default {
   components: {
@@ -235,7 +236,8 @@ export default {
       pollutantText: "CO<sub>2</sub>",
       sortState: "alphabetically",
       selectedFuel: "",
-      currentMap: 1
+      currentMap: 1,
+      egridSubregionMap: constVal.egridSubregionMapUrl
     };
   },
   mounted: function() {

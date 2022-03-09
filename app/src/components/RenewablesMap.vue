@@ -25,7 +25,7 @@
     <i18n path="description.text" tag="p">
       <template #eGRIDSubregion>
         <a
-          href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
+          :href= egridSubregionMap
           target="_blank"
           >{{ $t("description.eGRIDSubregion") }}</a
         >
@@ -41,6 +41,7 @@ import { addSubregionLabels } from "../helpers/MapHelpers.js";
 import { allSubregions } from "../stores/allSubregions.js";
 import { userSelection } from "../stores/userSelection.js";
 import { addTooltip } from "../helpers/Tooltip.js";
+import { constVal } from "../helpers/const.js";
 
 export default {
   data() {
@@ -53,7 +54,8 @@ export default {
       path: {},
       containerHeight: 0,
       subregionData: [],
-      selectedRenewable: "renewable"
+      selectedRenewable: "renewable",
+      egridSubregionMap: constVal.egridSubregionMapUrl
     };
   },
   mounted: function() {

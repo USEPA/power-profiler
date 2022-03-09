@@ -3,12 +3,32 @@ import json
 from pathlib import Path
 
 # Load in Subregion data.
+subregion_columns = pd.read_csv(
+    './data/csv/subregion_data.csv',
+    nrows=0 # Read 0 rows, assuming headers are at row 0
+).columns
+
+sub_pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
+
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
+
+sn[sub_pct_columns] = sn[sub_pct_columns].apply(lambda x: x.str.rstrip('%').astype(float))
+
 snfm = pd.read_csv("./data/csv/subregion_fuel_mix.csv",delimiter=',',thousands=',')
 # Load in Grid Loss data.
 gl = pd.read_csv("./data/csv/grid_loss.csv", delimiter=',', thousands=',')
 # Load in US-level data.
+national_columns = pd.read_csv(
+    './data/csv/national.csv',
+    nrows=0 # Read 0 rows, assuming headers are at row 0
+).columns
+
+nat_pct_columns = list(filter(lambda x: 'PR' in x, national_columns))
+
 n = pd.read_csv("./data/csv/national.csv", delimiter=',', thousands=',')
+
+n[nat_pct_columns] = n[nat_pct_columns].apply(lambda x: x.str.rstrip('%').astype(float))
+
 # Convert % strings into floats.
 gl['GGRSLOSS_STR'] = gl['GGRSLOSS']
 gl['GGRSLOSS'] = (gl['GGRSLOSS'].str.rstrip('%').astype('float') / 100.0).round(4)
@@ -42,7 +62,7 @@ eastern = ['MROE','SRMV','SRMW','RFCW','RFCM','SRTV','SRSO','FRCC','SRVC','RFCE'
 western = ['CAMX','NWPP','AZNM','RMPA']
 pr = ['PRMS']
 # Read in Subregions json.
-with open("./data/shape/egrid_2019_subregions_states.json", "r") as read_file:
+with open("./data/shape/egrid_2020_subregions_states.json", "r") as read_file:
     data = json.load(read_file)
     for feature in data["features"]:
         # Add eGRID data values.

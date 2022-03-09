@@ -13,8 +13,8 @@
       "title": "Additional Information",
       "feedback": "How do you like the new Power Profiler site?",
       "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Data source: 2019 data from the {0} released February 23, 2021",
-      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2019 (XLSX)",
+      "egridDataSource": "Data source: 2020 data from the {0} released January 27, 2022",
+      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2020 (XLSX)",
       "powerProfilerExcelVersion": "Excel version: {0}",
       "mailingList": "Sign up for the mailing list",
       "methodology": "Power Profiler Methodology",
@@ -35,8 +35,8 @@
       "title": "Información Adicional",
       "feedback": "¿Qué le parece el nuevo sitio del Analizador de consumo de energía?",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2019 del {0} actualizado el 02/23/2021",
-      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2019 (XLSX)",
+      "egridDataSource": "Fuente de datos: Datos de 2020 del {0} actualizado el 01/27/2022",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2020 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
       "mailingList": "Suscríbase a la lista de distribución",
       "methodology": "Metodología del Analizador de consumo de energía",
@@ -93,7 +93,7 @@
           for="additionalInfo.powerProfilerExcelLink"
         >
           <a
-            href="https://www.epa.gov/system/files/other-files/2021-09/power_profiler_zipcode_tool_2019.xlsx"
+            :href=powerProfilerExcel
             v-bind:aria-label="$t('ariaLabels.downloadsTool')"
             >{{ $t("additionalInfo.powerProfilerExcelLink") }}</a
           >
@@ -117,11 +117,11 @@
         </p>
         <p>
           <a
-            href="https://www.epa.gov/sites/production/files/2021-02/egrid2019_summary_tables.xlsx"
+            :href=egridSummaryTables
             v-bind:aria-label="$t('ariaLabels.downloadsSummary')"
             >{{ $t("additionalInfo.summaryTables") }}</a
           >
-          <span class="fileinfo">(1 pg, 717 K)</span>
+          <span class="fileinfo">(1 pg, 885 K)</span>
         </p>
         <p>
           <a href="javascript:void(0)" @click="$parent.showResources = true">{{
@@ -134,8 +134,15 @@
 </template>
 <script>
 import subregionSelection from "./SubregionSelection.vue";
+import { constVal } from "../helpers/const.js";
 
 export default {
+  data() {
+    return {
+      egridSummaryTables: constVal.egridSummaryTablesUrl,
+      powerProfilerExcel: constVal.powerProfilerExcelUrl,
+    }
+  },
   components: {
     subregionSelection: subregionSelection
   }

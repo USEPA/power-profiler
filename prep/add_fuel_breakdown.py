@@ -1,6 +1,17 @@
 import pandas as pd
 # Load eGRID subregion data
+# Load in Subregion data.
+subregion_columns = pd.read_csv(
+    './data/csv/subregion_data.csv',
+    nrows=0 # Read 0 rows, assuming headers are at row 0
+).columns
+
+pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
+
 sn = pd.read_csv("./data/csv/subregion_data.csv", delimiter=',', thousands=',')
+
+sn[pct_columns] = sn[pct_columns].apply(lambda x: x.str.rstrip('%').astype(float))
+
 sn['SRNOXRTA'] = sn['SRNOXRTA'].round(3)
 sn['SRSO2RTA'] = sn['SRSO2RTA'].round(3)
 sn['SRCO2RTA'] = sn['SRCO2RTA'].round(3)
@@ -8,7 +19,17 @@ sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(3).astype('str')
 sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(3).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
 # Load eGRID national data
+national_columns = pd.read_csv(
+    './data/csv/national.csv',
+    nrows=0 # Read 0 rows, assuming headers are at row 0
+).columns
+
+nat_pct_columns = list(filter(lambda x: 'PR' in x, national_columns))
+
 n = pd.read_csv("./data/csv/national.csv", delimiter=',', thousands=',')
+
+n[nat_pct_columns] = n[nat_pct_columns].apply(lambda x: x.str.rstrip('%').astype(float))
+
 n['USNOXRTA'] = n['USNOXRTA'].round(3)
 n['USSO2RTA'] = n['USSO2RTA'].round(3)
 n['USCO2RTA'] = n['USCO2RTA'].round(3)

@@ -93,7 +93,7 @@
       <i18n path="fuelMixBody.text" tag="p">
         <template #eGRIDSubregions>
           <a
-            href="https://www.epa.gov/sites/default/files/2021-03/2019_egrid_subregions.png"
+            :href= egridSubregionMap
             target="_blank"
             >{{ $t("fuelMixBody.eGRIDSubregions") }}</a
           >
@@ -181,6 +181,7 @@ import { userSelection } from "../stores/userSelection.js";
 import { addLogoBottom } from "../helpers/ChartHelpers.js";
 import emissionRateChart from "./EmissionRateChart.vue";
 import { addTooltip } from "../helpers/Tooltip";
+import { constVal } from "../helpers/const.js";
 
 export default {
   components: {
@@ -240,7 +241,8 @@ export default {
       sortedFuel: "",
       selectedFuelCategory: "allFuels",
       orientation: "",
-      selectedRegion: {}
+      selectedRegion: {},
+      egridSubregionMap: constVal.egridSubregionMapUrl
     };
   },
   mounted: function() {
