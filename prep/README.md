@@ -13,37 +13,16 @@ Power Profiler runs on two data files, `zip.csv` and `subregion.json`. The zip-s
 ## Initial setup
 
 1. [Download and unzip eGRID shape files from here](https://www.epa.gov/egrid/egrid-mapping-files)
-2. Add `.dbf` and `.shp` file to `data/shape` folder.
+2. Add `.dbf` and `.shp` file to `data/shape` folder
 3. [Download and unzip latest eGRID Excel files from here](https://www.epa.gov/egrid/download-data)
-4. Create `.csv` files in the `data/csv` folder from the following tabs in the eGRID Excel file:
-    - SR (Subregion): `subregion_data.csv`
-    - US (United States): `national.csv`
-    - GGL (Gross Grid Loss): `grid_loss.csv`
-    *Note: you need to remove the top level column headers prior to saving the tabs as csv files.  Also if there are formatting changes to any of the eGrid data files you will need to do some preprocessing prior to running these commands.  The subregion_data.csv and national.csv need to have percent formatted as 89.0 (not 0.89 or 89.0%).  The grid_loss.csv needs to have percent formatted as 89.0%.  There should be a more consistent handling of this in the processing scripts.*
-5. Run the following command to add renewable/non-renewable breakdowns and create file `subregion_fuel_mix.csv`:
-```python
-python add_fuel_breakdown.py
+3. Add the excel file to `data/excel` folder
+4. Run the following command from the prep folder using python 3+:
+{bash}
 ```
-
-## Using mapshaper to create GeoJSON
-
-6. Run this command to transform shape file into GeoJSON:
-```bash
-mapshaper egrid_2016_subregions.shp -simplify 1% -o format=geojson
+python add_egrid_data.py data/excel/egridYYYY_data.xlsx data/shape/eGRIDYYYY_subregions.shp -o ../app/data
 ```
-7. Run the following command to add `states.json` to the file and replace "Subregions" key with "name":
-```javascript
-node add_states.js
-```
-8. Run the following command to add eGRID data values to file:
-```python
-python add_egrid_data.py
-```
-9. Run this command to simplify file further:
-```bash
-mapshaper subregion.json -simplify dp 5% -o force format=geojson
-```
-10. Add the result JSON inside `result` to the app's `data` folder.
+> This will take all the data from the excel file and the shape file and create the necessary `subregion.json` file to be uploaded into Drupal, placing it in the `app/data` folder
+> There are other options for the `add_egrid_data.py` script. Run the script with the --help option to see more
 
 ## Update constants in app/src/helpers/const.js
 
