@@ -50,27 +50,29 @@
         </h3>
       </div>
       <div class="grid-row grid-gap flex-wrap">
-        <div class="grid-col-4 box box--special" value="co2EmissionRate">
-          <h3 class="box__title">CO<sub>2</sub></h3>
-          <div class="box__content">
+        <div class="grid-col-4 usa-summary-box" value="co2EmissionRate">
+          <div class="usa-summary-box__body">
+          <h3 class="usa-summary-box__heading">CO<sub>2</sub></h3>
+          <div class="usa-summary-box__text">
             <h2 id="co2-box__content">
               {{ subregion.properties.emissionFactor.co2EmissionRate.display }}
             </h2>
             <p>(lbs/MWh)</p>
           </div>
+          </div>
         </div>
-        <div class="grid-col-4 box box--special" value="so2EmissionRate">
-          <h3 class="box__title">SO<sub>2</sub></h3>
-          <div class="box__content">
+        <div class="grid-col-4 usa-summary-box" value="so2EmissionRate">
+          <h3 class="usa-summary-box__heading">SO<sub>2</sub></h3>
+          <div class="usa-summary-box__text">
             <h2 id="so2-box__content">
               {{ subregion.properties.emissionFactor.so2EmissionRate.display }}
             </h2>
             <p>(lbs/MWh)</p>
           </div>
         </div>
-        <div class="grid-col-4 box box--special" value="noxEmissionRate">
-          <h3 class="box__title">NO<sub>X</sub></h3>
-          <div class="box__content">
+        <div class="grid-col-4 usa-summary-box" value="noxEmissionRate">
+          <h3 class="usa-summary-box__heading">NO<sub>X</sub></h3>
+          <div class="usa-summary-box__text">
             <h2 id="nox-box__content">
               {{ subregion.properties.emissionFactor.noxEmissionRate.display }}
             </h2>
@@ -206,5 +208,10 @@ export default {
 #fuelMixContainer,
 #emissionRateContainer {
   flex: 1 1 510px;
+}
+
+/* There's a weird bug that only applies a margin of 1rem to the 2nd and third summary boxes and this seems to be the only solution */
+.usa-summary-box {
+  margin-top: 0rem;
 }
 </style>

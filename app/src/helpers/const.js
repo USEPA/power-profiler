@@ -1,5 +1,9 @@
 export const constVal = {
+           // CO2 sequestered annually per urban tree planted and allowed to grow for 10years
+           carbonSequesteredByTree: 0.06,
+           // CO2 sequestered annually by one acre of average U.S. forest
            carbonSequesteredByYear: 0.82,
+           // Conversion Factor for carbon sequestered by one acre of forest preserved from conversion to cropland (in the year of conversion)
            carbonSequesteredByAcre: 146.27,
            avgConsumptionSqft: 1.22,
            nationalTotal: 12188,

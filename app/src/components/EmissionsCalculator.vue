@@ -1007,16 +1007,15 @@ export default {
       return res;
     },
     calculateCarbonOffset: function(carbon) {
-      // 23.2 pounds of carbon a medium growth tree, planted in an urban setting, and allowed to grow for 10 years sequesters
-      // 44 units CO2
-      // 12 Units C
-      // 0.84 metric tons of CO2 sequestered annually by one acre of average US forest
       // 1 metric ton = 2204.6 lbs
-      var trees = (carbon / (23.2 * (44 / 12))).toLocaleString(undefined, {
+      let metricTonsCarbon = carbon / 2204.6;
+      let carbonSByTree = constVal.carbonSequesteredByTree;
+      let carbonSByYear = constVal.carbonSequesteredByYear;
+
+      let trees = (metricTonsCarbon / carbonSByTree).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
-      var carbonSByYear = constVal.carbonSequesteredByYear;
-      var acres = (carbon / (carbonSByYear * 2204.6)).toLocaleString(undefined, {
+      let acres = (metricTonsCarbon / carbonSByYear).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
       return { "trees": trees, "acres": acres };
