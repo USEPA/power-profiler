@@ -13,6 +13,6 @@ export const constVal = {
            egridSummaryTablesUrl:
                "https://www.epa.gov/system/files/documents/2022-01/egrid2020_summary_tables.xlsx",
            powerProfilerExcelUrl:
-               "https://www.epa.gov/system/files/other-files/2021-09/power_profiler_zipcode_tool_2019.xlsx"
+               "https://www.epa.gov/system/files/documents/2022-03/power_profiler_zipcode_tool_2020.xlsx"
        };
 
