@@ -69,18 +69,3 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
-      
-  message:
-    name: Message
-    runs-on: ubuntu-latest
-    needs: analyze
-    steps:
-    - name: Prepare message
-      run: echo "::set-output name=MESSAGE::$GITHUB_ACTOR created a $GITHUB_EVENT_NAME.  CodeQL has run. Check [code scanning alerts](https://github.com/USEPA/power-profiler/security/code-scanning) for details."
-      id: prepared-message
-    
-    - name: Send message to ms teams
-      uses: dhollerbach/github-action-send-message-to-ms-teams@1.0.10
-      with:
-        webhook: 'https://usepa.webhook.office.com/webhookb2/ab8531a3-c17a-4619-ae29-a705f82dc064@88b378b3-6748-4867-acf9-76aacbeca6a7/IncomingWebhook/5987132379634c9b9329e94dfe6c061b/462efbc9-d3ba-400f-99d2-ebd745ced7fa'
-        message: ${{ steps.prepared-message.outputs.MESSAGE }}
