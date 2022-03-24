@@ -27,8 +27,12 @@ export default {
       url: env.SUBREGION_JSON,
       success: function(json) {
         self.allData = json.features;
-        self.nationalFeature = json.features.slice(52, 53);
-        self.subregionData = json.features.slice(53, json.features.length);
+        self.nationalFeature = json.features.filter(
+          feature => feature.properties.type === "national"
+        );
+        self.subregionData = json.features.filter(
+          feature => feature.properties.type === "subregion"
+        );
         allSubregions.update(self.subregionData);
         nationalFeature.update(self.nationalFeature);
         self.$parent.$parent.$parent.subregionJSONLoaded = true;
@@ -66,7 +70,13 @@ export default {
 
       var container = svg
         .selectAll("g")
-        .data(data)
+        .data(data.sort(
+          function(a, b) {
+            // If it's a subregion, we want it to come after the state paths
+            // so the subregions show up on top.
+            return a.properties.type === "subregion" ? 1 : -1;
+          }
+        ))
         .enter()
         .append("g")
         .attr("class", "mapTooltip")

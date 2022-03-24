@@ -382,7 +382,7 @@ export default {
     this.emissionFactors = this.selectedSubregion.properties.emissionFactor;
     this.gridLoss = this.selectedSubregion.properties.gridLoss;
     $("#result").width() > 950
-    // slightly less than 1/4 the width so they fit in one row and don't wrap 
+    // slightly less than 1/4 the width so they fit in one row and don't wrap
       ? (this.emissionsResultsWidth = $("#result").width()*0.22)
       : (this.emissionsResultsWidth = 250);
     this.emissionsResultsHeight = 340;
@@ -393,7 +393,7 @@ export default {
       this.resultsFunction = "monthlyAverage";
       var userMonthlyAverage = $("#userMonthlyAverageInput").val();
       var userTotal = userMonthlyAverage * 12;
-      
+
       this.userEmissions = {
         co2: this.calculateEmissionsAll(
           Math.round(this.emissionFactors.co2EmissionRate.value*10)/10,
@@ -441,13 +441,13 @@ export default {
           this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
             .value,
           this.natGridloss.value,
-          this.nationalTotal            
+          this.nationalTotal
         ),
         nox: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value,
           this.natGridloss.value,
-          this.nationalTotal            
+          this.nationalTotal
         )
       };
 
@@ -593,15 +593,15 @@ export default {
           this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
             .value,
           this.natGridloss.value,
-          this.nationalTotal            
+          this.nationalTotal
         ),
         nox: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value,
           this.natGridloss.value,
-          this.nationalTotal            
+          this.nationalTotal
         )
-      };      
+      };
 
       var userCarbon = Math.round(this.userEmissions.co2).toLocaleString();
       var userNitrogen = this.userEmissions.nox.toLocaleString();
@@ -699,13 +699,13 @@ export default {
         so2: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.so2EmissionRate
             .value,
-           this.natGridloss.value, 
+           this.natGridloss.value,
           this.nationalTotal
         ),
         nox: this.calculateEmissionsAll(
           this.nationalFeature[0].properties.emissionFactor.noxEmissionRate
             .value,
-          this.natGridloss.value,  
+          this.natGridloss.value,
           this.nationalTotal
         )
       };
@@ -734,7 +734,7 @@ export default {
       }
       if (this.residentialMode == false) {
         var gaugeMax = 24000;
-        this.nationalTotal = this.sqrFootage * constVal.avgConsumptionSqft * 12; 
+        this.nationalTotal = this.sqrFootage * constVal.avgConsumptionSqft * 12;
         $("#resultGraphs").hide();
         $("#result-subheader").html(self.$t("results.commercialSubheader"));
         d3.selectAll("#chart-gauge svg").remove();
@@ -854,7 +854,7 @@ export default {
         self.userSelectionStore.setResidentialMode(true);
         self.displayNationalAverage();
         $("#customerText").show();
-        $("#residentialCustomersButton").hide();     
+        $("#residentialCustomersButton").hide();
       });
 
       $("#calculateMonthlyActualButton").click(function() {
@@ -863,7 +863,7 @@ export default {
         self.userSelectionStore.setResidentialMode(true);
         self.displayNationalAverage();
         $("#customerText").show();
-        $("#residentialCustomersButton").hide();        
+        $("#residentialCustomersButton").hide();
       });
 
       $("#annual-results-text").hide();
@@ -1005,18 +1005,17 @@ export default {
       var totEm = emissionsAttr + ((gridLoss * emissionsAttr) / (1 - gridLoss));
       var res = totEm.toFixed(1);
       return res;
-    },  
+    },
     calculateCarbonOffset: function(carbon) {
-      // 23.2 pounds of carbon a medium growth tree, planted in an urban setting, and allowed to grow for 10 years sequesters
-      // 44 units CO2
-      // 12 Units C
-      // 0.84 metric tons of CO2 sequestered annually by one acre of average US forest
       // 1 metric ton = 2204.6 lbs
-      var trees = (carbon / (23.2 * (44 / 12))).toLocaleString(undefined, {
+      let metricTonsCarbon = carbon / 2204.6;
+      let carbonSByTree = constVal.carbonSequesteredByTree;
+      let carbonSByYear = constVal.carbonSequesteredByYear;
+
+      let trees = (metricTonsCarbon / carbonSByTree).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
-      var carbonSByYear = constVal.carbonSequesteredByYear;
-      var acres = (carbon / (carbonSByYear * 2204.6)).toLocaleString(undefined, {
+      let acres = (metricTonsCarbon / carbonSByYear).toLocaleString(undefined, {
         maximumFractionDigits: 0
       });
       return { "trees": trees, "acres": acres };
@@ -1053,7 +1052,7 @@ export default {
         var arr = [
           {
             value: parseFloat(national[pollutants[i]]),
-            display: nationalDisplay,            
+            display: nationalDisplay,
             name: self.$t("results.charts.nat")
           },
           {
