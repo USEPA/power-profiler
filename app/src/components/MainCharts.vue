@@ -36,7 +36,7 @@
                 "renewable": "Renewable",
                 "non-renewable": "Non-renewable",
                 "renewable (excluding hydro)": "Renewable (excluding hydro)",
-                "non-renewable (excluding nuclear)": "Renewable (excluding nuclear)"
+                "non-renewable (excluding nuclear)": "Non-renewable (excluding nuclear)"
             }
         },
         "printReport": "Print Report"
@@ -79,7 +79,7 @@
                 "renewable": "Renovable",
                 "non-renewable": "No-renovable",
                 "renewable (excluding hydro)": "Renovable (excluyendo energía hidroeléctrica)",
-                "non-renewable (excluding nuclear)": "Renovable (excluyendo energía nuclear)"
+                "non-renewable (excluding nuclear)": "No-renovable (excluyendo energía nuclear)"
             }
         },
         "printReport": "Imprima un reporte"
