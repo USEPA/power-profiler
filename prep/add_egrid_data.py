@@ -183,6 +183,8 @@ for feature in data["features"]:
         feature["properties"]["name"] = feature["properties"].pop("ZipSubregi")
     if "zips_for_G" in feature["properties"]:
         feature["properties"]["name"] = feature["properties"].pop("zips_for_G")
+    if "Subregions" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("Subregions")
     if("STATE" in feature["properties"]):
         feature["properties"]["type"] = "state"
     # Add eGRID data values.
