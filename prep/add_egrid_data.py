@@ -10,16 +10,18 @@ from pathlib import Path
 parser = argparse.ArgumentParser(description='Generate subregion.json file from eGRID Excel file')
 parser.add_argument('egrid_excel', nargs=1, type=str, help='/path/to/egridYYYY_data.xlsx')
 parser.add_argument('egrid_shapefile', nargs=1, type=str, help='/path/to/egridYYYY_subregions.shp')
-# TODO: Maybe add optional argument to supply the egrid subregion json file from mapshaper?
-# parser.add_argument('egrid_sbrgn_json', nargs=1, type=str, help='/path/to/eGRIDYYYY_subregions.json')
+parser.add_argument('--geojson', nargs='?', type=str, default=None, help='/path/to/eGRIDYYYY_subregions.json')
 parser.add_argument('--states_json', '-s', nargs='?', type=str, default="./data/shape/states.json", help='/path/to/states.json')
 parser.add_argument('--data_year','-y', nargs='?', type=str, help='Year of eGRID data if filename does not contain year')
 parser.add_argument('--out_dir','-o', nargs='?', type=str, default="./result", help='Directory to write output files')
+parser.add_argument('--skippable_rows','-k', nargs='?', type=int, default=1, help='GGL sheet has this many extraneous "header" rows')
 
 args = parser.parse_args()
 egrid_excel = Path(args.egrid_excel[0])
 egrid_shapefile = Path(args.egrid_shapefile[0])
 egrid_states_json = Path(args.states_json)
+egrid_geojson = args.geojson
+skippable_rows = args.skippable_rows
 
 # for sheet names
 m = re.search('\d{4}',egrid_excel.name)
@@ -42,33 +44,37 @@ yr = data_year[-2:]
 
 out_dir = args.out_dir
 
-# generate the json from shapefile
-mapshaper_check = subprocess.run(["mapshaper", "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+if not egrid_geojson:
+    # generate the json from shapefile
+    mapshaper_check = subprocess.run(["mapshaper", "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
-mapshaper_version = mapshaper_check.stdout.decode('utf-8')
-if(mapshaper_version.find("not recognized") != -1):
-    sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper@0.4.125")
-if(mapshaper_version.strip() != "0.4.125"):
-    sys.exit("ERROR: mapshaper version must be 0.4.125")
+    mapshaper_version = mapshaper_check.stdout.decode('utf-8')
+    if(mapshaper_version.find("not recognized") != -1):
+        sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper@0.4.125")
+    if(mapshaper_version.strip() != "0.4.125"):
+        sys.exit("ERROR: mapshaper version must be 0.4.125 -- you have {}".format(mapshaper_version.strip()))
 
-mapshaper_create_json_cmd = ["mapshaper", egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
+    mapshaper_create_json_cmd = ["mapshaper", egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
 
-print(f'Creating json from {egrid_shapefile.name} using mapshaper')
-mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+    print(f'Creating json from {egrid_shapefile.name} using mapshaper')
+    mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
-if(mapshaper_output.returncode != 0):
-    sys.exit("ERROR: mapshaper failed to create json file")
+    if(mapshaper_output.returncode != 0):
+        sys.exit("ERROR: mapshaper failed to create json file")
 
-mapshaper_output_file = re.search("(?<=Wrote ).+", mapshaper_output.stdout.decode('utf-8')).group(0)
-egrid_sbrgn_json = Path(mapshaper_output_file)
-print(f'Wrote {egrid_sbrgn_json}')
+    mapshaper_output_file = re.search("(?<=Wrote ).+", mapshaper_output.stdout.decode('utf-8')).group(0)
+    egrid_sbrgn_json = Path(mapshaper_output_file)
+    print(f'Wrote {egrid_sbrgn_json}')
+else:
+    print(f'Using {egrid_geojson}')
+    egrid_sbrgn_json = Path(egrid_geojson)
 
 # Load all data from excel sheets into dict of dataframes
 print("Loading data from eGRID excel sheets")
-all_sheets = pd.read_excel(egrid_excel, sheet_name=['SRL20','US20', 'GGL20'], skiprows=1)
+all_sheets = pd.read_excel(egrid_excel, sheet_name=[f'SRL{yr}', f'US{yr}', f'GGL{yr}'], skiprows=skippable_rows)
 
 # Load in Subregion data.
-sn = all_sheets['SRL20']
+sn = all_sheets[f'SRL{yr}']
 subregion_columns = sn.columns
 
 sub_pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
@@ -76,10 +82,10 @@ sub_pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
 sn[sub_pct_columns] = sn[sub_pct_columns].apply(lambda x: round(x*100,1))
 
 # Load in Grid Loss data.
-gl = all_sheets['GGL20']
+gl = all_sheets[f'GGL{yr}']
 
 # Load in US-level data.
-n = all_sheets['US20']
+n = all_sheets[f'US{yr}']
 national_columns = n.columns
 
 nat_pct_columns = list(filter(lambda x: 'PR' in x, national_columns))
@@ -88,6 +94,9 @@ n[nat_pct_columns] = n[nat_pct_columns].apply(lambda x: round(x*100,1))
 
 # Convert % floats into strings.
 gl['GGRSLOSS_STR'] = (gl['GGRSLOSS']*100).map('{:,.1f}%'.format)
+
+# strip extra whitespace from region names
+gl['REGION'] = gl['REGION'].str.strip()
 
 # Renewable/Non-renewables dictionary.
 renewables = {
@@ -158,10 +167,22 @@ with egrid_sbrgn_json.open(mode="r") as read_file, egrid_states_json.open(mode="
 # Append the states data to the subregions data to have a single json file.
 data["features"] = data["features"] + states_data["features"]
 
+# default national US values (eGRID data before 2012 does not have this)
+fmCategories = {
+    "renewable": 0,
+    "non-renewable": 0,
+    "non-renewable (excluding nuclear)": 0,
+    "renewable (excluding hydro)": 0,
+    "nuclear": 0,
+    "hydro": 0,
+}
+
 for feature in data["features"]:
     # rename ZipSubregi to name
     if("ZipSubregi" in feature["properties"]):
         feature["properties"]["name"] = feature["properties"].pop("ZipSubregi")
+    if "zips_for_G" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("zips_for_G")
     if("STATE" in feature["properties"]):
         feature["properties"]["type"] = "state"
     # Add eGRID data values.
@@ -313,7 +334,7 @@ print("Using mapshaper to simplify the final output further")
 #mapshaper subregion.json -simplify dp 5% -o force format=geojson
 mapshaper_final_command = ["mapshaper",f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
 
-mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
 if(mapshaper_final_output.returncode != 0):
     print(mapshaper_final_output.stdout.decode('utf-8'))
