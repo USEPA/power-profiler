@@ -111,15 +111,19 @@ renewables = {
 sn['SRNOXRTA'] = sn['SRNOXRTA'].round(3)
 sn['SRSO2RTA'] = sn['SRSO2RTA'].round(3)
 sn['SRCO2RTA'] = sn['SRCO2RTA'].round(3)
+sn['SRC2ERTA'] = sn['SRC2ERTA'].round(3)
 sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(3).astype('str')
 sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(3).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
+sn['SRC2ERTA_STR'] = sn['SRC2ERTA'].map('{:,.1f}'.format)
 n['USNOXRTA'] = n['USNOXRTA'].round(3)
 n['USSO2RTA'] = n['USSO2RTA'].round(3)
 n['USCO2RTA'] = n['USCO2RTA'].round(3)
+n['USC2ERTA'] = n['USC2ERTA'].round(3)
 n['USNOXRTA_STR'] = n['USNOXRTA'].round(3).astype('str')
 n['USSO2RTA_STR'] = n['USSO2RTA'].round(3).astype('str')
 n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
+n['USC2ERTA_STR'] = n['USC2ERTA'].map('{:,.1f}'.format)
 # Set up lists for checking whether subregion is in one of the interconnect power grids.
 alaska = ['AKGD','AKMS']
 hawaii = ['HIMS','HIOA']
@@ -197,6 +201,11 @@ for feature in data["features"]:
                     "co2EmissionRate": {
                         "value": row["SRCO2RTA"],
                         "display": row["SRCO2RTA_STR"],
+                        "units": "lb/MWh"
+                    },
+                    "co2eEmissionRate": {
+                        "value": row["SRC2ERTA"],
+                        "display": row["SRC2ERTA_STR"],
                         "units": "lb/MWh"
                     },
                     "noxEmissionRate": {
@@ -316,7 +325,12 @@ national = {
                 "units":"lb/MWh",
                 "display":n['USCO2RTA_STR'].values[0],
                 "value":n['USCO2RTA'].values[0]
-                }
+                },
+            "co2eEmissionRate":{
+                "units":"lb/MWh",
+                "display":n['USC2ERTA_STR'].values[0],
+                "value":n['USC2ERTA'].values[0]
+                },
         },
         "gridLoss": {
             "display": gl[gl['REGION'] == 'U.S.']['GGRSLOSS_STR'].values[0],
