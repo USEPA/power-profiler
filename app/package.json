@@ -21,7 +21,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "create-file-webpack": "^1.0.2",
     "css-loader": "^2.1.1",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "mapshaper": "^0.4.125",
     "rimraf": "^2.7.1",
     "vue": "^2.6.11",
