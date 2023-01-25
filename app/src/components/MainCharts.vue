@@ -1051,8 +1051,8 @@ export default {
         .attr("x", -65)
         .attr("y", height + 15);
 
-      var topLen = 0;
-      var midLen = 0;
+      var topLen = 35;
+      var midLen = 10;
 
       var legendTop = svg
         .selectAll(".legendTop")
@@ -1061,7 +1061,7 @@ export default {
         .append("g")
         .attr("class", "legendTop")
         .attr("transform", function(d, i) {
-          const initialOffset = 60;
+          const initialOffset = -80;
           const squareOffset = 20;
           const multiplier = 5.5;
           const wordLen = self.$t(`fuelMixChart.fuels.${d}`).length;

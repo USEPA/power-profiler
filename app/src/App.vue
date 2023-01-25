@@ -20,9 +20,9 @@
     <p v-if="$root.$i18n.locale !== 'en'">{{ $t("linkLangNote") }}</p>
     <h3>{{ $t("subTitle") }}</h3>
 
-    <div id="app" class="grid-container">
-      <div class="grid-row grid-gap flex-no-wrap">
-        <sideBar id="sidebar" class="grid-col-4"></sideBar>
+    <div id="app">
+      <div id="app-content" class="display-flex flex-row flex-no-wrap">
+        <sideBar id="sidebar" ></sideBar>
         <div v-if="subregionJSONLoaded" id="main-charts" class="grid-col-8">
           <mainCharts v-show="showMain"></mainCharts>
           <router-view v-show="!showMain"></router-view>
@@ -263,12 +263,15 @@ input[type="number"]::-webkit-outer-spin-button {
 #app p {
   padding-bottom: 0.7em;
 }
-#app {
-  padding-left: 1em;
+
+#app-content {
+  column-gap: 1em;
 }
+
 #main-charts {
   /* Prevent too much shrinkage*/
   min-width: 600px;
+  max-width: 1000px;
 }
 
 .select-pollutant-label,
