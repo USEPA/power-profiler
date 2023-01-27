@@ -6,6 +6,7 @@
 - [Mapshaper command line tool](https://github.com/mbloch/mapshaper):
 ```bash
 npm install -g mapshaper@0.4.125
+pip install -r requirements.txt
 ```
 
 Power Profiler runs on two data files, `zip.csv` and `subregion.json`. The zip-subregion utility lookup data comes from the "Zip-subregion" tab of the Power Profiler Emissions Tool Excel file. This can be found on [the eGRID website](https://www.epa.gov/egrid). Follow these steps to update the `subregion.json` file (for a new year of eGRID data, for example):

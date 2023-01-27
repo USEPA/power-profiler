@@ -4,22 +4,34 @@ import argparse
 import re
 import sys
 import subprocess
+import shutil
 from pathlib import Path
 
 # Command-line arguments for file and data year
 parser = argparse.ArgumentParser(description='Generate subregion.json file from eGRID Excel file')
 parser.add_argument('egrid_excel', nargs=1, type=str, help='/path/to/egridYYYY_data.xlsx')
 parser.add_argument('egrid_shapefile', nargs=1, type=str, help='/path/to/egridYYYY_subregions.shp')
-# TODO: Maybe add optional argument to supply the egrid subregion json file from mapshaper?
-# parser.add_argument('egrid_sbrgn_json', nargs=1, type=str, help='/path/to/eGRIDYYYY_subregions.json')
+parser.add_argument('--geojson', nargs='?', type=str, default=None, help='/path/to/eGRIDYYYY_subregions.json')
 parser.add_argument('--states_json', '-s', nargs='?', type=str, default="./data/shape/states.json", help='/path/to/states.json')
 parser.add_argument('--data_year','-y', nargs='?', type=str, help='Year of eGRID data if filename does not contain year')
 parser.add_argument('--out_dir','-o', nargs='?', type=str, default="./result", help='Directory to write output files')
+parser.add_argument('--skippable_rows','-k', nargs='?', type=int, default=1, help='GGL sheet has this many extraneous "header" rows')
 
 args = parser.parse_args()
 egrid_excel = Path(args.egrid_excel[0])
 egrid_shapefile = Path(args.egrid_shapefile[0])
 egrid_states_json = Path(args.states_json)
+egrid_geojson = args.geojson
+skippable_rows = args.skippable_rows
+
+def get_pct_cols(sheet_cols, col_pct_string):
+  return list(filter(lambda x: col_pct_string in x, sheet_cols))
+
+def convert_pct_cols(df, pct_cols, data_year):
+  # Starting in 2018, percents are represented in raw fractional form
+  # with a percent format but before then they were whole percentage numbers
+  if data_year >= 2018:
+    return(df[pct_cols].apply(lambda x: round(x*100,1)))
 
 # for sheet names
 m = re.search('\d{4}',egrid_excel.name)
@@ -38,56 +50,69 @@ if(args.data_year != None):
 # Get the 2-digit year from the data_year for the sheet names
 yr = data_year[-2:]
 
+try:
+  data_year_num = int(data_year)
+except ValueError as verr:
+  print(
+    f'Please provide a valid numeric data_year[{data_year}]: data_year does not contain anything convertible to a number')
+except Exception as ex:
+  print(
+    f'Please provide a valid numeric data_year[{data_year}]: Exception occurred while converting to a number')
 # egrid_sbrgn_json = args.egrid_sbrgn_json[0]
 
 out_dir = args.out_dir
 
-# generate the json from shapefile
-mapshaper_check = subprocess.run(["mapshaper", "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+if not egrid_geojson:
+    # generate the json from shapefile
+    mapshaper_check = subprocess.run([shutil.which("mapshaper"), "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
-mapshaper_version = mapshaper_check.stdout.decode('utf-8')
-if(mapshaper_version.find("not recognized") != -1):
-    sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper@0.4.125")
-if(mapshaper_version.strip() != "0.4.125"):
-    sys.exit("ERROR: mapshaper version must be 0.4.125")
+    mapshaper_version = mapshaper_check.stdout.decode('utf-8')
+    if(mapshaper_version.find("not recognized") != -1):
+        sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper@0.4.125")
+    if(mapshaper_version.strip() != "0.4.125"):
+        sys.exit("ERROR: mapshaper version must be 0.4.125 -- you have {}".format(mapshaper_version.strip()))
 
-mapshaper_create_json_cmd = ["mapshaper", egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
+    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
 
-print(f'Creating json from {egrid_shapefile.name} using mapshaper')
-mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+    print(f'Creating json from {egrid_shapefile.name} using mapshaper')
+    mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
-if(mapshaper_output.returncode != 0):
-    sys.exit("ERROR: mapshaper failed to create json file")
+    if(mapshaper_output.returncode != 0):
+        sys.exit("ERROR: mapshaper failed to create json file")
 
-mapshaper_output_file = re.search("(?<=Wrote ).+", mapshaper_output.stdout.decode('utf-8')).group(0)
-egrid_sbrgn_json = Path(mapshaper_output_file)
-print(f'Wrote {egrid_sbrgn_json}')
+    mapshaper_output_file = re.search("(?<=Wrote ).+", mapshaper_output.stdout.decode('utf-8')).group(0)
+    egrid_sbrgn_json = Path(mapshaper_output_file)
+    print(f'Wrote {egrid_sbrgn_json}')
+else:
+    print(f'Using {egrid_geojson}')
+    egrid_sbrgn_json = Path(egrid_geojson)
 
 # Load all data from excel sheets into dict of dataframes
 print("Loading data from eGRID excel sheets")
-all_sheets = pd.read_excel(egrid_excel, sheet_name=['SRL20','US20', 'GGL20'], skiprows=1)
+all_sheets = pd.read_excel(egrid_excel, sheet_name=[f'SRL{yr}', f'US{yr}', f'GGL{yr}'], skiprows=skippable_rows)
 
 # Load in Subregion data.
-sn = all_sheets['SRL20']
-subregion_columns = sn.columns
-
-sub_pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
-
-sn[sub_pct_columns] = sn[sub_pct_columns].apply(lambda x: round(x*100,1))
-
-# Load in Grid Loss data.
-gl = all_sheets['GGL20']
+sn = all_sheets[f'SRL{yr}']
+sn_pct_cols = get_pct_cols(sn.columns, 'PR')
+sn[sn_pct_cols] = convert_pct_cols(sn, sn_pct_cols, data_year_num)
 
 # Load in US-level data.
-n = all_sheets['US20']
-national_columns = n.columns
+n = all_sheets[f'US{yr}']
+n_pct_cols = get_pct_cols(n.columns, 'PR')
+n[n_pct_cols] = convert_pct_cols(n, n_pct_cols, data_year_num)
 
-nat_pct_columns = list(filter(lambda x: 'PR' in x, national_columns))
-
-n[nat_pct_columns] = n[nat_pct_columns].apply(lambda x: round(x*100,1))
+# Load in Grid Loss data.
+gl = all_sheets[f'GGL{yr}']
 
 # Convert % floats into strings.
-gl['GGRSLOSS_STR'] = (gl['GGRSLOSS']*100).map('{:,.1f}%'.format)
+gl['GGRSLOSS_STR'] = convert_pct_cols(gl, ['GGRSLOSS'], data_year_num)
+gl['GGRSLOSS_STR'] = gl['GGRSLOSS_STR'].map('{:,.1f}%'.format)
+
+if data_year_num <= 2018:
+  gl['GGRLOSS'] = gl['GGRLOSS']/100
+
+# strip extra whitespace from region names
+gl['REGION'] = gl['REGION'].str.strip()
 
 # Renewable/Non-renewables dictionary.
 renewables = {
@@ -102,15 +127,19 @@ renewables = {
 sn['SRNOXRTA'] = sn['SRNOXRTA'].round(3)
 sn['SRSO2RTA'] = sn['SRSO2RTA'].round(3)
 sn['SRCO2RTA'] = sn['SRCO2RTA'].round(3)
+sn['SRC2ERTA'] = sn['SRC2ERTA'].round(3)
 sn['SRNOXRTA_STR'] = sn['SRNOXRTA'].round(3).astype('str')
 sn['SRSO2RTA_STR'] = sn['SRSO2RTA'].round(3).astype('str')
 sn['SRCO2RTA_STR'] = sn['SRCO2RTA'].map('{:,.1f}'.format)
+sn['SRC2ERTA_STR'] = sn['SRC2ERTA'].map('{:,.1f}'.format)
 n['USNOXRTA'] = n['USNOXRTA'].round(3)
 n['USSO2RTA'] = n['USSO2RTA'].round(3)
 n['USCO2RTA'] = n['USCO2RTA'].round(3)
+n['USC2ERTA'] = n['USC2ERTA'].round(3)
 n['USNOXRTA_STR'] = n['USNOXRTA'].round(3).astype('str')
 n['USSO2RTA_STR'] = n['USSO2RTA'].round(3).astype('str')
 n['USCO2RTA_STR'] = n['USCO2RTA'].map('{:,.1f}'.format)
+n['USC2ERTA_STR'] = n['USC2ERTA'].map('{:,.1f}'.format)
 # Set up lists for checking whether subregion is in one of the interconnect power grids.
 alaska = ['AKGD','AKMS']
 hawaii = ['HIMS','HIOA']
@@ -158,15 +187,30 @@ with egrid_sbrgn_json.open(mode="r") as read_file, egrid_states_json.open(mode="
 # Append the states data to the subregions data to have a single json file.
 data["features"] = data["features"] + states_data["features"]
 
+# default national US values (eGRID data before 2012 does not have this)
+fmCategories = {
+    "renewable": 0,
+    "non-renewable": 0,
+    "non-renewable (excluding nuclear)": 0,
+    "renewable (excluding hydro)": 0,
+    "nuclear": 0,
+    "hydro": 0,
+}
+
 for feature in data["features"]:
     # rename ZipSubregi to name
     if("ZipSubregi" in feature["properties"]):
         feature["properties"]["name"] = feature["properties"].pop("ZipSubregi")
+    if "zips_for_G" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("zips_for_G")
+    if "Subregions" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("Subregions")
     if("STATE" in feature["properties"]):
         feature["properties"]["type"] = "state"
     # Add eGRID data values.
     for index, row in sn.iterrows():
         if "name" in feature["properties"]:
+            feature["properties"]["dataYear"] = data_year_num
             if feature["properties"]["name"] == row["SUBRGN"]:
                 feature["properties"]["type"] = "subregion"
                 feature["properties"]["fullName"] = row["SRNAME"]
@@ -174,6 +218,11 @@ for feature in data["features"]:
                     "co2EmissionRate": {
                         "value": row["SRCO2RTA"],
                         "display": row["SRCO2RTA_STR"],
+                        "units": "lb/MWh"
+                    },
+                    "co2eEmissionRate": {
+                        "value": row["SRC2ERTA"],
+                        "display": row["SRC2ERTA_STR"],
                         "units": "lb/MWh"
                     },
                     "noxEmissionRate": {
@@ -261,6 +310,7 @@ national = {
     "type":"Feature",
     "geometry":{},
     "properties":{
+        "dataYear": data_year_num,
         "name":"National",
         "type":"national",
         "fullName":"National",
@@ -293,7 +343,12 @@ national = {
                 "units":"lb/MWh",
                 "display":n['USCO2RTA_STR'].values[0],
                 "value":n['USCO2RTA'].values[0]
-                }
+                },
+            "co2eEmissionRate":{
+                "units":"lb/MWh",
+                "display":n['USC2ERTA_STR'].values[0],
+                "value":n['USC2ERTA'].values[0]
+                },
         },
         "gridLoss": {
             "display": gl[gl['REGION'] == 'U.S.']['GGRSLOSS_STR'].values[0],
@@ -311,9 +366,9 @@ with open(f'{out_dir}/subregion.json', 'w') as outfile:
 
 print("Using mapshaper to simplify the final output further")
 #mapshaper subregion.json -simplify dp 5% -o force format=geojson
-mapshaper_final_command = ["mapshaper",f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
+mapshaper_final_command = [shutil.which("mapshaper"),f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
 
-mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
 if(mapshaper_final_output.returncode != 0):
     print(mapshaper_final_output.stdout.decode('utf-8'))
