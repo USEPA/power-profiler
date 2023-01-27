@@ -4,6 +4,7 @@ import argparse
 import re
 import sys
 import subprocess
+import shutil
 from pathlib import Path
 
 # Command-line arguments for file and data year
@@ -23,6 +24,15 @@ egrid_states_json = Path(args.states_json)
 egrid_geojson = args.geojson
 skippable_rows = args.skippable_rows
 
+def get_pct_cols(sheet_cols, col_pct_string):
+  return list(filter(lambda x: col_pct_string in x, sheet_cols))
+
+def convert_pct_cols(df, pct_cols, data_year):
+  # Starting in 2018, percents are represented in raw fractional form
+  # with a percent format but before then they were whole percentage numbers
+  if data_year >= 2018:
+    return(df[pct_cols].apply(lambda x: round(x*100,1)))
+
 # for sheet names
 m = re.search('\d{4}',egrid_excel.name)
 if(m == None and args.data_year == None):
@@ -40,13 +50,21 @@ if(args.data_year != None):
 # Get the 2-digit year from the data_year for the sheet names
 yr = data_year[-2:]
 
+try:
+  data_year_num = int(data_year)
+except ValueError as verr:
+  print(
+    f'Please provide a valid numeric data_year[{data_year}]: data_year does not contain anything convertible to a number')
+except Exception as ex:
+  print(
+    f'Please provide a valid numeric data_year[{data_year}]: Exception occurred while converting to a number')
 # egrid_sbrgn_json = args.egrid_sbrgn_json[0]
 
 out_dir = args.out_dir
 
 if not egrid_geojson:
     # generate the json from shapefile
-    mapshaper_check = subprocess.run(["mapshaper", "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
+    mapshaper_check = subprocess.run([shutil.which("mapshaper"), "--version"], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
     mapshaper_version = mapshaper_check.stdout.decode('utf-8')
     if(mapshaper_version.find("not recognized") != -1):
@@ -54,7 +72,7 @@ if not egrid_geojson:
     if(mapshaper_version.strip() != "0.4.125"):
         sys.exit("ERROR: mapshaper version must be 0.4.125 -- you have {}".format(mapshaper_version.strip()))
 
-    mapshaper_create_json_cmd = ["mapshaper", egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
+    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
 
     print(f'Creating json from {egrid_shapefile.name} using mapshaper')
     mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
@@ -75,25 +93,23 @@ all_sheets = pd.read_excel(egrid_excel, sheet_name=[f'SRL{yr}', f'US{yr}', f'GGL
 
 # Load in Subregion data.
 sn = all_sheets[f'SRL{yr}']
-subregion_columns = sn.columns
+sn_pct_cols = get_pct_cols(sn.columns, 'PR')
+sn[sn_pct_cols] = convert_pct_cols(sn, sn_pct_cols, data_year_num)
 
-sub_pct_columns = list(filter(lambda x: 'PR' in x, subregion_columns))
-
-sn[sub_pct_columns] = sn[sub_pct_columns].apply(lambda x: round(x*100,1))
+# Load in US-level data.
+n = all_sheets[f'US{yr}']
+n_pct_cols = get_pct_cols(n.columns, 'PR')
+n[n_pct_cols] = convert_pct_cols(n, n_pct_cols, data_year_num)
 
 # Load in Grid Loss data.
 gl = all_sheets[f'GGL{yr}']
 
-# Load in US-level data.
-n = all_sheets[f'US{yr}']
-national_columns = n.columns
-
-nat_pct_columns = list(filter(lambda x: 'PR' in x, national_columns))
-
-n[nat_pct_columns] = n[nat_pct_columns].apply(lambda x: round(x*100,1))
-
 # Convert % floats into strings.
-gl['GGRSLOSS_STR'] = (gl['GGRSLOSS']*100).map('{:,.1f}%'.format)
+gl['GGRSLOSS_STR'] = convert_pct_cols(gl, ['GGRSLOSS'], data_year_num)
+gl['GGRSLOSS_STR'] = gl['GGRSLOSS_STR'].map('{:,.1f}%'.format)
+
+if data_year_num <= 2018:
+  gl['GGRLOSS'] = gl['GGRLOSS']/100
 
 # strip extra whitespace from region names
 gl['REGION'] = gl['REGION'].str.strip()
@@ -348,7 +364,7 @@ with open(f'{out_dir}/subregion.json', 'w') as outfile:
 
 print("Using mapshaper to simplify the final output further")
 #mapshaper subregion.json -simplify dp 5% -o force format=geojson
-mapshaper_final_command = ["mapshaper",f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
+mapshaper_final_command = [shutil.which("mapshaper"),f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
 
 mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
