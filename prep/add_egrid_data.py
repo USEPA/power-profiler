@@ -210,6 +210,7 @@ for feature in data["features"]:
     # Add eGRID data values.
     for index, row in sn.iterrows():
         if "name" in feature["properties"]:
+            feature["properties"]["dataYear"] = data_year_num
             if feature["properties"]["name"] == row["SUBRGN"]:
                 feature["properties"]["type"] = "subregion"
                 feature["properties"]["fullName"] = row["SRNAME"]
@@ -309,6 +310,7 @@ national = {
     "type":"Feature",
     "geometry":{},
     "properties":{
+        "dataYear": data_year_num,
         "name":"National",
         "type":"national",
         "fullName":"National",
