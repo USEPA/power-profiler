@@ -34,28 +34,28 @@ To update Power Profiler for new data years (or for use with older data years) y
 *	Any changes in calculations or methodology
     * If there are changes, you'll likely need to update the code in the EmissionsCalculator.vue file
 *	New link to zipcode excel tool
-    * powerProfilerExcelUrl: string
+    * `powerProfilerExcelUrl: string`
 *	New link to egrid subregion map
-    * egridSubregionMapUrl: string
+    * `egridSubregionMapUrl: string`
 *	New link to eGRID summary table
-    * egridSummaryTablesUrl: string
+    * `egridSummaryTablesUrl: string`
 *	Updates to the following numerical constants:
     *	CO2 lbs sequestered annually per urban tree planted and allowed to grow for 10years
-        *	carbonSequesteredByTree: float
+        *	`carbonSequesteredByTree: float`
     *	CO2 lbs sequestered annually by one acre of average U.S. forest
-        *	carbonSequesteredByYear: float
+        *	`carbonSequesteredByYear: float`
     *	Conversion Factor for carbon sequestered by one acre of forest preserved from conversion to cropland  in the year of conversion)
-        *	carbonSequesteredByAcre: float
+        *	`carbonSequesteredByAcre: float`
     *	Average energy consumption kwh per square foot  per month for commercial calculations
-        *	avgConsumptionSqft: float
+        *	`avgConsumptionSqft: float`
     *	Average national energy consumption kwh per month
-        *	nationalAverage: float
+        *	`nationalAverage: float`
 * Edit the app/src/helpers/const.js file with the info from the constants above and the new links
 * Edit the English **and** Spanish text in the top \<i18n\> json for the following files:
     * SideBar.vue
-        * egridDataSource: update the data year and release date
-        * powerProfilerExcelLink: update the data year
-        * Update the file size for the span with class="fileinfo"
+        * `egridDataSource:` update the data year and release date
+        * `powerProfilerExcelLink:` update the data year
+        * Update the file size for the span with `class="fileinfo"`
 * Run the add_egrid_data.py script as shown in the [above section](#initial-setup) with the new eGRID excel and .shp files
 
 ## Upload files to Drupal
