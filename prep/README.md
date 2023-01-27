@@ -24,17 +24,43 @@ python add_egrid_data.py data/excel/egridYYYY_data.xlsx data/shape/eGRIDYYYY_sub
 > This will take all the data from the excel file and the shape file and create the necessary `subregion.json` file to be uploaded into Drupal, placing it in the `app/data` folder
 > There are other options for the `add_egrid_data.py` script. Run the script with the --help option to see more
 
-## Update constants in app/src/helpers/const.js
+## Updates for new eGRID data years:
 
-* carbonSequesteredByYear
-* carbonSequesteredByAcre
-* avgConsumptionSqft
-* nationalTotal
-* nationalAverage
+To update Power Profiler for new data years (or for use with older data years) you will need to update the following:
+
+*	New finalized eGRID excel file
+* New finalized eGRID .shp file
+*	New zipcode csv file
+*	Any changes in calculations or methodology
+    * If there are changes, you'll likely need to update the code in the EmissionsCalculator.vue file
+*	New link to zipcode excel tool
+    * powerProfilerExcelUrl: string
+*	New link to egrid subregion map
+    * egridSubregionMapUrl: string
+*	New link to eGRID summary table
+    * egridSummaryTablesUrl: string
+*	Updates to the following numerical constants:
+    *	CO2 lbs sequestered annually per urban tree planted and allowed to grow for 10years
+        *	carbonSequesteredByTree: float
+    *	CO2 lbs sequestered annually by one acre of average U.S. forest
+        *	carbonSequesteredByYear: float
+    *	Conversion Factor for carbon sequestered by one acre of forest preserved from conversion to cropland  in the year of conversion)
+        *	carbonSequesteredByAcre: float
+    *	Average energy consumption kwh per square foot  per month for commercial calculations
+        *	avgConsumptionSqft: float
+    *	Average national energy consumption kwh per month
+        *	nationalAverage: float
+* Edit the app/src/helpers/const.js file with the info from the constants above and the new links
+* Edit the English **and** Spanish text in the top \<i18n\> json for the following files:
+    * SideBar.vue
+        * egridDataSource: update the data year and release date
+        * powerProfilerExcelLink: update the data year
+        * Update the file size for the span with class="fileinfo"
+* Run the add_egrid_data.py script as shown in the [above section](#initial-setup) with the new eGRID excel and .shp files
 
 ## Upload files to Drupal
 
-> See README in app directory for more infof
+> See [README](../app/README.md) in the app directory for more info
 
 1. Replace the zip.csv in the document library
 2. Replace the subregion.json file in the document library
