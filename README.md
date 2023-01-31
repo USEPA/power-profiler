@@ -1,4 +1,4 @@
-Link to app in production: https://www.epa.gov/energy/power-profiler
+Link to app in production: https://www.epa.gov/egrid/power-profiler
 
 # Power Profiler
 
