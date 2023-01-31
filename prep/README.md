@@ -41,7 +41,7 @@ To update Power Profiler for new data years (or for use with older data years) y
 *	New link to eGRID summary table
     * `egridSummaryTablesUrl: string`
 *	Updates to the following numerical constants:
-    *	CO2 lbs sequestered annually per urban tree planted and allowed to grow for 10years
+    *	CO2 lbs sequestered annually per urban tree planted and allowed to grow for 10 years
         *	`carbonSequesteredByTree: float`
     *	CO2 lbs sequestered annually by one acre of average U.S. forest
         *	`carbonSequesteredByYear: float`
@@ -49,7 +49,9 @@ To update Power Profiler for new data years (or for use with older data years) y
         *	`carbonSequesteredByAcre: float`
     *	Average energy consumption kwh per square foot  per month for commercial calculations
         *	`avgConsumptionSqft: float`
-    *	Average national energy consumption kwh per month
+    * National total energy consumption for one year kwh (nationalAverage * 12)
+        *   `nationalTotal: nationalAverage * 12`
+    *	Average national energy consumption kwh for one month
         *	`nationalAverage: float`
 * Edit the app/src/helpers/const.js file with the info from the constants above and the new links
 * Edit the English **and** Spanish text in the top \<i18n\> json for the following files:
@@ -58,11 +60,9 @@ To update Power Profiler for new data years (or for use with older data years) y
         * `powerProfilerExcelLink:` update the data year
         * Update the file size for the span with `class="fileinfo"`
 * Run the add_egrid_data.py script as shown in the [above section](#initial-setup) with the new eGRID excel and .shp files
-
-## Upload files to Drupal
-
-> See [README](../app/README.md) in the app directory for more info
-
-1. Replace the zip.csv in the document library
-2. Replace the subregion.json file in the document library
-3. Replace the javascript in the Drupal javascript metadata after builing the production build
+* Run the `npm run prod` command to generate the `bundle.js` file in the `dist/prod` directory
+    * See the [Deployment](../README.md#deployment) section in the main README fore more info
+* Upload files to Drupal (See [README](../app/README.md) in the app directory for more info)
+    * Replace the zip.csv in the Drupal document library
+    * Replace the subregion.json file in the Drupal document library
+    * Replace the javascript in the Drupal javascript metadata after builing the production build
