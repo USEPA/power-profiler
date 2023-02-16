@@ -19,6 +19,7 @@ Most of the text content in the app can be found within the `template` sections 
 ## Requirements
 
 - [Node.js and npm](https://nodejs.org/en/)
+   Note to use node version 14.19.0
 
 ## Deployment
 
