@@ -19,6 +19,7 @@
       "mailingList": "Sign up for the mailing list",
       "methodology": "Power Profiler Methodology",
       "summaryTables": "eGRID Summary Tables (XLSX)",
+      "github": "View and contribute on GitHub",
       "resources": "Additional Resources"
     }
   },
@@ -41,6 +42,7 @@
       "mailingList": "Suscríbase a la lista de distribución",
       "methodology": "Metodología del Analizador de consumo de energía",
       "summaryTables": "Tablas de resumen de eGRID (XLSX)",
+      "github": "Ver y contribuir en GitHub",
       "resources": "Recursos adicionales"
     }
   }
@@ -122,6 +124,13 @@
             >{{ $t("additionalInfo.summaryTables") }}</a
           >
           <span class="fileinfo">(1 pg, 885 K)</span>
+        </p>
+        <p>
+          <a
+            href="https://github.com/USEPA/power-profiler"
+            target="_blank"
+            v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+            >{{ $t("additionalInfo.github")  }}</a>
         </p>
         <p>
           <a href="javascript:void(0)" @click="$parent.showResources = true">{{
