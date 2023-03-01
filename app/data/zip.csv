@@ -1,4 +1,4 @@
-zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
+ï»¿zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 00001,AK,,,AKMS,1
 00002,AK,Alaska Village Electric Coop Inc,60821,AKMS,1
 00003,AK,,,AKMS,1
@@ -2344,7 +2344,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 04992,ME,Central Maine Power Co,3266,NEWE,1
 05001,VT,Green Mountain Power Corp,7601,NEWE,1
 05009,VT,Green Mountain Power Corp,7601,NEWE,1
-05030,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05030,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05031,VT,Green Mountain Power Corp,7601,NEWE,1
 05032,VT,Green Mountain Power Corp,7601,NEWE,1
 05033,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2370,13 +2370,13 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05046,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05047,VT,Green Mountain Power Corp,7601,NEWE,1
 05048,VT,Green Mountain Power Corp,7601,NEWE,1
-05049,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05049,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05050,VT,Green Mountain Power Corp,7601,NEWE,1
 05051,VT,Green Mountain Power Corp,7601,NEWE,1
 05051,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05052,VT,Green Mountain Power Corp,7601,NEWE,1
 05053,VT,Green Mountain Power Corp,7601,NEWE,1
-05054,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05054,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05055,VT,Green Mountain Power Corp,7601,NEWE,1
 05056,VT,Green Mountain Power Corp,7601,NEWE,1
 05058,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2397,7 +2397,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05072,VT,Green Mountain Power Corp,7601,NEWE,1
 05072,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05073,VT,Green Mountain Power Corp,7601,NEWE,1
-05074,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05074,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05075,VT,Green Mountain Power Corp,7601,NEWE,1
 05076,VT,Green Mountain Power Corp,7601,NEWE,1
 05076,VT,Washington Electric Coop - (VT),20151,NEWE,0
@@ -2409,7 +2409,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05083,VT,Green Mountain Power Corp,7601,NEWE,1
 05083,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05084,VT,Green Mountain Power Corp,7601,NEWE,1
-05085,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05085,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05086,VT,Green Mountain Power Corp,7601,NEWE,1
 05086,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05088,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2419,7 +2419,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05141,VT,Green Mountain Power Corp,7601,NEWE,1
 05142,VT,Green Mountain Power Corp,7601,NEWE,1
 05143,VT,Green Mountain Power Corp,7601,NEWE,1
-05144,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05144,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05146,VT,Green Mountain Power Corp,7601,NEWE,1
 05148,VT,Green Mountain Power Corp,7601,NEWE,1
 05149,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2445,9 +2445,9 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05261,VT,Green Mountain Power Corp,7601,NEWE,1
 05262,VT,Green Mountain Power Corp,7601,NEWE,1
 05301,VT,Green Mountain Power Corp,7601,NEWE,1
-05302,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
-05303,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
-05304,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05302,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
+05303,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
+05304,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05340,VT,Green Mountain Power Corp,7601,NEWE,1
 05341,VT,Green Mountain Power Corp,7601,NEWE,1
 05342,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2462,7 +2462,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05354,VT,Green Mountain Power Corp,7601,NEWE,1
 05355,VT,Green Mountain Power Corp,7601,NEWE,1
 05356,VT,Green Mountain Power Corp,7601,NEWE,1
-05357,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05357,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05358,VT,Green Mountain Power Corp,7601,NEWE,1
 05359,VT,Green Mountain Power Corp,7601,NEWE,1
 05360,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2538,7 +2538,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05477,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,0
 05478,VT,Green Mountain Power Corp,7601,NEWE,1
 05478,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,0
-05479,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05479,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05481,VT,Green Mountain Power Corp,7601,NEWE,1
 05482,VT,Green Mountain Power Corp,7601,NEWE,1
 05482,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,0
@@ -2631,9 +2631,9 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05682,VT,Green Mountain Power Corp,7601,NEWE,1
 05682,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05701,VT,Green Mountain Power Corp,7601,NEWE,1
-05702,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05702,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05730,VT,Green Mountain Power Corp,7601,NEWE,1
-05731,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05731,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05732,VT,Green Mountain Power Corp,7601,NEWE,1
 05733,VT,Green Mountain Power Corp,7601,NEWE,1
 05734,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2642,16 +2642,16 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05737,VT,Green Mountain Power Corp,7601,NEWE,1
 05738,VT,Green Mountain Power Corp,7601,NEWE,1
 05739,VT,Green Mountain Power Corp,7601,NEWE,1
-05740,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
-05741,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05740,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
+05741,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05742,VT,Green Mountain Power Corp,7601,NEWE,1
 05743,VT,Green Mountain Power Corp,7601,NEWE,1
 05744,VT,Green Mountain Power Corp,7601,NEWE,1
-05745,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
-05746,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05745,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
+05746,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05747,VT,Green Mountain Power Corp,7601,NEWE,1
 05748,VT,Green Mountain Power Corp,7601,NEWE,1
-05750,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05750,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05751,VT,Green Mountain Power Corp,7601,NEWE,1
 05753,VT,Green Mountain Power Corp,7601,NEWE,1
 05757,VT,Green Mountain Power Corp,7601,NEWE,1
@@ -2694,10 +2694,10 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05836,VT,Washington Electric Coop - (VT),20151,NEWE,1
 05837,VT,Green Mountain Power Corp,7601,NEWE,1
 05837,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,0
-05838,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05838,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05839,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,1
 05839,VT,Washington Electric Coop - (VT),20151,NEWE,0
-05840,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05840,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05841,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,1
 05842,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,1
 05842,VT,Washington Electric Coop - (VT),20151,NEWE,0
@@ -2720,7 +2720,7 @@ zip,state,UtilName,trim_util_code,SUBRGN,Predominant Utility
 05861,VT,Green Mountain Power Corp,7601,NEWE,1
 05862,VT,Green Mountain Power Corp,7601,NEWE,1
 05862,VT,Washington Electric Coop - (VT),20151,NEWE,0
-05863,VT,Green Mountain Power Corp [Gaz Métropolitain & Co LP],1061,NEWE,1
+05863,VT,Green Mountain Power Corp [Gaz MÃ©tropolitain & Co LP],1061,NEWE,1
 05866,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,1
 05866,VT,Washington Electric Coop - (VT),20151,NEWE,0
 05867,VT,"Vermont Electric Cooperative, Inc",19791,NEWE,1
