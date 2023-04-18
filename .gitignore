@@ -2,6 +2,7 @@
 app/node_modules/
 # Ignore VS Code settings
 .vscode/*
+.vs
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -9,7 +10,7 @@ app/node_modules/
 # Ignore the dist files
 app/dist/*
 # Ignore prep data folder except the states.json file
-prep/data/csv/*
-prep/data/shape/egrid_*
+prep/test-prep/*
+prep/data/*
 prep/result/*
 !prep/data/shape/states.json

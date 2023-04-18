@@ -3,7 +3,7 @@
     "en": {
         "modalHeader": "Additional Resources",
         "modalBody": {
-            "zipCodeLookup": "U.S. Electric Utility Companies and Rates: Look-up by Zipcode",
+            "zipCodeLookup": "2021 U.S. Electric Utility Companies and Rates: Look-up by Zipcode",
             "energy": "Energy and the Environment",
             "airMarkets": "Clean Air Markets Division (CAMD)",
             "ghgReporting": "Greenhouse Gas Reporting Program (GHGRP)",
@@ -21,7 +21,7 @@
     "es": {
         "modalHeader": "Recursos adicionales",
         "modalBody": {
-            "zipCodeLookup": "Compañías y tarifas de servicios eléctricos de EE. UU.: búsqueda por código postal",
+            "zipCodeLookup": "2021 Compañías y tarifas de servicios eléctricos de EE. UU.: búsqueda por código postal",
             "energy": "La energía y el medioambiente",
             "airMarkets": "División de mercados de aire limpio (CAMD)",
             "ghgReporting": "Programa de informes sobre gases de efecto invernadero (GHGRP)",
