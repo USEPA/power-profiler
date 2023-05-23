@@ -107,7 +107,7 @@
         </i18n>
         <p>
           <a
-            href="https://www.epa.gov/system/files/documents/2023-04/Historical%20Zip%20Codes%204_25_23.xlsx"
+            href="https://www.epa.gov/system/files/documents/2023-05/Power%20Profiler%20Historical%20Zip%20Codes.xlsx"
             v-bind:aria-label="$t('ariaLabels.downloadsHistorical')"
             >{{ $t("additionalInfo.historicalZipCodes") }}</a
           >
