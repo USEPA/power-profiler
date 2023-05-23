@@ -7,7 +7,8 @@
     "ariaLabels": {
       "opensNewWin": "Opens new window",
       "downloadsTool": "Downloads Excel spreadsheet tool",
-      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+      "downloadsSummary": "Downloads Excel spreadsheet summary tables",
+      "downloadsHistorical": "Downloads Excel spreadsheet historical zip codes"
     },
     "additionalInfo": {
       "title": "Additional Information",
@@ -16,6 +17,7 @@
       "egridDataSource": "Data source: 2021 data from the {0} released January 30, 2023",
       "powerProfilerExcelLink": "Power Profiler Emissions Tool 2021 (XLSX)",
       "powerProfilerExcelVersion": "Excel version: {0}",
+      "historicalZipCodes": "Historical Zip Codes (XLSX)",
       "mailingList": "Sign up for the mailing list",
       "methodology": "Power Profiler Methodology",
       "summaryTables": "eGRID Summary Tables (XLSX)",
@@ -29,8 +31,9 @@
     "moreInfoLink": "Más Información",
     "ariaLabels": {
       "opensNewWin": "abre una nueva ventana",
-      "downloadsTool": "Downloads Excel spreadsheet tool",
-      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+      "downloadsTool": "descarga la herramienta de hoja de cálculo de Excel",
+      "downloadsSummary": "descarga las tablas de resumen de la hoja de cálculo de Excel",
+      "downloadsHistorical": "descarga los códigos postales históricos de la hoja de cálculo de Excel"
     },
     "additionalInfo": {
       "title": "Información Adicional",
@@ -39,6 +42,7 @@
       "egridDataSource": "Fuente de datos: Datos de 2020 del {0} actualizado el 01/27/2022",
       "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2020 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
+      "historicalZipCodes": "Códigos postales históricos (XLSX)",
       "mailingList": "Suscríbase a la lista de distribución",
       "methodology": "Metodología del Analizador de consumo de energía",
       "summaryTables": "Tablas de resumen de eGRID (XLSX)",
@@ -103,6 +107,13 @@
         </i18n>
         <p>
           <a
+            href="https://www.epa.gov/system/files/documents/2023-04/Historical%20Zip%20Codes%204_25_23.xlsx"
+            v-bind:aria-label="$t('ariaLabels.downloadsHistorical')"
+            >{{ $t("additionalInfo.historicalZipCodes") }}</a
+          >
+        </p>
+        <p>
+          <a
             href="https://lp.constantcontactpages.com/su/sG18AaT"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
@@ -158,7 +169,7 @@ export default {
 };
 </script>
 <style>
-#intro {
+#intro, #info {
   padding: 1.3529em 1em;
 }
 </style>
