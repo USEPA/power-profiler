@@ -37,8 +37,8 @@
     "additionalInfo": {
       "title": "Información Adicional",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2020 del {0} actualizado el 01/27/2022",
-      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2020 (XLSX)",
+      "egridDataSource": "Fuente de datos: Datos de 2021 del {0} actualizado el 01/30/2023",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2021 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
       "historicalZipCodes": "Códigos postales históricos (XLSX)",
       "mailingList": "Suscríbase a la lista de distribución",
