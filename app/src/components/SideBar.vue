@@ -12,7 +12,6 @@
     },
     "additionalInfo": {
       "title": "Additional Information",
-      "feedback": "How do you like the new Power Profiler site?",
       "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
       "egridDataSource": "Data source: 2021 data from the {0} released January 30, 2023",
       "powerProfilerExcelLink": "Power Profiler Emissions Tool 2021 (XLSX)",
@@ -37,10 +36,9 @@
     },
     "additionalInfo": {
       "title": "Información Adicional",
-      "feedback": "¿Qué le parece el nuevo sitio del Analizador de consumo de energía?",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2020 del {0} actualizado el 01/27/2022",
-      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2020 (XLSX)",
+      "egridDataSource": "Fuente de datos: Datos de 2021 del {0} actualizado el 01/30/2023",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2021 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
       "historicalZipCodes": "Códigos postales históricos (XLSX)",
       "mailingList": "Suscríbase a la lista de distribución",
@@ -69,17 +67,6 @@
     <div class="box multi related-info" id="info">
       <h3 class="box__title">{{ $t("additionalInfo.title") }}</h3>
       <div class="box__content">
-        <p>
-          <strong>
-            <a
-              href="https://www.epa.gov/egrid/forms/feedback"
-              target="_blank"
-              v-bind:aria-label="$t('ariaLabels.opensNewWin')"
-              >{{ $t("additionalInfo.feedback") }}</a
-            >
-          </strong>
-        </p>
-
         <i18n
           path="additionalInfo.egridDataSource"
           tag="p"
