@@ -3,6 +3,7 @@
     "en": {
         "modalHeader": "Additional Resources",
         "modalBody": {
+            "zipCodeLookup": "2021 U.S. Electric Utility Companies and Rates: Look-up by Zipcode",
             "energy": "Energy and the Environment",
             "airMarkets": "Clean Air Markets Division (CAMD)",
             "ghgReporting": "Greenhouse Gas Reporting Program (GHGRP)",
@@ -20,6 +21,7 @@
     "es": {
         "modalHeader": "Recursos adicionales",
         "modalBody": {
+            "zipCodeLookup": "2021 Compañías y tarifas de servicios eléctricos de EE. UU.: búsqueda por código postal",
             "energy": "La energía y el medioambiente",
             "airMarkets": "División de mercados de aire limpio (CAMD)",
             "ghgReporting": "Programa de informes sobre gases de efecto invernadero (GHGRP)",
@@ -50,6 +52,14 @@
           <div class="modal-body">
             <slot name="body">
               <ul>
+                <li>
+                  <a
+                    v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+                    href="https://data.openei.org/submissions/5806"
+                    target="_blank"
+                    >{{ $t("modalBody.zipCodeLookup") }}</a
+                  >
+                </li>
                 <li>
                   <a
                     v-bind:aria-label="$t('ariaLabels.opensNewWin')"

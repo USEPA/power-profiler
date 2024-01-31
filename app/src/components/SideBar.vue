@@ -7,18 +7,20 @@
     "ariaLabels": {
       "opensNewWin": "Opens new window",
       "downloadsTool": "Downloads Excel spreadsheet tool",
-      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+      "downloadsSummary": "Downloads Excel spreadsheet summary tables",
+      "downloadsHistorical": "Downloads Excel spreadsheet historical zip codes"
     },
     "additionalInfo": {
       "title": "Additional Information",
-      "feedback": "How do you like the new Power Profiler site?",
       "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Data source: 2020 data from the {0} released January 27, 2022",
-      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2020 (XLSX)",
+      "egridDataSource": "Data source: 2021 data from the {0} released January 30, 2023",
+      "powerProfilerExcelLink": "Power Profiler Emissions Tool 2021 (XLSX)",
       "powerProfilerExcelVersion": "Excel version: {0}",
+      "historicalZipCodes": "Historical Zip Codes (XLSX)",
       "mailingList": "Sign up for the mailing list",
       "methodology": "Power Profiler Methodology",
       "summaryTables": "eGRID Summary Tables (XLSX)",
+      "github": "View and contribute on GitHub",
       "resources": "Additional Resources"
     }
   },
@@ -28,19 +30,21 @@
     "moreInfoLink": "Más Información",
     "ariaLabels": {
       "opensNewWin": "abre una nueva ventana",
-      "downloadsTool": "Downloads Excel spreadsheet tool",
-      "downloadsSummary": "Downloads Excel spreadsheet summary tables"
+      "downloadsTool": "descarga la herramienta de hoja de cálculo de Excel",
+      "downloadsSummary": "descarga las tablas de resumen de la hoja de cálculo de Excel",
+      "downloadsHistorical": "descarga los códigos postales históricos de la hoja de cálculo de Excel"
     },
     "additionalInfo": {
       "title": "Información Adicional",
-      "feedback": "¿Qué le parece el nuevo sitio del Analizador de consumo de energía?",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2020 del {0} actualizado el 01/27/2022",
-      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2020 (XLSX)",
+      "egridDataSource": "Fuente de datos: Datos de 2021 del {0} actualizado el 01/30/2023",
+      "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2021 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
+      "historicalZipCodes": "Códigos postales históricos (XLSX)",
       "mailingList": "Suscríbase a la lista de distribución",
       "methodology": "Metodología del Analizador de consumo de energía",
       "summaryTables": "Tablas de resumen de eGRID (XLSX)",
+      "github": "Ver y contribuir en GitHub",
       "resources": "Recursos adicionales"
     }
   }
@@ -63,17 +67,6 @@
     <div class="box multi related-info" id="info">
       <h3 class="box__title">{{ $t("additionalInfo.title") }}</h3>
       <div class="box__content">
-        <p>
-          <strong>
-            <a
-              href="https://www.epa.gov/egrid/forms/feedback"
-              target="_blank"
-              v-bind:aria-label="$t('ariaLabels.opensNewWin')"
-              >{{ $t("additionalInfo.feedback") }}</a
-            >
-          </strong>
-        </p>
-
         <i18n
           path="additionalInfo.egridDataSource"
           tag="p"
@@ -101,6 +94,13 @@
         </i18n>
         <p>
           <a
+            href="https://www.epa.gov/system/files/documents/2023-05/Power%20Profiler%20Historical%20Zip%20Codes.xlsx"
+            v-bind:aria-label="$t('ariaLabels.downloadsHistorical')"
+            >{{ $t("additionalInfo.historicalZipCodes") }}</a
+          >
+        </p>
+        <p>
+          <a
             href="https://lp.constantcontactpages.com/su/sG18AaT"
             target="_blank"
             v-bind:aria-label="$t('ariaLabels.opensNewWin')"
@@ -122,6 +122,13 @@
             >{{ $t("additionalInfo.summaryTables") }}</a
           >
           <span class="fileinfo">(1 pg, 885 K)</span>
+        </p>
+        <p>
+          <a
+            href="https://github.com/USEPA/power-profiler"
+            target="_blank"
+            v-bind:aria-label="$t('ariaLabels.opensNewWin')"
+            >{{ $t("additionalInfo.github")  }}</a>
         </p>
         <p>
           <a href="javascript:void(0)" @click="$parent.showResources = true">{{
@@ -149,7 +156,7 @@ export default {
 };
 </script>
 <style>
-#intro {
+#intro, #info {
   padding: 1.3529em 1em;
 }
 </style>

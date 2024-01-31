@@ -1,4 +1,4 @@
-Link to app in production: https://www.epa.gov/energy/power-profiler
+Link to app in production: https://www.epa.gov/egrid/power-profiler
 
 # Power Profiler
 
@@ -64,8 +64,9 @@ You can deploy the app to Cloud.gov for testing purposes.  To do this you will n
 
 ## Versioning
 
-- Version 1.0 was released on December 21, 2018.
-- Version 1.1 was released on June 20, 2019
+New updates to the code that change functionality are versioned with v[major].[minor] (e.g., v2.0 introduced Spanish as a toggle within the same page). Any data update release will be appended to the version v[major].[minor]-[data year] (e.g., v2.0-2021 is v2.0 of the code with 2021 eGRID data)
+
+You can find all Power Profiler releases in the [Releases](https://github.com/USEPA/power-profiler/releases) section.
 
 ## Helpful Links
 - [Staging site for app](https://webcms.appdev.epa.gov/energy/power-profiler)
