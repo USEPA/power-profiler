@@ -8,7 +8,7 @@ module.exports = env => {
     entry: './src/main.js',
     output: {
       filename: 'bundle.js',
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, 'dist'),
     },
     module: {
       rules: [
@@ -21,6 +21,10 @@ module.exports = env => {
     devServer: {
       open: false,
       hot: true,
+      static: {
+        directory: path.resolve(__dirname, '../'),
+        publicPath: '/'
+      }
     },
     target: "web",
     plugins: [
@@ -28,7 +32,6 @@ module.exports = env => {
         template: './src/index.html',
       }),
       new VueLoaderPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           'NODE_ENV': JSON.stringify('development'),
