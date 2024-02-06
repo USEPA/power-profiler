@@ -24,7 +24,7 @@
     "mapshaper": "^0.6.61",
     "rimraf": "^2.7.1",
     "vue": "^2.6.11",
-    "vue-loader": "^15.9.0",
+    "vue-loader": "^15.11.1",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^5.20.0",
