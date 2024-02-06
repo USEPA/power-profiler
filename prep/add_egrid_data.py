@@ -68,11 +68,12 @@ if not egrid_geojson:
 
     mapshaper_version = mapshaper_check.stdout.decode('utf-8')
     if(mapshaper_version.find("not recognized") != -1):
-        sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper@0.4.125")
-    if(mapshaper_version.strip() != "0.4.125"):
-        sys.exit("ERROR: mapshaper version must be 0.4.125 -- you have {}".format(mapshaper_version.strip()))
+        sys.exit("ERROR: mapshaper not found. Install using npm install -g mapshaper")
 
-    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile, "-simplify", "1%", "-o", "format=geojson", egrid_shapefile.parent]
+    # The gj2008 flag is needed for the legacy behaviour for mapshaper
+    # that outputs the data in reverse winding oder compared to the spec
+    # See: https://stackoverflow.com/a/54949383
+    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile, "-simplify", "1%", "-o", "gj2008", "format=geojson", egrid_shapefile.parent]
 
     print(f'Creating json from {egrid_shapefile.name} using mapshaper')
     mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
@@ -366,7 +367,7 @@ with open(f'{out_dir}/subregion.json', 'w') as outfile:
 
 print("Using mapshaper to simplify the final output further")
 #mapshaper subregion.json -simplify dp 5% -o force format=geojson
-mapshaper_final_command = [shutil.which("mapshaper"),f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "format=geojson", f'{out_dir}/subregion.json']
+mapshaper_final_command = [shutil.which("mapshaper"),f'{out_dir}/subregion.json', "-simplify", "dp", "5%", "-o", "force", "gj2008", "format=geojson", f'{out_dir}/subregion.json']
 
 mapshaper_final_output = subprocess.run(mapshaper_final_command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
 
