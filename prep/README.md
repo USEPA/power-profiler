@@ -41,13 +41,13 @@ To update Power Profiler for new data years (or for use with older data years) y
 *	New link to eGRID summary table
     * `egridSummaryTablesUrl: string`
 *	Updates to the following numerical constants:
-    *	CO2 lbs sequestered annually per urban tree planted and allowed to grow for 10 years
+    *	CO2 metric tons sequestered annually per urban tree planted and allowed to grow for 10 years
         *	`carbonSequesteredByTree: float`
-    *	CO2 lbs sequestered annually by one acre of average U.S. forest
+    *	CO2 metric tons sequestered annually by one acre of average U.S. forest
         *	`carbonSequesteredByYear: float`
-    *	Conversion Factor for carbon sequestered by one acre of forest preserved from conversion to cropland  in the year of conversion)
+    *	Conversion Factor for metric tons CO2/acre/year sequestered by one acre of forest preserved from conversion to cropland (in the year of conversion)
         *	`carbonSequesteredByAcre: float`
-    *	Average energy consumption kwh per square foot  per month for commercial calculations
+    *	Average energy consumption kwh per square foot  per **month** for commercial calculations
         *	`avgConsumptionSqft: float`
     * National total energy consumption for one year kwh (nationalAverage * 12)
         *   `nationalTotal: nationalAverage * 12`
@@ -59,6 +59,8 @@ To update Power Profiler for new data years (or for use with older data years) y
         * `egridDataSource:` update the data year and release date
         * `powerProfilerExcelLink:` update the data year
         * Update the file size for the span with `class="fileinfo"`
+    * ResourcesModal.vue
+        * `zipCodeLookup:` update the data year for both English and Spanish and the link in the html below
 * Run the add_egrid_data.py script as shown in the [above section](#initial-setup) with the new eGRID excel and .shp files
 * Run the `npm run prod` command to generate the `bundle.js` file in the `dist/prod` directory
     * See the [Deployment](../README.md#deployment) section in the main README fore more info
