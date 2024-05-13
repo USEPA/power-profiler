@@ -72,8 +72,9 @@ if not egrid_geojson:
 
     # The gj2008 flag is needed for the legacy behaviour for mapshaper
     # that outputs the data in reverse winding oder compared to the spec
+    # drawing an svg map with d3 requires the reverse winding order
     # See: https://stackoverflow.com/a/54949383
-    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile, "-simplify", "1%", "-o", "gj2008", "format=geojson", egrid_shapefile.parent]
+    mapshaper_create_json_cmd = [shutil.which("mapshaper"), egrid_shapefile,  "-proj","wgs84","-simplify", "1%", "-o","geojson-type=FeatureCollection",egrid_shapefile.parent,"format=geojson", "gj2008"]
 
     print(f'Creating json from {egrid_shapefile.name} using mapshaper')
     mapshaper_output = subprocess.run(mapshaper_create_json_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=False)
@@ -206,6 +207,8 @@ for feature in data["features"]:
         feature["properties"]["name"] = feature["properties"].pop("zips_for_G")
     if "Subregions" in feature["properties"]:
         feature["properties"]["name"] = feature["properties"].pop("Subregions")
+    if "SUBRGN" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("SUBRGN")
     if("STATE" in feature["properties"]):
         feature["properties"]["type"] = "state"
     # Add eGRID data values.
