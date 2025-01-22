@@ -40,6 +40,12 @@ To update Power Profiler for new data years (or for use with older data years) y
     * `egridSubregionMapUrl: string`
 *	New link to eGRID summary table
     * `egridSummaryTablesUrl: string`
+* New link to the Power Profiler Historical Data
+    * Update in drupal
+    * Check SideBar.vue for the link
+* New link to the Power Profiler Methodology
+    * Update in drupal
+    * Check SideBar.vue for the link
 *	Updates to the following numerical constants:
     *	CO2 metric tons sequestered annually per urban tree planted and allowed to grow for 10 years
         *	`carbonSequesteredByTree: float`
