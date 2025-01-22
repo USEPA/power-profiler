@@ -3,7 +3,7 @@
     "en": {
         "modalHeader": "Additional Resources",
         "modalBody": {
-            "zipCodeLookup": "2022 U.S. Electric Utility Companies and Rates: Look-up by Zipcode",
+            "zipCodeLookup": "2023 U.S. Electric Utility Companies and Rates: Look-up by Zipcode",
             "energy": "Energy and the Environment",
             "powerSectorPrograms": "Clean Air Power Sector Programs",
             "ghgReporting": "Greenhouse Gas Reporting Program (GHGRP)",
@@ -21,7 +21,7 @@
     "es": {
         "modalHeader": "Recursos adicionales",
         "modalBody": {
-            "zipCodeLookup": "2022 Compañías y tarifas de servicios eléctricos de EE. UU.: búsqueda por código postal",
+            "zipCodeLookup": "2023 Compañías y tarifas de servicios eléctricos de EE. UU.: búsqueda por código postal",
             "energy": "La energía y el medioambiente",
             "powerSectorPrograms": "Programas del Sector de Energía para el Aire Limpio",
             "ghgReporting": "Programa de informes sobre gases de efecto invernadero (GHGRP)",
@@ -55,7 +55,7 @@
                 <li>
                   <a
                     v-bind:aria-label="$t('ariaLabels.opensNewWin')"
-                    href="https://data.openei.org/submissions/5993"
+                    href="https://data.openei.org/submissions/6225"
                     target="_blank"
                     >{{ $t("modalBody.zipCodeLookup") }}</a
                   >
