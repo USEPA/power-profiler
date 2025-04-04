@@ -33,6 +33,7 @@ Then, use one the following commands to deploy:
 - Production: `npm run prod`
 
 Note, these commands will clear any existing folder with built resources located in either `dist/stag` or `dist/prod`. Then, it will create a `bundle.js` file and `index.html`. Using only the `bundle.js` minified JS, you can copy and paste this code into the "Page Javascript" input field in Drupal.
+> You can also use `cat build/static/js/*.js > /dev/clipboard` (git bash) or `cat build/static/js/*.js | clip` (in Windows powershell) to copy the javascript to your clipboard for easy pasting into Drupal.
 
 If deploying to one of these environments, make sure to provide the app the URL of the D3 library hosted on EPA's website and assign the variable `&` to `jQuery` (shown below).
 

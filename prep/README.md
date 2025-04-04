@@ -69,6 +69,7 @@ To update Power Profiler for new data years (or for use with older data years) y
         * `zipCodeLookup:` update the data year for both English and Spanish and the link in the html below
 * Run the add_egrid_data.py script as shown in the [above section](#initial-setup) with the new eGRID excel and .shp files
 * Run the `npm run prod` command to generate the `bundle.js` file in the `dist/prod` directory
+    > In the terminal you can run: `cat build/static/js/*.js > /dev/clipboard` (git bash) or `cat build/static/js/*.js | clip` (in Windows powershell) to copy the javascript to your clipboard for easy pasting into Drupal
     * See the [Deployment](../README.md#deployment) section in the main README fore more info
 * Upload files to Drupal (See [README](../app/README.md) in the app directory for more info)
     * Replace the zip.csv in the Drupal document library
