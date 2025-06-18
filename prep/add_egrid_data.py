@@ -205,8 +205,9 @@ for feature in data["features"]:
         feature["properties"]["name"] = feature["properties"].pop("ZipSubregi")
     if "zips_for_G" in feature["properties"]:
         feature["properties"]["name"] = feature["properties"].pop("zips_for_G")
-    if "Subregions" in feature["properties"]:
-        feature["properties"]["name"] = feature["properties"].pop("Subregions")
+    # The property key was updated from "Subregions" to "Subregion" to align with the eGRID 2023 rev2 dataset.
+    if "Subregion" in feature["properties"]:
+        feature["properties"]["name"] = feature["properties"].pop("Subregion")
     if "SUBRGN" in feature["properties"]:
         feature["properties"]["name"] = feature["properties"].pop("SUBRGN")
     if("STATE" in feature["properties"]):

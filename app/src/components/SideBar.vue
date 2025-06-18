@@ -13,7 +13,7 @@
     "additionalInfo": {
       "title": "Additional Information",
       "egridLink":"Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Data source: 2023 data from the {0} released January 15, 2025",
+      "egridDataSource": "Data source: 2023 data from the {0} released June 12, 2025",
       "powerProfilerExcelLink": "Power Profiler Emissions Tool 2023 (XLSX)",
       "powerProfilerExcelVersion": "Excel version: {0}",
       "historicalZipCodes": "Historical Zip Codes (XLSX)",
@@ -37,7 +37,7 @@
     "additionalInfo": {
       "title": "Información Adicional",
       "egridLink": "Emissions & Generation Resource Integrated Database (eGRID)",
-      "egridDataSource": "Fuente de datos: Datos de 2023 del {0} actualizado el 01/15/2025",
+      "egridDataSource": "Fuente de datos: Datos de 2023 del {0} actualizado el 06/12/2025",
       "powerProfilerExcelLink": "Herramienta de Emisiones del Analizador de consumo de energía 2023 (XLSX)",
       "powerProfilerExcelVersion": "Herramienta de Excel: {0}",
       "historicalZipCodes": "Códigos postales históricos (XLSX)",
