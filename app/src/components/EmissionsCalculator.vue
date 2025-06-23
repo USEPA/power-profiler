@@ -198,7 +198,7 @@
                   class="usa-input--sm"
                   required=""
                   type="number"
-                />&nbsp;kWh`
+                />&nbsp;kWh
               </div>
             </div>
             <div class="grid-col">
